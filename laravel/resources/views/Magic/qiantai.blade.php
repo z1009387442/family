@@ -28,9 +28,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="green">
 					<a href="#" class="icon-home"></a>
 					<ul>
-						<li><a href="login.html">Login</a></li>
-					    <li><a href="register.html">Register</a></li>
-					    <li><a href="index.html">Logout</a></li>
+						<li><a href="{{url('home/login')}}">Login</a></li>
+					    <li><a href="{{url('home/register')}}">Register</a></li>
+					    <li><a href="{{url('home/login')}}">Logout</a></li>
 					</ul>
 				</li>
 			   </ul>
