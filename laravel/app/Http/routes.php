@@ -52,6 +52,40 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('index/index',[
 				'uses'=>'IndexController@index',
 				]);
+				//前台登录
+				Route::any('login',[
+				'uses'=>'IndexController@login'
+				]);
+
+				//前台注册 渲染模板
+				Route::any('register',[
+					'uses'=>'IndexController@register'
+				]);	
+
+				//前台用户注册
+				Route::any('register_do',[
+					'uses'=>'IndexController@register_do'
+				]);	
+
+				//前台验证用户名唯一
+				Route::any('verify_name',[
+					'uses'=>'IndexController@verify_name'
+				]);
+
+				//前台验证邮箱唯一
+				Route::any('verify_email',[
+					'uses'=>'IndexController@verify_email'
+				]);	
+		
+				//前台发送验证码
+				Route::any('send_verify_code',[
+					'uses'=>'IndexController@send_verify_code'
+				]);	
+
+				//验证前台用户输入验证码
+				Route::any('verify_user_code',[
+					'uses'=>'IndexController@verify_user_code'
+				]);	
 
 			});
 		});
