@@ -123,6 +123,18 @@
                             </li>
                         </ul>
                     </li>
+
+                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>团队管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/about/add_about')}}"><i class="icon-puzzle"></i> 添加队员</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/about/team_list')}}"><i class="icon-puzzle"></i> 队员列表</a>
+                            </li>
+                        </ul>
+                    </li>
                
 
                     <li class="divider"></li>
