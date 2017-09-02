@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Input;
 
 class IndexController extends Controller
 {
-	public function index(Request $request)
+	public function index()
 	{
 		return view('index.index');
 	}

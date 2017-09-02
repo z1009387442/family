@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     //指定表名
-    protected $table = 'Region';
+    protected $table = 'region';
 
     //主键
     protected $primaryKey = 'id';
