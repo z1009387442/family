@@ -7,13 +7,18 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;  
 use Illuminate\Support\Facades\Input;
+use App\Models\Region;
 
 class IndexController extends Controller
 {
 	public function index(Request $request)
 	{
+		
+
 		return view('index.index');
 	}
+
+
 	//用户登录
 	public function login(Request $request){
 		if($request->isMethod('post')){
