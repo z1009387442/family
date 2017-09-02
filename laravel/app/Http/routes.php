@@ -52,6 +52,10 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('index/index',[
 				'uses'=>'IndexController@index',
 				]);
+				//酒店列表
+				Route::any('hotel/show',[
+				'uses'=>'HotelController@show',
+				]);
 
 			});
 		});
