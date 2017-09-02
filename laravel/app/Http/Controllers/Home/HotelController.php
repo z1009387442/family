@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use DB;
 class HotelController extends Controller
 {
     public function index()
@@ -14,8 +14,16 @@ class HotelController extends Controller
 		return view('index.index');
 	}
 	public function show(Request $request){
-		
-		
-		return view('hotel.show');
+
+		$Hotel_arr = DB::table('region')
+            ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
+            ->where('region.region_name',$request->city_name)
+            ->get();
+		return view('hotel.show',['hotel_arr'=>$Hotel_arr]);
+	}
+	public function room(){
+
+
+	
 	}
 }
