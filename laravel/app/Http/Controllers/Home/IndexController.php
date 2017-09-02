@@ -168,7 +168,7 @@ class IndexController extends Controller
 	    $result = $rest->sendTemplateSMS($to,$datas,$tempId);
 	    if($result == NULL ) {
 	         echo "result error!";
-	         break;
+	         // break;
 	    }
 	     if($result->statusCode!=0) {
 	        return  "失败";
