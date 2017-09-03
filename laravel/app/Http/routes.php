@@ -150,6 +150,48 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('region/region_save',[
 				'uses'=>'RegionController@region_save',
 				]);
+				
+				/**
+				 * 后台酒店管理相关操作
+				 * @author [meng] <[920417690@qq.com]>
+				 */
+				//后台酒店列表
+				Route::any('hotel/hotel_list',[
+				'uses'=>'HotelController@hotel_list',
+				]);
+				//后台酒店添加
+				Route::any('hotel/hotel_add',[
+				'uses'=>'HotelController@hotel_add',
+				]);
+				//后台酒店修改
+				Route::any('hotel/hotel_save',[
+				'uses'=>'HotelController@hotel_save',
+				]);
+				//后台酒店删除
+				Route::any('hotel/hotel_del',[
+				'uses'=>'HotelController@hotel_del',
+				]);
+
+				/**
+				 * 后台酒店类型管理相关操作
+				 * @author [meng] <[920417690@qq.com]>
+				 */
+				//后台房间类型列表
+				Route::any('type/type_list',[
+				'uses'=>'TypeController@type_list',
+				]);
+				//后台房间类型添加
+				Route::any('type/type_add',[
+				'uses'=>'TypeController@type_add',
+				]);
+				//后台房间类型修改
+				Route::any('type/type_save',[
+				'uses'=>'TypeController@type_save',
+				]);
+				//后台房间类型删除
+				Route::any('type/type_del',[
+				'uses'=>'TypeController@type_del',
+				]);
 				//后台关于添加团队
 				Route::any('about/add_about',[
 				'uses'=>'AboutController@add_about',
@@ -167,6 +209,46 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'AboutController@team_del',
 				]);
 
+				/**
+				 * 后台房间管理相关操作
+				 * @author [meng] <[920417690@qq.com]>
+				 */
+				//后台房间列表
+				Route::any('room/room_list',[
+				'uses'=>'RoomController@room_list',
+				]);
+				//后台房间添加
+				Route::any('room/room_add',[
+				'uses'=>'RoomController@room_add',
+				]);
+				//后台房间修改
+				Route::any('room/room_save',[
+				'uses'=>'RoomController@room_save',
+				]);
+				//后台房间删除
+				Route::any('room/room_del',[
+				'uses'=>'RoomController@room_del',
+				]);
+
+				/**后台酒店分配类型相关操作
+				 * @author [meng] <[920417690@qq.com]>
+				 */
+				//后台酒店拥有类型列表
+				Route::any('hotel_type/hotel_type_list',[
+				'uses'=>'HoteltypeController@hotel_type_list',
+				]);
+				//后台酒店拥有类型添加
+				Route::any('hotel_type/hotel_type_add',[
+				'uses'=>'HoteltypeController@hotel_type_add',
+				]);
+				//后台酒店拥有类型修改
+				Route::any('hotel_type/hotel_type_save',[
+				'uses'=>'HoteltypeController@hotel_type_save',
+				]);
+				//后台酒店拥有类型删除
+				Route::any('hotel_type/hotel_type_del',[
+				'uses'=>'HoteltypeController@hotel_type_del',
+				]);
 		});
 	});
 });
