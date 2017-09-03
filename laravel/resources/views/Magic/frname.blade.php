@@ -116,14 +116,25 @@
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-puzzle"></i> 添加地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-shield"></i> 添加地区</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-puzzle"></i> 修改地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-question"></i> 修改地区</a>
                             </li>
                         </ul>
                     </li>
-               
+                    
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>相册管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/picture/hotel_album_add')}}"><i class="icon-shield"></i> 酒店内部图片添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/picture/room_album_list')}}"><i class="icon-question"></i> 酒店房间图片添加</a>
+                            </li>
+                        </ul>
+                    </li>
 
                     <li class="divider"></li>
                     <li class="nav-title">                   

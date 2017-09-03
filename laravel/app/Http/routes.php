@@ -80,6 +80,21 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'RegionController@region_save',
 				]);
 
+				//酒店内部相册添加
+				Route::any('picture/hotel_album_add',[
+				'uses'=>'PictureController@hotel_album_add',
+				]);
+				//酒店展示
+				Route::any('picture/room_album_list',[
+				'uses'=>'PictureController@room_album_list',
+				]);
+				//房间类型图片添加
+				Route::any('picture/room_album_add',[
+				'uses'=>'PictureController@room_album_add',
+				]);
+				Route::any('picture/room_album_type_list',[
+				'uses'=>'PictureController@room_album_type_list',
+				]);
 		});
 	});
 
