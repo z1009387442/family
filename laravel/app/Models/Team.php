@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Region extends Model
+class Team extends Model
 {
-<<<<<<< HEAD
     //指定表名
-    protected $table = 'region';
+    protected $table = 'team';
 
     //主键
     protected $primaryKey = 'id';
@@ -16,7 +15,4 @@ class Region extends Model
     //自动维护时间戳
     public $timestamps = false;
 
-=======
-    protected $table='region';
->>>>>>> dev
 }
