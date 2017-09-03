@@ -1,6 +1,6 @@
 @extends('magic.qiantai')
 <!-- 页面标题 -->
-@section('title', '首页')
+@section('title', '酒店')
 <!-- 左边菜单 -->
 @section('header')
     @parent

@@ -117,6 +117,11 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room/id/{id}',[
 				'uses'=>'HotelController@room',
 				])->where(['id'=>'[0-9]+']);
+
+				//前台关于团队展示
+				Route::any('hotel/room',[
+				'uses'=>'HotelController@room',
+				]);
 				
 
 
