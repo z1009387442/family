@@ -142,6 +142,10 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('region/region_add',[
 				'uses'=>'RegionController@region_add',
 				]);
+				//后台城市列表
+				Route::any('region/region_list',[
+				'uses'=>'RegionController@region_list',
+				]);
 				//后台修改城市
 				Route::any('region/region_save',[
 				'uses'=>'RegionController@region_save',
