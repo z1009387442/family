@@ -209,6 +209,8 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'AboutController@team_del',
 				]);
 
+
+
 				/**
 				 * 后台房间管理相关操作
 				 * @author [meng] <[920417690@qq.com]>
@@ -229,6 +231,12 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('room/room_del',[
 				'uses'=>'RoomController@room_del',
 				]);
+				Route::any('room/room_type_album_add',[
+				'uses'=>'RoomController@room_type_album_add',
+				]);
+				Route::any('room/room_type_album_list',[
+				'uses'=>'RoomController@room_type_album_list',
+				]);
 
 				/**后台酒店分配类型相关操作
 				 * @author [meng] <[920417690@qq.com]>
@@ -248,6 +256,7 @@ Route::group(['middleware' => ['admin']], function () {
 				//后台酒店拥有类型删除
 				Route::any('hotel_type/hotel_type_del',[
 				'uses'=>'HoteltypeController@hotel_type_del',
+
 				]);
 		});
 	});
