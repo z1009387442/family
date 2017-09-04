@@ -113,13 +113,13 @@
                         <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> 测试 <span class="badge badge-info">NEW</span></a>
                     </li>
                     <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理</a>
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理/浮动值</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-puzzle"></i> 添加地区</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-puzzle"></i> 修改地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_list')}}"><i class="icon-puzzle"></i> 修改地区/浮动值</a>
                             </li>
                         </ul>
                     </li>
@@ -132,6 +132,28 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('admin/about/team_list')}}"><i class="icon-puzzle"></i> 队员列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-calculator"></i>类型管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/type/type_add')}}"><i class="icon-puzzle"></i> 类型添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/type/type_list')}}"><i class="icon-puzzle"></i> 类型编辑</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pie-chart"></i>酒店管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/hotel/hotel_add')}}"><i class="icon-puzzle"></i> 酒店添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/hotel/hotel_list')}}"><i class="icon-puzzle"></i> 酒店编辑</a>
                             </li>
                         </ul>
                     </li>
