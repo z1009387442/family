@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     //指定表名
+
     protected $table = 'rooms_type';
+
 
     //主键
     protected $primaryKey = 'room_type_id';
@@ -16,3 +18,4 @@ class Type extends Model
     public $timestamps = false;
 
 }
+

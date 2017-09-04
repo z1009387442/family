@@ -11,29 +11,17 @@
 <div class="col-md">
         <div class="card">
     <div class="card-header" align="left">
-        <strong>酒店内部图片添加</strong>
-	<div align="right"><strong align="right"><a href="{{url('')}}">查看列表</a></strong></div>
+        <strong>房间类型图片添加</strong>
     </div>
     <div class="card-block">
         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal ">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="text-input">所属酒店</label>
-                <div class="col-md-9">
-                  
-                    <select name="hotel_id" id="hotel_id" class="form-control power_desc">
-                                <option value="0">请选择一家酒店</option>
-                         @foreach($hotel as $k=>$v)
-                               <option value="{{$v->hotel_id}}">{{$v->hotel_name}}</option>
-                          @endforeach                  
-                    </select>
-
-                </div>
-            </div>
+            <input type="hidden" name="room_type_id" value="{{$data['room_type_id']}}">
+            <input type="hidden" name="hotel_id" value="{{$data['hotel_id']}}">
             <div class="form-group row">
           <label class="col-md-3 form-control-label" for="file-input">上传图片</label>
                     <div class="col-md-9">
-                        <input type="file" id="file-input" name="hotel_img[]" multiple="">
+                        <input type="file" id="file-input" name="img_path" multiple="">
                     </div>
             </div>
             	     
