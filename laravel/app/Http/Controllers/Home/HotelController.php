@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Models\Hotel;
-use App\Models\hotelAlbum;
+use App\Models\HotelAlbum;
 class HotelController extends Controller
 {
     public function index()
@@ -32,7 +32,7 @@ class HotelController extends Controller
 				'hotel_tel'=>$hotel_arr->hotel_tel,
 				'hotel_desc'=>$hotel_arr->hotel_desc,];
 		//酒店图片查询
-		$hotel_img_arr=hotelAlbum::where('hotel_id',$request->id)->get();
+		$hotel_img_arr=HotelAlbum::where('hotel_id',$request->id)->get();
 		//酒店房间类型查询 和照片查询
 		$room_arr = DB::table('hotel_room_type')
             ->join('rooms_type', 'hotel_room_type.hotel_room_type_id', '=', 'rooms_type.room_type_id')
