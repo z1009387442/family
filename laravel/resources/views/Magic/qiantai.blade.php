@@ -100,6 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="footer">
 @section('footer')
     	<div class="container">
+    		<div class="clearfix"> </div>
     		<div>
     			
     		</div>
