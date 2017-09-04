@@ -11,7 +11,7 @@ use App\Models\Region;
 
 class IndexController extends Controller
 {
-	public function index(Request $request)
+	public function index()
 	{
 		
 

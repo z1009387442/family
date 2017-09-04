@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    protected $table='region';
+
+    //指定表名
+    protected $table = 'region';
+
+    //主键
+    protected $primaryKey = 'region_id';
+
+    //自动维护时间戳
+    public $timestamps = false;
 }

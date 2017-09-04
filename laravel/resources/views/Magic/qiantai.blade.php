@@ -101,6 +101,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 @section('footer')
     	<div class="container">
     		<div class="clearfix"> </div>
+    		<div>
+    			
+    		</div>
     		<div class="copy">
 		      <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
 	        </div>
@@ -108,4 +111,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 @show
     </div>
 </body>
-</html>	
+</html>

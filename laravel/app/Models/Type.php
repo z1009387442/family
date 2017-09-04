@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HotelAlbum extends Model
+class Type extends Model
 {
     //指定表名
-    protected $table = 'hotel_album';
+
+    protected $table = 'rooms_type';
+
 
     //主键
-    protected $primaryKey = 'hotel_album_id';
+    protected $primaryKey = 'room_type_id';
 
     //自动维护时间戳
     public $timestamps = false;
 
 }
+
