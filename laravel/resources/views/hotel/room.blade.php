@@ -60,7 +60,7 @@
 <?php foreach($rooms as $room) {?>
             <div class="jobs-item with-thumb">
             <div class="thumb_top">
-                <div class="thumb"><a href="view_profile.html"><img src="<?php echo $room->img_path; ?>" class="img-responsive" alt=""/></a></div>
+                <div class="thumb"><a href="view_profile.html"><img src="<?php echo $room->type_img; ?>" class="img-responsive" alt=""/></a></div>
               <div class="jobs_right">
               <h6 class="title"><?php echo $room->room_type_name; ?></h6>
               <ul class="top-btns">
@@ -68,14 +68,29 @@
                 <li><a href="#" class="fa fa-google-plus"></a></li>
               </ul>
 
-              <p class="description">会员价格：<?php echo $room->vip_price; ?>　　<span class="m_1"></span> 非会员价:<?php echo $room->vip_price; ?>　　<span class="m_1"></span>床型 : <?php echo $room->bed_type; ?></p>
-            
+              <p class="description">会员价格:
+                      @if($price['up_down']==1)
+                        {{($room->vip_price)*(1+$price['price']/100)}}
+                      @elseif($price['up_down']==0)
+                        {{($room->vip_price)*(1-5/100)}}
+                      @endif 
+                　　<span class="m_1"></span> 非会员价:
+                      @if($price['up_down']==1)
+                        {{($room->rack_price)*(1+$price['price']/100)}}
+                      @elseif($price['up_down']==0)
+                        {{($room->rack_price)*(1-5/100)}}
+                      @endif
+                　　<span class="m_1"></span>床型 : <?php echo $room->bed_type; ?></p>
+                      
             </div>
             <div class="clearfix"> </div>
              </div>
              <div class="thumb_bottom">
-                <div class="thumb"><a href="view_profile.html" class="photo_view">订房房间</a></div>
-                
+              @if($room->status==1)
+                  <div class="thumb"><a href="view_profile.html" class="photo_view">订房房间</a></div>
+              @elseif($room->status==0)
+                  <div class=""><a style="background-color:black;padding:7px 10px;color:#fff;font-size:12px" href="javascript:;">已经满了</a></div>
+              @endif
                 <div class="clearfix"> </div>
              </div>
             </div>
