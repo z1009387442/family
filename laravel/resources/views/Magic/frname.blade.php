@@ -128,6 +128,9 @@
                     <li class="nav-item nav-dropdown">
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>相册管理</a>
                         <ul class="nav-dropdown-items">
+                         <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/picture/hotel_album_add')}}"><i class="icon-shield"></i> 酒店内部图片添加</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('admin/region/region_list')}}"><i class="icon-puzzle"></i> 修改地区/浮动值</a>
                             </li>

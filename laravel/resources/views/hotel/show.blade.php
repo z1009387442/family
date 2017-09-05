@@ -1,6 +1,6 @@
 @extends('magic.qiantai')
 <!-- 页面标题 -->
-@section('title', '首页')
+@section('title', '酒店')
 <!-- 左边菜单 -->
 @section('header')
     @parent
@@ -55,7 +55,15 @@
 <!-- 酒店结束 -->
 
 </div>
+<!--右边div-->
 <div class="col-md-3 match_right">
+
+
+
+</div>
+<!--右边div（结束）-->
+<div class="clearfix"> </div>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <style type="text/css">
@@ -85,6 +93,7 @@
 
   
 </script>
+
   </div>
 </div>
 <link href="/qiantai/css/flexslider.css" rel='stylesheet' type='text/css' />

@@ -27,10 +27,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			   <ul>
 				<li class="green">
 					<a href="#" class="icon-home"></a>
-					<ul>
-						<li><a href="{{url('home/login')}}">Login</a></li>
-					    <li><a href="{{url('home/register')}}">Register</a></li>
-					    <li><a href="{{url('home/login')}}">Logout</a></li>
+					<ul>@if(Session::has('user_id'))
+						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+					    <li><a href="{{url('home/login_out')}}">注销</a></li>
+					    @else
+					    <li><a href="{{url('home/login')}}">登录</a></li>
+					    <li><a href="{{url('home/register')}}">注册</a></li>
+					    @endif
 					</ul>
 				</li>
 			   </ul>
@@ -100,6 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="footer">
 @section('footer')
     	<div class="container">
+    		<div class="clearfix"> </div>
     		<div>
     			
     		</div>
