@@ -273,6 +273,15 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'HoteltypeController@hotel_type_del',
 
 				]);
+
+					//酒店内部相册添加
+				Route::any('picture/hotel_album_add',[
+				'uses'=>'PictureController@hotel_album_add',
+				]);
+				//酒店展示
+				Route::any('picture/room_album_list',[
+				'uses'=>'PictureController@room_album_list',
+				]);
 		});
 	});
 });
