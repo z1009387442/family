@@ -87,7 +87,7 @@
              </div>
              <div class="thumb_bottom">
               @if($room->status==1)
-                  <div class="thumb"><a href="view_profile.html" class="photo_view">订房房间</a></div>
+                  <div class="thumb"><a href="{{url('home/order/create')}}/room_type_id/<?=$room->room_type_id?>/hotel_id/{{$hotel['hotel_id']}}" class="photo_view">订房房间</a></div>
               @elseif($room->status==0)
                   <div class=""><a style="background-color:black;padding:7px 10px;color:#fff;font-size:12px" href="javascript:;">已经满了</a></div>
               @endif
