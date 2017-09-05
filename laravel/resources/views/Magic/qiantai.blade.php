@@ -27,10 +27,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			   <ul>
 				<li class="green">
 					<a href="#" class="icon-home"></a>
-					<ul>
-						<li><a href="{{url('home/login')}}">Login</a></li>
-					    <li><a href="{{url('home/register')}}">Register</a></li>
-					    <li><a href="{{url('home/login')}}">Logout</a></li>
+					<ul>@if(Session::has('user_id'))
+						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+					    <li><a href="{{url('home/login_out')}}">注销</a></li>
+					    @else
+					    <li><a href="{{url('home/login')}}">登录</a></li>
+					    <li><a href="{{url('home/register')}}">注册</a></li>
+					    @endif
 					</ul>
 				</li>
 			   </ul>
@@ -100,40 +103,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="footer">
 @section('footer')
     	<div class="container">
-    		<div class="col-md-4 col_2">
-    			<h4>About Us</h4>
-    			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."</p>
-    		</div>
-    		<div class="col-md-2 col_2">
-    			<h4>Help & Support</h4>
-    			<ul class="footer_links">
-    				<li><a href="#">24x7 Live help</a></li>
-    				<li><a href="contact.html">Contact us</a></li>
-    				<li><a href="#">Feedback</a></li>
-    				<li><a href="faq.html">FAQs</a></li>
-    			</ul>
-    		</div>
-    		<div class="col-md-2 col_2">
-    			<h4>Quick Links</h4>
-    			<ul class="footer_links">
-    				<li><a href="privacy.html">Privacy Policy</a></li>
-    				<li><a href="terms.html">Terms and Conditions</a></li>
-    				<li><a href="services.html">Services</a></li>
-    			</ul>
-    		</div>
-    		<div class="col-md-2 col_2">
-    			<h4>Social</h4>
-    			<ul class="footer_social">
-				  <li><a href="#"><i class="fa fa-facebook fa1"> </i></a></li>
-				  <li><a href="#"><i class="fa fa-twitter fa1"> </i></a></li>
-				  <li><a href="#"><i class="fa fa-google-plus fa1"> </i></a></li>
-				  <li><a href="#"><i class="fa fa-youtube fa1"> </i></a></li>
-			    </ul>
-    		</div>
-
-
-
     		<div class="clearfix"> </div>
+    		<div>
+    			
+    		</div>
     		<div class="copy">
 		      <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
 	        </div>
@@ -141,4 +114,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 @show
     </div>
 </body>
-</html>	
+</html>

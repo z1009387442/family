@@ -86,7 +86,17 @@ Route::group(['middleware' => ['web']], function () {
 				//前台用户注册
 				Route::any('register_do',[
 					'uses'=>'IndexController@register_do'
-				]);	
+				]);
+
+				//前台用户注销
+				Route::any('login_out',[
+					'uses'=>'IndexController@login_out'
+				]);
+
+				//前台用户个人资料
+				Route::any('personal_data',[
+					'uses'=>'IndexController@personal_data'
+				]);
 
 				//前台验证用户名唯一
 				Route::any('verify_name',[
@@ -117,6 +127,11 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room/id/{id}',[
 				'uses'=>'HotelController@room',
 				])->where(['id'=>'[0-9]+']);
+
+				//前台关于团队展示
+				Route::any('hotel/room',[
+				'uses'=>'HotelController@room',
+				]);
 				
 
 
@@ -209,6 +224,8 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'AboutController@team_del',
 				]);
 
+
+
 				/**
 				 * 后台房间管理相关操作
 				 * @author [meng] <[920417690@qq.com]>
@@ -229,6 +246,12 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('room/room_del',[
 				'uses'=>'RoomController@room_del',
 				]);
+				Route::any('room/room_type_album_add',[
+				'uses'=>'RoomController@room_type_album_add',
+				]);
+				Route::any('room/room_type_album_list',[
+				'uses'=>'RoomController@room_type_album_list',
+				]);
 
 				/**后台酒店分配类型相关操作
 				 * @author [meng] <[920417690@qq.com]>
@@ -248,6 +271,7 @@ Route::group(['middleware' => ['admin']], function () {
 				//后台酒店拥有类型删除
 				Route::any('hotel_type/hotel_type_del',[
 				'uses'=>'HoteltypeController@hotel_type_del',
+
 				]);
 		});
 	});

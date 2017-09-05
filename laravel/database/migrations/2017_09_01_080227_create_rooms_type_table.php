@@ -19,8 +19,10 @@ class CreateRoomsTypeTable extends Migration
             $table->Integer('max_people');
             $table->Integer('room_area');
             $table->decimal('rack_price',5,2);
+
             $table->decimal('vip_price',5,2);
             $table->string('room_desc',200);
+
             $table->Integer('sort');
             $table->tinyInteger('status')->default('1');
         });
