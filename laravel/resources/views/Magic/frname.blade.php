@@ -116,8 +116,18 @@
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理/浮动值</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-puzzle"></i> 添加地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-shield"></i> 添加地区</a>
                             </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-question"></i> 修改地区</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>相册管理</a>
+                        <ul class="nav-dropdown-items">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('admin/region/region_list')}}"><i class="icon-puzzle"></i> 修改地区/浮动值</a>
                             </li>
@@ -154,10 +164,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('admin/hotel/hotel_list')}}"><i class="icon-puzzle"></i> 酒店编辑</a>
+
                             </li>
                         </ul>
                     </li>
-               
 
                     <li class="divider"></li>
                     <li class="nav-title">                   

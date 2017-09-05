@@ -20,7 +20,7 @@
   </div>
   <div class="profile_search">
   	<div class="container wrap_1">
-	  <form action="{{url('home/hotel/show')}}" method="post">
+	  <form action="{{url('home/hotel/show')}}" method="get">
 	  	<div class="search_top">
 		 <div class="inline-block">
 		  <label class="gender_1">目的地:</label>
@@ -81,7 +81,7 @@ var _hmt = _hmt || [];
 
 
 		<div class="submit inline-block">
-		{{ csrf_field() }}
+
 			<input type="hidden" value="" name="city_name" id="region">
 		   <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
 		</form>

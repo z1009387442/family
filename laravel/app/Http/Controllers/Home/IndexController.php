@@ -18,7 +18,6 @@ class IndexController extends Controller
 		return view('index.index');
 	}
 
-
 	//用户登录
 	public function login(Request $request){
 		if($request->isMethod('post')){
@@ -37,17 +36,29 @@ class IndexController extends Controller
 				$user_name=$user_name;
 				$request->session()->put('user_id',$user_id);
 				$request->session()->put('user_name',$user_name);
-				// print_r(Session::all());die;	
 				return redirect()->action('Home\IndexController@index');
 			}
 		}else{
 			return view('index.login');
 		}
 	}
+
+	//用户退出
+	public function login_out(Request $request){
+		$request->session()->flush();
+		return redirect()->action('Home\IndexController@login');
+	}
+
+	//用户个人资料页面
+	public function personal_data(){
+		return view('index.personal_data');
+	}
+
 	//渲染用户注册页面
 	public function register(Request $request){
 		return  view('index.register');
 	}
+
 	//判断用户名唯一
 	public function verify_name(Request $request){
 		$mingzi=Input::get('mingzi');

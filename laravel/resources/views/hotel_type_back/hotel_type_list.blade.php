@@ -95,6 +95,7 @@
                                                         <font color="SkyBlue">
                                                          <a href="{{url('admin/room/room_add')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">添加房间</a>　   
                                                         <a href="{{url('admin/room/room_list')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">查看房间</a>
+                                                        <a href="{{url('admin/room/room_type_album_add')}}?room_type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">添加图片</a>
                                                         </font>
                                                 </td>
                                             </tr>
