@@ -68,13 +68,13 @@
                 <li><a href="#" class="fa fa-google-plus"></a></li>
               </ul>
 
-              <p class="description">会员价格：<?php echo $room->vip_price; ?>　　<span class="m_1"></span> 非会员价:<?php echo $room->vip_price; ?>　　<span class="m_1"></span>床型 : <?php echo $room->bed_type; ?></p>
+              <p class="description">会员价格：<?php echo $room->vip_price; ?>　　<span class="m_1"></span> 非会员价:<?php echo $room->rack_price; ?>　　<span class="m_1"></span>床型 : <?php echo $room->bed_type; ?></p>
             
             </div>
             <div class="clearfix"> </div>
              </div>
              <div class="thumb_bottom">
-                <div class="thumb"><a href="view_profile.html" class="photo_view">订房房间</a></div>
+                <div class="thumb"><a href="{{url('home/order/create')}}/room_type_id/<?=$room->room_type_id?>/hotel_id/{{$hotel['hotel_id']}}" class="photo_view">订房房间</a></div>
                 
                 <div class="clearfix"> </div>
              </div>
@@ -154,5 +154,5 @@ $(window).load(function() {
 @endsection
 
 @section('footer')
-	@parent
+  @parent
 @endsection
