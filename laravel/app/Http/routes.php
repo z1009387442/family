@@ -123,6 +123,19 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'AboutController@index',
 				]);
 
+				//定制服务展示
+				Route::any('made/index',[
+				'uses'=>'MadeController@index',
+				]);
+				//积分换礼
+				Route::any('integral/index',[
+				'uses'=>'IntegralController@index',
+				]);
+				//兑换数量
+				Route::any('integral/convert',[
+				'uses'=>'IntegralController@convert',
+				]);
+
 				//酒店房间展示页面
 				Route::any('hotel/room/id/{id}',[
 				'uses'=>'HotelController@room',
