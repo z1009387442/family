@@ -54,6 +54,12 @@
             </div>
         </div>
         <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="file-input">样本图片</label>
+            <div class="col-md-9">
+                <input type="file" id="file-input" name="type_img">
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-md-3 form-control-label" for="textarea-input">房型描述</label>
             <div class="col-md-9">
                 <textarea id="textarea-input" name="room_desc" rows="9" class="form-control" ></textarea>
@@ -70,7 +76,7 @@
             <div class="col-md-9">
                 <div class="radio">
                     <label for="radio1">
-                        <input type="radio" id="radio1" name="status" value="1">开启
+                        <input type="radio" id="radio1" checked name="status"  value="1">开启
                     </label>
                     <label for="radio2">
                         <input type="radio" id="radio2" name="status" value="0">关闭
