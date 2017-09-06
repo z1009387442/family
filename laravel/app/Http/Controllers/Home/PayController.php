@@ -16,7 +16,7 @@ class PayController extends Controller
     {
     	// 创建支付单。
 		$alipay = app('alipay.web');
-		$alipay->setOutTradeNo('4324242255211');
+		$alipay->setOutTradeNo('4324s24142255211');
 		$alipay->setTotalFee('0.01');
 		$alipay->setSubject('测试');
 		$alipay->setBody('测试desc');

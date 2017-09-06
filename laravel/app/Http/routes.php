@@ -132,7 +132,6 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room',[
 				'uses'=>'HotelController@room',
 				]);
-<<<<<<< HEAD
 				
 				//支付
 				Route::group(['prefix' => 'pay'], function(){
@@ -151,7 +150,6 @@ Route::group(['middleware' => ['web']], function () {
 					]);
 
 				});
-=======
 
 				//预订房间
 				Route::any('order/create/room_type_id/{room_type_id}/hotel_id/{hotel_id}',[
@@ -167,7 +165,6 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('order/pay_money',[
 				'uses'=>'OrderController@pay_money',
 				]);
->>>>>>> 37878b8b79c8e5befaf55db666cfdc65bf0871bf
 
 			});
 		});

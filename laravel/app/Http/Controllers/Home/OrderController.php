@@ -6,7 +6,6 @@ use Redirect;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\RoomsType;
-use App\Models\RoomsTypeAlbum;
 use App\Models\Order;
 
 class OrderController extends Controller
@@ -23,11 +22,10 @@ class OrderController extends Controller
 		//房间类型照片信息、数据 room_type
 		$room_data = RoomsType::find($room_type_id);
 		//查房间类型表和房间类型的相册表room_type_albunm
-		$room_img = RoomsTypeAlbum::find($room_type_id);
 		//查酒店表，酒店地址和名字hotel
 		$hotel_data=Hotel::find($hotel_id);//用name和address
 		
-		return view('order.create',['room_data'=>$room_data,'room_img'=>$room_img,'hotel_data'=>$hotel_data]);
+		return view('order.create',['room_data'=>$room_data,'hotel_data'=>$hotel_data]);
 
 	}
 
@@ -67,11 +65,9 @@ class OrderController extends Controller
 		$order->total_price =$total_price;
 		if($order->save()){
 			//生成订单去支付
-			return Redirect::to('home/order/pay_money');
+			return Redirect::to('home/order/pay_money/order_id/'.$order->order_id);
 		}
-
-
-		die;	
+	
 	}
 
 	public function get_sn()
@@ -89,8 +85,8 @@ class OrderController extends Controller
 		return $str;
 	}
 
-	public function pay_money()
+	public function pay_money(Request $request)
 	{
-		return 123;
+		return $request->order_id;//接收订单号
 	}
 }

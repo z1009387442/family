@@ -23,11 +23,10 @@
    	 	<div class="col_3">
 
    	        <div class="col-sm-4 row_2">
-   	        <img src="{{$room_img->img_path}}" width="200" height="200" />
+   	        <img src="{{$room_data->type_img}}" width="200" height="200" />
 				<div class="flexslider">
 					 <ul class="slides">
 						<li data-thumb="images/p1.jpg">
-							<!-- <img src="{{$room_img->img_path}}" width="200" height="200" /> -->
 						</li>
 						
 					 </ul>
@@ -110,7 +109,7 @@
 							    <tr class="opened">
 									<td class="day_label">房间数量 :</td>
 									<td class="day_value">
-										<select class="room_sum" name="room_sum">
+										<select class="room_sum" name="room_sum" style="width: 150px; border: 1px solid #D7CFCF">
 										@for($i=1;$i<=3;$i++)
 											<option value="{{$i}}">{{$i}}</option>
 										@endfor
