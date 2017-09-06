@@ -65,11 +65,9 @@ class OrderController extends Controller
 		$order->total_price =$total_price;
 		if($order->save()){
 			//生成订单去支付
-			return Redirect::to('home/order/pay_money');
+			return Redirect::to('home/order/pay_money/order_id/'.$order->order_id);
 		}
-
-
-		die;	
+	
 	}
 
 	public function get_sn()
@@ -87,8 +85,8 @@ class OrderController extends Controller
 		return $str;
 	}
 
-	public function pay_money()
+	public function pay_money(Request $request)
 	{
-		return 123;
+		return $request->order_id;//接收订单号
 	}
 }

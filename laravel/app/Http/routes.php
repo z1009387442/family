@@ -144,9 +144,9 @@ Route::group(['middleware' => ['web']], function () {
 				]);
 				
 				//模拟支付页面
-				Route::any('order/pay_money',[
+				Route::any('order/pay_money/order_id/{order_id}',[
 				'uses'=>'OrderController@pay_money',
-				]);
+				])->where(['order_id'=>'[0-9]+']);
 
 			});
 		});
