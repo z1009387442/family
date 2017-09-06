@@ -16,7 +16,8 @@
     <!-- Icons -->
     <link href="/frname/css/font-awesome.min.css" rel="stylesheet">
     <link href="/frname/css/simple-line-icons.css" rel="stylesheet">
-
+    <link href="/frname/zhezhao/style.css" rel="stylesheet">
+    <script src="/qiantai/js/jquery.js"></script>
     <!-- Main styles for this application -->
     <link href="/frname/css/style.css" rel="stylesheet">
     <style>

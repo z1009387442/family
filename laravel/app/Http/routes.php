@@ -162,9 +162,9 @@ Route::group(['middleware' => ['web']], function () {
 				]);
 				
 				//模拟支付页面
-				Route::any('order/pay_money',[
+				Route::any('order/pay_money/order_id/{order_id}',[
 				'uses'=>'OrderController@pay_money',
-				]);
+				])->where(['order_id'=>'[0-9]+']);
 
 			});
 		});
@@ -217,6 +217,10 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('hotel/hotel_del',[
 				'uses'=>'HotelController@hotel_del',
 				]);
+				//后台酒店状态即点即改
+				Route::any('hotel/hotel_save_status',[
+				'uses'=>'HotelController@hotel_save_status',
+				]);
 
 				/**
 				 * 后台酒店类型管理相关操作
@@ -234,10 +238,15 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('type/type_save',[
 				'uses'=>'TypeController@type_save',
 				]);
-				//后台房间类型删除
-				Route::any('type/type_del',[
-				'uses'=>'TypeController@type_del',
+				//后台房间类型状态即点即改
+				Route::any('type/type_save_status',[
+				'uses'=>'TypeController@type_save_status',
 				]);
+				//后台查询该类型下所有的房间
+				Route::any('type/type_room',[
+				'uses'=>'TypeController@type_room',
+				]);
+				
 				//后台关于添加团队
 				Route::any('about/add_about',[
 				'uses'=>'AboutController@add_about',

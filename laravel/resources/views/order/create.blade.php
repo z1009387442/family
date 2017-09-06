@@ -27,6 +27,10 @@
 				<div class="flexslider">
 					 <ul class="slides">
 						<li data-thumb="images/p1.jpg">
+<<<<<<< HEAD
+=======
+							
+>>>>>>> ac01771afc309bf7e0359f4035184ab5c37bbe88
 						</li>
 						
 					 </ul>

@@ -11,13 +11,13 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <i class="fa fa-edit"></i>添加酒店房间分类
+                                    <i class="fa fa-edit"></i>添加酒店房间分类<!--  <button class="but">ssss</button> -->
                                      
                                        　 <font size="2"><a href="{{url('admin/type/type_list')}}">查看分类详情</a></font>
-                                   
                                 </div>
                                 <div class="card-block">
-                                    <form class="form-horizontal" action="{{url('admin/hotel_type/hotel_type_add')}}?hotel_id={{$hotel_id}}" method="post">
+                                    <form class="form-horizontal" action="{{url('admin/hotel_type/hotel_type_add')}}" method="post">
+                                    <input type="hidden" name="hotel_id" class="hotel_id" value="{{$hotel_id}}">
                                          <div class="form-group row">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                             @if($type_list ==  '')
@@ -61,6 +61,7 @@
 
                                             <tr>
                                                 <th>类型名称</th>
+                                                <th>样本图片</th>
                                                 <th>床的类型</th>
                                                 <th>入住人数</th>
                                                 <th>房间面积</th>
@@ -77,6 +78,7 @@
                                         @foreach($list as $k=>$v)
                                             <tr>
                                                 <td><font color="Gray">{{$v->room_type_name}}</font></td>
+                                                <td><img  style="width: 140px;height: 120px;" src="{{$v->type_img}}"/></td>
                                                 <td><font color="Gray">{{$v->bed_type}}</font></td>
                                                 <td><font color="Gray">{{$v->max_people}}</font></td>
                                                 <td><font color="Gray">{{$v->room_area}}</font></td>
@@ -93,9 +95,9 @@
                                                 </td>
                                                 <td>
                                                         <font color="SkyBlue">
-                                                         <a href="{{url('admin/room/room_add')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">添加房间</a>　   
-                                                        <a href="{{url('admin/room/room_list')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">查看房间</a>
-                                                        <a href="{{url('admin/room/room_type_album_add')}}?room_type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">添加图片</a>
+                                                         <a href="{{url('admin/room/room_add')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">添加房间</a>　  
+                                                        <a href="{{url('admin/room/room_list')}}?type_id=<?=$v->room_type_id?>&&hotel_id=<?=$hotel_id?>">房间列表</a>　
+                                                        <a data-id="{{$v->room_type_id}}" class="cd-popup-trigger0" href="javascript:void(0)">删除分类</a>
                                                         </font>
                                                 </td>
                                             </tr>
@@ -111,6 +113,63 @@
                                     
                                     @endif
                                     </table>
+             <div class="cd-popup">
+                <div class="cd-popup-container">
+                <br/><br/>
+                <h3><span style="color: red">温馨提示</span></h3>
+                <div class="cd-buttons">
+                <center>
+                <div style="width: 260px;"><br/>
+                酒店类型删除后,该类型下的所有房间也会被删除,您确定要删除吗？</div>
+                </center><br/><br/><br/><br/>
+                 <div class="card-footer">
+                    <button type="button" class="btn btn-sm btn-primary real">确定</button>
+                    <input type="hidden" class="room_type_id" value="">
+                    <button type="reset" class="btn btn-sm btn-danger reset">取消</button>
+                </div>
+                </div>
+                <a href="javascript:;"> <i class="fa fa-close fa-lg mt-2 cd-popup-close"> 　</i></a>
+                </div>
+            </div>
+                                                    
+            <script type="text/javascript">
+                /*弹框JS内容*/
+                jQuery(document).ready(function($){
+                //打开弹窗口
+                $('.cd-popup-trigger0').on('click', function(event){
+                event.preventDefault();
+                var real = $(this).data('id');
+                $(".room_type_id").val(real);
+                $('.cd-popup').addClass('is-visible');
+                //$(".dialog-addquxiao").hide()
+                });
+                //关闭弹窗口
+                $('.cd-popup').on('click', function(event){
+                if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+                event.preventDefault();
+                $(this).removeClass('is-visible');
+                }
+                });
+                });
+                //点击确认后，触发ajax
+                $(".real").click(function(){ 
+                    $('.cd-popup').removeClass('is-visible');
+                    var room_type_id = $(".room_type_id").val();
+                    var hotel_id = $(".hotel_id").val();
+                    $.ajax({
+                        'type':'get',
+                        'url':'hotel_type_del',
+                        'data':{room_type_id:room_type_id,hotel_id:hotel_id},
+                        success:function(msg){ 
+                            window.location.reload();
+                        }
+                    });
+                });
+                //点击取消后，关闭窗口
+                $(".reset").click(function(){
+                    $('.cd-popup').removeClass('is-visible');
+                });
+            </script>
                                     <nav>
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="#"><</a>

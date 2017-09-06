@@ -14,13 +14,14 @@
                                 </div>                              
 <div class="card-block">
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal ">
+    <input type="hidden" value="{{$room->room_id}}" name="room_id">
         <div class="form-group row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">房间号码</label>
             <div class="col-md-9">
-                <input type="text" id="text-input" name="room_number" class="form-control" >
+                <input type="text" id="text-input" name="room_number" class="form-control" value="{{$room->room_number}}">
             </div>
         </div>
         <div class="form-group row">
@@ -46,13 +47,13 @@
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">房间楼层</label>
             <div class="col-md-9">
-                <input type="text" id="text-input" name="room_floor" class="form-control" >
+                <input type="text" id="text-input" name="room_floor" class="form-control"  value="{{$room->room_floor}}">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">房间方位</label>
             <div class="col-md-9">
-                <input type="text" id="text-input" name="room_dicection" class="form-control" >
+                <input type="text" id="text-input" name="room_dicection" class="form-control"  value="{{$room->room_dicection}}">
             </div>
         </div>
         <div class="form-group row">
@@ -60,10 +61,10 @@
             <div class="col-md-9">
                 <div class="radio">
                     <label for="radio1">
-                        <input type="radio" id="radio1" checked name="status" value="1">可以使用
+                        <input type="radio" id="radio1" name="status" @if($room->status==1) checked @endif value="1">可以使用
                     </label>
                     <label for="radio2">
-                        <input type="radio" id="radio2" name="status" value="0">暂停使用
+                        <input type="radio" id="radio2" name="status" @if($room->status==0) checked @endif value="0">暂停使用
                     </label>
             </div>
         </div>

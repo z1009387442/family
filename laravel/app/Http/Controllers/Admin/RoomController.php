@@ -11,7 +11,7 @@ use App\Models\Hotel;
 use App\Models\RoomsTypeAlbum;
 class RoomController extends Controller
 {
-	/**
+/**
 	 * 房间管理首页
 	 * @author [meng] <[920417690@qq.com]>
 	 * @access public
@@ -20,12 +20,10 @@ class RoomController extends Controller
 	 */
 	public function room_list(Request $request)
 	{
-		$type_id = $request->type_id;
-		$hotel_id = $request->hotel_id;
-		$list = Room::where('hotel_id',$hotel_id)
-				->where('room_type_id',$type_id)
+		$list = Room::where('hotel_id',$request->hotel_id)
+				->where('room_type_id',$request->type_id)
 				->get();
-		return view('room_back.room_list',['list'=>$list]);
+		return view('room_back.room_list',['list'=>$list,'type_id'=>$request->type_id,'hotel_id'=>$request->hotel_id]);
 	}
 
 	/**
@@ -58,8 +56,8 @@ class RoomController extends Controller
 		}else{
 			$type_id = $request->type_id;
 			$hotel_id = $request->hotel_id;
-			$hotel = Hotel::all();
-			$type = Type::all();
+			$hotel = Hotel::where('status',1)->get();
+			$type = Type::where('status',1)->get();
 			// print_r($type);die;
 			return view('room_back.room_add',['hotel'=>$hotel,'type'=>$type,'type_id'=>$type_id,'hotel_id'=>$hotel_id]);
 		}
@@ -74,7 +72,11 @@ class RoomController extends Controller
 	 */
 	public function room_del(Request $request)
 	{
-		return view('room_back.room_del');
+		$bool = Room::destroy($request->id);
+		if($bool)
+		{
+			return Redirect::to('admin/room/room_list?hotel_id='.$request->hotel_id."&&type_id=".$request->type_id);
+		}
 	}
 
 	/**
@@ -88,9 +90,24 @@ class RoomController extends Controller
 	{
 		if($request->isMethod('post'))
 		{
+			$room = new Room;
+			//添加数据入库
+			$room = Room::find($request->room_id);
+			$room->status   = $request->status;
+			$room->room_floor = $request->room_floor;
+			$room->room_dicection = $request->room_dicection;
+			$room->room_number = $request->room_number;
+			$bool = $room->save();
+			if($bool)
+			{
+				return Redirect::to('admin/room/room_list?hotel_id='.$room->hotel_id."&&type_id=".$room->room_type_id);
+			}
 
 		}else{
-			return view('room_back.room_save');
+			$room = Room::find($request->id);
+			$hotel = Hotel::where('status',1)->get();
+			$type = Type::where('status',1)->get();
+			return view('room_back.room_save',['room'=>$room,'hotel'=>$hotel,'type'=>$type,'type_id'=>$request->type_id,'hotel_id'=>$request->hotel_id]);
 		}
 	}
 	public function room_type_album_add(Request $request)

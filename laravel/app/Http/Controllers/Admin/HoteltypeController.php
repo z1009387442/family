@@ -8,6 +8,7 @@ use Redirect;
 use App\Models\Hotel;
 use App\Models\Hoteltype;
 use App\Models\Type;
+use App\Models\Room;
 class HoteltypeController extends Controller
 {
 	/**
@@ -29,14 +30,14 @@ class HoteltypeController extends Controller
 			$hotel_type_id[] = $hotel_type->hotel_room_type_id;
 		}
 		//查询所有分类
-		$types = Type::all();
+		$types = Type::where('status',1)->get();
 		//获取所有分类id
 		foreach($types as $type){
 			$type_id[] = $type ->room_type_id;
 		}
 		if(empty($hotel_type_id))
 		{
-			$type_list = Type::all();
+			$type_list = Type::where('status',1)->get();
 		}else{
 			//对比酒店已有类型id和所有类型id
 			$other_id = array_diff($type_id,$hotel_type_id);
@@ -46,7 +47,7 @@ class HoteltypeController extends Controller
 				$type_list = '';
 			}else{
 				//查询酒店还没有的房间类型
-				$type_list = Type::whereIn('room_type_id' ,$other_id)->get();
+				$type_list = Type::where('status',1)->whereIn('room_type_id' ,$other_id)->get();
 			}
 		}
 		if(empty($hotel_type_id))
@@ -70,7 +71,6 @@ class HoteltypeController extends Controller
 	{
 		$hotel_room_type_id = $request->hotel_room_type_id;;
 		$hotel_id = $request->hotel_id;
-		// dd($hotel_room_type_id);die;
 		$data = '';
 		foreach($hotel_room_type_id as $k=>$v)
 		{
@@ -93,23 +93,17 @@ class HoteltypeController extends Controller
 	 */
 	public function hotel_type_del(Request $request)
 	{
-		
-	}
-
-	/**
-	 * 酒店管理修改
-	 * @author [meng] <[920417690@qq.com]>
-	 * @access public
-	 * @param  $[name] [description]
-	 * @return [type] [description]
-	 */
-	public function hotel_type_save(Request $request)
-	{
-		if($request->isMethod('post'))
+		//删除对应酒店下的此分类
+		$type_bool = Hoteltype::where('hotel_id',$request->hotel_id)->where('hotel_room_type_id', $request->room_type_id)->delete();
+		if($type_bool)
 		{
-
-		}else{
-			return view('hotel_back.hotel_save');
+			//删除酒店下的所有房间
+			$room_bool = Room::where('hotel_id',$request->hotel_id)->where('room_type_id', $request->room_type_id)->delete();
+			if($room_bool)
+			{
+				echo 1;
+			}
 		}
+	
 	}
 }
