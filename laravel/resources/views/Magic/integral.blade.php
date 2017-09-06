@@ -7,15 +7,12 @@
 <meta name="keywords" content="Marital Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- 引入插件样式 -->
-<link rel="stylesheet" type="text/css" href="/qiantai/codebase/GooCalendar.css"/>
-
 <link href="/qiantai/css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/qiantai/js/jquery.min.js"></script>
 <script src="/qiantai/js/bootstrap.min.js"></script>
 <!-- Custom Theme files -->
-<link href="/qiantai/css/style.css" rel='stylesheet' type='text/css' />
+<link href="/qiantai/css/integral.css" rel='stylesheet' type='text/css' />
 <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 
@@ -23,10 +20,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  <div class="navbar navbar-inverse-blue navbar">
  @section('header')
 
- <?php require('/qiantai/index.html'); ?>
 <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
 <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
 <a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
+    <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
       <div class="navbar-inner">
         <div class="container">
            <div class="navigation">
@@ -61,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   </div> 
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-		        <ul class="nav navbar-nav nav_1">
+		         <ul class="nav navbar-nav nav_1">
 		            <li><a href="{{url('/')}}">首页</a></li>
 		            <li>
 		              <a href="">酒店预订</a>		              
@@ -87,23 +84,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <div class="clearfix"> </div>
         </div> <!-- end container -->
       </div> <!-- end navbar-inner -->
-@show
+
     </div> <!-- end navbar-inverse-blue -->
 <!-- ============================  Navigation End ============================ -->
 @yield('content')
 
-    <div class="footer">
-@section('footer')
-    	<div class="container">
-    		<div class="clearfix"> </div>
-    		<div>
-    			
-    		</div>
-    		<div class="copy">
-		      <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-	        </div>
-    	</div>
-@show
-    </div>
+  
+
+
 </body>
 </html>
