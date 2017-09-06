@@ -259,6 +259,56 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'AboutController@team_del',
 				]);
 
+				//后台客房设施添加
+				Route::any('rooms/facilities_add',[
+				'uses'=>'RoomsFacilitiesController@facilities_add',
+				]);
+				//后台客房设施列表
+				Route::any('rooms/facilities_list',[
+				'uses'=>'RoomsFacilitiesController@facilities_list',
+				]);
+				//后台客房设施修改
+				Route::any('rooms/facilities_save',[
+				'uses'=>'RoomsFacilitiesController@facilities_save',
+				]);
+				//后台客房设施删除
+				Route::any('rooms/facilities_del',[
+				'uses'=>'RoomsFacilitiesController@facilities_del',
+				]);
+				//后台综合设施添加
+				Route::any('complex/facilities_add',[
+				'uses'=>'ComplexFacilitiesController@facilities_add',
+				]);
+				//后台综合设施列表
+				Route::any('complex/facilities_list',[
+				'uses'=>'ComplexFacilitiesController@facilities_list',
+				]);
+				//后台综合设施修改
+				Route::any('complex/facilities_save',[
+				'uses'=>'ComplexFacilitiesController@facilities_save',
+				]);
+				//后台综合设施删除
+				Route::any('complex/facilities_del',[
+				'uses'=>'ComplexFacilitiesController@facilities_del',
+				]);
+				//后台商品积分添加
+				Route::any('goods/goods_add',[
+				'uses'=>'GoodsController@goods_add',
+				]);
+				//后台商品积分列表
+				Route::any('goods/goods_list',[
+				'uses'=>'GoodsController@goods_list',
+				]);
+				//后台商品积分修改
+				Route::any('goods/goods_save',[
+				'uses'=>'GoodsController@goods_save',
+				]);
+				//后台商品积分删除
+				Route::any('goods/goods_del',[
+				'uses'=>'GoodsController@goods_del',
+				]);
+
+
 
 
 				/**

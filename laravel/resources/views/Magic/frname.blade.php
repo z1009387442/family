@@ -172,6 +172,47 @@
                             </li>
                         </ul>
                     </li>
+                    <!--                 客房设施 -->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>客房设施管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/rooms/facilities_add')}}"><i class="icon-shield"></i> 客房设施添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/rooms/facilities_list')}}"><i class="icon-shield"></i> 客房设施编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <!--综合设施管理-->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pie-chart"></i>综合设施管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/complex/facilities_add')}}"><i class="icon-puzzle"></i> 综合设施添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/complex/facilities_list')}}"><i class="icon-puzzle"></i> 综合设施编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!--商品积分列表-->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>商品积分管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/goods/goods_add')}}"><i class="icon-shield"></i> 商品积分添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/goods/goods_list')}}"><i class="icon-shield"></i> 商品积分编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
 
                     <li class="divider"></li>
                     <li class="nav-title">                   
