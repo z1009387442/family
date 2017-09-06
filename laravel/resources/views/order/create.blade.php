@@ -23,11 +23,11 @@
    	 	<div class="col_3">
 
    	        <div class="col-sm-4 row_2">
-   	        <img src="{{$room_img->img_path}}" width="200" height="200" />
+   	        <img src="{{$room_data->type_img}}" width="200" height="200" />
 				<div class="flexslider">
 					 <ul class="slides">
 						<li data-thumb="images/p1.jpg">
-							<!-- <img src="{{$room_img->img_path}}" width="200" height="200" /> -->
+							
 						</li>
 						
 					 </ul>
