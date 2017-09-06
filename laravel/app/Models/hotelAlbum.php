@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HotelAlbum extends Model
 {
-    //指定表名
+    //指定表的名
     protected $table = 'hotel_album';
 
     //主键
