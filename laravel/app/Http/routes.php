@@ -133,7 +133,23 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'HotelController@room',
 				]);
 				
+				//支付
+				Route::group(['prefix' => 'pay'], function(){
 
+					//创建支付
+					Route::get('create', [
+						'uses' => 'PayController@create'
+					]);
+
+					Route::get('noPage', [
+						'uses' => 'PayController@yiPage'
+					]);
+
+					Route::get('tongPage', [
+						'uses' => 'PayController@tongPage'
+					]);
+
+				});
 
 			});
 		});
