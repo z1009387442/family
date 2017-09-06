@@ -34,6 +34,8 @@ class HotelController extends Controller
 		if($request->isMethod('post'))
 		{
 			$data = $request->all();
+			//查询地区id
+			$region_one = Region::where('region_name',$data['region_name'])->first();
 			//将图片重命名
 			$newName = md5(date('ymdhis').$data['hotel_img']->getClientOriginalName()).".".$data['hotel_img']->getClientOriginalExtension();
 			//移动文件到uploads
@@ -44,7 +46,7 @@ class HotelController extends Controller
 			$hotel = new Hotel;
 			//添加数据入库
 			$hotel->hotel_name = $data['hotel_name'];
-			$hotel->region_id = $data['region_id'];
+			$hotel->region_id = $region_one->region_id;
 			$hotel->sort   = $data['sort'];
 			$hotel->hotel_img = $data['hotel_img'];
 			$hotel->hotel_address   = $data['hotel_address'];

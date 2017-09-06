@@ -206,9 +206,11 @@
 
 Copyright &copy; 2017.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>      
 </footer>
-	
+@section('js')
+    <script src="/frname/assets/js/libs/jquery.min.js"></script>
+@show
 	<!-- Bootstrap and necessary plugins -->
-	<script src="/frname/assets/js/libs/jquery.min.js"></script>
+	
 	<script src="/frname/assets/js/libs/tether.min.js"></script>
 	<script src="/frname/assets/js/libs/bootstrap.min.js"></script>
 	<script src="/frname/assets/js/libs/pace.min.js"></script>
