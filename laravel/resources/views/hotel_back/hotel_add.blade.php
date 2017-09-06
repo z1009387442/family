@@ -26,11 +26,17 @@
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">所属地区</label>
             <div class="col-md-9">
-                <select class="form-control" name="region_id" style="width: 180px;" id="ccyear">
-                @foreach($region as $k=>$v)
-                    <option value="{{$v->region_id}}">{{$v->region_name}}</option>
-                 @endforeach   
-                </select>
+<!--下拉地区开始-->
+        <div class="city-select" id="single-select-1">
+            <div class="city-info">
+                <div class="city-name">
+                </div>
+                <div class="city-input">
+                    <input type="text" class="input-search" value="" placeholder="请选择城市" />
+                </div>
+            </div>
+        </div>
+<!--下拉地区（结束）-->
             </div>
         </div>
         <div class="form-group row">
@@ -105,12 +111,74 @@
                     </label>
             </div>
         </div>
-    
+    </div>
 </div>
 <div class="card-footer">
-    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+<input type="hidden" value="" name="region_name" id="region_name">
+    <button type="submit" class="btn btn-sm btn-primary" id="submit_"><i class="fa fa-dot-circle-o"></i> Submit</button>
     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
 </div>
 </form>
 </div></div>
+
+    <link rel="stylesheet" type="text/css" href="/frname/houtai/css/city-select.css">
+    <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
+    <script type="text/javascript" src="/frname/houtai/js/citydata.min.js"></script>
+    <script type="text/javascript" src="/frname/houtai/js/citySelect-1.0.0.min.js?v=1"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#submit_").click(function(){
+        var region_name = $(".city-info").text();
+        $("#region_name").val(region_name);
+
+        });
+
+        // 单选
+        var singleSelect1 = $('#single-select-1').citySelect({
+            dataJson: cityData,
+            multiSelect: false,
+            shorthand: true,
+            search: true,
+            onInit: function () {
+                console.log(this)
+            },
+            onTabsAfter: function (target) {
+                console.log(target)
+            },
+            onCallerAfter: function (target, values) {
+                console.log(JSON.stringify(values))
+            }
+        });
+
+        // 单选设置城市
+        singleSelect1.setCityVal('北京市');
+
+        // 单选
+        var singleSelect2 = $('#single-select-2').citySelect({
+            dataJson: cityData
+        });
+
+        // 单选设置城市
+        singleSelect2.setCityVal('北京市');
+
+        // 禁止点击显示的接口
+        singleSelect2.status('readonly');
+
+        //单选
+        var singleSelect3 = $('#single-select-3').citySelect({
+            dataJson: cityData
+        });
+
+        // 单选设置城市
+        singleSelect3.setCityVal('广州市');
+
+        // 禁止点击显示的接口
+        singleSelect3.status('disabled');
+
+    });
+    </script>
+@endsection
+
+@section('js')
+
 @endsection

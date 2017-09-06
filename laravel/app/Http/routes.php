@@ -132,8 +132,21 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room',[
 				'uses'=>'HotelController@room',
 				]);
-				
 
+				//预订房间
+				Route::any('order/create/room_type_id/{room_type_id}/hotel_id/{hotel_id}',[
+				'uses'=>'OrderController@create',
+				])->where(['room_type_id'=>'[0-9]+','hotel_id'=>'[0-9]+']);
+				
+				//生成订单
+				Route::any('order/order_cre',[
+				'uses'=>'OrderController@order_cre',
+				]);
+				
+				//模拟支付页面
+				Route::any('order/pay_money',[
+				'uses'=>'OrderController@pay_money',
+				]);
 
 			});
 		});
@@ -272,6 +285,15 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('hotel_type/hotel_type_del',[
 				'uses'=>'HoteltypeController@hotel_type_del',
 
+				]);
+
+					//酒店内部相册添加
+				Route::any('picture/hotel_album_add',[
+				'uses'=>'PictureController@hotel_album_add',
+				]);
+				//酒店展示
+				Route::any('picture/room_album_list',[
+				'uses'=>'PictureController@room_album_list',
 				]);
 		});
 	});
