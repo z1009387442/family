@@ -98,6 +98,11 @@ Route::group(['middleware' => ['web']], function () {
 					'uses'=>'IndexController@personal_data'
 				]);
 
+				//用户头像上传
+				Route::any('user_img',[
+					'uses'=>'IndexController@user_img'
+				]);
+
 				//前台验证用户名唯一
 				Route::any('verify_name',[
 					'uses'=>'IndexController@verify_name'

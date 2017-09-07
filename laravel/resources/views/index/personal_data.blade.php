@@ -7,20 +7,22 @@
 @endsection
 <!-- 内容输入区 -->
 @section('content')
-    
-<link rel="stylesheet" type="text/css" href="/qiantai/uploadify/uploadify.css" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/H-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/style.css" />
+
 <div class="page-container">
     <form class="form form-horizontal" id="form-article-add" action="{{url('home/personal_data')}}" method="post" enctype="multipart/form-data">
         <div id="tab-system" class="HuiTab">
             <div class="tabBar cl">
                 <span>个人资料</span>
+                <span>我的订单</span>
                 <span>我的积分</span>
                 <span>我的余额</span>
                 <span>我的兑换券</span>
+                
             </div>
         
         <?php  foreach($user_info as $v) { ?>
@@ -29,7 +31,7 @@
                     <label class="form-label col-xs-4 col-sm-2">
                         <span class="c-red">*</span>
                         昵称：</label>
-                    <div class="formControls col-xs-8 col-sm-9">
+                    <div class="formControls col-xs-8 col-sm-9" style="width:800px;">
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}" />
                         <input name="user_name" class="input-text radius size-L" type="text" value="<?php echo  $v->user_name; ?>" readonly="true">
                     </div>
@@ -53,7 +55,7 @@
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">上传头像：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                    <div class="img"><img src="<?php if($v->img==NULL){echo '/uploads/default.jpg';}else{echo $v->img;}?>" width="100px" height="97px"></div>
+                    <div class="img"><img src="<?php if($v->img==NULL){echo "/uploads/default.png";}else{echo $v->img;}?>" width="100px" height="97px"></div>
                         <input type="hidden" name="img" value="">
                         <span class="btn-upload">
                         <a href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 上传头像</a>
@@ -74,23 +76,28 @@
 
 
             <div class="tabCon">
+                这是订单
             </div>
             <div class="tabCon">
+                这是积分
             </div>
             <div class="tabCon">
+                这是余额
+            </div>
+            <div class="tabCon">
+                这是兑换券
             </div>
         </div>        
     </form>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/qiantai/js/h-ui/jquery.min.js"></script>
-<!-- <script type="text/javascript" src="/qiantai/js/h-ui/layer.js"></script> -->
+<script type="text/javascript" src="/qiantai/js/h-ui/layer.js"></script>
 <script type="text/javascript" src="/qiantai/js/h-ui/H-ui.min.js"></script>
-<script type="text/javascript" src="/qiantai/js/h-ui/H-ui.admin.js"></script> 
-<!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/qiantai/js/h-ui/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<!-- <script type="text/javascript" src="/qiantai/js/h-ui/WdatePicker.js"></script> -->
+<script type="text/javascript" src="/qiantai/js/h-ui/WdatePicker.js"></script>
 <script type="text/javascript" src="/qiantai/js/h-ui/jquery.validate.js"></script>
 <script type="text/javascript" src="/qiantai/js/h-ui/validate-methods.js"></script>
 <script type="text/javascript" src="/qiantai/js/h-ui/messages_zh.js"></script>
@@ -136,6 +143,7 @@ function uploadPic(){
 
 
  </script>
+
 
 @endsection
 
