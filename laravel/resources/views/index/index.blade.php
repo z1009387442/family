@@ -15,7 +15,7 @@
   <div class="container">
     <div class="banner_info">
       <h3>Millions of verified Members</h3>
-      <a href="view_profile.html" class="hvr-shutter-out-horizontal">Create your Profile</a>
+      <a href="view_profile.html" class="hvr-shutter-out-horizontal">come on baby</a>
     </div>
   </div>
   <div class="profile_search">
@@ -299,7 +299,7 @@ var _hmt = _hmt || [];
     </div>
     <div class="bg">
 		<div class="container"> 
-			<h3>Guest Messages</h3>
+			<h3>网站免责声明</h3>
 			<div class="heart-divider">
 				<span class="grey-line"></span>
 				<i class="fa fa-heart pink-heart"></i>
@@ -308,9 +308,9 @@ var _hmt = _hmt || [];
             </div>
             <div class="col-sm-6">
             	<div class="bg_left">
-            		<h4>But I must explain</h4>
-            		<h5>Friend of Bride</h5>
-            		<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            		<h4>测试环境,请勿进行真实业务行为</h4>
+            		<h5>本网站一切内容都是为了更好地服务受众，不保证所有信息、图片、视频、链接及其它项目的绝对准确性和完整性，也并不意味着赞同其观点或证实其内容的真实性、科学性及严肃性等，使用者使用这些信息时，需要经过进一步核实。</h5>
+            		<p>本站采用的非本站原创文章及图片等内容无法一一和版权者联系，如果原作者及编辑认为其作品不宜在网络传播，或不应无偿使用，请及时用电子邮件或电话通知我们，并提供以下资料：一是著作权人的身份证明，包括身份证、法人执照、营业执照等有效身份证件;二是著作权权属证明，包括有关著作权登记证书或创作原手稿等。本网站将迅速采取适当措施，避免给双方造成不必要的损失。</p>
             	   <ul class="team-socials">
                     <li><a href="#"><span class="icon-social "><i class="fa fa-facebook"></i></span></a></li>
                     <li><a href="#"><span class="icon-social "><i class="fa fa-twitter"></i></span></a></li>
@@ -320,9 +320,9 @@ var _hmt = _hmt || [];
             </div>
             <div class="col-sm-6">
             	<div class="bg_left">
-            		<h4>But I must explain</h4>
-            		<h5>Friend of Groom</h5>
-            		<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            		<h4>测试环境,请勿进行真实业务行为</h4>
+            		<h5>本网站一切内容都是为了更好地服务受众，不保证所有信息、图片、视频、链接及其它项目的绝对准确性和完整性，也并不意味着赞同其观点或证实其内容的真实性、科学性及严肃性等，使用者使用这些信息时，需要经过进一步核实。</h5>
+            		<p>本站采用的非本站原创文章及图片等内容无法一一和版权者联系，如果原作者及编辑认为其作品不宜在网络传播，或不应无偿使用，请及时用电子邮件或电话通知我们，并提供以下资料：一是著作权人的身份证明，包括身份证、法人执照、营业执照等有效身份证件;二是著作权权属证明，包括有关著作权登记证书或创作原手稿等。本网站将迅速采取适当措施，避免给双方造成不必要的损失。</p>
             	   <ul class="team-socials">
                     <li><a href="#"><span class="icon-social "><i class="fa fa-facebook"></i></span></a></li>
                     <li><a href="#"><span class="icon-social "><i class="fa fa-twitter"></i></span></a></li>
