@@ -7,165 +7,235 @@
 @endsection
 <!-- 内容输入区 -->
 @section('content')
-<div class="grid_3">
-  <div class="container">
-   <div class="profile">
-     <div class="col-md-8 profile_left">
-      <div class="col_3">
-            <div class="col-sm-4 row_2">
-        <div class="flexslider">
-           <ul class="slides">
-           <?php foreach($hotel_img as $img) {?>
-            <li data-thumb="<?php echo $img->hotel_img; ?>">
-              <img src="<?php echo $img->hotel_img; ?>" />
-            </li>
-            <?php } ?>
-           </ul>
-          </div>
-      </div>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="/qiantai/room_type/style1503546983737.css"><style type="text/css">.amap-indoor-map .label-canvas{position:absolute;top:0;left:0}.amap-indoor-map .highlight-image-con *{pointer-events:none}.amap-indoormap-floorbar-control{position:absolute;margin:auto 0;bottom:165px;right:12px;width:35px;text-align:center;line-height:1.3em;overflow:hidden;padding:0 2px}.amap-indoormap-floorbar-control .panel-box{background-color:rgba(255,255,255,.9);border-radius:3px;border:1px solid #ccc}.amap-indoormap-floorbar-control .select-dock{position:absolute;top:0;left:0;width:100%;box-sizing:border-box;height:30px;border:solid #4196ff;border-width:0 2px;border-radius:2px;pointer-events:none;background:linear-gradient(to bottom,#f6f8f9 0,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%)}.amap-indoor-map .transition{transition:opacity .2s},.amap-indoormap-floorbar-control .transition{transition:top .2s,margin-top .2s}.amap-indoormap-floorbar-control .select-dock:after,.amap-indoormap-floorbar-control .select-dock:before{content:"";position:absolute;width:0;height:0;left:0;top:10px;border:solid transparent;border-width:4px;border-left-color:#4196ff}.amap-indoormap-floorbar-control .select-dock:after{right:0;left:auto;border-left-color:transparent;border-right-color:#4196ff}.amap-indoormap-floorbar-control.is-mobile{width:37px}.amap-indoormap-floorbar-control.is-mobile .floor-btn{height:35px;line-height:35px}.amap-indoormap-floorbar-control.is-mobile .select-dock{height:35px;top:36px}.amap-indoormap-floorbar-control.is-mobile .select-dock:after,.amap-indoormap-floorbar-control.is-mobile .select-dock:before{top:13px}.amap-indoormap-floorbar-control.is-mobile .floor-list-box{height:105px}.amap-indoormap-floorbar-control .floor-list-item .floor-btn{color:#555;font-family:"Times New Roman",sans-serif,"Microsoft Yahei";font-size:16px}.amap-indoormap-floorbar-control .floor-list-item.selected .floor-btn{color:#000}.amap-indoormap-floorbar-control .floor-btn{height:28px;line-height:28px;overflow:hidden;cursor:pointer;position:relative;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.amap-indoormap-floorbar-control .floor-btn:hover{background-color:rgba(221,221,221,.4)}.amap-indoormap-floorbar-control .floor-minus,.amap-indoormap-floorbar-control .floor-plus{position:relative;text-indent:-1000em}.amap-indoormap-floorbar-control .floor-minus:after,.amap-indoormap-floorbar-control .floor-plus:after{content:"";position:absolute;margin:auto;top:9px;left:0;right:0;width:0;height:0;border:solid transparent;border-width:10px 8px;border-top-color:#777}.amap-indoormap-floorbar-control .floor-minus.disabled,.amap-indoormap-floorbar-control .floor-plus.disabled{opacity:.3}.amap-indoormap-floorbar-control .floor-plus:after{border-bottom-color:#777;border-top-color:transparent;top:-3px}.amap-indoormap-floorbar-control .floor-list-box{max-height:153px;position:relative;overflow-y:hidden}.amap-indoormap-floorbar-control .floor-list{margin:0;padding:0;list-style:none}.amap-indoormap-floorbar-control .floor-list-item{position:relative}.amap-indoormap-floorbar-control .floor-btn.disabled,.amap-indoormap-floorbar-control .floor-btn.disabled *,.amap-indoormap-floorbar-control.with-indrm-loader *{-webkit-pointer-events:none!important;pointer-events:none!important}.amap-indoormap-floorbar-control .with-indrm-loader .floor-nonas{opacity:.5}.amap-indoor-map-moverf-marker{color:#555;background-color:#FFFEEF;border:1px solid #7E7E7E;padding:3px 6px;font-size:12px;white-space:nowrap;display:inline-block;position:absolute;top:1em;left:1.2em}.amap-indoormap-floorbar-control .amap-indrm-loader{-moz-animation:amap-indrm-loader 1.25s infinite linear;-webkit-animation:amap-indrm-loader 1.25s infinite linear;animation:amap-indrm-loader 1.25s infinite linear;border:2px solid #91A3D8;border-right-color:transparent;box-sizing:border-box;display:inline-block;overflow:hidden;text-indent:-9999px;width:13px;height:13px;border-radius:7px;position:absolute;margin:auto;top:0;left:0;right:0;bottom:0}@-moz-keyframes amap-indrm-loader{0%{-moz-transform:rotate(0);transform:rotate(0)}100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes amap-indrm-loader{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes amap-indrm-loader{0%{-moz-transform:rotate(0);-ms-transform:rotate(0);-webkit-transform:rotate(0);transform:rotate(0)}100%{-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)}}</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge; IE=8">
 
-      <div class="col-sm-8 row_1">
-        <table class="table_working_hours">
-        <h2><?php echo $hotel['hotel_name']; ?></h2>
-              <tbody>
-            <tr class="opened_1">
-              <td class="day_label">酒店电话</td>
-              <td class="day_value"><?php echo $hotel['hotel_tel']; ?></td>
+    <link rel="stylesheet" href="/qiantai/room_type/main.14f7aa84.css">
+    <style type="text/css">
+        var {
+        background-repeat: no-repeat;
+        }
+.p29_0_0,.p29_0_1,.p29_0_2,.p29_0_3,.p29_0_4,.p29_0_5,.p29_0_6,.p29_0_7,.p29_0_8,.p29_0_9,.p29_0_10{background-image: url('/Blur/Pic?b=5a664b2d7a83492181fcc12a20c0c84d'); font-size: 27px } .p29_0_0{ background-position: -4px -4px; padding: 0 8px } .p29_0_1{ background-position: -64px -4px; padding: 0 8px } .p29_0_2{ background-position: -109px -4px; padding: 0 8px } .p29_0_3{ background-position: -148px -4px; padding: 0 8px } .p29_0_4{ background-position: -219px -4px; padding: 0 8px } .p29_0_5{ background-position: -246px -4px; padding: 0 4px } .p29_0_6{ background-position: -264px -4px; padding: 0 8px } .p29_0_7{ background-position: -313px -4px; padding: 0 8px } .p29_0_8{ background-position: -343px -4px; padding: 0 8px } .p29_0_9{ background-position: -383px -4px; padding: 0 8px } .p29_0_10{ background-position: -453px -4px; padding: 0 8px } .p18_0_0,.p18_1_0,.p18_0_1,.p18_1_1,.p18_0_2,.p18_1_2,.p18_0_3,.p18_1_3,.p18_0_4,.p18_1_4,.p18_0_5,.p18_1_5,.p18_0_6,.p18_1_6,.p18_0_7,.p18_1_7,.p18_0_8,.p18_1_8,.p18_0_9,.p18_1_9,.p18_0_10,.p18_1_10{background-image: url('/Blur/Pic?b=2230f503618d4821b8883c3cc238cdc0'); font-size: 16px } .p18_0_0{ background-position: -2px -1px; padding: 0 5px } .p18_1_0{ background-position: -2px -21px; padding: 0 5px } .p18_0_1{ background-position: -19px -1px; padding: 0 5px } .p18_1_1{ background-position: -19px -21px; padding: 0 5px } .p18_0_2{ background-position: -36px -1px; padding: 0 5px } .p18_1_2{ background-position: -36px -21px; padding: 0 5px } .p18_0_3{ background-position: -64px -1px; padding: 0 5px } .p18_1_3{ background-position: -64px -21px; padding: 0 5px } .p18_0_4{ background-position: -89px -1px; padding: 0 5px } .p18_1_4{ background-position: -89px -21px; padding: 0 5px } .p18_0_5{ background-position: -111px -1px; padding: 0 2px } .p18_1_5{ background-position: -111px -21px; padding: 0 2px } .p18_0_6{ background-position: -120px -1px; padding: 0 5px } .p18_1_6{ background-position: -120px -21px; padding: 0 5px } .p18_0_7{ background-position: -153px -1px; padding: 0 5px } .p18_1_7{ background-position: -153px -21px; padding: 0 5px } .p18_0_8{ background-position: -171px -1px; padding: 0 5px } .p18_1_8{ background-position: -171px -21px; padding: 0 5px } .p18_0_9{ background-position: -194px -1px; padding: 0 5px } .p18_1_9{ background-position: -194px -21px; padding: 0 5px } .p18_0_10{ background-position: -232px -1px; padding: 0 5px } .p18_1_10{ background-position: -232px -21px; padding: 0 5px } .p16_0_0,.p16_1_0,.p16_0_1,.p16_1_1,.p16_0_2,.p16_1_2,.p16_0_3,.p16_1_3,.p16_0_4,.p16_1_4,.p16_0_5,.p16_1_5,.p16_0_6,.p16_1_6,.p16_0_7,.p16_1_7,.p16_0_8,.p16_1_8,.p16_0_9,.p16_1_9,.p16_0_10,.p16_1_10{background-image: url('/Blur/Pic?b=e917c9a7da79483aa180c39173ebdf3e'); font-size: 15px } .p16_0_0{ background-position: -2px -2px; padding: 0 4px } .p16_1_0{ background-position: -2px -20px; padding: 0 4px } .p16_0_1{ background-position: -18px -2px; padding: 0 4px } .p16_1_1{ background-position: -18px -20px; padding: 0 4px } .p16_0_2{ background-position: -34px -2px; padding: 0 4px } .p16_1_2{ background-position: -34px -20px; padding: 0 4px } .p16_0_3{ background-position: -60px -2px; padding: 0 4px } .p16_1_3{ background-position: -60px -20px; padding: 0 4px } .p16_0_4{ background-position: -83px -2px; padding: 0 2px } .p16_1_4{ background-position: -83px -20px; padding: 0 2px } .p16_0_5{ background-position: -97px -2px; padding: 0 4px } .p16_1_5{ background-position: -97px -20px; padding: 0 4px } .p16_0_6{ background-position: -111px -2px; padding: 0 4px } .p16_1_6{ background-position: -111px -20px; padding: 0 4px } .p16_0_7{ background-position: -142px -2px; padding: 0 4px } .p16_1_7{ background-position: -142px -20px; padding: 0 4px } .p16_0_8{ background-position: -158px -2px; padding: 0 4px } .p16_1_8{ background-position: -158px -20px; padding: 0 4px } .p16_0_9{ background-position: -179px -2px; padding: 0 4px } .p16_1_9{ background-position: -179px -20px; padding: 0 4px } .p16_0_10{ background-position: -214px -2px; padding: 0 4px } .p16_1_10{ background-position: -214px -20px; padding: 0 4px } .p14_0_0,.p14_0_1,.p14_0_2,.p14_0_3,.p14_0_4,.p14_0_5,.p14_0_6,.p14_0_7,.p14_0_8,.p14_0_9,.p14_0_10{background-image: url('/Blur/Pic?b=d7422dd20a284b7d86b6f947014c82b2'); font-size: 13px } .p14_0_0{ background-position: -2px -2px; padding: 0 4px } .p14_0_1{ background-position: -15px -2px; padding: 0 4px } .p14_0_2{ background-position: -29px -2px; padding: 0 4px } .p14_0_3{ background-position: -51px -2px; padding: 0 4px } .p14_0_4{ background-position: -70px -2px; padding: 0 3px } .p14_0_5{ background-position: -82px -2px; padding: 0 4px } .p14_0_6{ background-position: -94px -2px; padding: 0 4px } .p14_0_7{ background-position: -120px -2px; padding: 0 4px } .p14_0_8{ background-position: -134px -2px; padding: 0 4px } .p14_0_9{ background-position: -152px -2px; padding: 0 4px } .p14_0_10{ background-position: -182px -2px; padding: 0 4px } .p12_0_0,.p12_1_0,.p12_0_1,.p12_1_1,.p12_0_2,.p12_1_2,.p12_0_3,.p12_1_3,.p12_0_4,.p12_1_4,.p12_0_5,.p12_1_5,.p12_0_6,.p12_1_6,.p12_0_7,.p12_1_7,.p12_0_8,.p12_1_8,.p12_0_9,.p12_1_9,.p12_0_10,.p12_1_10{background-image: url('/Blur/Pic?b=da133aa928b44ca8a85c27ddeedd177d'); font-size: 12px } .p12_0_0{ background-position: -2px -3px; padding: 0 3px } .p12_1_0{ background-position: -2px -18px; padding: 0 3px } .p12_0_1{ background-position: -14px -3px; padding: 0 3px } .p12_1_1{ background-position: -14px -18px; padding: 0 3px } .p12_0_2{ background-position: -26px -3px; padding: 0 3px } .p12_1_2{ background-position: -26px -18px; padding: 0 3px } .p12_0_3{ background-position: -46px -3px; padding: 0 3px } .p12_1_3{ background-position: -46px -18px; padding: 0 3px } .p12_0_4{ background-position: -63px -3px; padding: 0 1px } .p12_1_4{ background-position: -63px -18px; padding: 0 1px } .p12_0_5{ background-position: -74px -3px; padding: 0 3px } .p12_1_5{ background-position: -74px -18px; padding: 0 3px } .p12_0_6{ background-position: -85px -3px; padding: 0 3px } .p12_1_6{ background-position: -85px -18px; padding: 0 3px } .p12_0_7{ background-position: -108px -3px; padding: 0 3px } .p12_1_7{ background-position: -108px -18px; padding: 0 3px } .p12_0_8{ background-position: -121px -3px; padding: 0 3px } .p12_1_8{ background-position: -121px -18px; padding: 0 3px } .p12_0_9{ background-position: -137px -3px; padding: 0 3px } .p12_1_9{ background-position: -137px -18px; padding: 0 3px } .p12_0_10{ background-position: -164px -3px; padding: 0 3px } .p12_1_10{ background-position: -164px -18px; padding: 0 3px }     </style>
+<style type="text/css">.amap-container{cursor:url(http://webapi.amap.com/theme/v1.3/openhand.cur),default;}.amap-drag{cursor:url(http://webapi.amap.com/theme/v1.3/closedhand.cur),default;}</style></head>
+
+<div class="Cmbox">
+    <div class="inner Cwrap">
+        <div id="Pdetail_part1" class="Pdetail_part1">
+            <div class="top Lcfx">
+                <div class="hotelinfo Lfll">
+                    <div class="hotelname">
+                        <h1>
+                        {{$hotel['hotel_name']}}
+                        </h1>
+                    </div>
+                    <div class="address Lmt5">{{$hotel['hotel_address']}}</div>
+                </div>
+            </div>
+            <div class="Lcfx Lmt5">
+                <div class="hotelpic Lfll Lposr">
+                                                    <img src="{{$hotel['hotel_img']}}" data-index="0" width="265" height="265" class="large Lfll">
+                            <div class="imagebox Lfll">
+                                <div class="clipinner Lcfx">
+                                            <?php foreach($hotel_img as $img) {?>
+                                            <img src="{{$img->hotel_img}}" data-index="1" width="175" height="130" class="img">
+                                            <?php } ?>
+                                            </div>
+                            </div>
+
+                </div>
+<!--百度地图-->
+                <div class="topcomment Lflr Lposr">
+
+                </div>
+<!--百度地图(结束)-->
+            </div>
+        </div>
+
+        <div id="Pdetail_part2" class="Pdetail_part2 Lposr Lmt10">
+            <div class="hotelroom_block" data-nblock-id="block/hotelDetailRoom">
+                <div class="roomtypebox Lmt25">
+<div class="roomtype">
+    <table>
+        <thead>
+            <tr>
+                <td width="200">房型</td>
+                <td width="210">床型</td>
+                <td width="100">门市价</td>         
+                <td width="100">会员价</td>
+                <td width="140">描述</td>
+                <td width="250">&nbsp;</td>
             </tr>
-            <tr class="opened_1">
-              <td class="day_label">酒店地址</td>
-              <td class="day_value"><?php echo $hotel['hotel_address']; ?></td>
-            </tr>
-           
-            </tbody>
-        </table>
-        <ul class="login_details">
-            <li><?php echo $hotel['hotel_desc']; ?></li>
-
-          </ul>
-      </div>
-
-      <div class="clearfix"> </div>
-    </div>
-    <div class="col_4">
-<!-- 内容插入 -->
-
-<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-
-         <div id="myTabContent" class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
-
-
-<!--房间列表-->
-<?php foreach($rooms as $key=>$val) {?>
-            <div class="jobs-item with-thumb">
-            <div class="thumb_top">
-                <div class="thumb"><a href="view_profile.html"><img src="<?php echo $val['type_img']; ?>" class="img-responsive" alt=""/></a></div>
-              <div class="jobs_right">
-              <h6 class="title"><?php echo $val['room_type_name']; ?></h6>
-              <ul class="top-btns">
-                
-                <li><a href="#" class="fa fa-google-plus"></a></li>
-              </ul>
-
-              <p class="description">会员价格:
-                      @if($price['up_down']==1)
+        </thead>
+<?php foreach($rooms as $key=>$val){?>
+        <tbody>
+        <tr class="room first">
+            <td class="roomtd" rowspan="1">
+                <div class="roomname">
+                    <div class="floatimage"></div>
+                    <img src="{{$val['type_img']}}" width="54" height="54" class="img">
+                    <h3>{{$val['room_type_name']}}</h3>
+                </div>
+            </td>
+                <td width="100">{{$val['bed_type']}}</td>
+                <td width="100"><span class="oldprice"><i>￥<span>
+                    @if($price['up_down']==1)
                         {{($val['vip_price'])*(1+$price['price']/100)}}
                       @elseif($price['up_down']==0)
                         {{($val['vip_price'])*(1-5/100)}}
-                      @endif 
-                　　<span class="m_1"></span> 非会员价:
-                      @if($price['up_down']==1)
+                      @endif </span></i></span></td>
+                <td width="140" class="pricearea Lposr" data-member-type="persnal" data-room-type="TTMDCF" data-activity-id="">
+                    <span class="price"><i>￥<span>
+                    @if($price['up_down']==1)
                         {{($val['rack_price'])*(1+$price['price']/100)}}
                       @elseif($price['up_down']==0)
                         {{($val['rack_price'])*(1-5/100)}}
-                      @endif
-                　　<span class="m_1"></span>床型 : <?php echo $val['bed_type']; ?></p>
-                      
-            </div>
-            <div class="clearfix"> </div>
-             </div>
-             <div class="thumb_bottom">
-              @if($val['a']!=0)
-                  <div class="thumb"><a href="{{url('home/order/create')}}/room_type_id/<?=$val['room_type_id']?>/hotel_id/{{$hotel['hotel_id']}}" class="photo_view">订房房间</a></div>
-              @else
-                  <div class=""><a style="background-color:black;padding:7px 10px;color:#fff;font-size:12px" href="javascript:;">已经满了</a></div>
-              @endif
-                <div class="clearfix"> </div>
-             </div>
-            </div>
+                      @endif</span></i></span>
+                </td>
+                <td width="140">{{$val['room_desc']}}</td>
+                <td width="210" class="bookbox">
+                @if($val['a']!=0)
+                <a href="{{url('home/order/create')}}/room_type_id/<?=$val['room_type_id']?>/hotel_id/{{$hotel['hotel_id']}}" class="Cbtn orderbtn" data-room-type="TTMDCF" data-activity-id="" data-isagents="0">预订</a>
+                @else
+                <a href="javascript:;" class="Cbtn orderbtn" style="background-color:black;color:#fff;font-size:12px" data-room-type="TTMDCF" data-activity-id="" data-isagents="0">房间售空</a>
+                @endif
+                </td>
+        </tr>
+    </tbody>
 <?php } ?>
-<!--房间列表（结束）-->
-
-
-          </div>
-         </div>
-
-       </div> 
-      </div>
-
-<!-- 结束 --> 
-     </div>
-     </div>
-     <div class="col-md-4 profile_right">
-      <div class="newsletter">
-       <form>
-        <input type="text" name="ne" size="30" required="" placeholder="Enter Profile ID :">
-        <input type="submit" value="Go">
-       </form>
-        </div>
-        <div class="view_profile">
-<!--热门房间-->
-          <h3>热门房间</h3>
-           <ul class="profile_item">
-            <a href="#">
-             <li class="profile_item-img">
-                <img src="/qiantai/images/p8.jpg" class="img-responsive" alt=""/>
-             </li>
-             <li class="profile_item-desc">
-                <h4>2458741</h4>
-                <p>29 Yrs, 5Ft 5in Christian</p>
-                <h5>View Full Profile</h5>
-             </li>
-             <div class="clearfix"> </div>
-            </a>
-           </ul>
-<!--热门房间(结束)-->
-       </div>
-       <div class="view_profile view_profile1">
-          <h3>推荐房间</h3>
-<!--推荐房间-->          
-           <ul class="profile_item">
-            <a href="#">
-             <li class="profile_item-img">
-                <img src="/qiantai/images/p10.jpg" class="img-responsive" alt=""/>
-             </li>
-             <li class="profile_item-desc">
-                <h4>2458741</h4>
-                <p>29 Yrs, 5Ft 5in Christian</p>
-                <h5>View Full Profile</h5>
-             </li>
-             <div class="clearfix"> </div>
-            </a>
-           </ul>
-<!--推荐房间(结束)-->
-         </div>
-        </div>
-       <div class="clearfix"> </div>
-    </div>
-  </div>
+   </table>
 </div>
-<script defer src="/qiantai/js/jquery.flexslider.js"></script>
-<link rel="stylesheet" href="/qiantai/css/flexslider.css" type="text/css" media="screen" />
-<script>
-// Can also be used with $(document).ready()
-$(window).load(function() {
-  $('.flexslider').flexslider({
-    animation: "slide",
-    controlNav: "thumbnails"
-  });
-});
-</script>   
+</div>
+               
+                
+                
+
+</div>
+<div id="Pdetail_basicinfo" class="Pdetail_basicinfo Lmt20">
+                    <h3 class="title"><i class="Cicon small_purulecircle"></i>酒店概况</h3>
+                    <div class="content Lovh">
+                        <div class="item">
+                            <span class="label"><i class="Cicon small_telephone"></i>酒店电话</span>
+                            <div class="text itembox"><span>{{$hotel['hotel_tel']}}</span></div>
+                        </div>
+                        <div class="item">
+                            <span class="label"><i class="Cicon small_littlehome"></i>酒店介绍</span>
+                            <div id="hotelDescText" class="text desc Lpb35">
+                                <div class="textbox"><p>{{$hotel['hotel_desc']}}</p></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="label"><i class="Cicon small_bell"></i>入住提示</span>
+                            <div id="hotelNoticeText" class="text checkin_notice">
+                                <div class="textbox" style="height: auto;">
+                                    <p>{{$hotel['hotel_hint']}}
+                                    </p>
+                                </div>
+                                <a href="javascript:;" class="more" style="display: none;">查看更多<i class="arrow"></i></a>
+                            </div>
+                        </div>
+                                <div class="item">
+                                    <span class="label"><i class="Cicon small_chair"></i>服务项目</span>
+                                    <div class="text itembox">
+                                    <?php foreach($new_2 as $new_22) {?>
+                                            <span>{{$new_22->complex_facilities_name}}</span>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                               
+                                <div class="item">
+                                    <span class="label"><i class="Cicon small_bed"></i>客房设施</span>
+                                    <div class="text itembox">
+                                    <?php foreach($new_1 as $new_11) {?>
+                                            <span>{{$new_11->rooms_facilities_name}}</span>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                    </div>
+                
+
+
+                </div>
+                <br>
+<div class="Pdetail_comment Lmt20" data-nblock-id="block/hotelDetailComment">
+<h3 class="title Lcfx"><i class="Cicon small_purulecircle"></i>酒店点评
+    <!--
+    <a href="javascript:;" class="Cbtn commentbtn Lflr Ldn">
+        <i class="Cicon small_write"></i>我要点评
+    </a>
+    -->
+</h3>
+<div class="content">
+    
+    <div class="top">
+        <div class="scorebox">
+           <span class="label"><font color="black">综合评分</font></span>
+            <div class="score">
+                　<span class="Ldib Lpl5"><font>★★★★★</font></span>
+                <span class="Ldib Lpl5">4.5/5分
+                </span>
+            </div>
+        </div>
+        <div class="keybox Lmt5">
+            <span class="label">大家都在说</span>
+            <div class="keys">
+                <span class="key active" data-map-new-prop-id="0">不限</span><span class="key" data-map-new-prop-id="46">服务态度好(32)</span><span class="key" data-map-new-prop-id="51">干净卫生(22)</span><span class="key" data-map-new-prop-id="85">前台服务不错(17)</span><span class="key" data-map-new-prop-id="43">服务不错(14)</span><span class="key" data-map-new-prop-id="64">客房干净(14)</span><span class="key" data-map-new-prop-id="558">打车不方便(2)</span>
+            </div>
+        </div>
+    </div>
+    <div class="commentbox Lovh">
+        <div class="commentitem" data-hotel-id="4302232">
+            <div class="user"><img src="/uploads/073dd685d025a9a3cc173972463e64bb.jpg" width="53" height="53" class="img"><span class="name">111718743</span>
+                
+                <span class="memberlevel">金会员</span>
+                
+            </div>
+            <div>
+                <div class="commentitemlist">
+                    
+                    <div class="replybox">
+                        <div class="reply"><div class="cont">酒店回复：尊敬的客户，感谢您的入住并留下宝贵的意见，我们一直致力于为您打造一个温馨甜蜜之家，您入住得舒适舒心是我们的最高追求。期待您再次光临。</div></div>
+                        
+                        <i class="Cicon arrow " style="display: inline;"></i>
+                    </div>
+                    
+                    <div class="ctextbox">
+
+                        <div class="ctext"><div class="cont"><span>环境不错，服务很好</span> </div></div>
+                        <i class="Cicon arrow"></i>
+                    </div>
+                    
+                    <div class="highQualityCommenttag">优质点评</div>
+                    
+                </div>
+                
+                <div class="cbottom Ltar Lcfx">
+                    <span class="score Lfll">
+                        <i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i>
+                        <span class="Ldib Lpl5">5<i>分</i></span>
+                    </span>
+                    <!--<span class="client">
+                        <i class="Cicon small_phone">
+                        </i>
+                    </span>
+                    <span class="split">|</span>-->
+                    <span class="cdate">2017-09-04 06:40</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pages" style="height: 87px;">
+        <div class="Cpage Ltar">
+            
+<a href="" class="active" data-page-index="1">1</a>
+<a href="" data-page-index="2">2</a>
+<a href="" data-page-index="3">3</a>
+<a href="" class="needspace" data-page-index="2">下一页</a>
+<a href="" class="needspace" data-page-index="442">尾页</a>
+        </div>
+    </div>
+</div>
+
+</div>
 @endsection
 
 @section('footer')

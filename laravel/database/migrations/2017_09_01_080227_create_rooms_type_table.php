@@ -17,6 +17,7 @@ class CreateRoomsTypeTable extends Migration
             $table->string('room_type_name',30);
             $table->string('bed_type',20);
             $table->Integer('max_people');
+            $table->char('type_img',60);
             $table->Integer('room_area');
             $table->decimal('rack_price',5,2);
 
