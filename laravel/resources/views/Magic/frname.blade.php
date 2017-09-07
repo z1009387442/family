@@ -16,7 +16,8 @@
     <!-- Icons -->
     <link href="/frname/css/font-awesome.min.css" rel="stylesheet">
     <link href="/frname/css/simple-line-icons.css" rel="stylesheet">
-
+    <link href="/frname/zhezhao/style.css" rel="stylesheet">
+    <script src="/qiantai/js/jquery.js"></script>
     <!-- Main styles for this application -->
     <link href="/frname/css/style.css" rel="stylesheet">
     <style>
@@ -113,17 +114,105 @@
                         <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> 测试 <span class="badge badge-info">NEW</span></a>
                     </li>
                     <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理</a>
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>地区管理/浮动值</a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-puzzle"></i> 添加地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_add')}}"><i class="icon-shield"></i> 添加地区</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-puzzle"></i> 修改地区</a>
+
+                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-question"></i> 修改地区</a>
                             </li>
                         </ul>
                     </li>
-               
+                    
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>相册管理</a>
+                        <ul class="nav-dropdown-items">
+                         <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/picture/hotel_album_add')}}"><i class="icon-shield"></i> 酒店内部图片添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/region/region_list')}}"><i class="icon-puzzle"></i> 修改地区/浮动值</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>团队管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/about/add_about')}}"><i class="icon-puzzle"></i> 添加队员</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/about/team_list')}}"><i class="icon-puzzle"></i> 队员列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-calculator"></i>类型管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/type/type_add')}}"><i class="icon-puzzle"></i> 类型添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/type/type_list')}}"><i class="icon-puzzle"></i> 类型编辑</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pie-chart"></i>酒店管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/hotel/hotel_add')}}"><i class="icon-puzzle"></i> 酒店添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/hotel/hotel_list')}}"><i class="icon-puzzle"></i> 酒店编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <!--                 客房设施 -->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>客房设施管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/rooms/facilities_add')}}"><i class="icon-shield"></i> 客房设施添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/rooms/facilities_list')}}"><i class="icon-shield"></i> 客房设施编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <!--综合设施管理-->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-pie-chart"></i>综合设施管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/complex/facilities_add')}}"><i class="icon-puzzle"></i> 综合设施添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/complex/facilities_list')}}"><i class="icon-puzzle"></i> 综合设施编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!--商品积分列表-->
+                        <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>商品积分管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/goods/goods_add')}}"><i class="icon-shield"></i> 商品积分添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/goods/goods_list')}}"><i class="icon-shield"></i> 商品积分编辑</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
 
                     <li class="divider"></li>
                     <li class="nav-title">                   
@@ -159,9 +248,11 @@
 
 Copyright &copy; 2017.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>      
 </footer>
-	
+@section('js')
+    <script src="/frname/assets/js/libs/jquery.min.js"></script>
+@show
 	<!-- Bootstrap and necessary plugins -->
-	<script src="/frname/assets/js/libs/jquery.min.js"></script>
+	
 	<script src="/frname/assets/js/libs/tether.min.js"></script>
 	<script src="/frname/assets/js/libs/bootstrap.min.js"></script>
 	<script src="/frname/assets/js/libs/pace.min.js"></script>
