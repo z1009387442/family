@@ -25,7 +25,13 @@
 	    <div class="col-sm-3">
 	      <ul class="login_details1">
 			 <li><h2><?php echo $hotel->hotel_name; ?></h2></li>
-			 <li><p><?php  echo $hotel->hotel_desc; ?></p></li>
+			 <li><p><?php
+			 if(mb_strlen($hotel->hotel_desc)>=45){
+			 	echo mb_substr($hotel->hotel_desc,0,45).'......';
+			 }else{
+			 	echo $hotel->hotel_desc.'......'; 
+			 }
+			 ?></p></li>
 		  </ul>
 	    </div>
 	    <div class="col-sm-6">
