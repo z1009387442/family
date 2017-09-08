@@ -24,24 +24,19 @@ body {
 /*.gallery_item_intro ul{margin:0}
 .gallery_item_intro ul li{padding:0;list-style:none;line-height:14pt }*/
 
-.gallery_item_intro { background-color:black;width: 250px;height: 900px; float: left;margin-left:200px;position: absolute; margin-right:35px; margin-top:40px;}
+.gallery_item_intro { background-color:black;width: 250px;height: 900px; float: left;margin-left:100px;position: absolute; margin-right:35px; margin-top:40px;}
 .gallery_item_intro h1{color:#996600; }
 .gallery_item_intro ul{overflow:hidden;width:100%;}
 .gallery_item_intro ul li {width:100%;float:left;list-style:none; margin-left:20px;}
 .gallery_item_intro ul li a{float:left;list-style:none; color: #999966; text-decoration: none; margin-top: 10px;}
 
-.article_div {width: 800px;height: 1000px; float: left;margin-left:500px; margin-right:65px;position: absolute;}
+.article_div {width: 800px;height: 1000px; float: left;margin-left:400px; margin-right:65px;position: absolute;}
 .article_div ul{overflow:hidden;width:100%;}
 .article_div ul li {width:33.333%;float:left;list-style:none;}
 .article_div p{ background-color:white;margin-left: 30px;height: 50px;}
 .article_div p a{margin-left: 150px;}
 .article_list a img {width:223px;height:220px; margin-left:30px; margin-top:40px;}
 .box_z{width: 100%;height: 200%; }
-
-
-
-
-
 
 
 
@@ -70,41 +65,12 @@ body {
 <div class="article_div">
 
 	<ul class="article_list">
+							@foreach($goods_list as $k=>$v)
 							<li class="">
-							<a href="{{url('home/integral/convert')}}" title="抵用券1000元">
-							<img src="/integral/1000.jpg">
-							</a><p class="shopps"><a href="{{url('home/integral/convert')}}" title="抵用券1000元">查看详情</a></p></li>
-		
-
-							<li class="">
-							<a href="/Shop/detail/166" title="兑换房间13000分">
-							<img src="/integral/13000.jpg">
-							</a><p class="shopps"><a href="/Shop/detail/166" title="兑换房间13000分">查看详情</a></p></li>
-
-							<li class="">			
-							<a href="/Shop/detail/170" title="兑换房间18000分">
-							<img src="/integral/18000.jpg">
-							</a><p class="shopps"><a href="/Shop/detail/170" title="兑换房间18000分">查看详情</a></p></li>
-
-							<li class="">
-							<a href="/Shop/detail/171" title="兑换房间28000分">
-							<img src="/integral/28000.jpg">
-							</a><p class="shopps"><a href="/Shop/detail/171" title="兑换房间28000分">查看详情</a></p></li>
-
-							<li class="">
-							<a href="/Shop/detail/172" title="兑换房间33000分">
-							<img src="/integral/33000.jpg">
-							</a><p class="shopps"><a href="/Shop/detail/172" title="兑换房间33000分">查看详情</a></p></li>
-
-							<li class="">
-							<a href="/Shop/detail/172" title="兑换房间38000分">
-							<img src="/integral/38000.jpg">
-							</a><p class="shopps" ><a href="/Shop/detail/172" title="兑换房间38000分" >查看详情</a></p></li>
-
-							<li class="">
-							<a href="/Shop/detail/172" title="兑换房间50000分">
-							<img src="/integral/50000.jpg">
-							</a><p class="shopps"><a href="/Shop/detail/172" title="兑换房间50000分">查看详情</a></p></li>
+							<a href="{{url('home/integral/convert')}}?goods_id=<?= $v->goods_id?>" title="{{$v->goods_name}}">
+							<img src="{{$v->goods_img}}">
+							</a><p class="shopps"><a href="{{url('home/integral/convert')}}?goods_id=<?= $v->goods_id?>" title="{{$v->goods_name}}">查看详情</a></p></li>
+							@endforeach
 
 							</ul>
 							</div>
