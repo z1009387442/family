@@ -169,24 +169,30 @@
     <div class="top">
         <div class="scorebox">
            <span class="label"><font color="black">综合评分</font></span>
+           <input type="hidden" value="{{$hotel['hotel_id']}}" class="hotel_id">
             <div class="score">
-                　<span class="Ldib Lpl5"><font>★★★★★</font></span>
-                <span class="Ldib Lpl5">4.5/5分
+                　<span class="Ldib Lpl5"><font>★★★★</font></span>
+                <span class="Ldib Lpl5">4/5分
                 </span>
             </div>
         </div>
         <div class="keybox Lmt5">
             <span class="label">大家都在说</span>
             <div class="keys">
-                <span class="key active" data-map-new-prop-id="0">不限</span><span class="key" data-map-new-prop-id="46">服务态度好(32)</span><span class="key" data-map-new-prop-id="51">干净卫生(22)</span><span class="key" data-map-new-prop-id="85">前台服务不错(17)</span><span class="key" data-map-new-prop-id="43">服务不错(14)</span><span class="key" data-map-new-prop-id="64">客房干净(14)</span><span class="key" data-map-new-prop-id="558">打车不方便(2)</span>
+                <span class="key active" data-map-new-prop-id="0">不限</span><span class="key" data-map-new-prop-id="46">服务态度({{$s_num}})</span><span class="key" data-map-new-prop-id="51">环境情况{{$h_num}}</span><span class="key" data-map-new-prop-id="558">干净卫生({{$w_num}})</span><span class="key" data-map-new-prop-id="558">地理位置({{$r_num}})</span>
             </div>
         </div>
     </div>
+    <div class="count_">
+    @if(empty($assess))
+    该酒店暂时还没有评价内容！
+    @else
+    @foreach($assess as $k=>$v)
     <div class="commentbox Lovh">
         <div class="commentitem" data-hotel-id="4302232">
-            <div class="user"><img src="/uploads/073dd685d025a9a3cc173972463e64bb.jpg" width="53" height="53" class="img"><span class="name">111718743</span>
+            <div class="user"><img src="{{$v->img}}" width="53" height="53" class="img"><span class="name">{{$v->user_name}}</span>
                 
-                <span class="memberlevel">金会员</span>
+                <span class="memberlevel">会员</span>
                 
             </div>
             <div>
@@ -200,42 +206,63 @@
                     
                     <div class="ctextbox">
 
-                        <div class="ctext"><div class="cont"><span>环境不错，服务很好</span> </div></div>
+                        <div class="ctext"><div class="cont"><span>{{$v->assess_desc}}</span> </div></div>
                         <i class="Cicon arrow"></i>
                     </div>
                     
-                    <div class="highQualityCommenttag">优质点评</div>
+                    <!-- <div class="highQualityCommenttag">优质点评</div> -->
                     
                 </div>
                 
                 <div class="cbottom Ltar Lcfx">
                     <span class="score Lfll">
-                        <i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i>
-                        <span class="Ldib Lpl5">5<i>分</i></span>
+                        <span class="Ldib Lpl5">用户评分　@for($i = 0;$i<$v->assess_num;$i++)<font style="color: red">★</font> @endfor
+                        {{$v->assess_num}}<i>分</i></span>
                     </span>
-                    <!--<span class="client">
-                        <i class="Cicon small_phone">
-                        </i>
-                    </span>
-                    <span class="split">|</span>-->
-                    <span class="cdate">2017-09-04 06:40</span>
+               
+                    <span class="cdate">{{$v->created_at}}</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="pages" style="height: 87px;">
-        <div class="Cpage Ltar">
-            
-<a href="" class="active" data-page-index="1">1</a>
-<a href="" data-page-index="2">2</a>
-<a href="" data-page-index="3">3</a>
-<a href="" class="needspace" data-page-index="2">下一页</a>
-<a href="" class="needspace" data-page-index="442">尾页</a>
-        </div>
+    @endforeach
+    <div class="pages" style="height: 87px; float: right">
+    @endif  
+{!! $assess->links() !!}
+
+
     </div>
 </div>
 
 </div>
+</div>
+<script type="text/javascript">
+    $(".key").click(function(){
+        $(this).siblings().css("background-color","rgba(221,221,221,.4)"); 
+        $(this).siblings().css("color","#993366");
+        $(this).css("background-color","#993366");
+        $(this).css("color","#ffffff");
+        var keyword = $(this).html();
+        if(keyword == "不限")
+        {
+            window.location.reload();
+        }else{
+            var hotel_id = $(".hotel_id").val();
+            //window.location.href="{{url('/home/hotel/room/id/12?page=1')}}";
+            $.ajax({
+                'type':'get',
+                'url':'http://www.sunshine.com/home/hotel/assess',
+                'data':{keyword:keyword,hotel_id:hotel_id},
+                success:function(msg){
+
+                    $('.count_').html(' ');
+                    $('.count_').append(msg);
+
+                }
+            });
+       }
+    });
+</script>
 @endsection
 
 @section('footer')

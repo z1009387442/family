@@ -298,6 +298,21 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </Response>
 
 request body = <TemplateSMS>
+<<<<<<< HEAD
+                    <to>18612537309</to> 
+                    <appId>8aaf07085e2d97fd015e3646b8a102d9</appId>
+                    <templateId>1</templateId>
+                    <datas><data>58595</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085e2d97fd015e363c66bd02c1/SMS/TemplateSMS?sig=477055137DE8AEF8D9C4618994525B1C
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>eca44f5baad94ff4b08b12033b5b022b</smsMessageSid>
+        <dateCreated>20170907210205</dateCreated>
+    </TemplateSMS>
+=======
                     <to>靠咖啡偶发姐儿们</to> 
                     <appId>8aaf07085e2d97fd015e3646b8a102d9</appId>
                     <templateId>1</templateId>
@@ -386,5 +401,6 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Response>
     <statusCode>160042</statusCode>
     <statusMsg>号码格式有误</statusMsg>
+>>>>>>> dev
 </Response>
 
