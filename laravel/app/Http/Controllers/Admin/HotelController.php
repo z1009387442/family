@@ -9,6 +9,8 @@ use App\Models\Hotel;
 use App\Models\Hoteltype;
 use App\Models\Region;
 use App\Models\Room;
+use App\Models\ComplexFacilities;
+use App\Models\RoomsFacilities;
 class HotelController extends Controller
 {
 	/**
@@ -59,8 +61,8 @@ class HotelController extends Controller
 			$hotel->hotel_hint   = $data['hotel_hint'];
 			$hotel->hotel_fax   = $data['hotel_fax'];
 			$hotel->hotel_desc   = $data['hotel_desc'];
-			$hotel->service_items_id   = $data['service_items_id'];
-			$hotel->room_facilities_id   = $data['room_facilities_id'];
+			$hotel->complex_facilities_id   = implode(',',$data['complex_facilities_id']);
+			$hotel->rooms_facilities_id   = implode(',',$data['rooms_facilities_id']);
 			$hotel->status   = $data['status'];
 			$bool = $hotel->save();
 			if($bool)
@@ -68,9 +70,14 @@ class HotelController extends Controller
 				return Redirect::to('admin/hotel/hotel_list');
 			}
 		}else{
+			//查询所有的地区
 			$region = Region::all();
+			//查询所有房间设施
+			$roomsFacilities = RoomsFacilities::all();
+			//查询所有服务项目
+			$complexFacilities = ComplexFacilities::where('status',1)->get();
 			// print_r($region);die;
-			return view('hotel_back.hotel_add',['region'=>$region]);
+			return view('hotel_back.hotel_add',['region'=>$region,'roomsFacilities'=>$roomsFacilities,'complexFacilities'=>$complexFacilities]);
 		}
 	}
 

@@ -23,8 +23,8 @@ class CreateHotelTable extends Migration
             $table->string('hotel_fax',30);
             $table->string('hotel_desc',200);
             $table->string('hotel_hint',200);
-            $table->Integer('service_items_id');
-            $table->Integer('room_facilities_id');
+            $table->char('complex_facilities_id',50);
+            $table->char('rooms_facilities_id',50);
             $table->tinyInteger('status')->default('0');
             $table->timestamps();
         });

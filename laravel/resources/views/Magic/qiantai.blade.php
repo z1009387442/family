@@ -4,6 +4,7 @@
 <title>@yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="_token" content="{{ csrf_token() }}"/>
 <meta name="keywords" content="Marital Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -22,7 +23,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  <div class="navbar navbar-inverse-blue navbar">
  @section('header')
-    <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
+
+ <?php require('/qiantai/index.html'); ?>
+<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
+<script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
+<a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
       <div class="navbar-inner">
         <div class="container">
            <div class="navigation">
@@ -32,6 +37,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<a href="#" class="icon-home"></a>
 					<ul>@if(Session::has('user_id'))
 						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+						<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
+						<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
 					    <li><a href="{{url('home/login_out')}}">注销</a></li>
 					    @else
 					    <li><a href="{{url('home/login')}}">登录</a></li>
@@ -58,39 +65,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
-		            <li><a href="index.html">Home</a></li>
-		            <li><a href="{{url('home/about/index')}}">About</a></li>
-		    		<li class="dropdown">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches<span class="caret"></span></a>
-		              <ul class="dropdown-menu" role="menu">
-		                <li><a href="matches.html">New Matches</a></li>
-		                <li><a href="viewed-profile.html">Who Viewed my Profile</a></li>
-		                <li><a href="viewed-not_contacted.html">Viewed & not Contacted</a></li>
-		                <li><a href="members.html">Premium Members</a></li>
-		                <li><a href="shortlisted.html">Shortlisted Profile</a></li>
-		              </ul>
+		            <li><a href="{{url('/')}}">首页</a></li>
+		            <li>
+		              <a href="">酒店预订</a>		              
 		            </li>
-					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search<span class="caret"></span></a>
-		              <ul class="dropdown-menu" role="menu">
-		                <li><a href="search.html">Regular Search</a></li>
-		                <li><a href="profile.html">Recently Viewed Profiles</a></li>
-		                <li><a href="search-id.html">Search By Profile ID</a></li>
-		                <li><a href="faq.html">Faq</a></li>
-		                <li><a href="shortcodes.html">Shortcodes</a></li>
-		              </ul>
+		            
+		    		<li>
+		              <a href="{{url('home/made/index')}}">定制服务</a>
+		              
 		            </li>
-		            <li class="dropdown">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages<span class="caret"></span></a>
-		              <ul class="dropdown-menu" role="menu">
-		                <li><a href="inbox.html">Inbox</a></li>
-		                <li><a href="inbox.html">New</a></li>
-		                <li><a href="inbox.html">Accepted</a></li>
-		                <li><a href="sent.html">Sent</a></li>
-		                <li><a href="upgrade.html">Upgrade</a></li>
-		              </ul>
+		            <li>
+		              <a href="{{url('home/integral/index')}}">积分兑换</a>		              
 		            </li>
-		            <li class="last"><a href="contact.html">Contacts</a></li>
+					 <li>
+		              <a href="{{url('home/join/index')}}">招商专栏</a>		              
+		            </li>
+		             <li class="last"><a href="contact.html">优惠促销</a></li>
+		            <li><a href="{{url('home/about/index')}}">关于我们</a></li>
+		           
 		        </ul>
 		     </div><!-- /.navbar-collapse -->
 		    </nav>

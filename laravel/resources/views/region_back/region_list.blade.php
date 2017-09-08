@@ -25,16 +25,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($list as $k=>$v)
+                    @foreach($data as $val)
                         <tr>
-                            <td><font color="Gray">{{$v->region_name}}</font></td>
-                            <td><font color="Gray">{{$v->sort}}</font></td>
-                            <td><font color="Gray">{{$v->floating_value}}</font>
+                            <td><font color="Gray">{{ $val->region_name }}</font></td>
+                            <td><font color="Gray">{{ $val->sort }}</font></td>
+                            <td><font color="Gray">{{ $val->floating_value }}</font>
                             </td>
                             <td>
                                     <font color="SkyBlue">
-                                    <i class="fa fa-pencil-square fa-lg mt-2"></i> <a href="{{url('admin/region/region_save')}}?id=<?=$v->region_id?>">编辑</a>　   
-                                    <i class="fa fa-trash fa-lg mt-2"></i> <a href="{{url('admin/region/region/id')}}/<?=$v->region_id?>">删除</a>
+                                    <i class="fa fa-pencil-square fa-lg mt-2"></i> <a href="{{url('admin/region/region_save')}}?id=<?=$val->region_id?>">编辑</a>　   
+                                    <!-- <i class="fa fa-trash fa-lg mt-2"></i> <a href="{{url('admin/region/region/id')}}/<?=$val->region_id?>">删除</a> -->
                                     </font>
                             </td>
                         </tr>
@@ -42,21 +42,7 @@
                     </tbody>
                 </table>
                 <nav>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#"><</a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">></a>
-                        </li>
-                    </ul>
+                   {!! $data->links() !!}
                 </nav>
             </div>
         </div>
