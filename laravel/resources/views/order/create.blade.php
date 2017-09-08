@@ -27,10 +27,6 @@
 				<div class="flexslider">
 					 <ul class="slides">
 						<li data-thumb="images/p1.jpg">
-<<<<<<< HEAD
-=======
-							
->>>>>>> ac01771afc309bf7e0359f4035184ab5c37bbe88
 						</li>
 						
 					 </ul>
@@ -157,7 +153,11 @@
 				       </div>
 				    </div>	    				    
 				  </div>
-				 <input type="submit" value="确认预订">
+				 @if(Session::get('user_id'))
+					<input type="submit" value="确认预订">
+				 @else
+				 	<a href="/home/login"><input type="button" value="去登陆"></a>
+				 @endif
 				 
 		     </div>
 		     </form>
