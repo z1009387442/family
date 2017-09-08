@@ -8,8 +8,8 @@ return [
 	'sign_type' => 'MD5',
 
 	// 服务器异步通知页面路径。
-	'notify_url' => 'http://www.sunshine.com/home/pay/webReturn',
+	'notify_url' => 'http://www.sunshine.com/home/pay/webNotify',
 
 	// 页面跳转同步通知页面路径。
-	'return_url' => 'http://www.sunshine.com/home/pay/webNotify'
+	'return_url' => 'http://www.sunshine.com/home/pay/webReturn'
 ];
