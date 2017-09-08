@@ -14,7 +14,10 @@ class RoomsFacilitiesController extends Controller
 	 */
 	public function facilities_list()
 	{
-		$list = RoomsFacilities::all();
+		// $list = RoomsFacilities::all();
+		$list = RoomsFacilities::paginate(2);
+		
+	
 		return view('rooms_facilities_back.rooms_facilities_list',['list'=>$list]);
 	}
 

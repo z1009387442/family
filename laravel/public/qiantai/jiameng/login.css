@@ -1,0 +1,262 @@
+﻿body {
+    height: 100%;
+}
+
+[data-role="page"] {
+    background: #F2F2F2;
+}
+
+[data-role="content"] {
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+    top: 80px;
+    /*min-height:620px;*/
+}
+
+[data-role="footer"] {
+    margin-top: 0;
+    background: #f2f2f2;
+    
+}
+
+    [data-role="footer"] .footer-img,
+    [data-role="footer"] .footer-link {
+        top: 5px;
+    }
+
+
+.login_help {
+    height: 100%;
+    background-color: #F2F2F2;
+    min-height: 520px;
+     /*min-height: 500px;*/
+}
+
+.login_top {
+    height: 60%;
+    height: 50%;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+    .login_top > div {
+        /*height: 100%;*/
+    }
+
+    .login_top > .left {
+        width: 70%;
+        min-height: 320px;
+    }
+
+    /*.login_top > .left img {
+            width: 99%;
+            height: 99%;
+            margin: 0.5%;
+        }*/
+
+    .login_top > .right {
+        width: 30%;
+    }
+
+        .login_top > .right > div {
+            margin: 1%;
+            height: 99%;
+            background-color: #FFFFFF;
+            position: relative;
+        }
+
+ul.tabTitleContainer {
+    border-bottom: solid 1px #017ACE;
+    height: 40px;
+}
+
+    ul.tabTitleContainer > li {
+        text-align: center;
+        width: 50%;
+        height: 13px;
+        line-height: 20px;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+        ul.tabTitleContainer > li.current {
+            border-bottom: solid 7px #017ACE;
+        }
+
+ul.tabContentContainer {
+    position: absolute;
+    top: 41px;
+    bottom: 0;
+    width: 100%;
+}
+
+    ul.tabContentContainer > li {
+        height: 98%;
+        width: 90%;
+        padding: 1% 5%;
+        background-color: #FFFFFF;
+        display: none;
+    }
+
+        ul.tabContentContainer > li.current {
+            display: block;
+        }
+
+        ul.tabContentContainer > li > form > div {
+            margin: 1px 0;
+            position: relative;
+        }
+
+            ul.tabContentContainer > li > form > div.login_submit {
+                margin-top: 8px;
+            }
+
+        ul.tabContentContainer > li.phone_login > form > div {
+            margin: 12px 0;
+        }
+
+.login_input {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    width: 96%;
+    border: solid 1px #E5E5E5;
+    padding: 0 2%;
+    border-radius: 3px;
+}
+
+    .login_input > i[class^="icon-"] {
+        font-size: 28px;
+        margin-top: 6px;
+        display: inline-block;
+        color: #8A8A8A;
+    }
+
+    .login_input input {
+        height: 38px;
+        *height: 36px;
+        line-height: 38px;
+        vertical-align: top;
+        position: absolute;
+        left: 55px;
+        right: 0px;
+        border: 0;
+        width: 249.5px;
+        font-size: 16px;
+        outline-style: none;
+    }
+
+.login-verify input {
+    width: 140px;
+}
+
+.login-verify img, .login-verify span {
+    width: 80px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.login-verify span {
+    width: 110px;
+}
+
+.login-verify span {
+    background-color: #CCCCCC;
+    text-align: center;
+    font-size: 14px;
+    *margin-top: -3px;
+}
+
+.login_submit input {
+    background-color: #017CCC;
+    border: 0;
+    height: 30px;
+    width: 100%;
+    font-size: 20px;
+    color: #FFF;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.help_bottom {
+    height: 40%;
+    margin-top: 5px;
+    background-color: #FFFFFF;
+}
+
+    .help_bottom ul {
+        height: 208px;
+        width: 100%;
+    }
+
+        .help_bottom ul li {
+            width: 16.5%;
+            height: 100%;
+            *height: 220px;
+            float: left;
+            position: relative;
+            cursor: pointer;
+            margin-left: 1px;
+            min-height: 150px;
+        }
+
+            .help_bottom ul li.active,
+            .help_bottom ul li.active a {
+                color: #FFFFFF;
+            }
+
+            .help_bottom ul li .icons {
+                width: 100%;
+                margin: 0 auto;
+                height: 60%;
+                position: absolute;
+                top: 15%;
+                border-right: solid 1px #D6D6D6;
+            }
+
+            .help_bottom ul li .tips {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                height: 20%;
+                text-align: center;
+                font-weight: bold;
+            }
+
+
+
+/* 样式修改 By Sue 2015.1.22  */
+
+.login-top .left img {
+    min-height: 320px;
+    width: 900px;
+}
+
+.login_top .right {
+    min-height: 320px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* 验证码手势  */
+.imgCode {
+    cursor: pointer;
+}
+
+.errorMsg {
+    text-align: right;
+    width: 215px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 15px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    position: absolute;
+    right: 0;
+    color: red;
+    float: right;
+}
