@@ -155,15 +155,12 @@
 				       </div>
 				    </div>	    				    
 				  </div>
-<<<<<<< HEAD
 				 @if(Session::get('user_id'))
 					<input type="submit" value="确认预订">
 				 @else
 				 	<a href="/home/login"><input type="button" value="去登陆"></a>
 				 @endif
-=======
 				 <input class="check_data" type="submit" value="确认预订">
->>>>>>> dev
 				 
 		     </div>
 		     </form>
