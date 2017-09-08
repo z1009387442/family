@@ -55,8 +55,8 @@
                     <td><font color="Gray">{{$v->hotel_address}}</font></td>
                     <td><font color="Gray">{{$v->hotel_desc}}</font></td>
                     <td><font color="Gray">{{$v->hotel_hint}}</font></td>
-                    <!-- <td><font color="Gray">{{$v->service_items_id}}</font></td>
-                    <td><font color="Gray">{{$v->room_facilities_id}}</font></td> -->
+                    <!-- <td><font color="Gray">{{$v->complex_facilities_id}}</font></td>
+                    <td><font color="Gray">{{$v->rooms_facilities_id}}</font></td> -->
                     <td><font color="Gray">{{$v->created_at}}</font></td>
                     <td><font color="Gray">{{$v->sort}}</font></td>
                     <td><font color="Gray">

@@ -11,10 +11,8 @@ use App\Models\Region;
 
 class IndexController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		
-
 		return view('index.index');
 	}
 
@@ -23,12 +21,12 @@ class IndexController extends Controller
 		if($request->isMethod('post')){
 			$email=$request->input('email');
 			$user_pwd=md5($request->input('user_pwd'));
-			$user_info=Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->get();
-			foreach($user_info as $values) {
-			     $user_id=$values->user_id;
-			  	 $user_name=$values->user_name;
-			}
-			if($user_info->isEmpty()){
+			$user_info=Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->first();
+			
+			     $user_id=$user_info->user_id;
+			  	 $user_name=$user_info->user_name;
+			
+			if(!$user_info){
 				echo '<script>alert("用户名或密码错误")</script>';
 				return view('index.login');
 			}else{
@@ -36,6 +34,7 @@ class IndexController extends Controller
 				$user_name=$user_name;
 				$request->session()->put('user_id',$user_id);
 				$request->session()->put('user_name',$user_name);
+				// print_r(Session::all());die;	
 				return redirect()->action('Home\IndexController@index');
 			}
 		}else{
@@ -43,21 +42,53 @@ class IndexController extends Controller
 		}
 	}
 
-	//用户退出
-	public function login_out(Request $request){
-		$request->session()->flush();
-		return redirect()->action('Home\IndexController@login');
+	//用户个人中心
+	public function personal_data(Request $request){
+
+
+		if($request->isMethod('post')){
+			$user_id=$request->session()->get('user_id');
+			$user_name=$request->input('user_name');
+			$tel=$request->input('tel');
+			$email=$request->input('email');
+			$img=$request->input('img');
+			//保存修改数据
+			$obj=Index::find($user_id);
+			$obj->user_name=$user_name;
+			$obj->email=$email;
+			$obj->tel=$tel;
+			$obj->img=$img;
+			$bool=$obj->save();
+			if($bool){
+				return redirect()->action('Home\IndexController@personal_data');
+			}
+		}else{
+			$user_id=$request->session()->get('user_id');
+			// dd($user_id);die;
+			$user_info=Index::where(['user_id'=>$user_id])->get();
+			return view("index.personal_data",['user_info'=>$user_info]);
+		}
+
 	}
 
-	//用户个人资料页面
-	public function personal_data(){
-		return view('index.personal_data');
+	//用户头像
+	public function user_img(Request $request){
+			$user_img=$request->file('uploadFile');
+			//将图片重命名
+			$newName = md5(date('ymdhis').$user_img->getClientOriginalName()).".".$user_img->getClientOriginalExtension();
+			//移动文件到uploads
+			$path=$user_img->move(public_path().'/uploads/',$newName);
+			//文件访问路径
+			$url='/uploads/'.$newName;
+			return $url;
 	}
+	
 
 	//渲染用户注册页面
 	public function register(Request $request){
 		return  view('index.register');
 	}
+
 
 	//判断用户名唯一
 	public function verify_name(Request $request){
@@ -69,6 +100,8 @@ class IndexController extends Controller
 			return 1;
 		}
 	}
+
+
 	//判断邮箱唯一
 	public function verify_email(Request $request){
 		return 1;
@@ -82,6 +115,8 @@ class IndexController extends Controller
 			return 1;
 		}
 	}
+
+
 	//用户注册  信息添加入库
 	public function register_do(Request $request){
 		$user_name=$request->input('user_name');
@@ -93,9 +128,17 @@ class IndexController extends Controller
 		$obj->user_pwd="$user_pwd";
 		$obj->email="$email";
 		$bool=$obj->save();
+		$user_id=$obj->user_id;
 		if($bool==true){
+			$request->session()->put('user_id',$user_id);
 			return redirect()->action('Home\IndexController@index');
 		}
+	}
+
+	//用户注销
+	public function login_out(Request $request){
+		$request->session()->flush();
+		return redirect()->action('Home\IndexController@login');
 	}
 
 	/**

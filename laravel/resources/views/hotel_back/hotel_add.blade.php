@@ -7,7 +7,7 @@
 @endsection
 <!-- 内容输入区 -->
 @section('content')
-<div class="col-md-6">
+<!-- <div class="col-md-6"> -->
 <div class="card">
   <div class="card-header">
                                     <strong>酒店添加</strong>
@@ -83,20 +83,22 @@
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">服务项目</label>
-            <div class="col-md-9">
-                <select class="form-control" name="service_items_id" style="width: 180px;" id="ccyear">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
+             <div class="col-md-9">                 
+                @foreach($complexFacilities as $k=>$v)
+                <label class="checkbox-inline" for="inline-checkbox1">
+                    <input type="checkbox" id="inline-checkbox1" name="complex_facilities_id[]" value="{{$v->complex_facilities_id}}"> {{$v->complex_facilities_name}}
+                </label>　
+                @endforeach
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">客房设施</label>
-            <div class="col-md-9">
-                <select class="form-control" name="room_facilities_id" style="width: 180px;" id="ccyear">
-               <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
+            <div class="col-md-9">                 
+                @foreach($roomsFacilities as $k=>$v)
+                <label class="checkbox-inline" for="inline-checkbox1">
+                    <input type="checkbox" id="inline-checkbox1" name="rooms_facilities_id[]" value="{{$v->rooms_facilities_id}}"> {{$v->rooms_facilities_name}}
+                </label>　
+                @endforeach
             </div>
         </div>
         <div class="form-group row">
@@ -119,7 +121,7 @@
     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
 </div>
 </form>
-</div></div>
+</div><!-- </div> -->
 
     <link rel="stylesheet" type="text/css" href="/frname/houtai/css/city-select.css">
     <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>

@@ -98,6 +98,11 @@ Route::group(['middleware' => ['web']], function () {
 					'uses'=>'IndexController@personal_data'
 				]);
 
+				//用户头像上传
+				Route::any('user_img',[
+					'uses'=>'IndexController@user_img'
+				]);
+
 				//前台验证用户名唯一
 				Route::any('verify_name',[
 					'uses'=>'IndexController@verify_name'
@@ -121,6 +126,19 @@ Route::group(['middleware' => ['web']], function () {
 				//前台关于团队展示
 				Route::any('about/index',[
 				'uses'=>'AboutController@index',
+				]);
+
+				//定制服务展示
+				Route::any('made/index',[
+				'uses'=>'MadeController@index',
+				]);
+				//积分换礼
+				Route::any('integral/index',[
+				'uses'=>'IntegralController@index',
+				]);
+				//兑换数量
+				Route::any('integral/convert',[
+				'uses'=>'IntegralController@convert',
 				]);
 
 				//酒店房间展示页面
@@ -150,6 +168,13 @@ Route::group(['middleware' => ['web']], function () {
 					]);
 
 				});
+
+
+				// 加盟展示
+			
+					Route::any('join/index',[
+				'uses'=>'JoinController@index',
+				]);
 
 				//预订房间
 				Route::any('order/create/room_type_id/{room_type_id}/hotel_id/{hotel_id}',[
@@ -262,6 +287,69 @@ Route::group(['middleware' => ['admin']], function () {
 				//后台关于团队删除
 				Route::any('about/team_del',[
 				'uses'=>'AboutController@team_del',
+				]);
+
+				//后台客房设施添加
+				Route::any('rooms/facilities_add',[
+				'uses'=>'RoomsFacilitiesController@facilities_add',
+				]);
+				//后台客房设施列表
+				Route::any('rooms/facilities_list',[
+				'uses'=>'RoomsFacilitiesController@facilities_list',
+				]);
+				//后台客房设施修改
+				Route::any('rooms/facilities_save',[
+				'uses'=>'RoomsFacilitiesController@facilities_save',
+				]);
+				//后台客房设施删除
+				Route::any('rooms/facilities_del',[
+				'uses'=>'RoomsFacilitiesController@facilities_del',
+				]);
+				//后台综合设施添加
+				Route::any('complex/facilities_add',[
+				'uses'=>'ComplexFacilitiesController@facilities_add',
+				]);
+				//后台综合设施列表
+				Route::any('complex/facilities_list',[
+				'uses'=>'ComplexFacilitiesController@facilities_list',
+				]);
+				//后台综合设施修改
+				Route::any('complex/facilities_save',[
+				'uses'=>'ComplexFacilitiesController@facilities_save',
+				]);
+				//后台综合设施删除
+				Route::any('complex/facilities_del',[
+				'uses'=>'ComplexFacilitiesController@facilities_del',
+				]);
+				//后台商品积分添加
+				Route::any('goods/goods_add',[
+				'uses'=>'GoodsController@goods_add',
+				]);
+				//后台商品积分列表
+				Route::any('goods/goods_list',[
+				'uses'=>'GoodsController@goods_list',
+				]);
+				//后台商品积分修改
+				Route::any('goods/goods_save',[
+				'uses'=>'GoodsController@goods_save',
+				]);
+				//后台商品积分删除
+				Route::any('goods/goods_del',[
+				'uses'=>'GoodsController@goods_del',
+				]);
+
+
+					//后台招商列表
+				Route::any('join/join_list',[
+				'uses'=>'JoinController@join_list',
+				]);
+				//后台招商修改
+				Route::any('join/join_save',[
+				'uses'=>'JoinController@join_save',
+				]);
+				//后台招商删除
+				Route::any('join/join_del',[
+				'uses'=>'JoinController@join_del',
 				]);
 
 
