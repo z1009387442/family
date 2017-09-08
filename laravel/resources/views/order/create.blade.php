@@ -160,6 +160,10 @@
 				 @else
 				 	<a href="/home/login"><input type="button" value="去登陆"></a>
 				 @endif
+<<<<<<< HEAD
+				 
+=======
+>>>>>>> dev
 		     </div>
 		     </form>
 		  </div>

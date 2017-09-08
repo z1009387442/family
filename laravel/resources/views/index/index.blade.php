@@ -20,7 +20,7 @@
   <div class="container">
     <div class="banner_info">
       <h3>Millions of verified Members</h3>
-      <a href="view_profile.html" class="hvr-shutter-out-horizontal">come on baby</a>
+      <a href="{{url('home/hotel/show_all')}}" class="hvr-shutter-out-horizontal">come on baby</a>
     </div>
   </div>
   <div class="profile_search">
