@@ -121,7 +121,7 @@
                             </li>
                             <li class="nav-item">
 
-                                <a class="nav-link" href="{{url('admin/region/region_save')}}"><i class="icon-question"></i> 修改地区</a>
+                                <a class="nav-link" href="{{url('admin/region/region_list')}}"><i class="icon-question"></i> 修改地区</a>
                             </li>
                         </ul>
                     </li>
