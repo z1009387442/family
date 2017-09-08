@@ -80,7 +80,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <li>
 		              <a href="{{url('home/join/index')}}">招商专栏</a>		              
 		            </li>
-		             <li class="last"><a href="contact.html">优惠促销</a></li>
 		            <li><a href="{{url('home/about/index')}}">关于我们</a></li>
 		           
 		        </ul>
