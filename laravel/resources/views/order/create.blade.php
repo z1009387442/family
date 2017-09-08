@@ -7,7 +7,9 @@
 @endsection
 
 @section('content')
-
+<style type="text/css">
+	.my_flag{color: red;font-size: 12px};
+</style>
 <div class="grid_3">
   <div class="container">
    <div class="breadcrumb1">
@@ -98,13 +100,13 @@
 				        		<tr class="opened_1">
 									<td class="day_label">入住时间 :</td>
 									<td class="day_value">
-										<input type="text" name="check_time" class="check_time" value="" id="calen1"/>
+										<input type="text" name="check_time" id="calen1" value="" placeholder="<?=$my_date['today']?>" />
 									</td>
 								</tr>
 								<tr class="opened_1">
 									<td class="day_label">离开时间 :</td>
 									<td class="day_value">
-										<input type="text" name="end_time" class="end_time" value="" id="calen2"/>
+										<input type="text" name="end_time" id="calen2" value="" placeholder="<?=$my_date['tomorrow']?>"/>
 									</td>
 								</tr>
 							    <tr class="opened">
@@ -137,7 +139,7 @@
 				    	  <table class="table_working_hours">
 				        	<tbody>
 				        		<tr class="opened">
-									<td class="day_label">入住人:</td>
+									<td class="day_label"><span class="my_flag">*</span>入住人:</td>
 									<td class="day_value resident_people">
 										<input type="text" name="resident_people[]" size="6">
 									</td>
@@ -145,8 +147,8 @@
 								<tr class="opened">
 								</tr>
 				        		<tr class="opened">
-									<td class="day_label">手机号码:</td>
-									<td class="day_value"><input type="text" name="cell_phone"></td>
+									<td class="day_label"><span class="my_flag">*</span>手机号码:</td>
+									<td class="day_value"><input type="text" class="user_tel" name="cell_phone"><span class="check_tel"></span></td>
 								</tr>
 							 </tbody>
 				          </table>
@@ -154,7 +156,7 @@
 				       </div>
 				    </div>	    				    
 				  </div>
-				 <input type="submit" value="确认预订">
+				 <input class="check_data" type="submit" value="确认预订">
 				 
 		     </div>
 		     </form>
@@ -223,10 +225,10 @@ var property2={
 	format:"yyyy-MM-dd"
 };
 $(document).ready(function(){
-	canva2=$.createGooCalendar("calen2",property2);
+		canva2=$.createGooCalendar("calen1",property2);
 });
 $(document).ready(function(){
-    canva2=$.createGooCalendar("calen1",property2);
+		canva2=$.createGooCalendar("calen2",property2);
 });
 </script>
 <!-- 时间插件 -->
@@ -235,17 +237,68 @@ $(document).ready(function(){
 <script defer src="/qiantai/js/jquery.flexslider.js"></script>
 <link rel="stylesheet" href="/qiantai/css/flexslider.css" type="text/css" media="screen" />
 <script>
-	$(".room_sum").change(function(){
+	flag_tel=0;
+	$(".check_data").click(function(){
+		if(flag_tel==0){
+			alert('请填写完整标红选项');
+			return false;
+		}else{
+			return true;
+		}
+	})
+
+	$("#calen1").blur(function(){
+		change_price();
+	})
+
+	$("#calen2").blur(function(){
+		change_price();
+	})
+
+	function change_price(){
 		var room_one=$("#room_one_price").text();
-		var count=$(this).val();
+		var count=$(".room_sum").val();
+		var start_time=$("#calen1").val();
+		var end_time=$("#calen2").val();
 		var total_price=count*room_one;
+		if(start_time!=''&&end_time!=''){
+			var total_day=DateDiff(start_time,end_time);
+			total_price=total_price*total_day;
+		}	
 		total_price=total_price.toFixed(2);
 		$("#room_total_price").text('￥'+total_price);
+	}
+
+
+	$(".user_tel").blur(function(){
+		var user_tel=$(this).val();
+        var reg=/^1[3578]\d{9}$/;
+        if(reg.test(user_tel)){
+        	$(".check_tel").text('');
+            flag_tel=1;
+        }else{
+        	flag_tel=0;
+            $(".check_tel").text('必填项');
+        }
+	})
+
+	$(".room_sum").change(function(){
+		change_price();
 		$(".resident_people").html('');
 		for(var i=0;i<count;i++){
 			$(".resident_people").append('<input type="text" name="resident_people[]" size="6">');
 		}
 	})
+
+	function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2002-12-18格式 
+       var  aDate,  oDate1,  oDate2,  iDays 
+       aDate  =  sDate1.split("-") 
+       oDate1  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])    //转换为12-18-2002格式 
+       aDate  =  sDate2.split("-") 
+       oDate2  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0]) 
+       iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24)    //把相差的毫秒数转换为天数 
+       return  iDays 
+	}
 </script>
 <script>
 // Can also be used with $(document).ready()

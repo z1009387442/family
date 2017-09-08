@@ -10,6 +10,8 @@ use DB;
 use App\Models\Hotel;
 use App\Models\HotelAlbum;
 use App\Models\Region;
+use App\Models\ComplexFacilities;
+use App\Models\RoomsFacilities;
 class HotelController extends Controller
 {
     public function index()
@@ -32,8 +34,12 @@ class HotelController extends Controller
 				'hotel_id'	=>$hotel_arr->hotel_id,
 				'hotel_address'=>$hotel_arr->hotel_address,
 				'hotel_tel'=>$hotel_arr->hotel_tel,
-				'hotel_desc'=>$hotel_arr->hotel_desc,];
-		
+				'hotel_desc'=>$hotel_arr->hotel_desc,
+				'hotel_img'=>$hotel_arr->hotel_img,
+				'hotel_hint'=>$hotel_arr->hotel_hint,
+				'rooms_facilities_id'=>$hotel_arr->rooms_facilities_id,
+				'complex_facilities_id'=>$hotel_arr->complex_facilities_id,
+				];
 		//酒店图片查询
 		$hotel_img_arr=HotelAlbum::where('hotel_id',$request->id)->get();
 		//查看房间有没有
@@ -57,12 +63,16 @@ class HotelController extends Controller
 				$NewArrData[] = array_merge($arrNewRoomStatus[$k], $Newroom_arr[$k]);
 			}	
 		}
+		//查询客房设施
+		$complex_facilities_arr=ComplexFacilities::whereIn('complex_facilities_id',explode(',',$hotel['complex_facilities_id']))->get();
 
+		//查询服务项目
+		$rooms_facilities_arr=RoomsFacilities::whereIn('rooms_facilities_id',explode(',',$hotel['rooms_facilities_id']))->get();
         //查询地区房间的买的价格
 		$region_arr=Region::find($hotel_arr->region_id);
 		$price=['price'=>substr($region_arr->floating_value,2),'up_down'=>substr($region_arr->floating_value,0,1)];
         //渲染页面传值
-		return view('hotel.room',['hotel'=>$hotel,'hotel_img'=>$hotel_img_arr,'rooms'=>$NewArrData,'price'=>$price]);
+		return view('hotel.room',['hotel'=>$hotel,'hotel_img'=>$hotel_img_arr,'rooms'=>$NewArrData,'price'=>$price,'new_2'=>$complex_facilities_arr,'new_1'=>$rooms_facilities_arr]);
 	}
 
 }
