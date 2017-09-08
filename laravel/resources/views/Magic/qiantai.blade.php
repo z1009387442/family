@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			   </ul>
              </nav>
            </div>
-           <a class="brand" href="index.html"><img src="/qiantai/images/logo.png" alt="logo"></a>
+           <a class="brand" href="javascript:;"><img src="/qiantai/images/logo.png" alt="logo"></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
