@@ -24,6 +24,12 @@ class HotelController extends Controller
             ->get();
 		return view('hotel.show',['hotel_arr'=>$Hotel_arr]);
 	}
+	public function show_all(Request $request){
+		//全部酒店展示
+		$Hotel_arr = DB::table('hotel')->get();
+
+		return view('hotel.show',['hotel_arr'=>$Hotel_arr]);
+	}
 	
 	public function room(Request $request){
 		//酒店 的详细信息

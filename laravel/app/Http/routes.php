@@ -146,6 +146,11 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'HotelController@room',
 				])->where(['id'=>'[0-9]+']);
 
+				//前台全部酒店展示
+				Route::any('hotel/show_all',[
+				'uses'=>'HotelController@show_all',
+				]);
+
 				//前台关于团队展示
 				Route::any('hotel/room',[
 				'uses'=>'HotelController@room',
@@ -165,6 +170,11 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('order/pay_money/order_id/{order_id}',[
 				'uses'=>'OrderController@pay_money',
 				])->where(['order_id'=>'[0-9]+']);
+
+				//搜索页面
+				Route::any('search/index',[
+				'uses'=>'SearchController@index',
+				]);
 
 			});
 		});
