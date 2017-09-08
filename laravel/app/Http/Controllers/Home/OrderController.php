@@ -24,8 +24,9 @@ class OrderController extends Controller
 		//查房间类型表和房间类型的相册表room_type_albunm
 		//查酒店表，酒店地址和名字hotel
 		$hotel_data=Hotel::find($hotel_id);//用name和address
-		
-		return view('order.create',['room_data'=>$room_data,'hotel_data'=>$hotel_data]);
+		$my_date['today']=date('Y-m-d');
+		$my_date['tomorrow']=date("Y-m-d",strtotime("+1 day"));
+		return view('order.create',['my_date'=>$my_date,'room_data'=>$room_data,'hotel_data'=>$hotel_data]);
 
 	}
 
@@ -36,13 +37,19 @@ class OrderController extends Controller
 		$room_price=$request->input('room_price');
 		$check_time=$request->input('check_time');
 		$end_time=$request->input('end_time');
+		if($check_time==''){
+			$check_time=date('Y-m-d');
+		}
+		if($end_time==''){
+			$end_time=date("Y-m-d",strtotime("+1 day"));
+		}
+		$startdate=strtotime($check_time);
+		$enddate=strtotime($end_time);
+		$total_days=round(($enddate-$startdate)/3600/24);
 		$room_sum=$request->input('room_sum');
 		$resident_people=$request->input('resident_people');//数组
 		$cell_phone=$request->input('cell_phone');
-
-
-
-		$total_price=$room_price*$room_sum;//计算房费总价
+		$total_price=$room_price*$room_sum*$total_days;//计算房费总价
 		$order_sn=$this->get_sn();//获取订单号
 		$resident_people=$this->get_peo($resident_people);//获取入住人
 		//获取用户ID
@@ -78,10 +85,13 @@ class OrderController extends Controller
 	public function get_peo($arr)
 	{
 		$str='';
-		foreach($arr as $k=>$v){
-			$str.='|'.$v;
+		if($str!=''){
+			foreach($arr as $k=>$v){
+				$str.='|'.$v;
+			}
+			$str=substr($str,1);
 		}
-		$str=substr($str,1);
+		
 		return $str;
 	}
 

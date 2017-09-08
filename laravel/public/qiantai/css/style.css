@@ -130,9 +130,18 @@ body a{
 }
 .navbar-inverse-blue .navbar-inner {
   padding: 7px 0;
+<<<<<<< HEAD
   background:#0c161F;
+=======
+  background:#0c161F ;
+>>>>>>> dev
   border:none;
   font-size: 0.85em;
+
+/*  filter:alpha(opacity=50);  
+  -moz-opacity:0.5;  
+  -khtml-opacity: 0.5;  
+  opacity: 0.5;  */
 }
 .navbar-inner_1{
   padding: 7px 0;
