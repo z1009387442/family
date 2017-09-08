@@ -40,8 +40,7 @@
 		<span class='state1'></span><br/> 
 		<input type="password" name="user_pwd"  placeholder="请输入密码">
 		<span class='state1'></span><br/>
-
-		<input type="text" placeholder="请输入您的手机号" class="tel" >
+		<input type="text" name="tel" placeholder="请输入您的手机号" class="tel" >
 		<input type="text" style="width:105px" placeholder="请输入验证码" class="verify_code">
 		
 		<input class="button blue send"  style="float:right" type="button" value="发送验证码" />

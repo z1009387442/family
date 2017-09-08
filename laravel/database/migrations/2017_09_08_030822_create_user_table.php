@@ -14,9 +14,13 @@ class CreateUserTable extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->increments('user_id');
-            $table->string('user_name');
-            $table->string('user_pwd');
-            $table->string('email');
+            $table->string('user_name',20);
+            $table->string('user_pwd',50);
+            $table->string('email',60);
+            $table->string('tel',11);
+            $table->string('img',50);
+            $table->integer('integral')->default(0)->comment("积分");
+            $table->decimal('balance', 8, 2)->default(0)->comment("余额");
             $table->timestamps();
         });
     }
