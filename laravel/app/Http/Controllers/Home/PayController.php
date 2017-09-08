@@ -273,19 +273,19 @@ class PayController extends Controller
 	{
 		// 验证请求。
 		if (! app('alipay.web')->verify()) {
-			echo "3";die;
-			return view('alipay.fail');
+			return view('pay.error',['error'=>'支付宝余额不足']);
 		}
 
 		// 判断通知类型。
 		switch (Input::get('trade_status')) {
 			case 'TRADE_SUCCESS':
 			case 'TRADE_FINISHED':
-			echo "4";die;
+			Order::where('order_sn', Input::get('out_trade_no'))
+            ->update(['pay_status' => 1]);
 				break;
 		}
 
-		return view('alipay.success');
+		return view('pay.end', ['order_sn' => Input::get('out_trade_no')]);
 	}
 
 }
