@@ -69,7 +69,7 @@ class PayController extends Controller
 
 			}else{
 
-				return view($arrReturn['link'], ['error' => '支付宝支付异常']);
+				return view($arrReturn['link'], ['error' => '账户余额不足']);
 
 			}
 			break;
@@ -273,7 +273,7 @@ class PayController extends Controller
 	{
 		// 验证请求。
 		if (! app('alipay.web')->verify()) {
-			return view('pay.error',['error'=>'支付宝余额不足']);
+			return view('pay.error',['error'=>'支付宝支付异常']);
 		}
 
 		// 判断通知类型。
@@ -282,10 +282,30 @@ class PayController extends Controller
 			case 'TRADE_FINISHED':
 			Order::where('order_sn', Input::get('out_trade_no'))
             ->update(['pay_status' => 1]);
-				break;
-		}
 
-		return view('pay.end', ['order_sn' => Input::get('out_trade_no')]);
+            $arrIntegralLod = Index::find(\Session::get('user_id'));
+
+            if($arrIntegralLod){
+
+                $num = $arrIntegralLod['integral'] + ceil(Input::get('total_fee'));
+                Index::where('user_id', \Session::get('user_id'))
+                ->update(['integral' => $num]);
+
+            }
+
+            $arrLog = [
+            'action' => '预定房间', 
+            'num' => ceil(Input::get('total_fee')),
+            'order_sn' => Input::get('out_trade_no'),
+            'jj' => 1,
+            'user_id' => \Session::get('user_id'), 
+            'create_at' => time()
+            ];
+            IntegralLog::insert($arrLog);
+                break;
+        }
+    
+        return view('pay.end', ['order_sn' => Input::get('out_trade_no'),'integral' => ceil(Input::get('total_fee'))]);
 	}
 
 }
