@@ -29,7 +29,6 @@
 				<div class="flexslider">
 					 <ul class="slides">
 						<li data-thumb="images/p1.jpg">
-							
 						</li>
 						
 					 </ul>
@@ -112,7 +111,7 @@
 							    <tr class="opened">
 									<td class="day_label">房间数量 :</td>
 									<td class="day_value">
-										<select class="room_sum" name="room_sum">
+										<select class="room_sum" name="room_sum" style="width: 150px; border: 1px solid #D7CFCF">
 										@for($i=1;$i<=3;$i++)
 											<option value="{{$i}}">{{$i}}</option>
 										@endfor
@@ -156,7 +155,15 @@
 				       </div>
 				    </div>	    				    
 				  </div>
+<<<<<<< HEAD
+				 @if(Session::get('user_id'))
+					<input type="submit" value="确认预订">
+				 @else
+				 	<a href="/home/login"><input type="button" value="去登陆"></a>
+				 @endif
+=======
 				 <input class="check_data" type="submit" value="确认预订">
+>>>>>>> dev
 				 
 		     </div>
 		     </form>

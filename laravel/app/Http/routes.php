@@ -150,6 +150,36 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room',[
 				'uses'=>'HotelController@room',
 				]);
+				
+				//支付
+				Route::group(['prefix' => 'pay'], function(){
+
+					//选择支付方式
+					Route::any('select/order_id/{id?}', [
+						'uses' => 'PayController@selectPay'
+					])->where(['order_id'=>'[0-9]+']);
+
+					//创建支付
+					Route::get('create/{orderId}/{payType}', [
+						'uses' => 'PayController@create'
+					]);
+					
+					Route::get('webNotify', [
+						'uses' => 'PayController@webNotify'
+					]);
+
+					Route::get('webReturn', [
+						'uses' => 'PayController@webReturn'
+					]);
+
+				});
+
+
+				// 加盟展示
+			
+					Route::any('join/index',[
+				'uses'=>'JoinController@index',
+				]);
 
 				//预订房间
 				Route::any('order/create/room_type_id/{room_type_id}/hotel_id/{hotel_id}',[
@@ -161,10 +191,10 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'OrderController@order_cre',
 				]);
 				
-				//模拟支付页面
-				Route::any('order/pay_money/order_id/{order_id}',[
-				'uses'=>'OrderController@pay_money',
-				])->where(['order_id'=>'[0-9]+']);
+				// //模拟支付页面
+				// Route::any('order/pay_money/order_id/{order_id}',[
+				// 'uses'=>'OrderController@pay_money',
+				// ])->where(['order_id'=>'[0-9]+']);
 
 			});
 		});
@@ -313,6 +343,19 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'GoodsController@goods_del',
 				]);
 
+
+					//后台招商列表
+				Route::any('join/join_list',[
+				'uses'=>'JoinController@join_list',
+				]);
+				//后台招商修改
+				Route::any('join/join_save',[
+				'uses'=>'JoinController@join_save',
+				]);
+				//后台招商删除
+				Route::any('join/join_del',[
+				'uses'=>'JoinController@join_del',
+				]);
 
 
 
