@@ -146,6 +146,13 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'HotelController@room',
 				]);
 
+
+				// 加盟展示
+			
+					Route::any('join/index',[
+				'uses'=>'JoinController@index',
+				]);
+
 				//预订房间
 				Route::any('order/create/room_type_id/{room_type_id}/hotel_id/{hotel_id}',[
 				'uses'=>'OrderController@create',
@@ -308,6 +315,19 @@ Route::group(['middleware' => ['admin']], function () {
 				'uses'=>'GoodsController@goods_del',
 				]);
 
+
+					//后台招商列表
+				Route::any('join/join_list',[
+				'uses'=>'JoinController@join_list',
+				]);
+				//后台招商修改
+				Route::any('join/join_save',[
+				'uses'=>'JoinController@join_save',
+				]);
+				//后台招商删除
+				Route::any('join/join_del',[
+				'uses'=>'JoinController@join_del',
+				]);
 
 
 
