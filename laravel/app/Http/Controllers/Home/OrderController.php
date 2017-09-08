@@ -72,7 +72,7 @@ class OrderController extends Controller
 		$order->total_price =$total_price;
 		if($order->save()){
 			//生成订单去支付
-			return Redirect::to('home/order/pay_money/order_id/'.$order->order_id);
+			return Redirect::to('home/pay/select/order_id/'.$order->order_id);
 		}
 	
 	}
