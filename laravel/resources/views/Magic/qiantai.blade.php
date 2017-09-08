@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="{{url('/')}}">首页</a></li>
 		            <li>
-		              <a href="">酒店预订</a>		              
+		              <a href="{{url('home/hotel/show_all')}}">酒店预订</a>		              
 		            </li>
 		            
 		    		<li>
