@@ -55,7 +55,7 @@
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">上传头像：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                    <div class="img"><img src="<?php if($v->img==NULL){echo "/uploads/default.png";}else{echo $v->img;}?>" width="100px" height="97px"></div>
+                    <div class="img"><img src="<?php if($v->img==NULL){echo "/qiantai/images//default.png";}else{echo $v->img;}?>" width="100px" height="97px"></div>
                         <input type="hidden" name="img" value="">
                         <span class="btn-upload">
                         <a href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 上传头像</a>
