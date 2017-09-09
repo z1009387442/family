@@ -158,7 +158,8 @@ a {
 	border: 1px solid #ccc;
 	background-color: #fcfcfc;
 	cursor: pointer;
-	width: 280px;
+	width: 180px;
+	height: 25px;
 	overflow: hidden;
 	padding: 8px;
 	padding-top: 0;
@@ -215,7 +216,7 @@ a {
 	display: inline-block;
 	vertical-align: middle;
 	padding: 5px;
-	margin-right: 5px;
+	margin-right: 1px;
 	position: relative
 }
 
@@ -259,7 +260,6 @@ a {
 .city-select .city-info .city-input,.city-select .city-info span {
 	display: inline-block;
 	vertical-align: middle;
-	margin-top: 8px
 }
 
 .city-select .city-input {

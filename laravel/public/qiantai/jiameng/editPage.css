@@ -1,0 +1,75 @@
+﻿.contentArea {
+    width: 1200px;
+    margin: 5px auto;
+}
+
+.head {
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    padding: 0 10px;
+    background: #017CCC;
+}
+
+.selectBlock {
+    border: none;
+    margin: 10px auto;
+}
+
+span.redBorder, 
+span.typeError { 
+    left: 120px;
+}
+
+[data-role="select_oneCol"],[data-role="select_twoCol"],[data-role="select_threeCol"]{
+    width:96%;
+    margin:0 auto;
+}
+
+[data-role="select_oneCol"] li {
+    line-height: 45px;
+    position:relative;
+}
+
+[data-role="select_twoCol"] li {
+    width:32%;
+    display: inline-block;
+    line-height: 45px;
+    position:relative;
+}
+
+[data-role="select_threeCol"] li {
+    width:32%;
+    line-height: 45px;
+    display: inline-block;
+    position:relative;
+}
+
+    [data-role="select_oneCol"] li.active,
+    [data-role="select_threeCol"] li.active {
+        color: white;
+        background: #017CCC;
+    }
+
+.divideLine {
+    border-top: 1px dashed #edecec;
+    padding-bottom:10px;
+}
+
+.infoTitle {
+    height: 30px;
+    line-height: 30px;
+    margin: 10px 30px;
+}
+
+.infoName {
+    width: 115px;
+    float: left;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.infoEdit {
+    height:25px;
+    display: inline-block;
+}

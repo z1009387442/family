@@ -8,6 +8,11 @@
 <!-- 内容输入区 -->
 @section('content')
 <!--时间插件引入文件-->
+<style type="text/css">
+	.gender_1,.age_box1{
+		vertical-align: middle;
+	}
+</style>
 <link rel="stylesheet" type="text/css" href="/qiantai/time/datedropper.css">
 <link rel="stylesheet" type="text/css" href="/qiantai/time/timedropper.min.css">
 <!--时间插件引入文件（结束）-->
@@ -15,7 +20,7 @@
   <div class="container">
     <div class="banner_info">
       <h3>Millions of verified Members</h3>
-      <a href="view_profile.html" class="hvr-shutter-out-horizontal">come on baby</a>
+      <a href="{{url('home/hotel/show_all')}}" class="hvr-shutter-out-horizontal">come on baby</a>
     </div>
   </div>
   <div class="profile_search">
@@ -28,7 +33,7 @@
 				<div class="city-select" id="single-select-1">
 					
 					<div class="city-info">
-						<div class="city-name">
+						<div class="city-name" style="width: 10px;height: 10px;">
 							<!-- <span id='region'>北京市</span> -->
 						</div>
 						<div class="city-input">
