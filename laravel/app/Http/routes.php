@@ -140,6 +140,10 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('integral/convert',[
 				'uses'=>'IntegralController@convert',
 				]);
+				//记录积分日志
+				Route::any('integral/integral_log_add',[
+				'uses'=>'IntegralController@integral_log_add',
+				]);
 
 				//酒店房间展示页面
 				Route::any('hotel/room/id/{id}',[

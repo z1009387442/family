@@ -299,16 +299,29 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 request body = <TemplateSMS>
 <<<<<<< HEAD
+                    <to>13522933162</to> 
+                    <appId>8aaf07085e2d97fd015e3646b8a102d9</appId>
+                    <templateId>1</templateId>
+                    <datas><data>47990</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085e2d97fd015e363c66bd02c1/SMS/TemplateSMS?sig=7A500A2388100BD1287F5E6FD8E89EE9
+=======
+<<<<<<< HEAD
                     <to>18612537309</to> 
                     <appId>8aaf07085e2d97fd015e3646b8a102d9</appId>
                     <templateId>1</templateId>
                     <datas><data>58595</data></datas>
                   </TemplateSMS>
 request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085e2d97fd015e363c66bd02c1/SMS/TemplateSMS?sig=477055137DE8AEF8D9C4618994525B1C
+>>>>>>> dev
 response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Response>
     <statusCode>000000</statusCode>
     <TemplateSMS>
+<<<<<<< HEAD
+        <smsMessageSid>e093dfd6d625431daedb05ce3f356ded</smsMessageSid>
+        <dateCreated>20170908113320</dateCreated>
+=======
         <smsMessageSid>eca44f5baad94ff4b08b12033b5b022b</smsMessageSid>
         <dateCreated>20170907210205</dateCreated>
     </TemplateSMS>
@@ -433,6 +446,7 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <TemplateSMS>
         <smsMessageSid>f79388a735ce4bddb0b639d2cbce22ed</smsMessageSid>
         <dateCreated>20170908105105</dateCreated>
+>>>>>>> dev
     </TemplateSMS>
 </Response>
 
