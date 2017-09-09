@@ -33,6 +33,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<a href="#" class="icon-home"></a>
 					<ul>@if(Session::has('user_id'))
 						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+						<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
+						<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
 					    <li><a href="{{url('home/login_out')}}">注销</a></li>
 					    @else
 					    <li><a href="{{url('home/login')}}">登录</a></li>
