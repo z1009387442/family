@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use App\Models\Region;
 use App\Models\Room;
 use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
+
 class HotelController extends Controller
 {
 	/**
@@ -25,7 +27,6 @@ class HotelController extends Controller
 		$list = DB::table('hotel')
 			->join('region','hotel.region_id','=','region.region_id')
 			->get();
-			//print_r($list);die;
 		return view('hotel_back.hotel_list',['list'=>$list]);
 	}
 
@@ -38,8 +39,7 @@ class HotelController extends Controller
 	 */
 	public function hotel_add(Request $request)
 	{
-		if($request->isMethod('post'))
-		{
+		if($request->isMethod('post')){
 			$data = $request->all();
 			//查询地区id
 			$region_one = Region::where('region_name',$data['region_name'])->first();
@@ -102,7 +102,7 @@ class HotelController extends Controller
 				$room_bool = Room::where('hotel_id', $request->hotel_id)->delete();
 				if($room_bool)
 				{
-					echo 1;
+					return 1;
 				}
 			}
 		}
@@ -123,7 +123,7 @@ class HotelController extends Controller
 	          ->update(['status' => $request->status]);
 	    if($bool)
 	    {
-	    	echo 1;
+	    	return 1;
 	    }
 	}
 	/**
@@ -138,11 +138,10 @@ class HotelController extends Controller
 		if($request->isMethod('post'))
 		{
 			$data = $request->all();
-			//将图片重命名
-			if(empty($data['hotel_img']))
-			{
-				//实例化model
-				$hotel = new Hotel;
+			//实例化model
+			$hotel = new Hotel;
+			//判断图片是否为空
+			if(empty($data['hotel_img'])){
 				//添加数据入库
 				$hotel = Hotel::find($data['hotel_id']);
 				$hotel->hotel_name = $data['hotel_name'];
@@ -167,8 +166,6 @@ class HotelController extends Controller
 				$path=$data['hotel_img']->move(public_path().'/uploads/',$newName);
 				//文件访问路径
 				$data['hotel_img']='/uploads/'.$newName;
-				//实例化model
-				$hotel = new Hotel;
 				//添加数据入库
 				$hotel = Hotel::find($data['hotel_id']);
 				$hotel->hotel_name = $data['hotel_name'];
@@ -194,7 +191,10 @@ class HotelController extends Controller
 			$id = $request->id;
 			$hotel = Hotel::find($id);
 			$region = Region::all();
-			return view('hotel_back.hotel_save',['hotel'=>$hotel,'region'=>$region]);
+			return view('hotel_back.hotel_save',[
+				'hotel'=>$hotel,
+				'region'=>$region
+			]);
 		}
 	}
 }

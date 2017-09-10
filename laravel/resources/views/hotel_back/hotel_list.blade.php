@@ -53,7 +53,7 @@
                     <td><font color="Gray">{{$v->hotel_tel}}</font></td>
                     <td><font color="Gray">{{$v->hotel_fax}}</font></td>
                     <td><font color="Gray">{{$v->hotel_address}}</font></td>
-                    <td><font color="Gray">{{$v->hotel_desc}}</font></td>
+                    <td><font color="Gray"><div style="overflow: scroll; white-space: nowrap; text-overflow: clip;width:100px;" >{{$v->hotel_desc}}</div></font></td>
                     <td><font color="Gray">{{$v->hotel_hint}}</font></td>
                     <!-- <td><font color="Gray">{{$v->complex_facilities_id}}</font></td>
                     <td><font color="Gray">{{$v->rooms_facilities_id}}</font></td> -->
