@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -12,9 +14,6 @@ class RoomsFacilitiesController extends Controller
 	/**
 	 * 客房设施
 	 * @author yanhong Yang
-	 * @link   {{string}}
-	 * @param  [type]     $id [description]
-	 * @return [type]         [description]
 	 */
 	public function facilities_list()
 	{
@@ -26,35 +25,31 @@ class RoomsFacilitiesController extends Controller
 	/**
 	 * 客房设施添加
 	  * @author yanhong Yang
-	 * @link   {{string}}
-	 * @param  [type]     $id [description]
-	 * @return [type]         [description]
 	 */
 	public function facilities_add(Request $request)
 	{
 		if ($request->isMethod('post')) {
 			$data = $request->all();
 			//实例化model
-			$RoomsFacilities = new RoomsFacilities;
+			$rooms_facilities = new RoomsFacilities;
 			//添加数据入库
-			$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
-			$RoomsFacilities->sort   = $data['sort'];
-			$RoomsFacilities->status   = $data['status'];
-			$bool = $RoomsFacilities->save();
+			$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
+			$rooms_facilities->sort   = $data['sort'];
+			$rooms_facilities->status   = $data['status'];
+			$bool = $rooms_facilities->save();
 			if ($bool) {
+
 				return Redirect::to('admin/rooms/facilities_list');
 			}
 		} else {
+
 			return view('rooms_facilities_back.rooms_facilities_add');
 		}
 	}
 
 	/**
 	 * 客房设施删除
-	 * @author yanhong Yang
-	 * @link   {{string}}
-	 * @param  [type]     $id [description]
-	 * @return [type]         [description] 
+	 * @author yanhong Yang 
 	 */
 	public function facilities_del(Request $request)
 	{
@@ -71,9 +66,6 @@ class RoomsFacilitiesController extends Controller
 	/**
 	 * 客房设施修改
 	 * @author yanhong Yang
-	 * @link   {{string}}
-	 * @param  [type]     $id [description]
-	 * @return [type]         [description]
 	 */
 	public function facilities_save(Request $request)
 	{
@@ -97,15 +89,17 @@ class RoomsFacilitiesController extends Controller
 					$RoomsFacilities->sort   = $data['sort'];
 					$bool = $RoomsFacilities->save();	
 				}
-					if($bool)
-					{
+					if($bool) {
+
 						return Redirect::to('admin/rooms/facilities_list');
+						
 					}
 				
-			} else {
+		} else {
+
 				$one = RoomsFacilities::where('rooms_facilities_id',$request->id)->first();
 
 				return view('rooms_facilities_back.rooms_facilities_save',['one'=>$one]);
-			}		
+		}		
 	}
 }

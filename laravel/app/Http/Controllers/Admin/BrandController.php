@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -29,15 +31,17 @@ class BrandController extends Controller
 	public function brand_add(Request $request)
 	{
 		if ($request->isMethod('post')) {
+
 			$data = $request->all();
 			//实例化model
-			$Brand = new Brand;
+			$brand = new Brand;
 			//添加数据入库
-			$Brand->brand_name = $data['brand_name'];
-			$Brand->sort   = $data['sort'];
-			$Brand->status   = $data['status'];
-			$bool = $Brand->save();
+			$brand->brand_name = $data['brand_name'];
+			$brand->sort   = $data['sort'];
+			$brand->status   = $data['status'];
+			$bool = $brand->save();
 				if ($bool) {
+
 					return Redirect::to('admin/brand/brand_list');
 				}
 		} else {
@@ -74,21 +78,21 @@ class BrandController extends Controller
 			//接收数据
 			$data = $request->all();
 			if (empty($data['brand_name'])) {
-				$Brand = new Brand;
-				$Brand = Brand::find($data['id']);
-				$Brand->brand_name = $data['brand_name'];
-				$Brand->sort   = $data['sort'];
-				$Brand->status   = $data['status'];
-				$bool = $Brand->save();	
+				$brand = new Brand;
+				$brand = brand::find($data['id']);
+				$brand->brand_name = $data['brand_name'];
+				$brand->sort   = $data['sort'];
+				$brand->status   = $data['status'];
+				$bool = $brand->save();	
 			} else {
 				//实例化model
-				$Brand = new Brand;
+				$brand = new Brand;
 				//添加数据入库
-				$Brand = Brand::find($data['id']);
-				$Brand->brand_name = $data['brand_name'];
-				$Brand->status   = $data['status'];
-				$Brand->sort   = $data['sort'];
-				$bool = $Brand->save();
+				$brand = brand::find($data['id']);
+				$brand->brand_name = $data['brand_name'];
+				$brand->status   = $data['status'];
+				$brand->sort   = $data['sort'];
+				$bool = $brand->save();
 			}
 				if ($bool) {
 					return Redirect::to('admin/brand/brand_list');
