@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -69,7 +71,7 @@ class ComplexFacilitiesController extends Controller
 	 */
 	public function facilities_save(Request $request)
 	{
-		
+
 		if ($request->isMethod('post')) {
 				//接收数据
 				$data = $request->all();
