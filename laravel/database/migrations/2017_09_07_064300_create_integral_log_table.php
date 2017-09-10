@@ -17,7 +17,7 @@ class CreateIntegralLogTable extends Migration
             $table->string('action', 200)->default('')->comment('积分操作');
             $table->string('order_sn')->default('')->comment('看不懂死去');
             $table->Integer('num')->default(0)->comment('分值');
-            $table->Integer('jj')->comment('加分 1， 减分 2');
+            $table->Integer('regulation')->comment('加分 1， 减分 2');
             $table->Integer('detailed_id')->default()->comment('兑换券ID')->nullable();
             $table->Integer('user_id');
             $table->Integer('create_at')->default(0);
