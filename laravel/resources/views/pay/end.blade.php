@@ -24,7 +24,7 @@
 	<div align="center" style="margin-top: 30px;">
 		<h2>预定房间成功</h2>
 		<h3>您的住房码为：<span class="order_sn">{{$order_sn}}</span>&nbsp;&nbsp;&nbsp;&nbsp;	
-		@if($integral)
+		@if(isset($integral))
 			赠送您<span class="integral">{{$integral}}</span>积分
 		@endif
 		</h3>

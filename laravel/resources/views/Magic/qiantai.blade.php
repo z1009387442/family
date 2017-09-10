@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			   </ul>
              </nav>
            </div>
-           <a class="brand" href="index.html"><img src="/qiantai/images/logo.png" alt="logo"></a>
+           <a class="brand" href="javascript:;"><img src="/qiantai/images/logo.png" alt="logo"></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="{{url('/')}}">首页</a></li>
 		            <li>
-		              <a href="">酒店预订</a>		              
+		              <a href="{{url('home/hotel/show_all')}}">酒店预订</a>		              
 		            </li>
 		            
 		    		<li>
@@ -80,7 +80,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 <li>
 		              <a href="{{url('home/join/index')}}">招商专栏</a>		              
 		            </li>
-		             <li class="last"><a href="contact.html">优惠促销</a></li>
 		            <li><a href="{{url('home/about/index')}}">关于我们</a></li>
 		           
 		        </ul>

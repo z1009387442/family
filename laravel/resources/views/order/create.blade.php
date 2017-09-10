@@ -155,16 +155,11 @@
 				       </div>
 				    </div>	    				    
 				  </div>
-<<<<<<< HEAD
 				 @if(Session::get('user_id'))
-					<input type="submit" value="确认预订">
+					<input class="check_data" type="submit" value="确认预订">
 				 @else
 				 	<a href="/home/login"><input type="button" value="去登陆"></a>
 				 @endif
-=======
-				 <input class="check_data" type="submit" value="确认预订">
->>>>>>> dev
-				 
 		     </div>
 		     </form>
 		  </div>
@@ -292,6 +287,7 @@ $(document).ready(function(){
 	$(".room_sum").change(function(){
 		change_price();
 		$(".resident_people").html('');
+		var count=$(this).val();
 		for(var i=0;i<count;i++){
 			$(".resident_people").append('<input type="text" name="resident_people[]" size="6">');
 		}
