@@ -7,7 +7,9 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="/qiantai/date_use/daterangepicker.min.css">
 <style type="text/css">
+	.sub_btn{border: 1px solid #faa51a;border-radius: 0.5em;padding: 0.5em 2em 0.55em;color: #fef4e9;font: 16px/100%;background-color:#faa51a; margin-top: 15px;}
 	.my_flag{color: red;font-size: 12px};
 </style>
 <div class="grid_3">
@@ -88,30 +90,30 @@
 			   <div id="myTabContent" class="tab-content">
 				  <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
 				    <div class="tab_box">
-				    	<h1>请完成您的预订信息</h1>
+				    	<h2>请完成您的预订信息</h2>
 				    	<p>Please complete your booking information</p>
 				    </div>
 				    <div class="basic_1">
-				    	<h3>预订信息</h3>
+				    	<h4>预订信息</h4>
 				    	<div class="col-md-6 basic_1-left">
 				    	  <table class="table_working_hours">
 				        	<tbody>
 				        		<tr class="opened_1">
 									<td class="day_label">入住时间 :</td>
 									<td class="day_value">
-										<input type="text" name="check_time" id="calen1" value="" placeholder="<?=$my_date['today']?>" />
+										<input type="text" name="check_time" id="date-range13" value="<?=$my_date['today']?>" placeholder="<?=$my_date['today']?>" />
 									</td>
 								</tr>
 								<tr class="opened_1">
 									<td class="day_label">离开时间 :</td>
 									<td class="day_value">
-										<input type="text" name="end_time" id="calen2" value="" placeholder="<?=$my_date['tomorrow']?>"/>
+										<input type="text" name="end_time" id="date-range14" value="<?=$my_date['tomorrow']?>" placeholder="<?=$my_date['tomorrow']?>" />
 									</td>
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">房间数量 :</td>
 									<td class="day_value">
-										<select class="room_sum" name="room_sum" style="width: 150px; border: 1px solid #D7CFCF">
+										<select class="room_sum" name="room_sum" style="width: 80px; border: 1px solid #D7CFCF">
 										@for($i=1;$i<=3;$i++)
 											<option value="{{$i}}">{{$i}}</option>
 										@endfor
@@ -140,7 +142,7 @@
 				        		<tr class="opened">
 									<td class="day_label"><span class="my_flag">*</span>入住人:</td>
 									<td class="day_value resident_people">
-										<input type="text" name="resident_people[]" size="6">
+										<input type="text" name="resident_people[]" size="6" placeholder="姓名">
 									</td>
 								</tr>
 								<tr class="opened">
@@ -151,15 +153,17 @@
 								</tr>
 							 </tbody>
 				          </table>
+				          @if(Session::get('user_id'))
+							<input class="check_data sub_btn" type="submit" value="确认预订">
+						 @else
+						 	<a href="/home/login"><input type="button" class="sub_btn" value="去登陆"></a>
+						 @endif
+
 				         </div>
 				       </div>
 				    </div>	    				    
-				  </div>
-				 @if(Session::get('user_id'))
-					<input class="check_data" type="submit" value="确认预订">
-				 @else
-				 	<a href="/home/login"><input type="button" value="去登陆"></a>
-				 @endif
+				  </div>		 
+
 		     </div>
 		     </form>
 		  </div>
@@ -213,27 +217,6 @@
   </div>
 </div>
 
-<!-- 时间插件 -->
-<script  type="text/javascript" src="/qiantai/codebase/jquery-1.3.2.min.js"></script>
-<script  type="text/javascript" src="/qiantai/codebase/GooFunc.js"></script>
-<script  type="text/javascript" src="/qiantai/codebase/GooCalendar.js"></script>
-<script type="text/javascript">
-var property2={
-	divId:"demo2",//日历控件最外层DIV的ID
-	needTime:false,//是否需要显示精确到秒的时间选择器，即输出时间中是否需要精确到小时：分：秒 默认为FALSE可不填
-	yearRange:[2017,2020],//可选年份的范围,数组第一个为开始年份，第二个为结束年份,如[1970,2030],可不填
-	week:['日','一','二','三','四','五','六'],//数组，设定了周日至周六的显示格式,可不填
-	month:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],//数组，设定了12个月份的显示格式,可不填
-	format:"yyyy-MM-dd"
-};
-$(document).ready(function(){
-		canva2=$.createGooCalendar("calen1",property2);
-});
-$(document).ready(function(){
-		canva2=$.createGooCalendar("calen2",property2);
-});
-</script>
-<!-- 时间插件 -->
 
 <!-- FlexSlider -->
 <script defer src="/qiantai/js/jquery.flexslider.js"></script>
@@ -249,19 +232,19 @@ $(document).ready(function(){
 		}
 	})
 
-	$("#calen1").blur(function(){
+	$("#date-range13").blur(function(){
 		change_price();
 	})
 
-	$("#calen2").blur(function(){
+	$("#date-range14").blur(function(){
 		change_price();
 	})
 
 	function change_price(){
 		var room_one=$("#room_one_price").text();
 		var count=$(".room_sum").val();
-		var start_time=$("#calen1").val();
-		var end_time=$("#calen2").val();
+		var start_time=$("#date-range13").val();
+		var end_time=$("#date-range14").val();
 		var total_price=count*room_one;
 		if(start_time!=''&&end_time!=''){
 			var total_day=DateDiff(start_time,end_time);
@@ -287,8 +270,9 @@ $(document).ready(function(){
 	$(".room_sum").change(function(){
 		change_price();
 		$(".resident_people").html('');
+		var count=$(this).val();
 		for(var i=0;i<count;i++){
-			$(".resident_people").append('<input type="text" name="resident_people[]" size="6">');
+			$(".resident_people").append('<input type="text" name="resident_people[]" size="6" placeholder="姓名">');
 		}
 	})
 
@@ -312,6 +296,27 @@ $(window).load(function() {
 });
 </script>  
 
+<script type="text/javascript" src="/qiantai/date_use/moment.min.js"></script>
+<script type="text/javascript" src="/qiantai/date_use/jquery.min.js"></script>
+<script type="text/javascript" src="/qiantai/date_use/jquery.daterangepicker.min.js"></script>
+<script>
+var now_date="<?=$my_date['today']?>";
+var tomo="<?=$my_date['tomorrow']?>";
+$('#date-range13').dateRangePicker(
+	{
+		startDate: now_date,
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false 
+	});
+$('#date-range14').dateRangePicker(
+	{
+		startDate: tomo,
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false 
+	});
+</script>
 
 @endsection
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -23,30 +24,26 @@ class LoginController extends Controller
 	 */
 	public function login(Request $request)
 	{
-		if($request->isMethod('post')){
+		if ($request->isMethod('post')) {
 			//接收数据
 			$name=$request->input('name');
 			$pwd=$request->input('pwd');
 			//根据姓名和密码查询数据
-			$admin_info=Admin::where(['name'=>$name,'pwd'=>$pwd])->first();
-						
-			if($admin_info){
+			$admin_info=Admin::where(['name'=>$name,'pwd'=>$pwd])->first();						
+			if ($admin_info) {
 				//查询到管理员信息
 				$admin_id=$admin_info->id;			
 				$admin_name=$admin_info->name;
-				//把管理员信息存储到session
-				
+				//把管理员信息存储到session				
 				$request->session()->put('admin_id', $admin_id);
-				$request->session()->put('admin_name', $admin_name);
-				
+				$request->session()->put('admin_name', $admin_name);				
 				return redirect('/admin/index/index');
-
-			}else{
+			} else {
 				//未查询到管理员信息
 				return view('login_back.index');				
-			}
-			
-		}else{
+			}			
+		} else {
+
 			return view('login_back.index');
 		}
 		
@@ -59,26 +56,25 @@ class LoginController extends Controller
 	 */
 	public function regist(Request $request)
 	{
-		if($request->isMethod('post')){
+		if ($request->isMethod('post')) {
 			$admin=new Admin;
-
 			$admin->name=$request->name;
 			$admin->pwd=$request->pwd;
 			$admin->email=$request->email;
 			$admin->tel=$request->tel;
-
 			$res=$admin->save();
-			if($res){
+			if ($res) {
 				//注册成功
 				$request->session()->put('admin_id', $admin->id);
 				$request->session()->put('admin_name', $admin->name);
-				return redirect('/admin/index/index');
-				
-			}else{
+
+				return redirect('/admin/index/index');			
+			} else {
+
 				return view('login_back.regist');
 			}
+		} else {
 
-		}else{
 			return view('login_back.regist');
 		}
 		
@@ -91,9 +87,11 @@ class LoginController extends Controller
 	{
 		$admin_name=Input::get('admin_name')?Input::get('admin_name'):"";
 		$admin_info=Admin::where('name',$admin_name)->first();
-		if($admin_info){
+		if ($admin_info) {
+
 			return 4;//重复
-		}else{
+		} else {
+
 			return 2;//不重复
 		}
 	}
@@ -104,14 +102,16 @@ class LoginController extends Controller
             $is_forget=$request->session()->forget('admin_id');
             $is_forget=$request->session()->forget('admin_name');
             if($is_forget===null){
+
             	return redirect('/admin/login/login');
             }else{
+
             	return redirect('/admin/index/index');
             }
-        }else{
+        } else {
+        	
         	return redirect('/admin/index/index');
         }
 	}
-
 
 }
