@@ -160,13 +160,12 @@ background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll
 				<div class="user_div">
 				<div class="item"><a href="{{url('home/integral/index')}}">积分兑换</a></div><div class="item sep">&gt;</div>
 				<div class="item">{{$goods_one->goods_name}}</div><div style="float:right"><div>
-				@if(Session::has('user_id'))
-						当前积分:<span style="color:red">10000</span>
-					   
-					    @else
-					   <a href="{{url('home/login')}}">点击登录</a>
-					    @endif
-				
+					
+					@if(isset($user->integral))
+						当前积分:<span style="color:red">{{$user->integral}}</span>
+						@else
+						 <a href="{{url('home/login')}}">请先登录</a> 	
+					@endif
 				</div>
 				</div>
 			</div>
@@ -195,18 +194,22 @@ background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll
 <input type="hidden" name="goods_price" value="{{$goods_one->goods_price}}" />
 <input type="hidden" name="goods_name" value="{{$goods_one->goods_name}}" />
 </div>
-		<p class="">
+		<p class="1">
 			<div class="parent">
 	
 
-<p class="p_name">&nbsp;</p>
-		<p class="p_name" style="text-align:center;">
-		@if(Session::has('user_id'))
-						<input type="submit"  class="button button-caution button-rounded button-jumbo" id="btnChange" value="点击兑换">
-					   				  
-					   	@else
-					    <a href="{{url('home/login')}}">请先登录</a>
-					    @endif
+<p class="p_name" >&nbsp;</p>
+		<p class="p_name" style="text-align:center">
+
+			   @if(!Session::has('user_id'))
+			  
+			  <a href="{{url('home/login')}}">请先登录</a> 	
+			   @elseif($goods_one->goods_price > $user->integral)
+				
+			   <a class="button button-caution button-rounded button-jumbo" href="{{url('home/integral/index')}}">积分不足</a>
+			   	@else
+			    <input type="submit"  class="button button-caution button-rounded button-jumbo" id="btnChange" value="点击兑换">
+			    @endif
 		
 		</p>
 		<p class="p_name">&nbsp;</p><p class="p_name">&nbsp;</p>

@@ -9,18 +9,14 @@ use App\Models\Join;
 
 class JoinController extends Controller
 {
-
-
 	/**
-	 * z加盟注册添加
+	 * 加盟注册添加
 	 */
 	public function index(Request $request)
 	{
-		if($request->isMethod('post')){
+		if ($request->isMethod('post')) {
 		//接收数据
 			$data = $request->all();
-			// print_r($data);die;
-	
 			//实例化model
 			$Join = new Join;
 			//添加数据入库
@@ -40,21 +36,14 @@ class JoinController extends Controller
 			$Join->tenement_address = $data['tenement_address'];
 			$Join->property = $data['property'];
 			$Join->others = $data['others'];
-
 			$bool = $Join->save();
-			if($bool)
-			{
+			if ($bool) {
 				echo '<script>alert("已经提交成功，等待结果吧！亲")</script>';
+
 				return view('index.index');
 			}
-		}else{
-			
+		} else {
 			return view('join.index');
 		}
 	}
-
-	
-
-		
-
 }

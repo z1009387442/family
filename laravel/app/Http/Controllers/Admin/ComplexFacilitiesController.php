@@ -10,21 +10,31 @@ use App\Models\ComplexFacilities;
 class ComplexFacilitiesController extends Controller
 {
 	/**
-	 * 客房设施
+	 * 综合设施展示
+	 * @access public
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_list(Request $request)
 	{
 		$list = complexFacilities::all();
+
 		return view('complex_facilities_back.complex_facilities_list',['list'=>$list]);
 	}
 
 	/**
-	 * 客房设施添加
+	 * 综合设施添加
+	 * @access public
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_add(Request $request)
 	{
-		if($request->isMethod('post'))
-		{
+		if ($request->isMethod('post')) {
 			$data = $request->all();
 			//实例化model
 			$ComplexFacilities = new ComplexFacilities;
@@ -33,18 +43,22 @@ class ComplexFacilitiesController extends Controller
 			$ComplexFacilities->sort   = $data['sort'];
 			$ComplexFacilities->status   = $data['status'];
 			$bool = $ComplexFacilities->save();
-			if($bool)
-			{
-				return Redirect::to('admin/complex/facilities_list');
-			}
-		}else{
+				if ($bool) {
+					return Redirect::to('admin/complex/facilities_list');
+				}
+		} else {
 			
 			return view('complex_facilities_back.complex_facilities_add');
 		}
 	}
 
 	/**
-	 * 客房设施删除 
+	 * 综合设施删除
+	 * @access public
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_del(Request $request)
 	{
@@ -52,33 +66,33 @@ class ComplexFacilitiesController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = ComplexFacilities::destroy($id);
-		if($bool)
-		{
+		if ($bool) {
 			return Redirect::to('admin/complex/facilities_list');
 		}
 	}
 
-	/**
-	 * 客房设施修改
+/**
+	 * 综合设施修改
+	 * @access public
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_save(Request $request)
 	{
 
-	if($request->isMethod('post'))
-		{
+	if ($request->isMethod('post')) {
 			//接收数据
 			$data = $request->all();
-
-			if(empty($data['complex_facilities_name'])){
+			if (empty($data['complex_facilities_name'])) {
 				$complexFacilities = new complexFacilities;
 				$complexFacilities = complexFacilities::find($data['id']);
 				$complexFacilities->complex_facilities_name = $data['complex_facilities_name'];
 				$complexFacilities->sort   = $data['sort'];
 				$complexFacilities->status   = $data['status'];
-				$bool = $complexFacilities->save();
-				
-			}else{
-			
+				$bool = $complexFacilities->save();	
+			} else {
 				//实例化model
 				$complexFacilities = new complexFacilities;
 				//添加数据入库
@@ -87,14 +101,11 @@ class ComplexFacilitiesController extends Controller
 				$complexFacilities->status   = $data['status'];
 				$complexFacilities->sort   = $data['sort'];
 				$bool = $complexFacilities->save();
-				
 			}
-			if($bool)
-			{
-				return Redirect::to('admin/complex/facilities_list');
-			}
-			
-		}else{
+				if ($bool) {
+					return Redirect::to('admin/complex/facilities_list');
+				}
+	  } else {
 			$one = complexFacilities::where('complex_facilities_id',$request->id)->first();
 			return view('complex_facilities_back.complex_facilities_save',['one'=>$one]);
 		}

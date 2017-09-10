@@ -140,12 +140,21 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('integral/convert',[
 				'uses'=>'IntegralController@convert',
 				]);
+				//记录积分日志
+				Route::any('integral/integral_log_add',[
+				'uses'=>'IntegralController@integral_log_add',
+				]);
 
 				//酒店房间展示页面
 				Route::any('hotel/room/id/{id}',[
 				'uses'=>'HotelController@room',
 				])->where(['id'=>'[0-9]+']);
 
+				//前台全部酒店展示
+				Route::any('hotel/show_all',[
+				'uses'=>'HotelController@show_all',
+				]);
+				
 				//前台酒店评价
 				Route::any('hotel/assess',[
 				'uses'=>'HotelController@assess',
@@ -200,6 +209,11 @@ Route::group(['middleware' => ['web']], function () {
 				// Route::any('order/pay_money/order_id/{order_id}',[
 				// 'uses'=>'OrderController@pay_money',
 				// ])->where(['order_id'=>'[0-9]+']);
+
+				//搜索页面
+				Route::any('search/index',[
+				'uses'=>'SearchController@index',
+				]);
 
 			});
 		});
@@ -347,21 +361,27 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('goods/goods_del',[
 				'uses'=>'GoodsController@goods_del',
 				]);
-
-
-					//后台招商列表
+				//后台招商列表
 				Route::any('join/join_list',[
 				'uses'=>'JoinController@join_list',
 				]);
-				//后台招商修改
-				Route::any('join/join_save',[
-				'uses'=>'JoinController@join_save',
+				//后台品牌添加
+				Route::any('brand/brand_add',[
+				'uses'=>'BrandController@brand_add',
 				]);
-				//后台招商删除
-				Route::any('join/join_del',[
-				'uses'=>'JoinController@join_del',
+				//后台品牌列表
+				Route::any('brand/brand_list',[
+				'uses'=>'BrandController@brand_list',
 				]);
-
+				//后台品牌修改
+				Route::any('brand/brand_save',[
+				'uses'=>'BrandController@brand_save',
+				]);
+				//后台品牌删除
+				Route::any('brand/brand_del',[
+				'uses'=>'BrandController@brand_del',
+				]);
+		
 
 
 				/**

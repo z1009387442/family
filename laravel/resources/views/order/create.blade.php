@@ -287,6 +287,7 @@ $(document).ready(function(){
 	$(".room_sum").change(function(){
 		change_price();
 		$(".resident_people").html('');
+		var count=$(this).val();
 		for(var i=0;i<count;i++){
 			$(".resident_people").append('<input type="text" name="resident_people[]" size="6">');
 		}

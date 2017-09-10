@@ -11,6 +11,10 @@ class GoodsController extends Controller
 {
 	/**
 	 * 商品积分
+	* @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function goods_list(Request $request)
 	{
@@ -20,10 +24,14 @@ class GoodsController extends Controller
 
 	/**
 	 * 商品积分添加
-	 */
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
+	  */
 	public function goods_add(Request $request)
 	{
-		if($request->isMethod('post')){
+		if ($request->isMethod('post')) {
 		//接收数据
 			$data = $request->all();
 			//print_r($data);die;
@@ -43,18 +51,20 @@ class GoodsController extends Controller
 			$Goods->goods_desc   = $data['goods_desc'];
 			$Goods->use_of   = $data['use_of'];
 			$bool = $Goods->save();
-			if($bool)
-			{
+			if ($bool) {
 				return Redirect::to('admin/goods/goods_list');
 			}
-		}else{
-			
+		} else {
 			return view('goods_back.goods_add');
 		}
 	}
 
 	/**
-	 * 商品积分删除 
+	 * 商品积分删除
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description] 
 	 */
 	public function goods_del(Request $request)
 	{
@@ -62,14 +72,17 @@ class GoodsController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = Goods::destroy($id);
-		if($bool)
-		{
+		if ($bool) {
 			return Redirect::to('admin/goods/goods_list');
 		}
 	}
 
 	/**
 	 * 商品积分修改
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function goods_save(Request $request)
 	{
@@ -79,7 +92,7 @@ class GoodsController extends Controller
 			//接收数据
 			$data = $request->all();
 
-			if(empty($data['goods_img'])){
+			if (empty($data['goods_img'])) {
 				$Goods = new Goods;
 				$Goods = Goods::find($data['goods_id']);
 				$Goods->goods_name = $data['goods_name'];
@@ -88,7 +101,7 @@ class GoodsController extends Controller
 				$Goods->use_of   = $data['use_of'];
 				$bool = $Goods->save();
 				
-			}else{
+			} else {
 				$newName = md5(date('ymdhis').$data['goods_img']->getClientOriginalName()).".".$data['goods_img']->getClientOriginalExtension();
 				//移动文件到uploads
 				$path=$data['goods_img']->move(public_path().'/uploads/',$newName);
@@ -106,20 +119,14 @@ class GoodsController extends Controller
 				$bool = $Goods->save();
 				
 			}
-			if($bool)
-			{
+			if ($bool) {
 				return Redirect::to('admin/goods/goods_list');
 			}
 			
-		}else{
+		} else {
 			$one = Goods::where('goods_id',$request->id)->first();
+
 			return view('goods_back.goods_save',['one'=>$one]);
 		}
-
-
-
-
-
-		
 	}
 }

@@ -11,23 +11,28 @@ class RoomsFacilitiesController extends Controller
 {
 	/**
 	 * 客房设施
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_list()
 	{
-		// $list = RoomsFacilities::all();
 		$list = RoomsFacilities::paginate(2);
-		
-	
+
 		return view('rooms_facilities_back.rooms_facilities_list',['list'=>$list]);
 	}
 
 	/**
 	 * 客房设施添加
+	  * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_add(Request $request)
 	{
-		if($request->isMethod('post'))
-		{
+		if ($request->isMethod('post')) {
 			$data = $request->all();
 			//实例化model
 			$RoomsFacilities = new RoomsFacilities;
@@ -36,18 +41,20 @@ class RoomsFacilitiesController extends Controller
 			$RoomsFacilities->sort   = $data['sort'];
 			$RoomsFacilities->status   = $data['status'];
 			$bool = $RoomsFacilities->save();
-			if($bool)
-			{
+			if ($bool) {
 				return Redirect::to('admin/rooms/facilities_list');
 			}
-		}else{
-			
+		} else {
 			return view('rooms_facilities_back.rooms_facilities_add');
 		}
 	}
 
 	/**
-	 * 客房设施删除 
+	 * 客房设施删除
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description] 
 	 */
 	public function facilities_del(Request $request)
 	{
@@ -63,49 +70,42 @@ class RoomsFacilitiesController extends Controller
 
 	/**
 	 * 客房设施修改
+	 * @author yanhong Yang
+	 * @link   {{string}}
+	 * @param  [type]     $id [description]
+	 * @return [type]         [description]
 	 */
 	public function facilities_save(Request $request)
 	{
-
-	if($request->isMethod('post'))
-		{
-			//接收数据
-			$data = $request->all();
-
-			if(empty($data['rooms_facilities_name'])){
-				$RoomsFacilities = new RoomsFacilities;
-				$RoomsFacilities = RoomsFacilities::find($data['id']);
-				$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
-				$RoomsFacilities->sort   = $data['sort'];
-				$RoomsFacilities->status   = $data['status'];
-				$bool = $RoomsFacilities->save();
+		if ($request->isMethod('post')) {
+				//接收数据
+				$data = $request->all();
+				if (empty($data['rooms_facilities_name'])) {
+					$RoomsFacilities = new RoomsFacilities;
+					$RoomsFacilities = RoomsFacilities::find($data['id']);
+					$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
+					$RoomsFacilities->sort   = $data['sort'];
+					$RoomsFacilities->status   = $data['status'];
+					$bool = $RoomsFacilities->save();	
+				} else {
+					//实例化model
+					$RoomsFacilities = new RoomsFacilities;
+					//添加数据入库
+					$RoomsFacilities = RoomsFacilities::find($data['id']);
+					$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
+					$RoomsFacilities->status   = $data['status'];
+					$RoomsFacilities->sort   = $data['sort'];
+					$bool = $RoomsFacilities->save();	
+				}
+					if($bool)
+					{
+						return Redirect::to('admin/rooms/facilities_list');
+					}
 				
-			}else{
-			
-				//实例化model
-				$RoomsFacilities = new RoomsFacilities;
-				//添加数据入库
-				$RoomsFacilities = RoomsFacilities::find($data['id']);
-				$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
-				$RoomsFacilities->status   = $data['status'];
-				$RoomsFacilities->sort   = $data['sort'];
-				$bool = $RoomsFacilities->save();
-				
-			}
-			if($bool)
-			{
-				return Redirect::to('admin/rooms/facilities_list');
-			}
-			
-		}else{
-			$one = RoomsFacilities::where('rooms_facilities_id',$request->id)->first();
-			return view('rooms_facilities_back.rooms_facilities_save',['one'=>$one]);
-		}
+			} else {
+				$one = RoomsFacilities::where('rooms_facilities_id',$request->id)->first();
 
-
-
-
-
-		
+				return view('rooms_facilities_back.rooms_facilities_save',['one'=>$one]);
+			}		
 	}
 }

@@ -13,6 +13,7 @@ class IndexController extends Controller
 {
 	public function index(Request $request)
 	{
+
 		return view('index.index');
 	}
 
@@ -21,12 +22,15 @@ class IndexController extends Controller
 		if($request->isMethod('post')){
 			$email=$request->input('email');
 			$user_pwd=md5($request->input('user_pwd'));
-			$user_info=Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->first();
+			$user_info=Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->get();
+				foreach($user_info as $v){
+				   $user_id=$v->user_id;
+				     
+			  	 $user_name=$v->user_name;	
+
+			  	}
 			
-			     $user_id=$user_info->user_id;
-			  	 $user_name=$user_info->user_name;
-			
-			if(!$user_info){
+			if($user_info->isEmpty()){
 				echo '<script>alert("用户名或密码错误")</script>';
 				return view('index.login');
 			}else{
@@ -64,11 +68,13 @@ class IndexController extends Controller
 			}
 		}else{
 			$user_id=$request->session()->get('user_id');
-			// dd($user_id);die;
 			$user_info=Index::where(['user_id'=>$user_id])->get();
-			return view("index.personal_data",['user_info'=>$user_info]);
+			$detailed=DB::table('detailed')
+			->join('goods','detailed.goods_id','=','goods.goods_id')
+			->where('detailed.user_id',$user_id)
+			->get();
+			return view("index.personal_data",['user_info'=>$user_info],['detailed'=>$detailed]);
 		}
-
 	}
 
 	//用户头像
@@ -121,12 +127,14 @@ class IndexController extends Controller
 	public function register_do(Request $request){
 		$user_name=$request->input('user_name');
 		$email= $request->input('email');
+		$tel= $request->input('tel');
 		$user_pwd=md5($request->input('user_pwd'));
 
 		$obj=new Index();
-		$obj->user_name="$user_name";
-		$obj->user_pwd="$user_pwd";
-		$obj->email="$email";
+		$obj->user_name=$user_name;
+		$obj->user_pwd=$user_pwd;
+		$obj->email=$email;
+		$obj->tel=$tel;
 		$bool=$obj->save();
 		$user_id=$obj->user_id;
 		if($bool==true){
