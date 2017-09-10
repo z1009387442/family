@@ -225,7 +225,18 @@
                             </li>
                         </ul>
                     </li>
-
+                        <!--品牌管理-->
+                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-calculator"></i>品牌管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/brand/brand_add')}}"><i class="icon-puzzle"></i> 品牌添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/brand/brand_list')}}"><i class="icon-puzzle"></i> 品牌编辑</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="divider"></li>
                     <li class="nav-title">                   
                 </ul>
