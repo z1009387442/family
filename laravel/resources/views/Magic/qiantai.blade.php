@@ -19,7 +19,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="/qiantai/css/style.css" rel='stylesheet' type='text/css' />
 <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	.Mfoot {
+	border-top: 1px solid #e6e6e6;
+	background-color: #faf8f9;
+	min-width: 990px;
+	
 
+}
+
+
+.Mfoot .inner {
+	color: #7f1f59;
+	line-height: 20px
+}
+
+.Mfoot .links {
+	font-size: 13px;
+	font-weight: 700
+}
+
+.Mfoot .links a {
+	color: #7f1f59;
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px
+}
+
+.Mfoot .links a:hover {
+	color: #ae1a63
+}
+</style>
 
  <div class="navbar navbar-inverse-blue navbar">
  @section('header')
@@ -96,15 +126,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <div class="footer">
 @section('footer')
-    	<div class="container">
-    		<div class="clearfix"> </div>
-    		<div>
-    			
-    		</div>
-    		<div class="copy">
-		      <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-	        </div>
-    	</div>
+<center>
+		  <footer class="Mfoot">
+            <div class="inner Cwrap Lpb25 Lpt25">
+                <div class="links Ltac">
+                    <a rel="nofollow" href="">sunshine</a><a rel="nofollow" href="" target="_blank">酒店加盟</a><a href="" rel="nofollow" target="_blank">职位招聘</a><a rel="nofollow" href="">意见反馈</a><a rel="nofollow" href="">联系我们</a>
+                </div>
+                <p class="copyright Ltac Lmt20">京|  ©2017 Sunshine All Rights reserved. sunshine酒店管理有限公司</p>
+            </div>
+        </footer>
+</center>
+    
 @show
     </div>
 </body>
