@@ -31,6 +31,7 @@ class ComplexFacilitiesController extends Controller
 	public function facilities_add(Request $request)
 	{
 		if ($request->isMethod('post')) {
+
 			$data = $request->all();
 			//实例化model
 			$ComplexFacilities = new ComplexFacilities;
@@ -40,6 +41,7 @@ class ComplexFacilitiesController extends Controller
 			$ComplexFacilities->status   = $data['status'];
 			$bool = $ComplexFacilities->save();
 				if ($bool) {
+
 					return Redirect::to('admin/complex/facilities_list');
 				}
 		} else {
@@ -59,7 +61,9 @@ class ComplexFacilitiesController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = ComplexFacilities::destroy($id);
+
 		if ($bool) {
+
 			return Redirect::to('admin/complex/facilities_list');
 		}
 	}
@@ -77,12 +81,14 @@ class ComplexFacilitiesController extends Controller
 				$data = $request->all();
 
 				if (empty($data['complex_facilities_name'])) {
+
 					$complexfacilities = new complexFacilities;
 					$complexfacilities = complexFacilities::find($data['id']);
 					$complexfacilities->complex_facilities_name = $data['complex_facilities_name'];
 					$complexfacilities->sort   = $data['sort'];
 					$complexfacilities->status   = $data['status'];
 					$bool = $complexfacilities->save();	
+					
 				} else {
 					//实例化model
 					$complexfacilities = new complexFacilities;
