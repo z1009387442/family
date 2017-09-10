@@ -101,7 +101,7 @@ class IntegralController extends Controller
 		$integral_log->action='兑换了:'.$goods_name;
 		$integral_log->order_sn=' ';
 		$integral_log->num=$goods_price;
-		$integral_log->jj='2';
+		$integral_log->regulation='2';
 		$integral_log->detailed_id=$detailed_id;
 		$integral_log->user_id=$user_id;
 		$integral_log->create_at=time();
