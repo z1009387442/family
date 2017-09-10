@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Redirect;
 use App\Models\Type;
+
 class TypeController extends Controller
 {
 	/**
@@ -31,8 +33,7 @@ class TypeController extends Controller
 	 */
 	public function type_add(Request $request)
 	{
-		if($request->isMethod('post'))
-		{
+		if($request->isMethod('post')){
 			//接收数据
 			$data = $request->all();
 			$newName = md5(date('ymdhis').$data['type_img']->getClientOriginalName()).".".$data['type_img']->getClientOriginalExtension();
@@ -94,7 +95,7 @@ class TypeController extends Controller
 	          ->update(['status' => $request->status]);
 	    if($bool)
 	    {
-	    	echo 1;
+	    	return 1;
 	    }
 	}
 
@@ -107,12 +108,10 @@ class TypeController extends Controller
 	 */
 	public function type_save(Request $request)
 	{
-		if($request->isMethod('post'))
-		{
+		if($request->isMethod('post')){
 			//接收数据
 			$data = $request->all();
-			if(empty($data['type_img']))
-			{
+			if(empty($data['type_img'])){
 				$type = new Type;
 				//添加数据入库
 				$type = Type::find($data['room_type_id']);
@@ -151,10 +150,10 @@ class TypeController extends Controller
 				$type->sort   = $data['sort'];
 				$type->status   = $data['status'];
 				$bool = $type->save();
-			if($bool)
-			{
-				return Redirect::to('admin/type/type_list');
-			}
+				if($bool)
+				{
+					return Redirect::to('admin/type/type_list');
+				}
 			}
 		}else{
 			$type = Type::find($request->id);

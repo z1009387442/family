@@ -361,21 +361,27 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('goods/goods_del',[
 				'uses'=>'GoodsController@goods_del',
 				]);
-
-
-					//后台招商列表
+				//后台招商列表
 				Route::any('join/join_list',[
 				'uses'=>'JoinController@join_list',
 				]);
-				//后台招商修改
-				Route::any('join/join_save',[
-				'uses'=>'JoinController@join_save',
+				//后台品牌添加
+				Route::any('brand/brand_add',[
+				'uses'=>'BrandController@brand_add',
 				]);
-				//后台招商删除
-				Route::any('join/join_del',[
-				'uses'=>'JoinController@join_del',
+				//后台品牌列表
+				Route::any('brand/brand_list',[
+				'uses'=>'BrandController@brand_list',
 				]);
-
+				//后台品牌修改
+				Route::any('brand/brand_save',[
+				'uses'=>'BrandController@brand_save',
+				]);
+				//后台品牌删除
+				Route::any('brand/brand_del',[
+				'uses'=>'BrandController@brand_del',
+				]);
+		
 
 
 				/**

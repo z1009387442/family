@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -15,6 +17,7 @@ class JoinController extends Controller
 	public function join_list(Request $request)
 	{
 		$list = Join::all();
+
 		return view('join_back.join_list',['list'=>$list]);
 	}
 
