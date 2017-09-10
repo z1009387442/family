@@ -19,7 +19,7 @@ class ComplexFacilitiesController extends Controller
 	 */
 	public function facilities_list(Request $request)
 	{
-		$list = complexFacilities::all();
+		$list = complexFacilities::paginate(2);
 
 		return view('complex_facilities_back.complex_facilities_list',['list'=>$list]);
 	}

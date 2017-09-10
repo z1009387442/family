@@ -18,11 +18,6 @@
 <div class="card">
     <div class="card-header">
         <i class="fa fa-align-justify"></i> 品牌列表
-        <!-- <label class="switch switch-3d switch-primary">
-            <input type="checkbox" class="switch-input" checked="">
-            <span class="switch-label"></span>
-            <span class="switch-handle"></span>
-        </label> -->
     </div>
     <div class="card-block">
         <table class="table table-bordered table-striped table-condensed">
@@ -49,8 +44,8 @@
                     </td>
                     <td>
                             <font color="SkyBlue">
-                             <a href="{{url('admin/complex/facilities_save')}}?id=<?=$v->brand_id?>">编辑</a>　   
-                            <a href="{{url('admin/complex/facilities_del')}}?id=<?=$v->brand_id?>">删除</a>
+                             <a href="{{url('admin/brand/brand_save')}}?id=<?=$v->brand_id?>">编辑</a>　   
+                            <a href="{{url('admin/brand/brand_del')}}?id=<?=$v->brand_id?>">删除</a>
                             </font>
                     </td>
                 </tr>
@@ -58,21 +53,9 @@
             </tbody>
         </table>
         <nav>
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#"><</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">4</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">></a>
-                </li>
-            </ul>
+             <div>
+                    <div class="pull-right">{{$list->render()}}</div>
+            </div>
         </nav>
     </div>
 </div>

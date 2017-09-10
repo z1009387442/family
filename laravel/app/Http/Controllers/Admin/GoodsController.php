@@ -18,7 +18,7 @@ class GoodsController extends Controller
 	 */
 	public function goods_list(Request $request)
 	{
-		$list = Goods::all();
+		$list = Goods::paginate(2);
 		return view('goods_back.goods_list',['list'=>$list]);
 	}
 

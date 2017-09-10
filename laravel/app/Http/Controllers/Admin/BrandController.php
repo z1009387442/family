@@ -16,7 +16,7 @@ class BrandController extends Controller
 	 */
 	public function brand_list(Request $request)
 	{
-		$list = Brand::all();
+		$list = Brand::paginate(2);
 
 		return view('brand_back.brand_list',['list'=>$list]);
 	}
