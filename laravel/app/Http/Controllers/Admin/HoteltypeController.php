@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use App\Models\Hotel;
 use App\Models\Hoteltype;
 use App\Models\Type;
 use App\Models\Room;
+
 class HoteltypeController extends Controller
 {
 	/**
@@ -32,26 +34,24 @@ class HoteltypeController extends Controller
 		//查询所有分类
 		$types = Type::where('status',1)->get();
 		//获取所有分类id
-		foreach($types as $type){
+		foreach($types as $type)
+		{
 			$type_id[] = $type ->room_type_id;
 		}
-		if(empty($hotel_type_id))
-		{
+		if(empty($hotel_type_id)){
 			$type_list = Type::where('status',1)->get();
 		}else{
 			//对比酒店已有类型id和所有类型id
 			$other_id = array_diff($type_id,$hotel_type_id);
 			//如果other_id为空说明
-			if(empty($other_id))
-			{
+			if(empty($other_id)){
 				$type_list = '';
 			}else{
 				//查询酒店还没有的房间类型
 				$type_list = Type::where('status',1)->whereIn('room_type_id' ,$other_id)->get();
 			}
 		}
-		if(empty($hotel_type_id))
-		{
+		if(empty($hotel_type_id)){
 			$list = "";
 		}else{
 			//根据关联id查询酒店拥有的类型
@@ -101,7 +101,7 @@ class HoteltypeController extends Controller
 			$room_bool = Room::where('hotel_id',$request->hotel_id)->where('room_type_id', $request->room_type_id)->delete();
 			if($room_bool)
 			{
-				echo 1;
+				return 1;
 			}
 		}
 	
