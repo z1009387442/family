@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 .Mfoot .inner {
 	color: #7f1f59;
-	line-height: 20px
+	line-height: 40px
 }
 
 .Mfoot .links {
@@ -51,10 +51,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }
 </style>
 
- <div class="navbar navbar-inverse-blue navbar">
- @section('header')
+<div class="navbar navbar-inverse-blue navbar">
+@section('header')
 
- <?php require('/qiantai/index.html'); ?>
+<?php require('/qiantai/index.html'); ?>
 <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
 <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
 <a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
@@ -116,19 +116,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		     </div><!-- /.navbar-collapse -->
 		    </nav>
 		   </div> <!-- end pull-right -->
-          <div class="clearfix"> </div>
         </div> <!-- end container -->
       </div> <!-- end navbar-inner -->
 @show
     </div> <!-- end navbar-inverse-blue -->
 <!-- ============================  Navigation End ============================ -->
+
 @yield('content')
 
-    <div class="footer">
+
 @section('footer')
 <center>
 		  <footer class="Mfoot">
-            <div class="inner Cwrap Lpb25 Lpt25">
+            <div class="inner Cwrap Lpb25 Lpt25" class="margin-">
                 <div class="links Ltac">
                     <a rel="nofollow" href="">sunshine</a><a rel="nofollow" href="" target="_blank">酒店加盟</a><a href="" rel="nofollow" target="_blank">职位招聘</a><a rel="nofollow" href="">意见反馈</a><a rel="nofollow" href="">联系我们</a>
                 </div>
@@ -138,6 +138,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </center>
     
 @show
-    </div>
+
 </body>
 </html>
