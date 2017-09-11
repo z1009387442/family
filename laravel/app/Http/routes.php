@@ -73,6 +73,11 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'HotelController@show',
 				]);
 
+				//酒店列表搜索
+				Route::any('hotel/hotel_search',[
+				'uses'=>'HotelController@hotel_search',
+				]);
+
 				//前台登录
 				Route::any('login',[
 				'uses'=>'IndexController@login'
