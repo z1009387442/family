@@ -23,12 +23,12 @@
       <a href="{{url('home/hotel/show_all')}}" class="hvr-shutter-out-horizontal">come on baby</a>
     </div>
   </div>
-  <div class="profile_search">
-  	<div class="container wrap_1">
+  <div class="profile_search" style="background-color: black;">
+  	<div class="container wrap_1" >
 	  <form action="{{url('home/hotel/show')}}" method="get">
 	  	<div class="search_top">
 		 <div class="inline-block">
-		  <label class="gender_1">目的地:</label>
+		  <label class="">目的地:</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
 				<div class="city-select" id="single-select-1">
 					
@@ -45,13 +45,13 @@
 		   </div>
 	    </div>
         <div class="inline-block">
-		  <label class="gender_1">入住时间:</label>
+		  <label class="">入住时间:</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
 				<input type="text" class="input" name="check_in" id="pickdate" style="color:#000" />
           </div>
         </div>
         <div class="inline-block">
-		  <label class="gender_1">离开时间:</label>
+		  <label class="">离开时间:</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
 				<input type="text" class="input" name="check_out" id="pickdate1" style="color:#000"/>
           </div>
@@ -83,33 +83,17 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-
-
 		<div class="submit inline-block">
-
 			<input type="hidden" value="" name="city_name" id="region">
-		   <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
+		   <input id="submit-btn" class="" type="submit" value="Find Matches">
 		</form>
      </div>
     </div>
-  </div> 
+  </div>
 </div> 
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
 
-<div class="grid_2">
-<!-- 	<div class="container">
-		<h2>Success Stories</h2>
-       	<div class="heart-divider">
-			<span class="grey-line"></span>
-			<i class="fa fa-heart pink-heart"></i>
-			<i class="fa fa-heart grey-heart"></i>
-			<span class="grey-line"></span>
-        </div>
-        <div class="row_1">
 
-	
-	  </div>
-    </div> -->
     <div class="bg">
 		<div class="container"> 
 			<h3>网站免责声明</h3>
@@ -145,7 +129,6 @@ var _hmt = _hmt || [];
             </div>
             <div class="clearfix"> </div>
 		</div>
-
 	</div>
 	<link rel="stylesheet" type="text/css" href="/qiantai/xiala/css/city-select.css">
 <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
