@@ -23,6 +23,17 @@
                 <input type="text" id="text-input" name="hotel_name" class="form-control" >
             </div>
         </div>
+    <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">所属品牌</label>
+            <div class="col-md-9">
+                <select id="select" name="brand_id" style="width: 280px;height:48px; border: 1px solid #ccc;" >
+                <option value="0">请选择品牌</option>
+                @foreach($brand as $k=>$v)
+                    <option value="{{$v->brand_id}}">{{$v->brand_name}}</option>
+                 @endforeach
+                </select>
+            </div>
+        </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="text-input">所属地区</label>
             <div class="col-md-9">
@@ -37,6 +48,14 @@
             </div>
         </div>
 <!--下拉地区（结束）-->
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">所在商圈</label>
+            <div class="col-md-9">    
+                <select id="select" class="xiala_" name="business_district_id" style="width: 280px;height:48px; border: 1px solid #ccc;" class="form-control">
+                    <option value="0">请选择商圈</option>
+                </select><input type="text" id="text-input" style="width: 280px;height:48px; border: 1px solid #ccc; margin-left: 20px; font-size: 12px;" placeholder=" 没有找到？手动输入商圈" name="business_district_name">
             </div>
         </div>
         <div class="form-group row">
@@ -118,7 +137,7 @@
 <div class="card-footer">
 <input type="hidden" value="" name="region_name" id="region_name">
     <button type="submit" class="btn btn-sm btn-primary" id="submit_"><i class="fa fa-dot-circle-o"></i> Submit</button>
-    <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+    <button type="reset" onchange="" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
 </div>
 </form>
 </div><!-- </div> -->
@@ -177,7 +196,30 @@
         // 禁止点击显示的接口
         singleSelect3.status('disabled');
 
+        $(document).on('click','.caller', function() {
+            var region_name = $(this).html();
+            $.ajax({
+                type:'get',
+                url: 'business_district',
+                data:{region_name:region_name},
+                dataType:'json',
+                success:function(msg){
+                   $(".xiala_").html('<option value="0">请选择商圈</option>');
+                   $.each(msg,function( key, val ) {
+                   $(".xiala_").append('<option value="'+val.business_district_id+'"">'+val.business_district_name+'</option>');
+                   
+                });
+              }
+            });
+        });
+        
     });
+    //     $(".xiala_").click(function(){
+    //     var region_name = $(".city-info").text();
+    //     alert(region_name);
+
+    // });
+            
     </script>
 @endsection
 

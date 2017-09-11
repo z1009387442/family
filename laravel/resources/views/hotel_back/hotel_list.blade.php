@@ -53,8 +53,8 @@
                     <td><font color="Gray">{{$v->hotel_tel}}</font></td>
                     <td><font color="Gray">{{$v->hotel_fax}}</font></td>
                     <td><font color="Gray">{{$v->hotel_address}}</font></td>
-                    <td><font color="Gray"><div style="overflow: scroll; white-space: nowrap; text-overflow: clip;width:100px;" >{{$v->hotel_desc}}</div></font></td>
-                    <td><font color="Gray">{{$v->hotel_hint}}</font></td>
+                    <td><font color="Gray"><?php echo mb_substr($v->hotel_desc,0,20).'...'?></font></td>
+                    <td><font color="Gray"><?php echo mb_substr($v->hotel_hint,0,20).'...'?></font></td>
                     <!-- <td><font color="Gray">{{$v->complex_facilities_id}}</font></td>
                     <td><font color="Gray">{{$v->rooms_facilities_id}}</font></td> -->
                     <td><font color="Gray">{{$v->created_at}}</font></td>
@@ -67,7 +67,7 @@
                     </td>
                     <td>
                             <font color="SkyBlue">
-                             <a href="{{url('admin/hotel/hotel_save')}}?id=<?=$v->hotel_id?>">编辑</a>　   
+                             <a href="{{url('admin/hotel/hotel_save')}}?id=<?=$v->hotel_id?>">编辑</a>　 
                                <a data-id="{{$v->hotel_id}}" class="cd-popup-trigger0" href="javascript:void(0)">删除</a>
                             </font>
                     </td>

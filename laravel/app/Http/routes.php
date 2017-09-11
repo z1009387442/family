@@ -270,6 +270,10 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('hotel/hotel_save_status',[
 				'uses'=>'HotelController@hotel_save_status',
 				]);
+				//后台根据城市获取商圈
+				Route::any('hotel/business_district',[
+				'uses'=>'HotelController@business_district',
+				]);
 
 				/**
 				 * 后台酒店类型管理相关操作
