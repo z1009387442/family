@@ -12,6 +12,8 @@ use App\Models\Region;
 use App\Models\Room;
 use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
+use App\Models\Businessdistrict;
+use App\Models\Brand;
 
 class HotelController extends Controller
 {
@@ -43,6 +45,13 @@ class HotelController extends Controller
 			$data = $request->all();
 			//查询地区id
 			$region_one = Region::where('region_name',$data['region_name'])->first();
+			if(empty($data['business_district_id'])){
+				$businessdistrict = new Businessdistrict;
+				$businessdistrict->business_district_name = $data['business_district_name'];
+				$businessdistrict->region_id = $region_one->region_id;
+				$bool = $businessdistrict->save();
+				$data['business_district_id'] = $businessdistrict->business_district_id;
+			}
 			//将图片重命名
 			$newName = md5(date('ymdhis').$data['hotel_img']->getClientOriginalName()).".".$data['hotel_img']->getClientOriginalExtension();
 			//移动文件到uploads
@@ -54,6 +63,8 @@ class HotelController extends Controller
 			//添加数据入库
 			$hotel->hotel_name = $data['hotel_name'];
 			$hotel->region_id = $region_one->region_id;
+			$hotel->brand_id = $data['brand_id'];
+			$hotel->business_district_id = $data['business_district_id'];
 			$hotel->sort   = $data['sort'];
 			$hotel->hotel_img = $data['hotel_img'];
 			$hotel->hotel_address   = $data['hotel_address'];
@@ -70,14 +81,17 @@ class HotelController extends Controller
 				return Redirect::to('admin/hotel/hotel_list');
 			}
 		}else{
-			//查询所有的地区
-			$region = Region::all();
 			//查询所有房间设施
-			$roomsFacilities = RoomsFacilities::all();
+			$roomsFacilities = RoomsFacilities::where('status',1)->get();
 			//查询所有服务项目
 			$complexFacilities = ComplexFacilities::where('status',1)->get();
-			// print_r($region);die;
-			return view('hotel_back.hotel_add',['region'=>$region,'roomsFacilities'=>$roomsFacilities,'complexFacilities'=>$complexFacilities]);
+			//查询所有品牌
+			$brand = Brand::where('status',1)->get();
+			return view('hotel_back.hotel_add',[
+				'roomsFacilities'=>$roomsFacilities,
+				'complexFacilities'=>$complexFacilities,
+				'brand'=>$brand
+			]);
 		}
 	}
 
@@ -190,11 +204,37 @@ class HotelController extends Controller
 		}else{
 			$id = $request->id;
 			$hotel = Hotel::find($id);
-			$region = Region::all();
+			$hotel['complex_facilities_id'] = explode(',',$hotel->complex_facilities_id);
+			$hotel['rooms_facilities_id'] = explode(',',$hotel->rooms_facilities_id);
+			//查询所有房间设施
+			$roomsFacilities = RoomsFacilities::where('status',1)->get();
+			//查询所有服务项目
+			$complexFacilities = ComplexFacilities::where('status',1)->get();
+			//查询所有品牌
+			$brand = Brand::where('status',1)->get();
 			return view('hotel_back.hotel_save',[
 				'hotel'=>$hotel,
-				'region'=>$region
+				'roomsFacilities'=>$roomsFacilities,
+				'complexFacilities'=>$complexFacilities,
+				'brand'=>$brand,
+				'complex_facilities_id'=>$hotel['complex_facilities_id'],
+				'rooms_facilities_id' =>$hotel['rooms_facilities_id']
 			]);
 		}
+	}
+	/**
+	 * 根据所选城市，查询商圈
+	 * @author [meng] <[920417690@qq.com]>
+	 * @access public
+	 * @param  $[name] [description]
+	 * @return [type] [description]
+	 */
+	public function business_district(Request $request)
+	{
+		$results = Region::where('region_name',$request->region_name)->get();
+		foreach ($results as $result) {
+   			$id = $result->region_id;
+		}
+		return json_encode(Businessdistrict::where('status',1)->where('region_id',$id)->get()->toArray());
 	}
 }
