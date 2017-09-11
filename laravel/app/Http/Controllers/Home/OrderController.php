@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
@@ -7,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\RoomsType;
 use App\Models\Order;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -21,13 +23,16 @@ class OrderController extends Controller
 		$hotel_id=$request->hotel_id;//接收房间类型ID
 		//房间类型照片信息、数据 room_type
 		$room_data = RoomsType::find($room_type_id);
-		//查房间类型表和房间类型的相册表room_type_albunm
 		//查酒店表，酒店地址和名字hotel
 		$hotel_data=Hotel::find($hotel_id);//用name和address
-		$my_date['today']=date('Y-m-d');
-		$my_date['tomorrow']=date("Y-m-d",strtotime("+1 day"));
-		return view('order.create',['my_date'=>$my_date,'room_data'=>$room_data,'hotel_data'=>$hotel_data]);
+		$my_date['today']=Carbon::now()->toDateString();
+		$my_date['tomorrow']=Carbon::tomorrow('Europe/London')->toDateString();
 
+		return view('order.create',[
+			'my_date'=>$my_date,
+			'room_data'=>$room_data,
+			'hotel_data'=>$hotel_data
+		]);
 	}
 
 	public function order_cre(Request $request)
@@ -38,10 +43,10 @@ class OrderController extends Controller
 		$check_time=$request->input('check_time');
 		$end_time=$request->input('end_time');
 		if($check_time==''){
-			$check_time=date('Y-m-d');
+			$check_time=Carbon::now()->toDateString();
 		}
 		if($end_time==''){
-			$end_time=date("Y-m-d",strtotime("+1 day"));
+			$end_time=Carbon::tomorrow('Europe/London')->toDateString();
 		}
 		$startdate=strtotime($check_time);
 		$enddate=strtotime($end_time);
@@ -60,16 +65,16 @@ class OrderController extends Controller
 		}
 		//生成订单
 		$order=new Order;
-		$order->user_id = $user_id;
-		$order->order_sn = $order_sn;
-		$order->check_time =$check_time;
-		$order->end_time =$end_time;
-		$order->room_num =$room_sum;
-		$order->resident_people =$resident_people;
-		$order->cell_phone =$cell_phone;
-		$order->hotel_id =$hotel_id;
-		$order->room_type_id =$room_type_id;
-		$order->total_price =$total_price;
+		$order->user_id=$user_id;
+		$order->order_sn=$order_sn;
+		$order->check_time=$check_time;
+		$order->end_time=$end_time;
+		$order->room_num=$room_sum;
+		$order->resident_people=$resident_people;
+		$order->cell_phone=$cell_phone;
+		$order->hotel_id=$hotel_id;
+		$order->room_type_id=$room_type_id;
+		$order->total_price=$total_price;
 		if($order->save()){
 			//生成订单去支付
 			return Redirect::to('home/pay/select/order_id/'.$order->order_id);
@@ -82,17 +87,16 @@ class OrderController extends Controller
 		return 'sunshine-'.date('Ymd').rand(1000,9999);
 	}
 
-	public function get_peo($arr)
+	public function get_peo($resident_people)
 	{
-		$str='';
-		if($str!=''){
-			foreach($arr as $k=>$v){
-				$str.='|'.$v;
-			}
-			$str=substr($str,1);
-		}
+		if(!empty($resident_people)){
+
+			return implode('|',$resident_people);
+		}else{
+			
+			return '';
+		}	
 		
-		return $str;
 	}
 
 	public function pay_money(Request $request)
