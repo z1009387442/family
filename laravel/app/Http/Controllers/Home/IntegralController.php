@@ -12,6 +12,7 @@ use App\Models\IntegralLog;
 use App\Models\Goods;
 use App\Models\Detailed;
 use Redirect;
+use Carbon\Carbon;
 
 class IntegralController extends Controller
 {
@@ -25,7 +26,6 @@ class IntegralController extends Controller
 	public function index(Request $request)
 	{
 		$list =Goods::all();
-
 		return view('integral.integral',['goods_list'=>$list]);
 	}
 
@@ -38,7 +38,7 @@ class IntegralController extends Controller
 	 */
 	public function convert(Request $request)
 	{
-		$user_id=$request->session()->has('user_id');
+		$user_id=$request->session()->get('user_id');
 		if ($request->isMethod('post')) {
 			$user_data=Index::where('user_id',"$user_id")->select('integral')->first();
 			$goods_price=$request->goods_price;
@@ -48,7 +48,7 @@ class IntegralController extends Controller
 
 				return false;
 			}
-			$created_at =date("Y-m-d H:i:s",time());
+			$created_at =Carbon::now();
 			$Detailed   = new Detailed;	
 			$Detailed->goods_id		= $goods_id;
 			$Detailed->goods_price  = $goods_price;
@@ -57,7 +57,7 @@ class IntegralController extends Controller
 			$bool = $Detailed->save();
 			if ($bool) {
 					 //兑换成功扣除积分
-					Index::decrement('integral',"$goods_price");
+					Index::where('user_id',"$user_id")->decrement('integral',"$goods_price");
 					$info=$this->integral_log_add($Detailed->detailed_id,$goods_name,$goods_price,$user_id);
 						if ($info) {
 
