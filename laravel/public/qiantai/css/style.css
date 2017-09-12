@@ -120,7 +120,7 @@ body a{
     -o-transition: 0.4s;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    color: #fff;
+    color: black;
     content: "\f0c9";
     display: inline-block;
     font-size: 20px;
@@ -130,7 +130,6 @@ body a{
 }
 .navbar-inverse-blue .navbar-inner {
   padding: 7px 0;
-  background:#b273ab;
   border:none;
   font-size: 0.85em;
 
@@ -288,7 +287,7 @@ ul.nav_1 li{
 	margin-right:0px;
 }
 ul.nav_1 li a{
-   color:#fff;
+   color:#7f1f59;
 }
 .dropdown-menu>li>a {
    color:#333 !important;
@@ -297,8 +296,8 @@ ul.nav_1 li.last{
 	margin-right:0;
 }
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus{
-    background-color:#ffa417 !important;
-    border-color:#ffa417;
+    background-color:#7f1f59 !important;
+    border-color:#7f1f59;
     color:#fff !important;
 }
 .banner{
@@ -370,7 +369,7 @@ ul.nav_1 li.last{
 }
 .profile_search{
 	text-align: center;
-    background-color:rgba(12, 9, 10, 0.29);
+    background-color:rgba(12, 9, 10, 0.5);
     padding: 2em;
     margin:11em 0 0 0;
 }

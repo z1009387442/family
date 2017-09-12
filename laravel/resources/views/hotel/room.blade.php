@@ -81,14 +81,14 @@
                     @if($price['up_down']==1)
                         {{($val['vip_price'])*(1+$price['price']/100)}}
                       @elseif($price['up_down']==0)
-                        {{($val['vip_price'])*(1-5/100)}}
+                        {{($val['vip_price'])*(1-$price['price']/100)}}
                       @endif </span></i></span></td>
                 <td width="140" class="pricearea Lposr" data-member-type="persnal" data-room-type="TTMDCF" data-activity-id="">
                     <span class="price"><i>￥<span>
                     @if($price['up_down']==1)
                         {{($val['rack_price'])*(1+$price['price']/100)}}
                       @elseif($price['up_down']==0)
-                        {{($val['rack_price'])*(1-5/100)}}
+                        {{($val['rack_price'])*(1-$price['price']/100)}}
                       @endif</span></i></span>
                 </td>
                 <td width="140">{{$val['room_desc']}}</td>
