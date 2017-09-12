@@ -149,7 +149,7 @@
 				          @if(Session::get('user_id'))
 							<input class="check_data sub_btn" type="submit" value="确认预订">
 						 @else
-						 	<a href="/home/login"><input type="button" class="sub_btn" value="去登陆"></a>
+						 	<input type="button" class="sub_btn" value="点击登录" onclick="ShowDiv('MyDiv','fade')">
 						 @endif
 
 				         </div>
@@ -196,10 +196,134 @@
            
          </div>
         </div>
+       
+<!--弹出层时背景层DIV-->  
+<div id="fade" class="black_overlay">  
+</div>  
+ <div id="MyDiv" class="white_content">  
+   <div style="text-align: right; cursor: default; height: 40px;">  
+   <span id="XX"  style="font-size: 16px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">×</span>  
+  </div>  
+  <!-- 登录表单 --> 
+  <div class="Myform">
+  	<ul>
+  	<form>
+  		<li>邮箱：<input type="text" class="user_email" value="" placeholder="请输入邮箱"></li>
+  		<li>密码：<input type="password" class="user_pwd" value="" placeholder="请输入密码"></li>
+  		<li><button class="MyBut user_login">登录</button><input type="reset" class="MyBut" value="重置"></li>
+  	</form>
+  	</ul>
+  </div>
+   <!-- 登录表单 --> 
+ </div> 
        <div class="clearfix"> </div>
     </div>
   </div>
 </div>
+<style> 
+.Myform .MyBut{
+	border: 1px solid #5a98de;
+	border-radius: 0.5em;
+	padding: 0.2em 1em 0.2em;
+	color: #fef4e9;
+	font: 16px/100%;
+	background-color:#5a98de;
+	margin-top: 15px;
+	margin-right: 30px;
+}
+.Myform li {
+	text-align: center;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 3px;
+}
+.black_overlay{  
+ display: none;  
+ position: absolute;  
+ top: 0%;  
+ left: 0%;  
+ width: 100%;  
+ height: 100%;  
+ background-color: black;  
+ z-index:1001;  
+ -moz-opacity: 0.8;  
+ opacity:.100;  
+ filter: alpha(opacity=80);
+}  
+.white_content { 
+ display: none;  
+ position: absolute;  
+ top: 50%;  
+ left: 35%;  
+ width: 30%;  
+ height: 40%;  
+ border: 5px solid lightblue;  
+ background-color: white;
+ z-index:1002;  
+ overflow: auto;  
+}  
+.white_content_small {  
+ display: none;  
+ position: absolute;  
+ top: 20%;  
+ left: 30%;  
+ width: 40%;  
+ height: 50%;  
+ border: 16px solid lightblue;  
+ background-color: white;  
+ z-index:1002;
+ overflow: auto;  
+}  
+#XX{
+    text-align:center;
+    margin-right:1px;
+    display: inline-block;
+    width:30px;
+    height: 30px;
+    line-height: 30px;
+  }
+ #XX:hover{background-color: #EE0000}
+</style> 
+
+<script type="text/javascript">  
+//弹出隐藏层  
+function ShowDiv(show_div,bg_div){  
+ document.getElementById(show_div).style.display='block';  
+ document.getElementById(bg_div).style.display='block' ;  
+ var bgdiv = document.getElementById(bg_div);  
+ bgdiv.style.width = document.body.scrollWidth;   
+ // bgdiv.style.height = $(document).height();  
+ $("#"+bg_div).height($(document).height());  
+};  
+//关闭弹出层  
+function CloseDiv(show_div,bg_div)  
+{  
+ document.getElementById(show_div).style.display='none';  
+ document.getElementById(bg_div).style.display='none';  
+};  
+
+	$(".user_login").click(function(){
+		var user_email=$(".user_email").val();
+		var user_pwd=$(".user_pwd").val();
+		if(user_email==''){
+			alert('请输入邮箱');
+			return false;
+		}
+		if(user_pwd==''){
+			alert('请输入密码');
+			return false;
+		}
+		$.ajax({
+		   type: "POST",
+		   url: "submit_login",
+		   data: {'user_email':user_email,'user_pwd':user_pwd},
+		   success: function(msg){
+		     alert(msg);
+		   }
+		});
+	})
+</script>
 
 
 <!-- FlexSlider -->
