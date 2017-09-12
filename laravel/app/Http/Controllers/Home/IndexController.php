@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers\Home;
-require (app_path() . '/Libs/CCPRestSDK.php');
 use App\Models\Index;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -8,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;  
 use Illuminate\Support\Facades\Input;
 use App\Models\Region;
-
+use App\Libs\REST;
 class IndexController extends Controller
 {
 	public function index(Request $request)
@@ -20,13 +19,13 @@ class IndexController extends Controller
 	//用户登录
 	public function login(Request $request){
 		if($request->isMethod('post')){
-			$email=$request->input('email');
-			$user_pwd=md5($request->input('user_pwd'));
-			$user_info=Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->get();
+			$email = $request->input('email');
+			$user_pwd = md5($request->input('user_pwd'));
+			$user_info = Index::where(['email'=>$email,'user_pwd'=>$user_pwd])->get();
 				foreach($user_info as $v){
-				   $user_id=$v->user_id;
+				   $user_id = $v->user_id;
 				     
-			  	 $user_name=$v->user_name;	
+			  	 $user_name = $v->user_name;	
 
 			  	}
 			
@@ -34,8 +33,8 @@ class IndexController extends Controller
 				echo '<script>alert("用户名或密码错误")</script>';
 				return view('index.login');
 			}else{
-				$user_id=$user_id;
-				$user_name=$user_name;
+				$user_id = $user_id;
+				$user_name = $user_name;
 				$request->session()->put('user_id',$user_id);
 				$request->session()->put('user_name',$user_name);
 				// print_r(Session::all());die;	
@@ -51,29 +50,59 @@ class IndexController extends Controller
 
 
 		if($request->isMethod('post')){
-			$user_id=$request->session()->get('user_id');
-			$user_name=$request->input('user_name');
-			$tel=$request->input('tel');
-			$email=$request->input('email');
-			$img=$request->input('img');
+			$user_id = $request->session()->get('user_id');
+			$user_name = $request->input('user_name');
+			$tel = $request->input('tel');
+			$email = $request->input('email');
+			$img = $request->input('img');
 			//保存修改数据
 			$obj=Index::find($user_id);
-			$obj->user_name=$user_name;
-			$obj->email=$email;
-			$obj->tel=$tel;
-			$obj->img=$img;
-			$bool=$obj->save();
+			$obj->user_name = $user_name;
+			$obj->email = $email;
+			$obj->tel = $tel;
+			$obj->img = $img;
+			$bool = $obj->save();
 			if($bool){
 				return redirect()->action('Home\IndexController@personal_data');
 			}
 		}else{
-			$user_id=$request->session()->get('user_id');
-			$user_info=Index::where(['user_id'=>$user_id])->get();
-			$detailed=DB::table('detailed')
-			->join('goods','detailed.goods_id','=','goods.goods_id')
-			->where('detailed.user_id',$user_id)
-			->get();
-			return view("index.personal_data",['user_info'=>$user_info],['detailed'=>$detailed]);
+			//当前用户ID
+			$user_id = $request->session()->get('user_id');
+			$user_info = Index::where(['user_id'=>$user_id])->get();
+			//查询兑换券使用情况
+			$detailed = DB::table('detailed')
+				->join('goods','detailed.goods_id','=','goods.goods_id')
+				->where('detailed.user_id',$user_id)
+				->get();
+			//查询订单信息
+			$order = DB::table('order')
+				->where('user_id',$user_id)
+				->get();
+			foreach($order as $v){
+				$hotel_id = $v->hotel_id;
+				$room_type_id = $v->room_type_id;
+				$room_num = $v->room_num;
+				}		
+			//酒店信息
+			$hotel_name = DB::table('hotel')
+				->where('hotel_id',$hotel_id)
+				->get();
+			//酒店房间信息
+			$room_type = DB::table('rooms_type')
+				->where('room_type_id',$room_type_id)
+				->get();
+			//房间号
+			$room_num = DB::table('rooms')
+				->where('room_id',$room_num)
+				->get();
+			return view("index.personal_data",[
+				'user_info' => $user_info,
+				'detailed' => $detailed,
+				'order' => $order,
+				'hotel_name' => $hotel_name,
+				'room_type' => $room_type,
+				'room_num' => $room_num
+				]);
 		}
 	}
 
@@ -110,11 +139,10 @@ class IndexController extends Controller
 
 	//判断邮箱唯一
 	public function verify_email(Request $request){
-		return 1;
-		$youxiang=Input::get('youxiang');
-		// print_r($youxiang);die;
+		$youxiang=$request->input('youxiang');
+
 		$email=Index::where(['email'=>$youxiang])->first();
-		// dd($email);die;
+	
 		if($email){
 			return 0;
 		}else{
@@ -156,7 +184,7 @@ class IndexController extends Controller
 	public function send_verify_code(Request $request){
 
 		//接收前台手机号
-		$tel=Input::get('tel');
+		$tel=$request->input('tel');
 
 		//生成随机验证码并发送
 		$rand=rand("10000",'99999');
@@ -180,23 +208,17 @@ class IndexController extends Controller
 	 */
 	public function verify_user_code(Request $request){
 		//前台数据
-		$user_verify_code=Input::get('verify_code');
-		$user_tel=Input::get('user_tel');
+		$user_verify_code=$request->input('verify_code');
+		$user_tel=$request->input('user_tel');
 		//session数据
 		$tel=$request->session()->get('tel');
 		$save_time=$request->session()->get('save_time');
 		$verify_code=$request->session()->get('verify_code');
-		// print_r($verify_code);die;
 		$now=time();
-		if(	$user_tel == $tel && $user_verify_code==$verify_code ){
-			if( $now-$save_time <= 60 ){
-				return 0;
-			}else{
-				return 1;
-			}
-		}else{
+		if(	!$user_tel == $tel && $user_verify_code==$verify_code ){
 			return 2;
 		}
+		return  ($now-$save_time <= 60)?0 : 1;
 
 	}
 	
@@ -227,7 +249,7 @@ class IndexController extends Controller
 		//REST版本号
 		$softVersion='2013-12-26';
 
-	    $rest = new \REST($serverIP,$serverPort,$softVersion);
+	    $rest = new REST($serverIP,$serverPort,$softVersion);
 	    $res= $rest->setAccount($accountSid,$accountToken);
 	    $rest->setAppId($appId);
 	    // 发送模板短信
@@ -244,6 +266,23 @@ class IndexController extends Controller
 	        return  "成功";
 	         //TODO 添加成功处理逻辑
 	    }
+	}
+	/**
+	 * [用户评论]
+	 * @return [const] [description]
+	 */
+	public function assess_desc(Request $request){
+		$user_id = $request->session()->get('user_id');
+		$assess_desc = $request->input('assess_desc');
+		$assess_num = $request->input('assess_num');
+		$hotel_id = $request->input('hotel_id');
+		$res=DB::table('assess')->insert([
+			'user_id'=>$user_id,
+			'assess_desc'=>$assess_desc,
+			'assess_num'=>$assess_num,
+			'hotel_id'=>$hotel_id
+		]);
+		return $res ? 1 : 2;
 	}
 	
 }
