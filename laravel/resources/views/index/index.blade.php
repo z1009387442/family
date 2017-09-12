@@ -181,39 +181,19 @@ var _hmt = _hmt || [];
 <div class="hot_tj fix">
     <h3>热门推荐酒店</h3>
     <ul class="main_w1200">
-        <li class="fl" style="background: url(http://image-homeinn.b0.upaiyun.com/web/image/2f7fef48-a829-4762-a701-c19630489bba.jpg) center center no-repeat;">
-            <span></span>
-            <b style="display: block;">漫趣乐园丨如家上海浦东机场店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>漫趣乐园<br>如家上海浦东机场店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥376</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/K21001" target="_blank">立即预订</a>
-            </dl>
-        </li>
-        <li class="fl" style="background: url(http://image-homeinn.b0.upaiyun.com/web/image/c5d6c1f0-4178-44fe-95d5-06ebe727babc.jpg) center center no-repeat;">
-            <span></span>
-            <b style="display: block;">如家商旅酒店（金标）丨上海宛平南路店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>如家商旅酒店（金标）<br>上海宛平南路店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥383</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/T21007" target="_blank">立即预订</a>
-            </dl>
-        </li>
-        <li class="fl" style="background: rgba(0, 0, 0, 0) url(&quot;http://images.homeinns.com/image/web/brand/home/hot_tj_bg3.jpg&quot;) no-repeat scroll center center; margin-right: 0px;">
-            <span></span>
-            <b style="display: block;">如家精选酒店丨北京东四店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>如家精选酒店<br>北京东四店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥491</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/J10002" target="_blank">立即预订</a>
-            </dl>
-        </li>
+        @foreach($hot_hotel as $v)
+            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 0px;">
+                <span></span>
+                <b style="display: block;">{{$v['hotel_name']}}</b>
+                <div class="hot_tmbg" style="display: none;"></div>
+                <dl style="display: none;">
+                    <dt>{{$v['hotel_name']}}<br>{{$v['hotel_address']}}</dt>
+                    <p></p>
+                    <dd>特惠价：<code>￥{{$v['price']}}</code>/晚</dd>
+                    <a href="{{url('home/hotel/room/id/'.$v['hotel_id'])}}" target="_blank">立即预订</a>
+                </dl>
+            </li>
+        @endforeach
     </ul>
 </div>
 <!--搜索下面内容（结束）-->

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use App\Models\Region;
 use App\Libs\REST;
-class IndexController extends Controller
+class IndexController extends BaseController
 {
 	public function index(Request $request)
 	{
