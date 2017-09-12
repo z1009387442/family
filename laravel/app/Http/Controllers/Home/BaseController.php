@@ -26,11 +26,14 @@ class BaseController extends Controller
    	 */
    	private function getHotHotel()
    	{
+   		//获取最热的三个酒店
    		$arrHotHotel = Hotel::join('region', 'region.region_id', '=', 'hotel.region_id')
    		->take(3)->get()->toArray();
 
+   		//把最低价格拼装到数组
    		$newHotHotel = $this->get_price($arrHotHotel);
-   		
+
+   		//渲染所有视图
    		view()->share('hot_hotel', $newHotHotel);
    	}
 
@@ -41,7 +44,6 @@ class BaseController extends Controller
      */
     public function get_price($hotel_arr)
     {
-    	// p($hotel_arr);die;
     	//下标从0开始
 		$hotel_arr = array_values($hotel_arr);
 		$price_arr = [
