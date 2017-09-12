@@ -58,8 +58,11 @@ class IntegralController extends Controller
 			if ($bool) {
 					 //兑换成功扣除积分
 					Index::decrement('integral',"$goods_price");
+					$info=$this->integral_log_add($Detailed->detailed_id,$goods_name,$goods_price,$user_id);
+						if ($info) {
 
-					return redirect::to('home/integral/integral_log_add?detailed_id='.$Detailed->detailed_id."&&goods_name=".$goods_name."&&goods_price=".$goods_price);
+							return redirect('home/personal_data');
+						}					
 					}
 		} else {
 			$goods_id=$request->goods_id;
@@ -91,12 +94,8 @@ class IntegralController extends Controller
 	 * @author cex
 	 * @return [type]    true  [description]
 	 */
-	public function integral_log_add(Request $request)
+	public function integral_log_add($detailed_id,$goods_name,$goods_price,$user_id)
 	{
-		$detailed_id=$request->detailed_id;
-		$goods_name =$request->goods_name;
-		$goods_price=$request->goods_price;
-		$user_id=$request->session()->has('user_id');
 		$integral_log= new IntegralLog;
 		$integral_log->action='兑换了:'.$goods_name;
 		$integral_log->order_sn=' ';
@@ -105,10 +104,10 @@ class IntegralController extends Controller
 		$integral_log->detailed_id=$detailed_id;
 		$integral_log->user_id=$user_id;
 		$integral_log->create_at=time();
-		$bool=$integral_log->save();
+		$bool=$integral_log->save();	
 		if ($bool) {
-		
-			 return redirect('home/personal_data');
+			
+			 return $bool;
 		}
 	}
 

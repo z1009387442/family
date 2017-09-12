@@ -9,8 +9,11 @@
 @section('content')
 <link rel="stylesheet" href="/qiantai/date_use/daterangepicker.min.css">
 <style type="text/css">
-	.sub_btn{border: 1px solid #faa51a;border-radius: 0.5em;padding: 0.5em 2em 0.55em;color: #fef4e9;font: 16px/100%;background-color:#faa51a; margin-top: 15px;}
-	.my_flag{color: red;font-size: 12px};
+	.sub_btn{border: 1px solid #993366;border-radius: 0.5em;padding: 0.5em 2em 0.55em;color: #fef4e9;font: 16px/100%;background-color:#993366; margin-top: 15px;}
+	.tab_box h2{color: #c32143;font-size: 1.5em};
+	.basic_1 h4{color: #c32143;font-size: 1.5em};
+	.hotel_name{font-size: 2em};
+	ul.profile_item li.profile_item-desc .hotel_name{font-size: 2em};
 </style>
 <div class="grid_3">
   <div class="container">
@@ -39,14 +42,6 @@
 			<div class="col-sm-8 row_1">
 				<table class="table_working_hours">
 		        	<tbody>
-		        		<tr class="opened">
-							<td class="day_label">酒店名称 :</td>
-							<td class="day_value">{{$hotel_data->hotel_name}}</td>
-						</tr>
-						<tr class="opened">
-							<td class="day_label">地址 :</td>
-							<td class="day_value">{{$hotel_data->hotel_address}}</td>
-						</tr>
 			        	<tr class="opened">
 							<td class="day_label">房间类型名称 :</td>
 							<td class="day_value">{{$room_data->room_type_name}}</td>
@@ -79,9 +74,7 @@
 		</div>
 		<div class="col_4">
 		    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-			   <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist">
-				  <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">预订信息</a></li>
-			   </ul>
+			   
 		<form method="post" action="{{url('home/order/order_cre')}}">
 			   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 			   <input type="hidden" name="hotel_id" value="{{$hotel_data->hotel_id}}" />
@@ -171,23 +164,13 @@
    	 </div>
      <div class="col-md-4 profile_right">
      	<div class="newsletter">
-		   <form>
-			  <input type="text" name="ne" size="30" required="" placeholder="Enter Profile ID :">
-			  <input type="submit" value="Go">
-		   </form>
+		   <h3>酒店风采</h3>
         </div>
-        <div class="view_profile">
-        	<h3>热门酒店</h3>
-        	
+        <div class="view_profile">	
            <ul class="profile_item">
         	  <a href="#">
         	   <li class="profile_item-img">
-        	   	  <img src="" class="img-responsive" alt=""/>
-        	   </li>
-        	   <li class="profile_item-desc">
-        	   	  <h4>2458741</h4>
-        	   	  <p>29 Yrs, 5Ft 5in Christian</p>
-        	   	  <h5>View Full Profile</h5>
+        	   	  <img src="{{$hotel_data->hotel_img}}" width="200" height="200" alt=""/>
         	   </li>
         	   <div class="clearfix"> </div>
         	  </a>
@@ -195,19 +178,20 @@
           
        </div>
        <div class="view_profile view_profile1">
-        	<h3>热销房型</h3>
         	<ul class="profile_item">
-        	  <a href="#">
-        	   <li class="profile_item-img">
-        	   <img src="">
+        	   <li class="profile_item-desc">
+        	   	  <h4 class="hotel_name">{{$hotel_data->hotel_name}}</h4>
+        	   	  <p></p>
+        	   	  <p>{{$hotel_data->hotel_address}}<p>
+        	   	  <p></p>
+        	   	  <p>{{$hotel_data->hotel_tel}}</p>
         	   </li>
         	   <li class="profile_item-desc">
-        	   	  <h4>2458741</h4>
-        	   	  <p>29 Yrs, 5Ft 5in Christian</p>
-        	   	  <h5>View Full Profile</h5>
+        	   	  <p>{{$hotel_data->hotel_desc}}</p>
+        	   	  <p></p>
+        	   	  <p>{{$hotel_data->hotel_hint}}</p>
         	   </li>
         	   <div class="clearfix"> </div>
-        	  </a>
            </ul>
            
          </div>
