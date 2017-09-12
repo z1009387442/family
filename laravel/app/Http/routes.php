@@ -123,6 +123,11 @@ Route::group(['middleware' => ['web']], function () {
 					'uses'=>'IndexController@send_verify_code'
 				]);	
 
+				//前台用户订单评价
+				Route::any('assess_desc',[
+					'uses'=>'IndexController@assess_desc'
+				]);
+
 				//验证前台用户输入验证码
 				Route::any('verify_user_code',[
 					'uses'=>'IndexController@verify_user_code'
@@ -218,6 +223,11 @@ Route::group(['middleware' => ['web']], function () {
 				//搜索页面
 				Route::any('search/index',[
 				'uses'=>'SearchController@index',
+				]);
+
+				//弹窗登录
+				Route::any('order/login',[
+				'uses'=>'IndexController@order_login',
 				]);
 
 			});

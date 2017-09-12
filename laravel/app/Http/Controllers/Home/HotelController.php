@@ -14,7 +14,7 @@ use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
 use App\Models\Brand;
 
-class HotelController extends Controller
+class HotelController extends BaseController
 {
     public function index()
 	{
@@ -34,7 +34,10 @@ class HotelController extends Controller
         //所有服务项目
         $complex_arr = ComplexFacilities::all();
 
-        if ($hotel_arr) {
+        $hotel_arr = json_decode(json_encode($hotel_arr),true);
+        //获取最低价格
+        $hotel_arr = $this->get_price($hotel_arr);
+
 
         	return view('hotel.show',[
         			'hotel_arr' => $hotel_arr,
@@ -42,10 +45,6 @@ class HotelController extends Controller
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
         		]);
-        } else {
-
-        	return view('index.index');
-        }
 		
 	}
 
@@ -93,12 +92,11 @@ class HotelController extends Controller
         	}
 		}
 
-		foreach($hotel_arr as $k=>$v){
-			$price_arr[] = ['floating_value'=>substr($v['floating_value'],2),'up_down'=>substr($v['floating_value'],0,1)];
+		if(empty($hotel_arr)){
+			return '暂未搜索到符合条件的酒店！';
 		}
-
-
-		//p($price_arr);die;
+		//获取最低价格
+		$hotel_arr = $this->get_price($hotel_arr);
 
 		return view('hotel.search',[
 				'hotel_arr' => $hotel_arr,
@@ -148,7 +146,7 @@ class HotelController extends Controller
 
 		$arrRoomTypeId2 = array_column($room_arr, 'room_type_id');
 		$newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
-		if ($newroom_arr) {
+		
 			foreach ($newroom_arr as $k => $v) {
 				if (!isset($arr_new_room_status[$k])) {
 					$new_arr_data[] = array_merge(['a' => 0], $newroom_arr[$k]);
@@ -208,11 +206,7 @@ class HotelController extends Controller
 					'new_2'=>$complex_facilities_arr,
 					'new_1'=>$rooms_facilities_arr
 				]);
-		} else {
-
-			return view('index.index');
-		}
-		
+				
 
 	}
 	/**

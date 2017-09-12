@@ -19,11 +19,10 @@
 <div class="banner">
   <div class="container">
     <div class="banner_info">
-      <h3>Millions of verified Members</h3>
-      <a href="{{url('home/hotel/show_all')}}" class="hvr-shutter-out-horizontal">come on baby</a>
+      <h3>New experience</h3>
     </div>
   </div>
-  <div class="profile_search" style="background-color: black;">
+  <div class="profile_search">
   	<div class="container wrap_1" >
 	  <form action="{{url('home/hotel/show')}}" method="get">
 	  	<div class="search_top">
@@ -91,50 +90,119 @@ var _hmt = _hmt || [];
     </div>
   </div>
 </div> 
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+<!--搜索下面内容-->
+<link href="/qiantai/index/reset.css" rel="stylesheet">
+<link href="/qiantai/index/brand.css" rel="stylesheet">
+<script src="/qiantai/index/jquery"></script>
+<script src="/qiantai/index/index"></script>
 
 
-    <div class="bg">
-		<div class="container"> 
-			<h3>网站免责声明</h3>
-			<div class="heart-divider">
-				<span class="grey-line"></span>
-				<i class="fa fa-heart pink-heart"></i>
-				<i class="fa fa-heart grey-heart"></i>
-				<span class="grey-line"></span>
-            </div>
-            <div class="col-sm-6">
-            	<div class="bg_left">
-            		<h4>测试环境,请勿进行真实业务行为</h4>
-            		<h5>本网站一切内容都是为了更好地服务受众，不保证所有信息、图片、视频、链接及其它项目的绝对准确性和完整性，也并不意味着赞同其观点或证实其内容的真实性、科学性及严肃性等，使用者使用这些信息时，需要经过进一步核实。</h5>
-            		<p>本站采用的非本站原创文章及图片等内容无法一一和版权者联系，如果原作者及编辑认为其作品不宜在网络传播，或不应无偿使用，请及时用电子邮件或电话通知我们，并提供以下资料：一是著作权人的身份证明，包括身份证、法人执照、营业执照等有效身份证件;二是著作权权属证明，包括有关著作权登记证书或创作原手稿等。本网站将迅速采取适当措施，避免给双方造成不必要的损失。</p>
-            	   <ul class="team-socials">
-                    <li><a href="#"><span class="icon-social "><i class="fa fa-facebook"></i></span></a></li>
-                    <li><a href="#"><span class="icon-social "><i class="fa fa-twitter"></i></span></a></li>
-                    <li><a href="#"><span class="icon-social"><i class="fa fa-google-plus"></i></span></a></li>
-                   </ul>
-            	</div>
-            </div>
-            <div class="col-sm-6">
-            	<div class="bg_left">
-            		<h4>测试环境,请勿进行真实业务行为</h4>
-            		<h5>本网站一切内容都是为了更好地服务受众，不保证所有信息、图片、视频、链接及其它项目的绝对准确性和完整性，也并不意味着赞同其观点或证实其内容的真实性、科学性及严肃性等，使用者使用这些信息时，需要经过进一步核实。</h5>
-            		<p>本站采用的非本站原创文章及图片等内容无法一一和版权者联系，如果原作者及编辑认为其作品不宜在网络传播，或不应无偿使用，请及时用电子邮件或电话通知我们，并提供以下资料：一是著作权人的身份证明，包括身份证、法人执照、营业执照等有效身份证件;二是著作权权属证明，包括有关著作权登记证书或创作原手稿等。本网站将迅速采取适当措施，避免给双方造成不必要的损失。</p>
-            	   <ul class="team-socials">
-                    <li><a href="#"><span class="icon-social "><i class="fa fa-facebook"></i></span></a></li>
-                    <li><a href="#"><span class="icon-social "><i class="fa fa-twitter"></i></span></a></li>
-                    <li><a href="#"><span class="icon-social"><i class="fa fa-google-plus"></i></span></a></li>
-                   </ul>
-            	</div>
-            </div>
-            <div class="clearfix"> </div>
-		</div>
-	</div>
-	<link rel="stylesheet" type="text/css" href="/qiantai/xiala/css/city-select.css">
+
+<div class="main_w1200">
+    <div class="prefer_main">
+        <h1>会员尊享特惠</h1>
+            <ul class="prefer_box" style="margin-right: 45px;">
+                <a href="http://www.bthhotels.com/Member/MemberRights" class="prefer_img1" target="_blank">
+                    <img src="/qiantai/index/la.jpg" height="489">
+                    <span></span>
+                    <b style="bottom: 9px;">无数精彩礼遇尽在家宾会</b>
+                </a>
+            </ul>
+                    <ul class="prefer_box">
+                <a href="http://images.homeinns.com/Activity/home_bus_new/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                    <img src="/qiantai/index/789.jpg" height="222">
+                    <span></span>
+                    <b style="bottom: 9px;">如家巴士</b>
+                </a>
+            </ul>
+                    <ul class="prefer_box" style="margin-right: 0px;">
+                <a href="http://images.homeinns.com/Activity/NewActivities/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                    <img src="/qiantai/index/110.jpg" height="222">
+                    <span></span>
+                    <b style="bottom: 9px;">199元住五星酒店</b>
+                </a>
+            </ul>
+                    <ul class="prefer_box">
+                <a href="http://images.homeinns.com/Activity/dear.html?_gscu_=91890283xy14vr12&amp;_gscs_=99044592pp67qz18%7Cpv%3A3" class="prefer_img2" target="_blank">
+                    <img src="/qiantai/index/123.jpg" height="222">
+                    <span></span>
+                    <b style="bottom: 9px;">官方渠道低价保障 买贵赔3倍</b>
+                </a>
+            </ul>
+                    <ul class="prefer_box" style="margin-right: 0px;">
+                <a href="http://www.yazhugongyu.com/promotion.html" class="hot_img2" target="_blank">
+                    <img src="/qiantai/index/456.png" height="222">
+                    <span></span>
+                    <b>青春无所谓</b>
+                </a>
+            </ul>
+    </div>
+</div>
+<div class="sub_box fix">
+    <div class="main_w1200">
+        <dl>
+            <dt>测试环境,请勿进行真实业务行为<br></dt>
+            <dd>
+               本网站一切内容都是为了更好地服务受众，不保证所有信息、图片、视频、链接及其它项目的绝对准确性和完整性，也并不意味着赞同其观点或证实其内容的真实性、科学性及严肃性等，使用者使用这些信息时，需要经过进一步核实。
+            </dd>
+            <a href="http://www.bthhotels.com/hotel/JG0026">探索更多主题</a>
+        </dl>
+        <div class="sub_imgbox fl" style="width:675px; margin-left:146px;">
+            <ul class="sub_imgL fl" style="margin-right:4px;">
+               <a href="http://www.bthhotels.com/hotel/K21001" target="_blank" class="">
+                   <img src="/qiantai/index/subL1.jpg" width="446" height="446">
+                   <span></span>
+                   <b>漫趣乐园-如家上海浦东机场店</b>
+               </a>
+
+            </ul>
+            
+            <ul class="sub_imgR fl">
+                <li style="margin-bottom:5px;">
+                    <a href="http://images.homeinns.com/Activity/theme/parent_child/parent_child.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" target="_blank">
+                        <img src="/qiantai/index/subRa1.jpg" width="221" height="221">
+                        <span class="sp_b"></span>
+                        <p>亲子游主题-北京松鹤建国饭店</p>
+                    </a>
+
+
+                </li>
+                <li>
+                    <a href="http://images.homeinns.com/Activity/theme/holidays/holidays.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" target="_blank">
+                        <img src="/qiantai/index/subRa2.jpg" width="221" height="221">
+                        <span class="sp_b"></span>
+                        <p>休闲度假主题-三亚天通建国酒店</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="hot_tj fix">
+    <h3>热门推荐酒店</h3>
+    <ul class="main_w1200">
+        @foreach($hot_hotel as $v)
+            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 0px;">
+                <span></span>
+                <b style="display: block;">{{$v['hotel_name']}}</b>
+                <div class="hot_tmbg" style="display: none;"></div>
+                <dl style="display: none;">
+                    <dt>{{$v['hotel_name']}}<br>{{$v['hotel_address']}}</dt>
+                    <p></p>
+                    <dd>特惠价：<code>￥{{$v['price']}}</code>/晚</dd>
+                    <a href="{{url('home/hotel/room/id/'.$v['hotel_id'])}}" target="_blank">立即预订</a>
+                </dl>
+            </li>
+        @endforeach
+    </ul>
+</div>
+<!--搜索下面内容（结束）-->
+
+<link rel="stylesheet" type="text/css" href="/qiantai/xiala/css/city-select.css">
 <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
-	<script type="text/javascript" src="/qiantai/xiala/js/citydata.min.js"></script>
-	<script type="text/javascript" src="/qiantai/xiala/js/citySelect-1.0.0.min.js?v=1"></script>
-	<script type="text/javascript">
+<script type="text/javascript" src="/qiantai/xiala/js/citydata.min.js"></script>
+<script type="text/javascript" src="/qiantai/xiala/js/citySelect-1.0.0.min.js?v=1"></script>
+<script type="text/javascript">
 
 $("#submit-btn").click(function(){
 	var region_name = $(".city-info").text();
