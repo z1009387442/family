@@ -149,7 +149,7 @@
 				          @if(Session::get('user_id'))
 							<input class="check_data sub_btn" type="submit" value="确认预订">
 						 @else
-						 	<input type="button" class="sub_btn" value="点击登录" onclick="ShowDiv('MyDiv','fade')">
+						 	<input class="sub_btn click_login" type="submit" value="确认预订">
 						 @endif
 
 				         </div>
@@ -207,11 +207,10 @@
   <!-- 登录表单 --> 
   <div class="Myform">
   	<ul>
-  	<form>
   		<li>邮箱：<input type="text" class="user_email" value="" placeholder="请输入邮箱"></li>
   		<li>密码：<input type="password" class="user_pwd" value="" placeholder="请输入密码"></li>
-  		<li><button class="MyBut user_login">登录</button><input type="reset" class="MyBut" value="重置"></li>
-  	</form>
+  		<li><button class="MyBut user_login">登录</button><a href="/index.php/home/register">还没有账号？点我注册</a></li>
+  		<li class="error_mes"></li>
   	</ul>
   </div>
    <!-- 登录表单 --> 
@@ -254,7 +253,7 @@
 .white_content { 
  display: none;  
  position: absolute;  
- top: 50%;  
+ top: 35%;  
  left: 35%;  
  width: 30%;  
  height: 40%;  
@@ -303,7 +302,13 @@ function CloseDiv(show_div,bg_div)
  document.getElementById(bg_div).style.display='none';  
 };  
 
+$(document).on("click",".click_login",function(){
+	ShowDiv('MyDiv','fade');
+	return false;
+})
+
 	$(".user_login").click(function(){
+		var obj=$(".sub_btn");
 		var user_email=$(".user_email").val();
 		var user_pwd=$(".user_pwd").val();
 		if(user_email==''){
@@ -315,11 +320,18 @@ function CloseDiv(show_div,bg_div)
 			return false;
 		}
 		$.ajax({
-		   type: "POST",
-		   url: "submit_login",
-		   data: {'user_email':user_email,'user_pwd':user_pwd},
+		   type: "GET",
+		   url: "/home/order/login",
+		   data: {"user_email":user_email,"user_pwd":user_pwd},
 		   success: function(msg){
-		     alert(msg);
+		     if(msg==2){
+		     	//登录成功
+		     	obj.removeClass("click_login");
+		     	obj.addClass("check_data");
+		     	CloseDiv('MyDiv','fade');
+		     }else{
+		     	$(".error_mes").html('邮箱或密码输入错误');
+		     }
 		   }
 		});
 	})
@@ -331,7 +343,7 @@ function CloseDiv(show_div,bg_div)
 <link rel="stylesheet" href="/qiantai/css/flexslider.css" type="text/css" media="screen" />
 <script>
 	flag_tel=0;
-	$(".check_data").click(function(){
+	$(document).on("click",".check_data",function(){
 		if(flag_tel==0){
 			alert('请填写完整标红选项');
 			return false;
