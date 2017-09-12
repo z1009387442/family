@@ -6,22 +6,48 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
 
 class BaseController extends Controller
 {
    	public function __construct()
    	{
-   		
+   		$this->getHotHotel();
    	}
+
+
+   	/**
+   	 * [getHotHotel description]
+   	 * 描述：获取热门酒店
+   	 * @access public
+   	 * @author JiaHui Wang
+   	 * @link   {{string}}
+   	 * @return [type]     [description]
+   	 */
+   	private function getHotHotel()
+   	{
+   		$arrHotHotel = Hotel::join('region', 'region.region_id', '=', 'hotel.region_id')
+   		->take(3)->get()->toArray();
+
+   		$newHotHotel = $this->get_price($arrHotHotel);
+   		
+   		view()->share('hot_hotel', $newHotHotel);
+   	}
+
+
 
     /**
      * 获取酒店列表最低价格
      */
     public function get_price($hotel_arr)
     {
+    	// p($hotel_arr);die;
     	//下标从0开始
 		$hotel_arr = array_values($hotel_arr);
-		$price_arr = ['floating_value'=>substr($hotel_arr[0]['floating_value'],2),'up_down'=>substr($hotel_arr[0]['floating_value'],0,1)];
+		$price_arr = [
+			'floating_value' => substr($hotel_arr[0]['floating_value'], 2),
+			'up_down' => substr($hotel_arr[0]['floating_value'], 0, 1)
+		];
 		
 		//获取所有酒店id
 		foreach($hotel_arr as $kk=>$vv){

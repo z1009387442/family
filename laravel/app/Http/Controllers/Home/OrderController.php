@@ -10,7 +10,7 @@ use App\Models\RoomsType;
 use App\Models\Order;
 use Carbon\Carbon;
 
-class OrderController extends Controller
+class OrderController extends BaseController
 {
 	/**
 	 * [生成订单]

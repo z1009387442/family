@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Redirect;
 use App\Models\Join;
 
-class JoinController extends Controller
+class JoinController extends BaseController
 {
 	/**
 	 * 加盟注册添加
