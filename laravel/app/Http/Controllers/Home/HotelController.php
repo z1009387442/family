@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -13,52 +12,134 @@ use App\Models\Region;
 use App\Models\Assess;
 use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
+use App\Models\Brand;
+
 class HotelController extends Controller
 {
     public function index()
 	{
 		return view('index.index');
 	}
+
 	public function show(Request $request){
 
-		$Hotel_arr = DB::table('region')
+		$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
             ->get();
-        if($Hotel_arr){
-        	return view('hotel.show',['hotel_arr'=>$Hotel_arr]);
-        }else{
+        //所有品牌
+        $brand_arr = Brand::all();
+        //所有设施
+        $facilities_arr = RoomsFacilities::all();
+        //所有服务项目
+        $complex_arr = ComplexFacilities::all();
+
+        if ($hotel_arr) {
+
+        	return view('hotel.show',[
+        			'hotel_arr' => $hotel_arr,
+        			'brand' => $brand_arr,
+        			'facilities' => $facilities_arr,
+        			'complex' => $complex_arr,
+        		]);
+        } else {
+
         	return view('index.index');
         }
 		
 	}
-	public function show_all(Request $request){
-		//全部酒店展示
-		$Hotel_arr = DB::table('hotel')->get();
 
-		return view('hotel.show',['hotel_arr'=>$Hotel_arr]);
+	/**
+	 * 酒店搜索
+	 */
+	public function hotel_search(Request $request)
+	{
+		//设施id
+		$rooms_facilities_id = $request->rooms_facilities_id;
+		$rooms_facilities_id = explode(',',$rooms_facilities_id);
+		//服务id
+		$complex_facilities_id = $request->complex_facilities_id;
+		$complex_facilities_id = explode(',',$complex_facilities_id);
+		
+
+		$hotel_arr = DB::table('region')
+            ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
+            ->where('region.region_name',$request->city_name)
+            ->get();
+        $hotel_arr = json_decode(json_encode($hotel_arr),true);
+
+        //设施
+		if($rooms_facilities_id[0]!=''){
+			foreach($hotel_arr as $k=>&$v){
+        	$v['rooms_facilities_id'] = explode(',',$v['rooms_facilities_id']);
+        		foreach($rooms_facilities_id as $key=>$val){
+        			if (!in_array($val,$v['rooms_facilities_id'])) {
+ 						unset($hotel_arr[$k]);
+        			}
+
+        		}
+        	}
+		}
+		//服务
+		if($complex_facilities_id[0]!=''){
+			foreach($hotel_arr as $k=>&$v){
+        	$v['complex_facilities_id'] = explode(',',$v['complex_facilities_id']);
+        		foreach($complex_facilities_id as $key=>$val){
+        			if (!in_array($val,$v['complex_facilities_id'])) {
+ 						unset($hotel_arr[$k]);
+        			}
+
+        		}
+        	}
+		}
+
+		foreach($hotel_arr as $k=>$v){
+			$price_arr[] = ['floating_value'=>substr($v['floating_value'],2),'up_down'=>substr($v['floating_value'],0,1)];
+		}
+
+
+		//p($price_arr);die;
+
+		return view('hotel.search',[
+				'hotel_arr' => $hotel_arr,
+			]);
+	}
+
+
+	/**
+	 * 全部酒店展示
+	 */
+	public function show_all(Request $request){
+	
+		$hotel_arr = DB::table('hotel')->get();
+
+		return view('hotel.show',['hotel_arr' => $hotel_arr]);
 	}
 	
+	/**
+	 * 酒店 的详细信息
+	 */
 	public function room(Request $request){
-		//酒店 的详细信息
+		
 		$hotel_arr = Hotel::where('hotel_id',$request->id)->find($request->id);
-		$hotel=['hotel_name'=>$hotel_arr->hotel_name,
-				'hotel_id'	=>$hotel_arr->hotel_id,
-				'hotel_address'=>$hotel_arr->hotel_address,
-				'hotel_tel'=>$hotel_arr->hotel_tel,
-				'hotel_desc'=>$hotel_arr->hotel_desc,
-				'hotel_img'=>$hotel_arr->hotel_img,
-				'hotel_hint'=>$hotel_arr->hotel_hint,
-				'rooms_facilities_id'=>$hotel_arr->rooms_facilities_id,
-				'complex_facilities_id'=>$hotel_arr->complex_facilities_id,
-				];
+		$hotel=[
+			'hotel_name'            => $hotel_arr->hotel_name,
+			'hotel_id'              => $hotel_arr->hotel_id,
+			'hotel_address'         => $hotel_arr->hotel_address,
+			'hotel_tel'             => $hotel_arr->hotel_tel,
+			'hotel_desc'            => $hotel_arr->hotel_desc,
+			'hotel_img'             => $hotel_arr->hotel_img,
+			'hotel_hint'            => $hotel_arr->hotel_hint,
+			'rooms_facilities_id'   => $hotel_arr->rooms_facilities_id,
+			'complex_facilities_id' => $hotel_arr->complex_facilities_id,
+		];
 		//酒店图片查询
 		$hotel_img_arr=HotelAlbum::where('hotel_id',$request->id)->get();
 		//查看房间有没有
 		$room_status=DB::select('SELECT room_type_id, count(`status`)as a FROM `sun_rooms` where `status`=1 group by room_type_id');
 		$room_status = json_decode(json_encode($room_status),true);
 		$arrRoomTypeId = array_column($room_status, 'room_type_id');
-		$arrNewRoomStatus = array_combine($arrRoomTypeId, $room_status);
+		$arr_new_room_status = array_combine($arrRoomTypeId, $room_status);
 		$room_arr = DB::table('rooms_type')
             ->join('hotel_room_type', 'rooms_type.room_type_id', '=', 'hotel_room_type.hotel_room_type_id')
             ->where('hotel_room_type.hotel_id',$request->id)
@@ -66,18 +147,17 @@ class HotelController extends Controller
         $room_arr = json_decode(json_encode($room_arr),true);
 
 		$arrRoomTypeId2 = array_column($room_arr, 'room_type_id');
-		$Newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
-		if($Newroom_arr){
-			foreach ($Newroom_arr as $k => $v) {
-				if(!isset($arrNewRoomStatus[$k])){
-					$NewArrData[] = array_merge(['a' => 0], $Newroom_arr[$k]);
-				}else{
-					$NewArrData[] = array_merge($arrNewRoomStatus[$k], $Newroom_arr[$k]);
+		$newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
+		if ($newroom_arr) {
+			foreach ($newroom_arr as $k => $v) {
+				if (!isset($arr_new_room_status[$k])) {
+					$new_arr_data[] = array_merge(['a' => 0], $newroom_arr[$k]);
+				} else {
+					$new_arr_data[] = array_merge($arr_new_room_status[$k], $newroom_arr[$k]);
 				}	
 			}
 			//查询客房设施
-			$complex_facilities_arr=ComplexFacilities::whereIn('complex_facilities_id',explode(',',$hotel['complex_facilities_id']))->get();
-
+		$complex_facilities_arr=ComplexFacilities::whereIn('complex_facilities_id',explode(',',$hotel['complex_facilities_id']))->get();
 
 		//查询服务项目
 		$rooms_facilities_arr=RoomsFacilities::whereIn('rooms_facilities_id',explode(',',$hotel['rooms_facilities_id']))->get();
@@ -100,7 +180,19 @@ class HotelController extends Controller
 			   ->where('assess_desc','like','%'.$keyword.'%')
 		       ->paginate(6);    
         //渲染页面传值
-		return view('hotel.room',['hotel'=>$hotel,'hotel_img'=>$hotel_img_arr,'rooms'=>$NewArrData,'price'=>$price,'new_2'=>$complex_facilities_arr,'new_1'=>$rooms_facilities_arr,'assess'=>$assess,'h_num'=>$h_num,'s_num'=>$s_num,'r_num'=>$r_num,'w_num'=>$w_num]);
+		return view('hotel.room',[
+				'hotel'=>$hotel,
+				'hotel_img'=>$hotel_img_arr,
+				'rooms'=>$new_arr_data,
+				'price'=>$price,
+				'new_2'=>$complex_facilities_arr,
+				'new_1'=>$rooms_facilities_arr,
+				'assess'=>$assess,
+				'h_num'=>$h_num,
+				's_num'=>$s_num,
+				'r_num'=>$r_num,
+				'w_num'=>$w_num
+			]);
 
 			//查询服务项目
 			$rooms_facilities_arr=RoomsFacilities::whereIn('rooms_facilities_id',explode(',',$hotel['rooms_facilities_id']))->get();
@@ -108,8 +200,16 @@ class HotelController extends Controller
 			$region_arr=Region::find($hotel_arr->region_id);
 			$price=['price'=>substr($region_arr->floating_value,2),'up_down'=>substr($region_arr->floating_value,0,1)];
 	        //渲染页面传值
-			return view('hotel.room',['hotel'=>$hotel,'hotel_img'=>$hotel_img_arr,'rooms'=>$NewArrData,'price'=>$price,'new_2'=>$complex_facilities_arr,'new_1'=>$rooms_facilities_arr]);
-		}else{
+			return view('hotel.room',[
+					'hotel'=>$hotel,
+					'hotel_img'=>$hotel_img_arr,
+					'rooms'=>$new_arr_data,
+					'price'=>$price,
+					'new_2'=>$complex_facilities_arr,
+					'new_1'=>$rooms_facilities_arr
+				]);
+		} else {
+
 			return view('index.index');
 		}
 		
@@ -133,11 +233,11 @@ class HotelController extends Controller
 			   ->where('assess_desc','like','%'.$keyword.'%')
 		       ->paginate(6);
 		$new_str='';
-foreach($assess as $v){
+		foreach($assess as $v){
 
 		for($i = 0;$i<$v->assess_num;$i++){
 			$new_str.='<font style="color: red">★</font>';
-			};
+		};
 
 
 	echo '<div class="commentbox Lovh">

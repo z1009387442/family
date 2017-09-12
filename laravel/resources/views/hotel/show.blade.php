@@ -71,7 +71,7 @@
                                             <!-- <span id='region'></span> -->
                                         </div>
                                         <div class="city-input">
-                                            <input value="上海" class="input1 checkincity input-search" type="text">
+                                            <input value="<?php echo $_GET['city_name']; ?>" class="input1 checkincity input-search" type="text">
                                             <!-- <input type="text" class="input-search" value="" placeholder="请选择城市" /> -->
                                         </div>
                                     </div>
@@ -84,14 +84,14 @@
                                 <span class="ltext">入住日期</span>
                                 <div class="inputbox">
                                     <!-- <input type="text" class="input" id="pickdate" style="color:#000" /> -->
-                                    <input value="2017-09-07" class="input1" id="pickdate" type="text">
+                                    <input value="<?php echo $_GET['check_in']; ?>" class="input1" id="pickdate" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
                             <div class="item Lfll">
                                 <span class="ltext">退房日期</span>
                                 <div class="inputbox">
-                                    <input value="2017-09-08" class="input1" id="pickdate1" type="text">
+                                    <input value="<?php echo $_GET['check_out']; ?>" class="input1" id="pickdate1" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                             <!-- <span id='region'></span> -->
                                         </div>
                                         <div class="city-input">
-                                            <input value="上海" class="input1 checkincity input-search" type="text">
+                                            <input value="<?php echo $_GET['city_name']; ?>" class="input1 checkincity input-search" type="text">
                                             <!-- <input type="text" class="input-search" value="" placeholder="请选择城市" /> -->
                                         </div>
                                     </div>
@@ -135,14 +135,14 @@
                                 <span class="ltext">入住日期</span>
                                 <div class="inputbox">
                                     <!-- <input type="text" class="input" id="pickdate" style="color:#000" /> -->
-                                    <input value="2017-09-07" class="input1" id="pickdate" type="text">
+                                    <input value="<?php echo $_GET['check_in']; ?>" class="input1" id="pickdate" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
                             <div class="item Lfll">
                                 <span class="ltext">退房日期</span>
                                 <div class="inputbox">
-                                    <input value="2017-09-08" class="input1" id="pickdate1" type="text">
+                                    <input value="<?php echo $_GET['check_out']; ?>" class="input1" id="pickdate1" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
@@ -161,14 +161,24 @@
 
             <div id="Plist_filter" class="Plist_filter Lposr" data-nblock-id="block/hotelListFilter">
                 <!-- <a href="javascript:;" class="expand expand_big shrink"><span>展开</span>设施&amp;评论<i class="arrow"></i></a> --> 
-                        
-                            <div class="filteritem">
-                                <span class="name">品牌</span>
+                             <div class="filteritem">
+                                <span class="name">商圈</span>
                                 <div class="itembox Lcfx branditem" data-param="HotelStyleList">
                                     <span class=" clean">不限</span>
                                             <label class="item" title="桔子水晶">
                                                 <input class="check1" data-search-code="14" type="checkbox">桔子水晶
                                             </label>
+                                </div>
+                            </div>
+                            <div class="filteritem">
+                                <span class="name">品牌</span>
+                                <div class="itembox Lcfx branditem" data-param="HotelStyleList">
+                                    <span class=" clean">不限</span>
+                                    @foreach($brand as $key=>$val)
+                                            <label class="item" title="{{$val->brand_name}}">
+                                                <input class="check1" value="{{$val->brand_id}}" type="checkbox">{{$val->brand_name}}
+                                            </label>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="filteritem">
@@ -193,12 +203,25 @@
                                 </div>
                             </div>
                             <div class="filteritem" style="display: block;">
-                                <span class="name">设施与服务</span>
+                                <span class="name">客房设施</span>
                                 <div class="itembox Lcfx serviceitem" data-param="FacilityList">
                                     <span class=" clean">不限</span>
+                                    @foreach($facilities as $key=>$val)
                                             <label class="item" title="会议室">
-                                                <input class="check1" data-search-code="3" type="checkbox">会议室
+                                                <input class="check1 sheshi" value="{{ $val->rooms_facilities_id }}" type="checkbox">{{ $val->rooms_facilities_name }}
                                             </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="filteritem" style="display: block;">
+                                <span class="name">服务项目</span>
+                                <div class="itembox Lcfx serviceitem" data-param="FacilityList">
+                                    <span class=" clean">不限</span>
+                                    @foreach($complex as $key=>$val)
+                                            <label class="item" title="会议室">
+                                                <input class="check1 fuwu" value="{{ $val->complex_facilities_id }}" type="checkbox">{{ $val->complex_facilities_name }}
+                                            </label>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="filteritem" style="display: block;">
@@ -217,6 +240,42 @@
     <span class="icon-tag">所有</span>
     <span class="next">&gt;</span>
 </div>
+
+<script type="text/javascript">
+    $(".check1").click(function(){
+        //设施
+        rooms_facilities_id = '';
+        $(".sheshi").each(function(i,v){
+            if($(v).prop('checked')==true){
+                rooms_facilities_id = rooms_facilities_id+','+$(v).val();
+
+            }
+        });
+        rooms_facilities_id = rooms_facilities_id.substr(1);
+        //服务
+        complex_facilities_id = '';
+        $(".fuwu").each(function(i,v){
+            if($(v).prop('checked')==true){
+                complex_facilities_id = complex_facilities_id+','+$(v).val();
+
+            }
+        });
+        complex_facilities_id = complex_facilities_id.substr(1);
+
+        //搜索
+         var city_name = "<?php echo $_GET['city_name']; ?>";
+        $.ajax({
+           type: "GET",
+           url: "hotel_search",
+           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name},
+           success: function(msg){
+             $("#boxs").html('');
+             $("#boxs").append(msg);
+           }
+        });
+    });
+
+</script>
 
 <!-- 区域展示 -->
 
@@ -238,6 +297,7 @@
 
 
 </div>
+<div id="boxs">
                 <div class="lbox">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
@@ -321,6 +381,9 @@
 </div>
 <?php } ?>
 </div>
+
+</div>
+
 </div>
 
 <div class="pages">
@@ -483,18 +546,17 @@ var _hmt = _hmt || [];
   <div id="allmap"></div>
 <script src="jquery.js"></script>
 <script type="text/javascript">
-  $(".address").mouseenter(function(){
-    var address = $(this).find(".city").text();
-    //百度地图API功能
-  var map = new BMap.Map("allmap");          
-  map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-  var local = new BMap.LocalSearch(map, {
-    renderOptions:{map: map}
-  });
-  local.search(address);
-  $("#allmap").removeAttr("style");
-  });
-
+    $(document).on('mouseenter',".address",function(){
+        var address = $(this).find(".city").text();
+        //百度地图API功能
+        var map = new BMap.Map("allmap");          
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+        local.search(address);
+        $("#allmap").removeAttr("style");
+    });
   
 </script>
 

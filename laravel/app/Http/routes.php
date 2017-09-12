@@ -73,6 +73,11 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'HotelController@show',
 				]);
 
+				//酒店列表搜索
+				Route::any('hotel/hotel_search',[
+				'uses'=>'HotelController@hotel_search',
+				]);
+
 				//前台登录
 				Route::any('login',[
 				'uses'=>'IndexController@login'
@@ -269,6 +274,10 @@ Route::group(['middleware' => ['admin']], function () {
 				//后台酒店状态即点即改
 				Route::any('hotel/hotel_save_status',[
 				'uses'=>'HotelController@hotel_save_status',
+				]);
+				//后台根据城市获取商圈
+				Route::any('hotel/business_district',[
+				'uses'=>'HotelController@business_district',
 				]);
 
 				/**

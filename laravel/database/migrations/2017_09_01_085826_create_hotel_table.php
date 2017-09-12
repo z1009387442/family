@@ -16,6 +16,8 @@ class CreateHotelTable extends Migration
             $table->increments('hotel_id');
             $table->string('hotel_name');
             $table->Integer('region_id');
+            $table->Integer('brand_id');
+            $table->Integer('business_district_id');
             $table->Integer('sort');
             $table->string('hotel_img',60);
             $table->string('hotel_address',60);

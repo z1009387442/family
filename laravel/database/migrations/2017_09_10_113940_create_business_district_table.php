@@ -16,8 +16,8 @@ class CreateBusinessDistrictTable extends Migration
             $table->increments('business_district_id');
             $table->char('business_district_name',30);
             $table->Integer('region_id');
-            $table->Integer('sort');
-            $table->tinyInteger('status')->default('0');
+            $table->Integer('sort')->default('50');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

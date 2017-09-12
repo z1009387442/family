@@ -30,7 +30,9 @@ class PayController extends Controller
 	 */
 	public function selectPay($id)
 	{
-		return view('pay/pay-select', ['id' => $id]);
+		return view('pay/pay-select', [
+            'id' => $id,
+        ]);
 	}
 
 
@@ -50,29 +52,33 @@ class PayController extends Controller
     	Order::where('order_id', $orderId)->update(['pay_type' => $payType]);
     	switch ($payType) {
     		case 1 : 
-    		$this->weixin($orderId); break;
+    		    $this->weixin($orderId); break;
 
     		case 2 : 
-			$PayLink = $this->zhifubao($orderId);
-			return redirect()->to($PayLink);
+		        $PayLink = $this->zhifubao($orderId);
+			    return redirect()->to($PayLink);
 
     		case 3 : 
-			$this->credential($orderId);
-			break;
+			    $this->credential($orderId);
+			    break;
 
     		case 4 : 
-			$arrReturn = $this->yve($orderId);
+			    $arrReturn = $this->yve($orderId);
 
-			if($arrReturn['status'] == 1){
+			if ($arrReturn['status'] == 1) {
 
-				return view($arrReturn['link'], ['order_sn' => Order::find($orderId)->order_sn, 'integral' => $arrReturn['integral']]);
+				return view($arrReturn['link'], [
+                    'order_sn' => Order::find($orderId)->order_sn, 
+                    'integral' => $arrReturn['integral']
+                ]);
 
-			}else{
+			} else {
 
-				return view($arrReturn['link'], ['error' => '账户余额不足']);
+				return view($arrReturn['link'], [
+                    'error' => '账户余额不足'
+                ]);
 
 			}
-			break;
     	}
 
     }
@@ -111,12 +117,6 @@ class PayController extends Controller
     public function credential($orderId)
     {
     	echo "暂未实现";die;
-
-	    $order_arr=Order::find($orderId);
-    	// total_price 价格
-    	$Detailed_arr=Detailed::join('goods','detailed.goods_id','=','goods.goods_id')->where('user_id',\Session::get('user_id'))->get();
-
-    	$Detailed_arr=json_decode(json_encode($Detailed_arr),true);
     }
 
 
@@ -140,26 +140,38 @@ class PayController extends Controller
 
     	$balance = $user_arr->balance-$order_arr->total_price;
 
-    	if($balance>=0){
+    	if ($balance >= 0) {
 
-    		Index::where('user_id', '=', \Session::get('user_id'))
-    		->update(['balance' => $balance]);
+    		Index::where('user_id', '=', \Session::get('user_id'))->update(['balance' => $balance]);
     		//修改订单付款状态
     		Order::where('order_id', '=', $orderId)->update(['pay_status' => 1]);
     		//给用户增加积分
     		$num = $user_arr['integral'] + ceil($order_arr['total_price']);
     		Index::where('user_id', \Session::get('user_id'))->update(['integral' => $num]);
     		//积分日志拼装数组
-    		$arrLog = ['action' => '预定房间', 'num' => ceil($order_arr['total_price']), 'order_sn' => $order_arr['order_sn'], 'jj' => 1, 'user_id' => \Session::get('user_id'), 'create_at' => time() ];
+    		$arrLog = [
+                'action' => '预定房间', 'num' => ceil($order_arr['total_price']), 
+                'order_sn' => $order_arr['order_sn'], 
+                'regulation' => 1, 
+                'user_id' => \Session::get('user_id'), 
+                'create_at' => time()
+            ];
     		//插入积分操作
 			IntegralLog::insert($arrLog);
 
     			
-    		return ['link' => 'pay.end', 'status' =>1 ,'integral' => ceil($order_arr['total_price'])];
+    		return [
+                'link' => 'pay.end', 
+                'status' =>1,
+                'integral' => ceil($order_arr['total_price'])
+            ];
 
     	}else{
 
-    		return ['link' => 'pay.error', 'status' => 2];
+    		return [
+                'link' => 'pay.error', 
+                'status' => 2
+            ];
 
     	}
 
@@ -222,7 +234,9 @@ class PayController extends Controller
     	// 验证请求。
 		if (! app('alipay.web')->verify()) {
 			//支付失败
-			return view('pay.error',['error'=>'支付宝余额不足']);
+			return view('pay.error',[
+                'error'=>'支付宝余额不足',
+            ]);
 		}
 
 		// 判断通知类型。
@@ -230,29 +244,28 @@ class PayController extends Controller
 			case 'TRADE_SUCCESS':
 			case 'TRADE_FINISHED':
 
-			Order::where('order_sn', Input::get('out_trade_no'))
-			->update(['pay_status' => 1]);
+			Order::where('order_sn', Input::get('out_trade_no'))->update(['pay_status' => 1]);
 
 			$arrIntegralLod = Index::find(\Session::get('user_id'));
 
-			if($arrIntegralLod){
+			if ($arrIntegralLod) {
 
 				$num = $arrIntegralLod['integral'] + ceil(Input::get('total_fee'));
-				Index::where('user_id', \Session::get('user_id'))
-				->update(['integral' => $num]);
+
+				Index::where('user_id', \Session::get('user_id'))->update(['integral' => $num]);
 
 			}
 
 			$arrLog = [
-			'action' => '预定房间', 
-			'num' => ceil(Input::get('total_fee')),
-			'order_sn' => Input::get('out_trade_no'),
-			'jj' => 1,
-			'user_id' => \Session::get('user_id'), 
-			'create_at' => time()
+    			'action' => '预定房间', 
+    			'num' => ceil(Input::get('total_fee')),
+    			'order_sn' => Input::get('out_trade_no'),
+    			'regulation' => 1,
+    			'user_id' => \Session::get('user_id'), 
+    			'create_at' => time()
 			];
+
 			IntegralLog::insert($arrLog);
-				break;
 		}
 	
 		return view('pay.end', ['order_sn' => Input::get('out_trade_no')]);
@@ -280,32 +293,34 @@ class PayController extends Controller
 		switch (Input::get('trade_status')) {
 			case 'TRADE_SUCCESS':
 			case 'TRADE_FINISHED':
-			Order::where('order_sn', Input::get('out_trade_no'))
-            ->update(['pay_status' => 1]);
+			Order::where('order_sn', Input::get('out_trade_no'))->update(['pay_status' => 1]);
 
             $arrIntegralLod = Index::find(\Session::get('user_id'));
 
-            if($arrIntegralLod){
+            if ($arrIntegralLod) {
 
                 $num = $arrIntegralLod['integral'] + ceil(Input::get('total_fee'));
-                Index::where('user_id', \Session::get('user_id'))
-                ->update(['integral' => $num]);
+
+                Index::where('user_id', \Session::get('user_id'))->update(['integral' => $num]);
 
             }
 
             $arrLog = [
-            'action' => '预定房间', 
-            'num' => ceil(Input::get('total_fee')),
-            'order_sn' => Input::get('out_trade_no'),
-            'jj' => 1,
-            'user_id' => \Session::get('user_id'), 
-            'create_at' => time()
+                'action' => '预定房间', 
+                'num' => ceil(Input::get('total_fee')),
+                'order_sn' => Input::get('out_trade_no'),
+                'regulation' => 1,
+                'user_id' => \Session::get('user_id'), 
+                'create_at' => time()
             ];
             IntegralLog::insert($arrLog);
                 break;
         }
     
-        return view('pay.end', ['order_sn' => Input::get('out_trade_no'),'integral' => ceil(Input::get('total_fee'))]);
+        return view('pay.end', [
+            'order_sn' => Input::get('out_trade_no'),
+            'integral' => ceil(Input::get('total_fee'))
+        ]);
 	}
 
 }
