@@ -225,6 +225,11 @@ Route::group(['middleware' => ['web']], function () {
 				'uses'=>'SearchController@index',
 				]);
 
+				//弹窗登录
+				Route::any('order/login',[
+				'uses'=>'IndexController@order_login',
+				]);
+
 			});
 		});
 
