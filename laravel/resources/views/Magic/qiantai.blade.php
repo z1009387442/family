@@ -58,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
 <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
 <a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
-      <div class="navbar-inner">
+      <div class="navbar-inner"  style="background-image: url(/qiantai/images/123.png);">
         <div class="container">
            <div class="navigation">
              <nav id="colorNav">
@@ -95,22 +95,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
-		            <li><a href="{{url('/')}}">首页</a></li>
+		            <li><a href="{{url('/')}}"><b>首页</b></a></li>
 		            <li>
-		              <a href="{{url('home/hotel/show_all')}}">酒店预订</a>		              
+		              <a href="{{url('home/hotel/show_all')}}"><b>酒店预订</b></a>		              
 		            </li>
 		            
 		    		<li>
-		              <a href="{{url('home/made/index')}}">定制服务</a>
+		              <a href="{{url('home/made/index')}}"><b>定制服务</b></a>
 		              
 		            </li>
 		            <li>
-		              <a href="{{url('home/integral/index')}}">积分兑换</a>		              
+		              <a href="{{url('home/integral/index')}}"><b>积分兑换</b></a>		              
 		            </li>
 					 <li>
-		              <a href="{{url('home/join/index')}}">招商专栏</a>		              
+		              <a href="{{url('home/join/index')}}"><b>招商专栏</b></a>		              
 		            </li>
-		            <li><a href="{{url('home/about/index')}}">关于我们</a></li>
+		            <li><a href="{{url('home/about/index')}}"><b>关于我们</b></a></li>
 		           
 		        </ul>
 		     </div><!-- /.navbar-collapse -->
