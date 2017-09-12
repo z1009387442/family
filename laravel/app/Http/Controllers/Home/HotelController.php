@@ -163,13 +163,13 @@ class HotelController extends BaseController
 		$region_arr=Region::find($hotel_arr->region_id);
 		$price=['price'=>substr($region_arr->floating_value,2),'up_down'=>substr($region_arr->floating_value,0,1)];
 		//获取关于环境评价的条数
-		$h_num = Assess::where('assess_desc','like','%环境%')->count();
+		$h_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%环境%')->count();
 		//获取关于服务评价的条数
-		$s_num = Assess::where('assess_desc','like','%服务%')->count();
+		$s_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%服务%')->count();
 		//获取关于位置评价的条数
-		$r_num = Assess::where('assess_desc','like','%位置%')->count();
+		$r_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%位置%')->count();
 		//获取关于卫生评价的条数
-		$w_num = Assess::where('assess_desc','like','%干净%')->count();
+		$w_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%干净%')->count();
 		//查询用户评价
 		$keyword=mb_substr($request->keyword,0,2);
 		$assess = DB::table('assess')
@@ -262,7 +262,7 @@ class HotelController extends BaseController
                 
                 <div class="cbottom Ltar Lcfx">
                     <span class="score Lfll">
-                        <span class="Ldib Lpl5">'.$new_str.'
+                        <span class="Ldib Lpl5">'.$new_str.$v->assess_num.'<i>分</i></span>
                       
                         <i class="Cicon small_phone">
                         </i>

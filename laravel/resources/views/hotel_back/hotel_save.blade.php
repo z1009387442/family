@@ -23,35 +23,42 @@
                 <input type="text" id="text-input" name="hotel_name" class="form-control" value="{{$hotel->hotel_name}}">
             </div>
         </div>
-       <div class="form-group row">
-            <label class="col-md-3 form-control-label" for="text-input">所属地区</label>
+        <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">所属品牌</label>
             <div class="col-md-9">
-<!--下拉地区开始-->
-        <div class="city-select" id="single-select-1">
-            <div class="city-info">
-                <div class="city-name">
-                </div>
-                <div class="city-input">
-                    <input type="text" class="input-search" value="" placeholder="请选择城市" />
-                </div>
+                <select id="select" name="brand_id" style="width: 280px;height:48px; border: 1px solid #ccc;" >
+                <option value="0">请选择品牌</option>
+                @foreach($brand as $k=>$v)
+                    <option @if($hotel->brand_id==$v->brand_id) selected @endif value="{{$v->brand_id}}">{{$v->brand_name}}</option>
+                 @endforeach
+                </select>
             </div>
         </div>
-<!--下拉地区（结束）-->
+      <div class="form-group row">
+            <label class="col-md-3 form-control-label" for="select">所属地区</label>
+            <div class="col-md-9">
+                <select id="select" name="region_id" class="region_id" style="width: 280px;height:48px; border: 1px solid #ccc;" >
+                <option value="0">请选择品牌</option>
+                @foreach($region as $k=>$v)
+                    <option @if($hotel->region_id==$v->region_id) selected @endif value="{{$v->region_id}}">{{$v->region_name}}</option>
+                 @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="select">所在商圈</label>
             <div class="col-md-9">    
                 <select id="select" class="xiala_" name="business_district_id" style="width: 280px;height:48px; border: 1px solid #ccc;" class="form-control">
-                    <option value="0">请选择商圈</option>
-                </select><input type="text" id="text-input" style="width: 280px;height:48px; border: 1px solid #ccc; margin-left: 20px; font-size: 12px;" placeholder=" 没有找到？手动输入商圈" name="business_district_name">
+                    <option value="0">手动输入</option>
+                    <option selected value="{{$hotel->business_district_id}}">{{$hotel->business_district_name}}</option>
+                </select><input type="text" id="text-input" style="width: 280px;height:48px; border: 1px solid #ccc; margin-left: 20px; font-size: 12px;" placeholder=" 没有找到？手动输入商圈" value="" name="business_district_name"><input type="hidden" name="business_id" value="{{$hotel->business_district_id}}">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-3 form-control-label" for="file-input">首页图片</label>
             <div class="col-md-9">
             	<img   style="width: 140px;height: 120px;" src="{{$hotel->hotel_img}}"/><br/>
-                <input type="file" id="file-input" name="hotel_img">
+                <input type="file" id="file-input" name="new_img"><input type="hidden" id="text-input" name="old_img" value="{{$hotel->hotel_img}}" >
             </div>
         </div>
         <div class="form-group row">
@@ -95,7 +102,7 @@
              <div class="col-md-9">                 
                 @foreach($complexFacilities as $k=>$v)
                 <label class="checkbox-inline" for="inline-checkbox1">
-                    <input type="checkbox" @if(in_array('$v->complex_facilities_id',$complex_facilities_id)) checked @endif  id="inline-checkbox1" name="complex_facilities_id[]" value="{{$v->complex_facilities_id}}"> {{$v->complex_facilities_name}}
+                    <input type="checkbox" <?php if(in_array($v->complex_facilities_id,$complex_facilities_id))echo 'checked'?> id="inline-checkbox1" name="complex_facilities_id[]" value="{{$v->complex_facilities_id}}"> {{$v->complex_facilities_name}}
                 </label>　
                 @endforeach
             </div>
@@ -105,7 +112,7 @@
             <div class="col-md-9">                 
                 @foreach($roomsFacilities as $k=>$v)
                 <label class="checkbox-inline" for="inline-checkbox1">
-                    <input type="checkbox" id="inline-checkbox1" name="rooms_facilities_id[]" value="{{$v->rooms_facilities_id}}"> {{$v->rooms_facilities_name}}
+                    <input type="checkbox" <?php if(in_array($v->rooms_facilities_id,$rooms_facilities_id))echo 'checked'?> id="inline-checkbox1" name="rooms_facilities_id[]" value="{{$v->rooms_facilities_id}}"> {{$v->rooms_facilities_name}}
                 </label>　
                 @endforeach
             </div>
@@ -135,61 +142,12 @@
     <script type="text/javascript" src="/frname/houtai/js/citydata.min.js"></script>
     <script type="text/javascript" src="/frname/houtai/js/citySelect-1.0.0.min.js?v=1"></script>
     <script type="text/javascript">
-    $(function() {
-        $("#submit_").click(function(){
-        var region_name = $(".city-info").text();
-        $("#region_name").val(region_name);
-
-        });
-
-        // 单选
-        var singleSelect1 = $('#single-select-1').citySelect({
-            dataJson: cityData,
-            multiSelect: false,
-            shorthand: true,
-            search: true,
-            onInit: function () {
-                console.log(this)
-            },
-            onTabsAfter: function (target) {
-                console.log(target)
-            },
-            onCallerAfter: function (target, values) {
-                console.log(JSON.stringify(values))
-            }
-        });
-
-        // 单选设置城市
-        singleSelect1.setCityVal('北京市');
-
-        // 单选
-        var singleSelect2 = $('#single-select-2').citySelect({
-            dataJson: cityData
-        });
-
-        // 单选设置城市
-        singleSelect2.setCityVal('北京市');
-
-        // 禁止点击显示的接口
-        singleSelect2.status('readonly');
-
-        //单选
-        var singleSelect3 = $('#single-select-3').citySelect({
-            dataJson: cityData
-        });
-
-        // 单选设置城市
-        singleSelect3.setCityVal('广州市');
-
-        // 禁止点击显示的接口
-        singleSelect3.status('disabled');
-
-        $(document).on('click','.caller', function() {
-            var region_name = $(this).html();
+        $('.region_id').change(function() {
+            var region_id = $(this).val();
             $.ajax({
                 type:'get',
                 url: 'business_district',
-                data:{region_name:region_name},
+                data:{region_id:region_id},
                 dataType:'json',
                 success:function(msg){
                    $(".xiala_").html('<option value="0">请选择商圈</option>');
@@ -201,7 +159,6 @@
             });
         });
         
-    });
     //     $(".xiala_").click(function(){
     //     var region_name = $(".city-info").text();
     //     alert(region_name);
