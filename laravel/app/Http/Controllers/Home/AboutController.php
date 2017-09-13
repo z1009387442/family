@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;  
 use Illuminate\Support\Facades\Input;
 
-class AboutController extends Controller
+class AboutController extends BaseController
 {
 	public function index(Request $request)
 	{

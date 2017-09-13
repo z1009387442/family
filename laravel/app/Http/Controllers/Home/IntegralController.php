@@ -14,7 +14,7 @@ use App\Models\Detailed;
 use Redirect;
 use Carbon\Carbon;
 
-class IntegralController extends Controller
+class IntegralController extends BaseController
 {
 	/**
 	 * [selectPay description]

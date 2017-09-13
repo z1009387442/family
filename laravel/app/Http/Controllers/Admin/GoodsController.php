@@ -13,7 +13,7 @@ class GoodsController extends Controller
 {
 	/**
 	 * 商品积分
-	* @author yanhong Yang
+	 * @author yanhong Yang
 	 * @link   {{string}}
 	 */
 	public function goods_list(Request $request)
@@ -41,7 +41,7 @@ class GoodsController extends Controller
 			//文件访问路径
 			$data['goods_img']='/uploads/'.$newName;
 			//实例化model
-			$Goods = new Goods;
+			$goods = new Goods;
 			//添加数据入库
 			$goods->goods_name = $data['goods_name'];
 			$goods->goods_price = $data['goods_price'];
@@ -50,10 +50,13 @@ class GoodsController extends Controller
 			$goods->goods_desc   = $data['goods_desc'];
 			$goods->use_of   = $data['use_of'];
 			$bool = $goods->save();
+
 			if ($bool) {
+
 				return Redirect::to('admin/goods/goods_list');
 			}
 		} else {
+
 			return view('goods_back.goods_add');
 		}
 	}
@@ -69,6 +72,7 @@ class GoodsController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = goods::destroy($id);
+		
 		if ($bool) {
 
 			return Redirect::to('admin/goods/goods_list');

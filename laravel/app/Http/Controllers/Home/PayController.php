@@ -16,7 +16,7 @@ use App\Models\Goods;
 /**
  * 支付控制器
  */
-class PayController extends Controller
+class PayController extends BaseController
 {
 
 	/**

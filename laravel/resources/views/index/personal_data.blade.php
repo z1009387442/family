@@ -8,6 +8,12 @@
 <!-- 内容输入区 -->
 @section('content')
 <style type="text/css">
+      .star-bar{font-size:0; line-height:0}
+      .star-bar .star{display:inline-block;text-align:center}
+      /*中*/
+      .size-M img{ width:24px;height:24px}
+      /*小*/
+      .size-S img{width:16px;height:16px}
       #login
       {
           display:none;
@@ -39,6 +45,7 @@
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="/qiantai/css/h-ui/style.css" />
+
 
 
 <div class="page-container">
@@ -77,17 +84,15 @@
                         <span class="c-red">*</span>
                         电话：</label>
                     <div class="formControls col-xs-8 col-sm-9">
-                       <input name="tel" placeholder="请先点击编辑" class="input-text radius size-L" type="text" value="<?php echo $v->tel ?>" readonly="true">
+                       <input name="tel" placeholder="请先点击编辑" class="input-text radius size-L" type="text" value="{{ $v->tel}}" readonly="true">
                     </div>
                 </div>
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">上传头像：</label>
                     <div class="formControls col-xs-8 col-sm-9">
 
-                    <div class="img"><img src="<?php if($v->img==NULL){echo "/qiantai/images//default.png";}else{echo $v->img;}?>" width="100px" height="97px"></div>
-
-
-                        <input type="hidden" name="img" value="">
+                    <div class="img"><img src="<?php if($v->img==NULL){echo "/qiantai/images/default.png";}else{echo $v->img;}?>" width="96px" height="97px"></div>
+                        <input type='hidden' name='img' value='{{$v->img}}'>
                         <span class="btn-upload">
                         <a href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 上传头像</a>
                         <input style="width:100px" type="file" multiple="true"  class="input-file" name="uploadFile" id="upload_file" onchange="uploadPic()">
@@ -107,17 +112,72 @@
 
 
             <div class="tabCon">
-                这是订单
+                <div class="mt-20">
+                         <table class="table table-border table-bg">
+                            <thead class="text-c">
+                                <tr>
+                                  <th>订单号</th>
+                                  <th>酒店名称</th>
+                                  <th>房间号</th>
+                                  <th>房间类型</th>
+                                  <th>总价格</th> 
+                                  <th>支付类型</th> 
+                                  <th>支付状态</th>
+                                  <th>入住时间</th>
+                                  <th>离开时间</th> 
+                                  <th>客户联系方式</th>
+                                  <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            @foreach($order as $v)
+                                <tr class="text-c" data-id="{{$v->hotel_id}}" data-oid="{{$v->order_id}}">
+                                  
+                                  <td>{{$v->order_sn}}</td>
+                                  @foreach($hotel_name as $val)
+                                  <td>{{$val->hotel_name}}</td>
+                                  @endforeach
+
+                                  @foreach($room_num as $ve)
+                                  <td>{{$ve->room_number}}</td>
+                                  @endforeach
+
+                                  @foreach($room_type as $va)
+                                  <td>{{$va->room_type_name}}</td>
+                                  @endforeach
+                                  <td>{{$v->total_price}}</td>
+                                  <td>@if($v->pay_type==1)微信支付@elseif($v->pay_type==2)支付宝支付@elseif($v->pay_type==3)百度钱包支付@($v->pay_type==4)余额支付@endif</td>
+                                  <td>@if($v->pay_status==0)未支付@elseif($v->pay_status==1)已支付@endif</td>
+                                  <td>{{$v->check_time}}</td>
+                                  <td>{{$v->end_time}}</td>
+                                  <td>{{$v->cell_phone}}</td>
+                                  <td class="last">
+                                  @if($v->pay_status==0)
+                                      <input id="Button1" type="button" class="btn btn-primary radius" value="待支付.." disabled="true"  >
+                                  @elseif($v->pay_status==1)
+                                    @if($v->status==0)
+                                      <input id="Button1" type="button" class="btn btn-primary radius" value="评价" onclick="ShowDiv('MyDiv','fade')" >
+                                    @elseif($v->status==1)
+                                     <input id="Button1" type="button" class="btn btn-defaust radius" value="已评价" disabled="true" >
+                                    @endif
+                                  @endif
+                                  </td>
+                                </tr>
+                            @endforeach
+                              </tbody>
+                        </table>
+                </div>     
             </div>
             <div class="tabCon">
-                这是积分
+                   
             </div>
             <div class="tabCon">
                 这是余额
             </div>
             <div class="tabCon">
                 <div class="cl pd-5 bg-1 bk-gray mt-20">
-                <a href="javascript:show()">使用规则 </a> <span class="r">共有兑换券：<strong><?php echo count($detailed); ?></strong> 张</span> </div>
+                <input onclick="javascript:show()" type="button" value="使用规则" class="btn btn-primary-outline radius">
+                <span class="r">共有兑换券：<strong><?php echo count($detailed); ?></strong> 张</span> </div>
                 <div class="mt-20">
                          <table class="table table-border table-bg">
                             <thead class="text-c">
@@ -155,11 +215,12 @@
         </div>        
     </form>
 </div>
+
 <!-- 弹出层 -->
 <div id="login">
-<a href="javascript:hide()">✖</a>
+<span id="XX"  style="font-size: 16px; cursor:pointer;float:right"><a href="javascript:hide()">✖</a></span>
 <div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="2">兑换券使用细则</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="4" color="red"><strong>兑换券使用细则</strong></font><br>
 1.兑换券不得兑换现金<br/>
 2.每张兑换券仅能够使用一次，不找零，不退换<br/>
 3.使用兑换券抵扣部分的金额不开具发票<br/>
@@ -174,7 +235,46 @@
      </div>
   <div id="over"></div>
 <!-- 弹出层结束 -->
+             
+<style>
+  #XX{
+    text-align:center;
+    margin-right:1px;
+    display: inline-block;
+    width:30px;
+    height: 30px;
+    line-height: 30px;
+  }
+  #XX:hover{background-color: #EE0000}
+</style>
+<!-----评价弹出层---->
+<div id="fade" class="black_overlay">  
+</div>  
+ <div id="MyDiv" class="white_content">  
+  <div style="text-align: right; cursor: default; height: 40px;">  
+   <span id="XX"  style="font-size: 16px; cursor:pointer;" class="close_div" onclick="CloseDiv('MyDiv','fade')">✖</span>  
+  </div>  
+ 
+      <div style="width:500px; height:50px;">
+        <span style='margin-left:13px' class="f-l f-15 va-m">描述相符：</span>
+        <div id="star-1" class="star-bar size-M f-l mr-10 va-m" style="width:250px;"></div>
+        <strong id="result-1" class="f-l va-m"></strong>
+      </div>
 
+      <div style="width:100%">
+        <span style='margin-left:13px' class="f-l f-15 va-m">评价内容：</span>
+        <input type="hidden" value="" class="hotel_id">
+        <input type="hidden" value="" class="order_id">
+        <textarea id="assess_desc" cols="60" rows="10"></textarea>
+      </div>
+
+      <div style="text-align:center;margin-top:20px;">
+        <input type="button" value="评价" class="btn btn-primary radius assess">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn btn-default radius" type="button" value="取消">
+      </div>
+
+ </div>  
+<!-----评价弹结束---->
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="/qiantai/js/h-ui/jquery.min.js"></script>
 <script type="text/javascript" src="/qiantai/js/h-ui/layer.js"></script>
@@ -188,63 +288,126 @@
 <script type="text/javascript" src="/qiantai/js/h-ui/messages_zh.js"></script>
 <!-- Resource jQuery -->
 <script type="text/javascript">
-var login = document.getElementById('login');
-var over = document.getElementById('over');
-    function show()
-   {
-      login.style.display = "block";
-       over.style.display = "block";
-    }
-    function hide()
-    {
-         login.style.display = "none";
-         over.style.display = "none";
-    }
- 
+    star_num="";
+    //弹出隐藏层  
+    function ShowDiv(show_div,bg_div){  
+     document.getElementById(show_div).style.display='block';  
+     document.getElementById(bg_div).style.display='block' ;  
+     var bgdiv = document.getElementById(bg_div);  
+     bgdiv.style.width = document.body.scrollWidth;   
+     $("#"+bg_div).height($(document).height());
 
-$(function(){
-    $('.skin-minimal input').iCheck({
-        checkboxClass: 'icheckbox-blue',
-        radioClass: 'iradio-blue',
-        increaseArea: '20%'
+    };  
+    //关闭弹出层  
+    function CloseDiv(show_div,bg_div)  
+    {  
+     document.getElementById(show_div).style.display='none';  
+     document.getElementById(bg_div).style.display='none';  
+    };  
+
+    flag="";
+
+   $(".tbody").delegate("#Button1","click",function(){
+       var hotel_id  = $(this).parents('tr').data('id');
+       var order_id  = $(this).parents('tr').data('oid');
+       $(".hotel_id").val(hotel_id);
+       $(".order_id").val(order_id);
+       flag=$(this);
+   })
+
+   $('.assess').click(function(){
+        var assess_desc = $("#assess_desc").val();
+        var hotel_id=$(".hotel_id").val();
+        var order_id=$(".order_id").val();
+        if(assess_desc==''){
+            return false;
+        }else{
+          $.ajax({
+              type:'get',
+              url:'assess_desc',
+              data:{'assess_desc':assess_desc,'hotel_id':hotel_id,'assess_num':star_num,'order_id':order_id},
+              success:function(msg){
+                    CloseDiv('MyDiv','fade');
+                    flag.val('已评价').removeClass('btn-primary').addClass('btn-defaust').attr('disabled',true);
+                }
+            })
+        }
+       
+       
     });
-    $("#tab-system").Huitab({
-        index:0
+
+    var login = document.getElementById('login');
+    var over = document.getElementById('over');
+        function show()
+       {
+          login.style.display = "block";
+           over.style.display = "block";
+        }
+        function hide()
+        {
+             login.style.display = "none";
+             over.style.display = "none";
+        }
+     
+    //兑换券弹出层操作
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        $("#tab-system").Huitab({
+            index:0
+        });
     });
-});
 
     //图片处理
-function uploadPic(){
-    var pic = $('#upload_file')[0].files[0];
-    var fd = new FormData();
-    fd.append('uploadFile', pic);
-    var token=$("#token").val();
-    var obj=$(this);
-    $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-        url:"user_img",
-        type:"post",
-        'X-XSRF-TOKEN':"token",
-        // Form数据
-        data: fd,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success:function(msg){
-           $('.img').html("<img src="+msg+" alt=''width='100px' height='97px'>");
-           $("input[name='img']").val(msg);
-        }
-    });
-                        
-}
+    function uploadPic(){
+        var pic = $('#upload_file')[0].files[0];
+        var fd = new FormData();
+        fd.append('uploadFile', pic);
+        var token=$("#token").val();
+        var obj=$(this);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            url:"user_img",
+            type:"post",
+            'X-XSRF-TOKEN':"token",
+            // Form数据
+            data: fd,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(msg){
+               $('.img').html("<img src="+msg+" alt=''width='100px' height='97px'>");
+               $("input[name='img']").val(msg);
+            }
+        });
+                          
+    }
+    //编辑资料
     $(".edit").click(function(){
        $("input").removeAttr("readonly",'false');
     });
-
+    
+    //星星评价
+    $(function(){
+      $("#star-1").raty({
+        hints: ['1','2', '3', '4', '5'],//自定义分数
+        starOff: 'iconpic-star-S-default.png',//默认灰色星星
+        starOn: 'iconpic-star-S.png',//黄色星星
+        path: '/qiantai/images/star',//可以是相对路径
+        number: 5,//星星数量，要和hints数组对应
+        showHalf: true,
+        targetKeep : true,
+        click: function (score, evt) {
+          star_num=score;
+          $("#result-1").html('你的评分是'+score+'分');
+        }
+      });
+    });
 
  </script>
-
-
 @endsection
 
 @section('footer')

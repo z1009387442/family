@@ -10,7 +10,7 @@ use App\Models\RoomsType;
 use App\Models\Order;
 use Carbon\Carbon;
 
-class OrderController extends Controller
+class OrderController extends BaseController
 {
 	/**
 	 * [生成订单]
@@ -42,10 +42,10 @@ class OrderController extends Controller
 		$room_price=$request->input('room_price');
 		$check_time=$request->input('check_time');
 		$end_time=$request->input('end_time');
-		if($check_time==''){
+		if ($check_time=='') {
 			$check_time=Carbon::now()->toDateString();
 		}
-		if($end_time==''){
+		if ($end_time=='') {
 			$end_time=Carbon::tomorrow('Europe/London')->toDateString();
 		}
 		$startdate=strtotime($check_time);
@@ -58,9 +58,9 @@ class OrderController extends Controller
 		$order_sn=$this->get_sn();//获取订单号
 		$resident_people=$this->get_peo($resident_people);//获取入住人
 		//获取用户ID
-		if($request->session()->has('user_id')){
+		if ($request->session()->has('user_id')) {
 			$user_id=$request->session()->has('user_id');
-		}else{
+		} else {
 			$user_id=0;
 		}
 		//生成订单
@@ -75,7 +75,7 @@ class OrderController extends Controller
 		$order->hotel_id=$hotel_id;
 		$order->room_type_id=$room_type_id;
 		$order->total_price=$total_price;
-		if($order->save()){
+		if ($order->save()) {
 			//生成订单去支付
 			return Redirect::to('home/pay/select/order_id/'.$order->order_id);
 		}
@@ -89,10 +89,10 @@ class OrderController extends Controller
 
 	public function get_peo($resident_people)
 	{
-		if(!empty($resident_people)){
+		if (!empty($resident_people)) {
 
 			return implode('|',$resident_people);
-		}else{
+		} else {
 			
 			return '';
 		}	

@@ -49,6 +49,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 .Mfoot .links a:hover {
 	color: #ae1a63
 }
+.signin {
+	margin-top: 10px;
+	font-size:18px;
+	padding-left: 20px;
+	padding-right: 20px
+
+}
+.signin a{
+	text-decoration: none;
+	color: #7f1f59;
+	margin-top: 10px;
+	padding-top: 7px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border:2px solid #7f1f59;
+	border-radius: 7px
+
+}
+.container a{
+	font-size: 16px;
+}
+
 </style>
 
 <div class="navbar navbar-inverse-blue navbar">
@@ -58,26 +81,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
 <script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
 <a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
-      <div class="navbar-inner"  style="background-image: url(/qiantai/images/123.png);">
+      <div class="navbar-inner"  style="background-image: url(/qiantai/images/123.png); background-size:100% 100%;">
         <div class="container">
-           <div class="navigation">
+        <div class="navigation">
              <nav id="colorNav">
-			   <ul>
-			   				<li class="green">				 
-					<ul>@if(Session::has('user_id'))
-						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
-						<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
-						<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
-					    <li><a href="{{url('home/login_out')}}">注销</a></li>
-					    @else
-					    <li><a href="{{url('home/login')}}">登录</a></li>
-					    <li><a href="{{url('home/register')}}">注册</a></li>
-					    @endif
-					</ul>
+             @if(Session::has('user_id'))
+				<ul>
+				 <li><a href="{{url('home/personal_data')}}"><img class="avatar size-L radius" src="{{Session::get('img')}}"></a>
+		         <ul>
+	              	<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+					<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
+					<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
+				    <li><a href="{{url('home/login_out')}}">注销</a></li>
+		         </ul>	
 				</li>
 			   </ul>
+			@else
+			 	<div class="signin">
+				 	<a href="{{url('home/login')}}">登录</a>
+				 	<a href="{{url('home/register')}}">注册</a>
+				</div>
+			 @endif
              </nav>
            </div>
+
            <a class="brand" href="javascript:;"><img src="/qiantai/images/logo.png" alt="logo"></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
@@ -96,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="{{url('/')}}"><b>首页</b></a></li>
 		            <li>
-		              <a href="{{url('home/hotel/show_all')}}"><b>酒店预订</b></a>		              
+		              <a href="{{url('home/activity/index')}}"><b>特价专区</b></a>		              
 		            </li>
 		            
 		    		<li>

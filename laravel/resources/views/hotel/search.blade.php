@@ -1,7 +1,7 @@
                 <div class="lbox">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
-                            当前城市，为您找到<b>503</b>家酒店
+                            当前城市，为您找到<b><?php echo $count; ?></b>家酒店
                         </div>
                         <div class="filterbox">
                             <div class="filterbar Lcfx" style="top: 52px; left: 164.6px; position: static; width: auto;">
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="rarea">
-            <div class="pricearea Ltar" data-hotel-lowest-price="-143"><span class="price"><i>￥</i><var class="p29_0_0"></var><var class="p29_0_4"></var><var class="p29_0_3"></var><i>起</i></span></div>
+            <div class="pricearea Ltar" data-hotel-lowest-price="-143"><span class="price"><i>￥</i><i><font size="6"><?php echo $hotel['price']; ?></font>起</i></span></div>
             <div class="score Ltar">
                 <i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i>
                 <span class="Ldib Lpl5">5<i>/5分</i></span>

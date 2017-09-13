@@ -102,35 +102,35 @@ var _hmt = _hmt || [];
     <div class="prefer_main">
         <h1>会员尊享特惠</h1>
             <ul class="prefer_box" style="margin-right: 45px;">
-                <a href="http://www.bthhotels.com/Member/MemberRights" class="prefer_img1" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img1" target="_blank">
                     <img src="/qiantai/index/la.jpg" height="489">
                     <span></span>
                     <b style="bottom: 9px;">无数精彩礼遇尽在家宾会</b>
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/home_bus_new/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/789.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">如家巴士</b>
                 </a>
             </ul>
                     <ul class="prefer_box" style="margin-right: 0px;">
-                <a href="http://images.homeinns.com/Activity/NewActivities/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/110.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">199元住五星酒店</b>
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/dear.html?_gscu_=91890283xy14vr12&amp;_gscs_=99044592pp67qz18%7Cpv%3A3" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/123.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">官方渠道低价保障 买贵赔3倍</b>
                 </a>
             </ul>
                     <ul class="prefer_box" style="margin-right: 0px;">
-                <a href="http://www.yazhugongyu.com/promotion.html" class="hot_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="hot_img2" target="_blank">
                     <img src="/qiantai/index/456.png" height="222">
                     <span></span>
                     <b>青春无所谓</b>
@@ -154,7 +154,6 @@ var _hmt = _hmt || [];
                    <span></span>
                    <b>漫趣乐园-如家上海浦东机场店</b>
                </a>
-
             </ul>
             
             <ul class="sub_imgR fl">
@@ -181,39 +180,19 @@ var _hmt = _hmt || [];
 <div class="hot_tj fix">
     <h3>热门推荐酒店</h3>
     <ul class="main_w1200">
-        <li class="fl" style="background: url(http://image-homeinn.b0.upaiyun.com/web/image/2f7fef48-a829-4762-a701-c19630489bba.jpg) center center no-repeat;">
-            <span></span>
-            <b style="display: block;">漫趣乐园丨如家上海浦东机场店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>漫趣乐园<br>如家上海浦东机场店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥376</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/K21001" target="_blank">立即预订</a>
-            </dl>
-        </li>
-        <li class="fl" style="background: url(http://image-homeinn.b0.upaiyun.com/web/image/c5d6c1f0-4178-44fe-95d5-06ebe727babc.jpg) center center no-repeat;">
-            <span></span>
-            <b style="display: block;">如家商旅酒店（金标）丨上海宛平南路店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>如家商旅酒店（金标）<br>上海宛平南路店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥383</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/T21007" target="_blank">立即预订</a>
-            </dl>
-        </li>
-        <li class="fl" style="background: rgba(0, 0, 0, 0) url(&quot;http://images.homeinns.com/image/web/brand/home/hot_tj_bg3.jpg&quot;) no-repeat scroll center center; margin-right: 0px;">
-            <span></span>
-            <b style="display: block;">如家精选酒店丨北京东四店</b>
-            <div class="hot_tmbg" style="display: none;"></div>
-            <dl style="display: none;">
-                <dt>如家精选酒店<br>北京东四店</dt>
-                <p></p>
-                <dd>特惠价：<code>￥491</code>/晚</dd>
-                <a href="http://www.bthhotels.com/hotel/J10002" target="_blank">立即预订</a>
-            </dl>
-        </li>
+        @foreach($hot_hotel as $v)
+            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 0px;">
+                <span></span>
+                <b style="display: block;">{{$v['hotel_name']}}</b>
+                <div class="hot_tmbg" style="display: none;"></div>
+                <dl style="display: none;">
+                    <dt>{{$v['hotel_name']}}<br>{{$v['hotel_address']}}</dt>
+                    <p></p>
+                    <dd>特惠价：<code>￥{{$v['price']}}</code>/晚</dd>
+                    <a href="{{url('home/hotel/room/id/'.$v['hotel_id'])}}" target="_blank">立即预订</a>
+                </dl>
+            </li>
+        @endforeach
     </ul>
 </div>
 <!--搜索下面内容（结束）-->

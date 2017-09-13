@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\RoomsType;
 
-class SearchController extends Controller
+class SearchController extends BaseController
 {
 	public function index()
 	{
