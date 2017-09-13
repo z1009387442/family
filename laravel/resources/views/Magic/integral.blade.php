@@ -31,21 +31,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
            <div class="navigation">
              <nav id="colorNav">
-			   <ul>
-				<li class="green">
-					<a href="#" class="icon-home"></a>
-					<ul>@if(Session::has('user_id'))
-						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
-						<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
-						<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
-					    <li><a href="{{url('home/login_out')}}">注销</a></li>
-					    @else
-					    <li><a href="{{url('home/login')}}">登录</a></li>
-					    <li><a href="{{url('home/register')}}">注册</a></li>
-					    @endif
-					</ul>
+             @if(Session::has('user_id'))
+				<ul>
+				 <li><a href="{{url('home/personal_data')}}"><img class="avatar size-L radius" src="{{Session::get('img')}}"></a>
+		         <ul>
+	              	<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
+					<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
+					<li><a href="{{url('home/personal_data')}}">我的订单</a></li>
+				    <li><a href="{{url('home/login_out')}}">注销</a></li>
+		         </ul>	
 				</li>
 			   </ul>
+			@else
+			 	<div class="signin">
+				 	<a href="{{url('home/login')}}">登录</a>
+				 	<a href="{{url('home/register')}}">注册</a>
+				</div>
+			 @endif
              </nav>
            </div>
            <a class="brand" href="javascript:;"><img src="/qiantai/images/logo.png" alt="logo"></a>
