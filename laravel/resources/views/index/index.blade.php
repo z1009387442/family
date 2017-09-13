@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
     <h3>热门推荐酒店</h3>
     <ul class="main_w1200">
         @foreach($hot_hotel as $v)
-            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 0px;">
+            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 45px;">
                 <span></span>
                 <b style="display: block;">{{$v['hotel_name']}}</b>
                 <div class="hot_tmbg" style="display: none;"></div>
