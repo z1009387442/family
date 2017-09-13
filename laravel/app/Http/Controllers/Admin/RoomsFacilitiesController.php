@@ -29,6 +29,7 @@ class RoomsFacilitiesController extends Controller
 	public function facilities_add(Request $request)
 	{
 		if ($request->isMethod('post')) {
+
 			$data = $request->all();
 			//实例化model
 			$rooms_facilities = new RoomsFacilities;
@@ -37,6 +38,7 @@ class RoomsFacilitiesController extends Controller
 			$rooms_facilities->sort   = $data['sort'];
 			$rooms_facilities->status   = $data['status'];
 			$bool = $rooms_facilities->save();
+
 			if ($bool) {
 
 				return Redirect::to('admin/rooms/facilities_list');
@@ -57,6 +59,7 @@ class RoomsFacilitiesController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = RoomsFacilities::destroy($id);
+
 		if($bool)
 		{
 			return Redirect::to('admin/rooms/facilities_list');
@@ -94,7 +97,6 @@ class RoomsFacilitiesController extends Controller
 						return Redirect::to('admin/rooms/facilities_list');
 						
 					}
-				
 		} else {
 
 				$one = RoomsFacilities::where('rooms_facilities_id',$request->id)->first();

@@ -400,6 +400,22 @@ Route::group(['middleware' => ['admin']], function () {
 				Route::any('brand/brand_del',[
 				'uses'=>'BrandController@brand_del',
 				]);
+				//后台商品折扣添加
+				Route::any('discounts/discounts_add',[
+				'uses'=>'DiscountsController@discounts_add',
+				]);
+				//后台商品折扣列表
+				Route::any('discounts/discounts_list',[
+				'uses'=>'DiscountsController@discounts_list',
+				]);
+				//后台商品折扣修改
+				Route::any('discounts/discounts_save',[
+				'uses'=>'DiscountsController@discounts_save',
+				]);
+				//后台商品折扣删除
+				Route::any('discounts/discounts_del',[
+				'uses'=>'DiscountsController@discounts_del',
+				]);
 		
 
 
