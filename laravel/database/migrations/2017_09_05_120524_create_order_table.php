@@ -21,7 +21,7 @@ class CreateOrderTable extends Migration
             $table->smallInteger('room_num');
             $table->string('resident_people', 100);
             $table->string('cell_phone', 11);       
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0)->comment('是否评价 0未评价 1已评价');
             $table->smallInteger('sort');
             $table->smallInteger('hotel_id');
             $table->smallInteger('room_type_id');

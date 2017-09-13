@@ -17,6 +17,7 @@ class CreateAssessTable extends Migration
             $table->string('assess_desc');//
             $table->Integer('assess_num');
             $table->smallInteger('user_id');
+            $table->smallInteger('order_id');
             $table->smallInteger('hotel_id');
             $table->timestamps();
         });
