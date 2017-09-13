@@ -102,7 +102,7 @@ var _hmt = _hmt || [];
     <div class="prefer_main">
         <h1>会员尊享特惠</h1>
             <ul class="prefer_box" style="margin-right: 45px;">
-                <a href="http://www.bthhotels.com/Member/MemberRights" class="prefer_img1" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img1" target="_blank">
                     <img src="/qiantai/index/la.jpg" height="489">
                     <span></span>
                     <b style="bottom: 9px;">无数精彩礼遇尽在家宾会</b>
@@ -123,14 +123,14 @@ var _hmt = _hmt || [];
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/dear.html?_gscu_=91890283xy14vr12&amp;_gscs_=99044592pp67qz18%7Cpv%3A3" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/123.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">官方渠道低价保障 买贵赔3倍</b>
                 </a>
             </ul>
                     <ul class="prefer_box" style="margin-right: 0px;">
-                <a href="http://www.yazhugongyu.com/promotion.html" class="hot_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="hot_img2" target="_blank">
                     <img src="/qiantai/index/456.png" height="222">
                     <span></span>
                     <b>青春无所谓</b>
@@ -154,7 +154,6 @@ var _hmt = _hmt || [];
                    <span></span>
                    <b>漫趣乐园-如家上海浦东机场店</b>
                </a>
-
             </ul>
             
             <ul class="sub_imgR fl">
