@@ -61,14 +61,14 @@ class BaseController extends Controller
         $hotel_type_arr = json_decode(json_encode($hotel_type_arr),true);
 
         //查询所有房型
-        $rooms_type_arr = DB::select('select `room_type_id`,`rack_price` from sun_rooms_type');
+        $rooms_type_arr = DB::select('select `room_type_id`,`vip_price` from sun_rooms_type');
         $rooms_type_arr = json_decode(json_encode($rooms_type_arr),true);
 
         // p($rooms_type_arr);die;
         foreach($hotel_type_arr as $key=>&$val){
         	foreach($rooms_type_arr as $kkk=>$vvv){
         		if ($val['hotel_room_type_id'] == $vvv['room_type_id']) {
-        			$val['price'] = $vvv['rack_price'];
+        			$val['price'] = $vvv['vip_price'];
 
         			$hotel_price_arr[$val['hotel_id']]['hotel_id'] = $val['hotel_id'];
 

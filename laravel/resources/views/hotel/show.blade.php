@@ -41,18 +41,27 @@
 <!-- loading -->
 <style type="text/css">
 	.chufa{
-		display: none;
+		/*display: none;*/
+        /*top: 0px; position: fixed;*/
+        background:#E8E8D0;opacity: 0.8; top: 0px; position: fixed; z-index: 999;
 	}
+
 </style>
 <script type="text/javascript">
 
 	$(window).scroll(function () {
-	if ($(window).scrollTop() >= 45) {
-		$(".chufa").show();
+	if ($(window).scrollTop() >= 100) {
+        setTimeout('test()',500); 
 	}else{
-		$(".chufa").hide();
+      setTimeout('tests()',500); 
 	}
 });
+    function test(){
+        $("#ding").addClass("chufa");
+    }
+    function tests(){
+        $("#ding").removeClass("chufa");
+    }
 </script>
 <div class="newCommonHeader Lposr">
 	
@@ -60,7 +69,7 @@
 
 	<div id="Plist_checkin" class="Plist_checkin">
                 <div id="Plist_checkin" class="Plist_checkin">
-                <div class="checkinbox shadow " style="position: absolute; left: 77px;  width: 100%;">
+                <div class="checkinbox shadow " style="width: 100%;">
                     <div class="Lcfx">
                         <div class="item Lfll" data-nblock-id="ui/checkinCity">
                             <span class="ltext">城市</span>
@@ -68,30 +77,32 @@
                                 <div class="city-select" id="single-select-1">
                                     <div class="city-info">
                                         <div class="city-name">
-                                            <!-- <span id='region'></span> -->
+                                            <span id='region'></span>
                                         </div>
                                         <div class="city-input">
+                                        
                                             <input value="<?php echo $_GET['city_name']; ?>" class="input1 checkincity input-search" type="text">
-                                            <!-- <input type="text" class="input-search" value="" placeholder="请选择城市" /> -->
+                                            <input type="text" class="input-search"  value="<?php echo $_GET['city_name']; ?>" placeholder="请选择城市" />
                                         </div>
                                     </div>
                                 </div>    
                                 <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                             </div>
                         </div>
+                    <form action="" method="get">
                         <div class="Lfll" data-nblock-id="ui/checkinDate?offset=0px-10px">
                             <div class="item Lfll">
                                 <span class="ltext">入住日期</span>
                                 <div class="inputbox">
                                     <!-- <input type="text" class="input" id="pickdate" style="color:#000" /> -->
-                                    <input value="<?php echo $_GET['check_in']; ?>" class="input1" id="pickdate" type="text">
+                                    <input value="<?php echo $_GET['check_in']; ?>" name='check_in' class="input1" id="pickdate" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
                             <div class="item Lfll">
                                 <span class="ltext">退房日期</span>
                                 <div class="inputbox">
-                                    <input value="<?php echo $_GET['check_out']; ?>" class="input1" id="pickdate1" type="text">
+                                    <input value="<?php echo $_GET['check_out']; ?>" name='check_out' class="input1" id="pickdate1" type="text">
                                     <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
                                 </div>
                             </div>
@@ -102,63 +113,20 @@
                                 <input id="key_word" placeholder="酒店名称" data-keyword="" type="text">
                             </div>
                         </div>
-                        <div class="btnbox Lfll"><a href="javascript:;" rel="nofollow" class="Cbtn std_small Lmr10 search">搜索</a></div>
+                        <input type="hidden" name="city_name" id="region" value="">
+                        <div class="btnbox Lfll"><input type="submit" id="subm" rel="nofollow" value="搜索" class="Cbtn std_small Lmr10 "></div>
+                    </form> 
                     </div>
                 </div>
             </div>
     </div>
 </div>
-    <div class="Cmbox">
-        <div class="inner Cwrap">
-            <div id="Plist_checkin" class="Plist_checkin">
-                <div class="checkinbox shadow chufa " style="top: 0px; position: fixed; width: 100%;">
-                    <div class="Lcfx">
-                        <div class="item Lfll" data-nblock-id="ui/checkinCity">
-                            <span class="ltext">城市</span>
-                            <div class="inputbox">
-                                <div class="city-select" id="single-select-1">
-                                    <div class="city-info">
-                                        <div class="city-name">
-                                            <!-- <span id='region'></span> -->
-                                        </div>
-                                        <div class="city-input">
-                                            <input value="<?php echo $_GET['city_name']; ?>" class="input1 checkincity input-search" type="text">
-                                            <!-- <input type="text" class="input-search" value="" placeholder="请选择城市" /> -->
-                                        </div>
-                                    </div>
-                                </div>    
-                                <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
-                            </div>
-                        </div>
-                        <div class="Lfll" data-nblock-id="ui/checkinDate?offset=0px-10px">
-                            <div class="item Lfll">
-                                <span class="ltext">入住日期</span>
-                                <div class="inputbox">
-                                    <!-- <input type="text" class="input" id="pickdate" style="color:#000" /> -->
-                                    <input value="<?php echo $_GET['check_in']; ?>" class="input1" id="pickdate" type="text">
-                                    <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
-                                </div>
-                            </div>
-                            <div class="item Lfll">
-                                <span class="ltext">退房日期</span>
-                                <div class="inputbox">
-                                    <input value="<?php echo $_GET['check_out']; ?>" class="input1" id="pickdate1" type="text">
-                                    <div class="arrowbox"><i class="Cicon drop_arrow"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item Lfll" data-nblock-id="ui/checkinKeyword">
-                            <span class="ltext">关键字</span>
-                            <div class="inputbox">
-                                <input id="key_word" placeholder="酒店名称" data-keyword="" type="text">
-                            </div>
-                        </div>
-                        <div class="btnbox Lfll"><a href="javascript:;" rel="nofollow" class="Cbtn std_small Lmr10 search">搜索</a></div>
-                    </div>
-                </div>
-            </div>
 
 
+
+
+
+<div id="ding">
             <div id="Plist_filter" class="Plist_filter Lposr" data-nblock-id="block/hotelListFilter">
                 <!-- <a href="javascript:;" class="expand expand_big shrink"><span>展开</span>设施&amp;评论<i class="arrow"></i></a> --> 
                              <div class="filteritem">
@@ -176,7 +144,7 @@
                                     <span class=" clean">不限</span>
                                     @foreach($brand as $key=>$val)
                                             <label class="item" title="{{$val->brand_name}}">
-                                                <input class="check1" value="{{$val->brand_id}}" type="checkbox">{{$val->brand_name}}
+                                                <input class="check1 brand" value="{{$val->brand_id}}" type="checkbox">{{$val->brand_name}}
                                             </label>
                                     @endforeach
                                 </div>
@@ -186,19 +154,19 @@
                                 <div class="itembox Lcfx priceitem" data-param="PriceRange">
                                     <span class=" clean">不限</span>
                                             <label class="item" title="￥150以下">
-                                                <input class="check1" data-search-code="A" type="checkbox">￥150以下
+                                                <input class="check1 price" data-search-code="0-150" type="checkbox">￥150以下
                                             </label>
                                             <label class="item" title="￥150-￥300">
-                                                <input class="check1" data-search-code="B" type="checkbox">￥150-￥300
+                                                <input class="check1 price" data-search-code="150-300" type="checkbox">￥150-￥300
                                             </label>
                                             <label class="item" title="￥301-￥450">
-                                                <input class="check1" data-search-code="C" type="checkbox">￥301-￥450
+                                                <input class="check1 price" data-search-code="301-450" type="checkbox">￥301-￥450
                                             </label>
                                             <label class="item" title="￥451-￥600">
-                                                <input class="check1" data-search-code="D" type="checkbox">￥451-￥600
+                                                <input class="check1 price" data-search-code="451-600" type="checkbox">￥451-￥600
                                             </label>
                                             <label class="item" title="￥600以上">
-                                                <input class="check1" data-search-code="E" type="checkbox">￥600以上
+                                                <input class="check1 price" data-search-code="600-99999" type="checkbox">￥600以上
                                             </label>
                                 </div>
                             </div>
@@ -224,17 +192,11 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="filteritem" style="display: block;">
-                                <span class="name">评价</span>
-                                <div class="itembox Lcfx commentitem" data-param="UserOptimization">
-                                    <span class=" clean">不限</span>
-                                            <label class="item" title="周边繁华">
-                                                <input name="UserOptimization" class="check1" data-search-code="SDN" type="radio">周边繁华
-                                            </label>
-                                </div>
-                            </div>
-
+                           
+            
             </div>
+</div>
+
             <div class="Plist_mbox Lcfx">
                 <div class="searchfilter Cdir"><div class="all Ldib">
     <span class="icon-tag">所有</span>
@@ -243,6 +205,25 @@
 
 <script type="text/javascript">
     $(".check1").click(function(){
+        //品牌
+        brand_id = '';
+        $(".brand").each(function(i,v){
+            if($(v).prop('checked')==true){
+                brand_id = brand_id+','+$(v).val();
+
+            }
+        });
+        brand_id = brand_id.substr(1);
+
+        //价格
+        price_type = '';
+        $(".price").each(function(i,v){
+            if($(v).prop('checked')==true){
+                price_type = price_type+','+$(v).data('search-code');
+            }
+        });
+        price_type = price_type.substr(1);
+
         //设施
         rooms_facilities_id = '';
         $(".sheshi").each(function(i,v){
@@ -267,7 +248,7 @@
         $.ajax({
            type: "GET",
            url: "hotel_search",
-           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name},
+           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name,price_type:price_type,brand_id:brand_id},
            success: function(msg){
              $("#boxs").html('');
              $("#boxs").append(msg);
@@ -301,7 +282,7 @@
                 <div class="lbox">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
-                           当前城市，为您找到<b>503</b>家酒店
+                           当前城市，为您找到<b><?php echo $count; ?></b>家酒店
                         </div>
                         <div class="filterbox">
                             <div class="filterbar Lcfx" style="top: 52px; left: 164.6px; position: static; width: auto;">
@@ -430,6 +411,11 @@
 <script src="/qiantai/loading/js/jquery.min.js"></script>
     <script src="/qiantai/loading/js/fakeLoader.min.js"></script>
     <script>
+    $("#subm").click(function(){
+    var region_name = $(".city-info").text();
+    $("#region").val(region_name);
+    
+});
         $(document).ready(function(){
             $(".fakeloader").fakeLoader({
                 timeToHide:1200,
