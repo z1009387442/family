@@ -19,7 +19,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="/qiantai/css/integral.css" rel='stylesheet' type='text/css' />
 <link href='https://fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<style type="text/css">
 
+.signin {
+	margin-top: 10px;
+	font-size:18px;
+	padding-left: 20px;
+	padding-right: 20px
+
+}
+.signin a{
+	text-decoration: none;
+	color: #7f1f59;
+	margin-top: 10px;
+	padding-top: 7px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border:2px solid #7f1f59;
+	border-radius: 7px
+
+}
+.container a{
+	font-size: 16px;
+}
+
+
+</style>
 
  <div class="navbar navbar-inverse-blue navbar">
  @section('header')
@@ -33,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              <nav id="colorNav">
              @if(Session::has('user_id'))
 				<ul>
-				 <li><a href="{{url('home/personal_data')}}"><img class="avatar size-L radius" src="{{Session::get('img')}}"></a>
+				 <li><a href="{{url('home/personal_data')}}"><img class="avatar size-L radius" src="{{Session::get('img')}}"  ></a>
 		         <ul>
 	              	<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
 					<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
