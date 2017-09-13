@@ -63,8 +63,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
            <div class="navigation">
              <nav id="colorNav">
 			   <ul>
-				<li class="green">
-					<a href="#" class="icon-home"></a>
+			   				<li class="green">				 
 					<ul>@if(Session::has('user_id'))
 						<li><a href="{{url('home/personal_data')}}">个人资料</a></li>
 						<li><a href="{{url('home/personal_data')}}">我的优惠券</a></li>
@@ -82,7 +81,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
            <a class="brand" href="javascript:;"><img src="/qiantai/images/logo.png" alt="logo"></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Brand and toggle get grouped for better mobile display
 		  <div class="navbar-header nav_2">
 		      <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">Menu
 		        <span class="sr-only">Toggle navigation</span>

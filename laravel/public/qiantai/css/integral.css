@@ -273,7 +273,7 @@ ul.nav_1 li{
   margin-right:0px;
 }
 ul.nav_1 li a{
-   color:#fff;
+   color:#7f1f59;
 }
 .dropdown-menu>li>a {
    color:#333 !important;
@@ -282,7 +282,7 @@ ul.nav_1 li.last{
   margin-right:0;
 }
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus{
-    background-color:#ffa417 !important;
+    background-color:#7f1f59 !important;
     border-color:#ffa417;
     color:#fff !important;
 }
