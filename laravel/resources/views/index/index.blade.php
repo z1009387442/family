@@ -109,14 +109,14 @@ var _hmt = _hmt || [];
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/home_bus_new/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/789.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">如家巴士</b>
                 </a>
             </ul>
                     <ul class="prefer_box" style="margin-right: 0px;">
-                <a href="http://images.homeinns.com/Activity/NewActivities/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="{{url('home/activity/index')}}" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/110.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">199元住五星酒店</b>

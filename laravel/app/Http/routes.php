@@ -68,6 +68,11 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('index/index',[
 				'uses'=>'IndexController@index',
 				]);
+
+				Route::any('activity/index',[
+				'uses'=>'ActivityController@index',
+				]);
+
 				//酒店列表
 				Route::any('hotel/show',[
 				'uses'=>'HotelController@show',
