@@ -1,7 +1,7 @@
                 <div class="lbox">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
-                            当前城市，为您找到<b>503</b>家酒店
+                            当前城市，为您找到<b><?php echo $count; ?></b>家酒店
                         </div>
                         <div class="filterbox">
                             <div class="filterbar Lcfx" style="top: 52px; left: 164.6px; position: static; width: auto;">

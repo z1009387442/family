@@ -35,6 +35,9 @@ class HotelController extends BaseController
         $complex_arr = ComplexFacilities::all();
 
         $hotel_arr = json_decode(json_encode($hotel_arr),true);
+        if(empty($hotel_arr)){
+			return '暂未搜索到符合条件的酒店！';
+		}
         //获取最低价格
         $hotel_arr = $this->get_price($hotel_arr);
 
@@ -44,6 +47,7 @@ class HotelController extends BaseController
         			'brand' => $brand_arr,
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
+        			'count' => count($hotel_arr),
         		]);
 		
 	}
@@ -53,19 +57,45 @@ class HotelController extends BaseController
 	 */
 	public function hotel_search(Request $request)
 	{
+		//价格搜索
+		$price_type = $request->price_type;
+		$price_type_arr = explode(',',$price_type);
+		//p($price_type_arr);
+
 		//设施id
 		$rooms_facilities_id = $request->rooms_facilities_id;
 		$rooms_facilities_id = explode(',',$rooms_facilities_id);
 		//服务id
 		$complex_facilities_id = $request->complex_facilities_id;
 		$complex_facilities_id = explode(',',$complex_facilities_id);
-		
+		//品牌id
+		$brand_id = $request->brand_id;
+		$brand_id = explode(',',$brand_id);
 
 		$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
             ->get();
         $hotel_arr = json_decode(json_encode($hotel_arr),true);
+        
+        //品牌
+		if($brand_id[0]!=''){
+			foreach($hotel_arr as $k=>&$v){
+				$num = 0;
+        		foreach($brand_id as $key=>$val){
+        			$coun = count($brand_id);
+	        		if ( $v['brand_id'] == $val ){
+	        			
+	        			break;
+	        		}else{
+	        			$num++;
+	        			if( $num == $coun ){
+	        				unset($hotel_arr[$k]);
+	        			}
+	        		}
+        		}
+        	}
+		}
 
         //设施
 		if($rooms_facilities_id[0]!=''){
@@ -98,8 +128,34 @@ class HotelController extends BaseController
 		//获取最低价格
 		$hotel_arr = $this->get_price($hotel_arr);
 
+		if ($price_type_arr[0]!='') {
+			foreach($hotel_arr as $k=>&$v){
+        	$num = 0;
+        		foreach($price_type_arr as $key=>$val){
+        			$cou = count($price_type_arr);
+        			$value = explode('-',$val);
+	        		if ( $value[0] < $v['price'] && $v['price'] < $value[1] ){
+	        			
+	        			break;
+	        		}else{
+	        			
+	        			$num++;
+	        			if( $num == $cou ){
+	        				
+	        				unset($hotel_arr[$k]);
+	        			}
+	        		}
+        		}
+        	}
+		}
+		
+		if(empty($hotel_arr)){
+			return '暂未搜索到符合条件的酒店！';
+		}
+
 		return view('hotel.search',[
 				'hotel_arr' => $hotel_arr,
+				'count' => count($hotel_arr),
 			]);
 	}
 
