@@ -68,6 +68,11 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('index/index',[
 				'uses'=>'IndexController@index',
 				]);
+
+				Route::any('activity/index',[
+				'uses'=>'ActivityController@index',
+				]);
+
 				//酒店列表
 				Route::any('hotel/show',[
 				'uses'=>'HotelController@show',
@@ -223,6 +228,11 @@ Route::group(['middleware' => ['web']], function () {
 				//搜索页面
 				Route::any('search/index',[
 				'uses'=>'SearchController@index',
+				]);
+
+				//弹窗登录
+				Route::any('order/login',[
+				'uses'=>'IndexController@order_login',
 				]);
 
 			});
@@ -394,6 +404,22 @@ Route::group(['middleware' => ['admin']], function () {
 				//后台品牌删除
 				Route::any('brand/brand_del',[
 				'uses'=>'BrandController@brand_del',
+				]);
+				//后台商品折扣添加
+				Route::any('discounts/discounts_add',[
+				'uses'=>'DiscountsController@discounts_add',
+				]);
+				//后台商品折扣列表
+				Route::any('discounts/discounts_list',[
+				'uses'=>'DiscountsController@discounts_list',
+				]);
+				//后台商品折扣修改
+				Route::any('discounts/discounts_save',[
+				'uses'=>'DiscountsController@discounts_save',
+				]);
+				//后台商品折扣删除
+				Route::any('discounts/discounts_del',[
+				'uses'=>'DiscountsController@discounts_del',
 				]);
 		
 

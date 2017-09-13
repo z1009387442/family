@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\Region;
 use App\Libs\REST;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
 	public function index(Request $request)
 	{
@@ -322,6 +322,34 @@ class IndexController extends Controller
 			]);
 		
 		return $res ? 1 : 2;
+	}
+
+
+
+
+
+
+
+
+	/**
+	 * 弹窗登录
+	 */
+	public function order_login(Request $request)
+	{
+		$user_email = $request->input('user_email');
+		$user_pwd = md5($request->input('user_pwd'));
+		$user_info = Index::where(['email'=>$user_email,'user_pwd'=>$user_pwd])->first();
+		if ($user_info) {
+			$user_id = $user_info->user_id;
+			$user_name = $user_info->user_name;
+			$request->session()->put('user_id',$user_id);
+			$request->session()->put('user_name',$user_name);
+
+			return 2;
+		} else {
+
+			return 3;
+		}
 	}
 	
 }
