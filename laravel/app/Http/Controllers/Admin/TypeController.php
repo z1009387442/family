@@ -38,11 +38,11 @@ class TypeController extends Controller
 
 			$data = $request->all();
 
-			$newName = md5(date('ymdhis').$data['type_img']->getClientOriginalName()).".".$data['type_img']->getClientOriginalExtension();
+			$new_name = md5(rand(1,999).$data['type_img']->getClientOriginalName()).".".$data['type_img']->getClientOriginalExtension();
 
-			$path=$data['type_img']->move(public_path().'/uploads/',$newName);
+			$path=$data['type_img']->move(public_path().'/uploads/',$new_name);
 
-			$data['type_img']='/uploads/'.$newName;
+			$data['type_img']='/uploads/'.$new_name;
 
 			$type = new Type;
 
@@ -160,11 +160,11 @@ class TypeController extends Controller
 				}
 			} else {
 
-				$newName = md5(date('ymdhis').$data['type_img']->getClientOriginalName()).".".$data['type_img']->getClientOriginalExtension();
+				$new_name = md5(rand(1,999).$data['type_img']->getClientOriginalName()).".".$data['type_img']->getClientOriginalExtension();
 
-				$path=$data['type_img']->move(public_path().'/uploads/',$newName);
+				$path=$data['type_img']->move(public_path().'/uploads/',$new_name);
 
-				$data['type_img']='/uploads/'.$newName;
+				$data['type_img']='/uploads/'.$new_name;
 
 				$type = Type::find($data['room_type_id']);
 				

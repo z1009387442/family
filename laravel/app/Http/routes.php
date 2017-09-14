@@ -179,6 +179,15 @@ Route::group(['middleware' => ['web']], function () {
 				Route::any('hotel/room',[
 				'uses'=>'HotelController@room',
 				]);
+
+				Route::any('connect/album',[
+					'uses'=>'ConnectController@album',
+				]);
+
+				Route::any('connect/service',[
+					'uses'=>'ConnectController@service',
+				]);
+				
 				
 				//支付
 				Route::group(['prefix' => 'pay'], function(){
