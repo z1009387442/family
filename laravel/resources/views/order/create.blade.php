@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/qiantai/date_use/daterangepicker.min.css">
 <style type="text/css">
 	.sub_btn{border: 1px solid #993366;border-radius: 0.5em;padding: 0.5em 2em 0.55em;color: #fef4e9;font: 16px/100%;background-color:#993366; margin-top: 15px;}
+	.container{font-size:14px;};	
 	.tab_box h2{color: #c32143;font-size: 1.5em};
 	.basic_1 h4{color: #c32143;font-size: 1.5em};
 	.hotel_name{font-size: 2em};
@@ -343,24 +344,34 @@ $(document).on("click",".click_login",function(){
 <link rel="stylesheet" href="/qiantai/css/flexslider.css" type="text/css" media="screen" />
 <script>
 	flag_tel=0;
+	flag_money=1;
 	$(document).on("click",".check_data",function(){
+		var start_time=$("#date-range13").val();
+		var end_time=$("#date-range14").val();
+		var Start = new Date(start_time).getTime();
+		var End = new Date(end_time).getTime();
+		if(End < Start){
+			alert('结束日期不能小于开始日期！');
+			return false;
+		}
 		if(flag_tel==0){
-			alert('请填写完整标红选项');
+			alert('请完成您的预订信息');
 			return false;
 		}else{
 			return true;
 		}
 	})
 
-	$("#date-range13").blur(function(){
+	$("#date-range13").change(function(){
 		change_price();
 	})
 
-	$("#date-range14").blur(function(){
+	$("#date-range14").change(function(){
 		change_price();
 	})
 
 	function change_price(){
+		var total_price=0;
 		var room_one=$("#room_one_price").text();
 		var count=$(".room_sum").val();
 		var start_time=$("#date-range13").val();
