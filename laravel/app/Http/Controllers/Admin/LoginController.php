@@ -12,11 +12,6 @@ use Session;
 
 class LoginController extends Controller
 {
-	public function index()
-	{
-		return 1;
-	}
-
 	/**
 	 * [登录 description]
 	 * @param  Request $request [description]
@@ -79,32 +74,32 @@ class LoginController extends Controller
 		}
 		
 	}
+
 	/**
 	 * [判断用户名是否重复注册 description]
 	 * @return [type] [description]
 	 */
-	public function check_name()
+	public function check_name(Request $request)
 	{
-		$admin_name=Input::get('admin_name')?Input::get('admin_name'):"";
+		$admin_name=$request->input('admin_name')?$request->input('admin_name'):"";
 		$admin_info=Admin::where('name',$admin_name)->first();
-		if ($admin_info) {
-
-			return 4;//重复
-		} else {
-
-			return 2;//不重复
-		}
+		
+		return empty($admin_info)?2:4;//4重复	
 	}
 
+	/**
+	 * [退出登录 description]
+	 * @return [type] [description]
+	 */
 	public function logout(Request $request)
 	{
 		if ($request->session()->has('admin_id')&&$request->session()->has('admin_name')) {
             $is_forget=$request->session()->forget('admin_id');
             $is_forget=$request->session()->forget('admin_name');
-            if($is_forget===null){
+            if ($is_forget===null) {
 
             	return redirect('/admin/login/login');
-            }else{
+            } else {
 
             	return redirect('/admin/index/index');
             }

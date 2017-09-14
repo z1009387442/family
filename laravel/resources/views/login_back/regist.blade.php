@@ -114,7 +114,7 @@
         $.ajax({
            type: "GET",
            url: "/index.php/admin/login/check_name",
-           data: "admin_name="+admin_name,
+           data: {'admin_name':admin_name},
            success: function(msg){
              if(msg==4){
                 flag=0;
