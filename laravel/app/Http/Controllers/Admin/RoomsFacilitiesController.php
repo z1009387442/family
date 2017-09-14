@@ -76,21 +76,21 @@ class RoomsFacilitiesController extends Controller
 				//接收数据
 				$data = $request->all();
 				if (empty($data['rooms_facilities_name'])) {
-					$RoomsFacilities = new RoomsFacilities;
-					$RoomsFacilities = RoomsFacilities::find($data['id']);
-					$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
-					$RoomsFacilities->sort   = $data['sort'];
-					$RoomsFacilities->status   = $data['status'];
-					$bool = $RoomsFacilities->save();	
+					$rooms_facilities = new RoomsFacilities;
+					$rooms_facilities = RoomsFacilities::find($data['id']);
+					$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
+					$rooms_facilities->sort   = $data['sort'];
+					$rooms_facilities->status   = $data['status'];
+					$bool = $rooms_facilities->save();	
 				} else {
 					//实例化model
-					$RoomsFacilities = new RoomsFacilities;
+					$rooms_facilities = new RoomsFacilities;
 					//添加数据入库
-					$RoomsFacilities = RoomsFacilities::find($data['id']);
-					$RoomsFacilities->rooms_facilities_name = $data['rooms_facilities_name'];
-					$RoomsFacilities->status   = $data['status'];
-					$RoomsFacilities->sort   = $data['sort'];
-					$bool = $RoomsFacilities->save();	
+					$rooms_facilities = RoomsFacilities::find($data['id']);
+					$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
+					$rooms_facilities->status   = $data['status'];
+					$rooms_facilities->sort   = $data['sort'];
+					$bool = $rooms_facilities->save();	
 				}
 					if($bool) {
 

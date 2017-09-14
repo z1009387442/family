@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Home;
+
 use Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -43,6 +45,7 @@ class JoinController extends BaseController
 				return view('index.index');
 			}
 		} else {
+			
 			return view('join.index');
 		}
 	}

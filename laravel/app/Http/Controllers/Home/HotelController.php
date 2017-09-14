@@ -192,6 +192,7 @@ class HotelController extends BaseController
 		}
 		
 		if(empty($hotel_arr)){
+
 			return '暂未搜索到符合条件的酒店！';
 		}
 
@@ -234,16 +235,16 @@ class HotelController extends BaseController
 		//查看房间有没有
 		$room_status=DB::select('SELECT room_type_id, count(`status`)as a FROM `sun_rooms` where `status`=1 group by room_type_id');
 		$room_status = json_decode(json_encode($room_status),true);
-		$arrRoomTypeId = array_column($room_status, 'room_type_id');
-		$arr_new_room_status = array_combine($arrRoomTypeId, $room_status);
+		$arr_room_type_id = array_column($room_status, 'room_type_id');
+		$arr_new_room_status = array_combine($arr_room_type_id, $room_status);
 		$room_arr = DB::table('rooms_type')
             ->join('hotel_room_type', 'rooms_type.room_type_id', '=', 'hotel_room_type.hotel_room_type_id')
             ->where('hotel_room_type.hotel_id',$request->id)
             ->get();
         $room_arr = json_decode(json_encode($room_arr),true);
 
-		$arrRoomTypeId2 = array_column($room_arr, 'room_type_id');
-		$newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
+		$arr_room_type_id2 = array_column($room_arr, 'room_type_id');
+		$newroom_arr = array_combine($arr_room_type_id2, $room_arr);
 		if(empty($newroom_arr)){
 			return "<center><h1>酒店正在维护中...</h1><a href='".url('home/index/index')."'>返回首页</a><center>";
 		}

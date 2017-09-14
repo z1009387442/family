@@ -26,6 +26,7 @@ class IntegralController extends BaseController
 	public function index(Request $request)
 	{
 		$list =Goods::all();
+		
 		return view('integral.integral',['goods_list'=>$list]);
 	}
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Home;
 
 use App\Models\Team;
@@ -12,6 +13,7 @@ class AboutController extends BaseController
 	public function index(Request $request)
 	{
 		$list = Team::all();
+
 		return view('about.about',['list'=>$list]);
 	}
 	

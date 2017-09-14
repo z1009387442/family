@@ -20,11 +20,11 @@ class AboutController extends Controller
 			//接收数据
 			$data = $request->all();
 			//将图片重命名
-			$newName = md5(date('ymdhis').$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
+			$new_name = md5(rand(1,999).$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
 			//移动文件到uploads
-			$path=$data['team_images']->move(public_path().'/uploads/',$newName);
+			$path=$data['team_images']->move(public_path().'/uploads/',$new_name);
 			//文件访问路径
-			$data['team_images']='/uploads/'.$newName;
+			$data['team_images']='/uploads/'.$new_name;
 			//实例化model
 			$team = new Team;
 			//添加数据入库
@@ -66,11 +66,11 @@ class AboutController extends Controller
 				$team->status  = $data['status'];
 				$bool = $team->save();			
 			} else {
-				$newName = md5(date('ymdhis').$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
+				$new_name = md5(rand(1,999).$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
 				//移动文件到uploads
-				$path=$data['team_images']->move(public_path().'/uploads/',$newName);
+				$path=$data['team_images']->move(public_path().'/uploads/',$new_name);
 				//文件访问路径
-				$data['team_images']='/uploads/'.$newName;
+				$data['team_images']='/uploads/'.$new_name;
 				//实例化model
 				$team = new Team;
 				//添加数据入库

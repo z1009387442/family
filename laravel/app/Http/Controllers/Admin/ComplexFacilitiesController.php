@@ -34,12 +34,12 @@ class ComplexFacilitiesController extends Controller
 
 			$data = $request->all();
 			//实例化model
-			$ComplexFacilities = new ComplexFacilities;
+			$complex_facilities = new ComplexFacilities;
 			//添加数据入库
-			$ComplexFacilities->complex_facilities_name = $data['complex_facilities_name'];
-			$ComplexFacilities->sort   = $data['sort'];
-			$ComplexFacilities->status   = $data['status'];
-			$bool = $ComplexFacilities->save();
+			$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
+			$complex_facilities->sort   = $data['sort'];
+			$complex_facilities->status   = $data['status'];
+			$bool = $complex_facilities->save();
 				if ($bool) {
 
 					return Redirect::to('admin/complex/facilities_list');
@@ -82,29 +82,28 @@ class ComplexFacilitiesController extends Controller
 
 				if (empty($data['complex_facilities_name'])) {
 
-					$complexfacilities = new complexFacilities;
-					$complexfacilities = complexFacilities::find($data['id']);
-					$complexfacilities->complex_facilities_name = $data['complex_facilities_name'];
-					$complexfacilities->sort   = $data['sort'];
-					$complexfacilities->status   = $data['status'];
-					$bool = $complexfacilities->save();	
+					$complex_facilities = new complexFacilities;
+					$complex_facilities = complexFacilities::find($data['id']);
+					$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
+					$complex_facilities->sort   = $data['sort'];
+					$complex_facilities->status   = $data['status'];
+					$bool = $complex_facilities->save();	
 					
 				} else {
 					//实例化model
-					$complexfacilities = new complexFacilities;
+					$complex_facilities = new complexFacilities;
 					//添加数据入库
-					$complexfacilities = complexFacilities::find($data['id']);
-					$complexfacilities->complex_facilities_name = $data['complex_facilities_name'];
-					$complexfacilities->status   = $data['status'];
-					$complexfacilities->sort   = $data['sort'];
-					$bool = $complexfacilities->save();
+					$complex_facilities = complexFacilities::find($data['id']);
+					$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
+					$complex_facilities->status   = $data['status'];
+					$complex_facilities->sort   = $data['sort'];
+					$bool = $complex_facilities->save();
 				}
 					if ($bool) {
 
 						return Redirect::to('admin/complex/facilities_list');
 					}
 		  } else {
-
 				$one = complexfacilities::where('complex_facilities_id',$request->id)->first();
 
 				return view('complex_facilities_back.complex_facilities_save',['one'=>$one]);

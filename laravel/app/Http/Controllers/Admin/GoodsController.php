@@ -31,15 +31,15 @@ class GoodsController extends Controller
 	public function goods_add(Request $request)
 	{
 		if ($request->isMethod('post')) {
-		//接收数据
+			//接收数据
 			$data = $request->all();
 			//print_r($data);die;
 			//将图片重命名
-			$newName = md5(date('ymdhis').$data['goods_img']->getClientOriginalName()).".".$data['goods_img']->getClientOriginalExtension();
+			$new_name = md5(rand(1,999).$data['goods_img']->getClientOriginalName()).".".$data['goods_img']->getClientOriginalExtension();
 			//移动文件到uploads
-			$path=$data['goods_img']->move(public_path().'/uploads/',$newName);
+			$path=$data['goods_img']->move(public_path().'/uploads/',$new_name);
 			//文件访问路径
-			$data['goods_img']='/uploads/'.$newName;
+			$data['goods_img']='/uploads/'.$new_name;
 			//实例化model
 			$goods = new Goods;
 			//添加数据入库
@@ -103,7 +103,7 @@ class GoodsController extends Controller
 					$bool = $goods->save();				
 				} else {
 
-					$newName = md5(date('ymdhis').$data['goods_img']->getClientOriginalName()).".".$data['goods_img']->getClientOriginalExtension();
+					$newName = md5(rand(1,999).$data['goods_img']->getClientOriginalName()).".".$data['goods_img']->getClientOriginalExtension();
 					//移动文件到uploads
 					$path=$data['goods_img']->move(public_path().'/uploads/',$newName);
 					//文件访问路径
@@ -126,7 +126,6 @@ class GoodsController extends Controller
 				}
 				
 			} else {
-
 				$one = Goods::where('goods_id',$request->id)->first();
 
 				return view('goods_back.goods_save',['one'=>$one]);

@@ -162,11 +162,11 @@ class RoomController extends Controller
 			
 			$img_path=$request->img_path; //房间图片
 			
-			$newName = md5(date('ymdhis').$img_path->getClientOriginalName()).".".$img_path->getClientOriginalExtension();   //图片重命名
+			$new_name = md5(rand(1,999).$img_path->getClientOriginalName()).".".$img_path->getClientOriginalExtension();   //图片重命名
 			
-			$path=$img_path->move(public_path().'\uploads/',$newName);
+			$path=$img_path->move(public_path().'\uploads/',$new_name);
 		
-			$new_path='/uploads/'.$newName;
+			$new_path='/uploads/'.$new_name;
 			
 			$data['hotel_id']=$hotel_id;
 			
@@ -174,9 +174,9 @@ class RoomController extends Controller
 			
 			$data['img_path']=$new_path;
 			
-			$RoomsTypeAlbum = new RoomsTypeAlbum;
+			$rooms_type_album = new RoomsTypeAlbum;
 			
-			$bool=$RoomsTypeAlbum->insert($data);
+			$bool=$rooms_type_album->insert($data);
 			
 			if ($bool) {
 
@@ -186,6 +186,7 @@ class RoomController extends Controller
 							->join('rooms_type',"rooms_type_album.room_type_id",'=',"rooms_type.room_type_id")
 							->where('rooms_type_album.hotel_id',$hotel_id)
 							->get();
+
 				return view('room_back.room_type_album_show',['room_arr'=>$room_arr]);
 			}
 
