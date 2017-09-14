@@ -51,9 +51,17 @@
 
 	$(window).scroll(function () {
 	if ($(window).scrollTop() >= 100) {
-        setTimeout('test()',500); 
+        
+        var ss = 0;
+        if(ss == 0){
+            $("#key").html("展开").parent().animate({height:"25px"},0);
+           var ss = 1;
+        } 
+        setTimeout('test()',500);
+
 	}else{
       setTimeout('tests()',500); 
+      $("#key").html("关闭").parent().animate({height:"280px"},0);
 	}
 });
     function test(){
@@ -123,19 +131,41 @@
 </div>
 
 
+<style>
+#ccontent {
 
+width: 830px;
+height: 25px;
+background:#FFF;
+
+overflow: hidden;
+
+}
+#key {
+cursor: pointer;
+color: red;
+float: right;
+width:50px;
+height:25px;
+line-height:25px
+margin:0 0 0 0;
+}
+</style>
 
 
 <div id="ding">
+<div id="ccontent"> <span id="key">展开</span><span class="fonttitle">条件：</span>
             <div id="Plist_filter" class="Plist_filter Lposr" data-nblock-id="block/hotelListFilter">
                 <!-- <a href="javascript:;" class="expand expand_big shrink"><span>展开</span>设施&amp;评论<i class="arrow"></i></a> --> 
                              <div class="filteritem">
                                 <span class="name">商圈</span>
                                 <div class="itembox Lcfx branditem" data-param="HotelStyleList">
                                     <span class=" clean">不限</span>
-                                            <label class="item" title="桔子水晶">
-                                                <input class="check1" data-search-code="14" type="checkbox">桔子水晶
+                                    @foreach($business_arr as $key=>$val)
+                                            <label class="item" title="{{$val->business_district_name}}">
+                                                <input class="check1 business" type="checkbox" value="{{$val->business_district_id}}">{{$val->business_district_name}}
                                             </label>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="filteritem">
@@ -195,7 +225,23 @@
                            
             
             </div>
+            
+  
+   </div>
 </div>
+
+<script type="text/javascript">
+$("#key").html("关闭").parent().animate({height:"280px"},1);
+    $("#key").click(function(){
+        var te = $(this).html();
+        if(te == '展开'){
+            $(this).html("关闭").parent().animate({height:"280px"},500);
+        }else{
+            $(this).html("展开").parent().animate({height:"25px"},500);
+        }
+        
+    });
+</script>
 
             <div class="Plist_mbox Lcfx">
                 <div class="searchfilter Cdir"><div class="all Ldib">
@@ -205,6 +251,16 @@
 
 <script type="text/javascript">
     $(".check1").click(function(){
+        //商圈
+        
+        business_district_id = '';
+        $(".business").each(function(i,v){
+            if($(v).prop('checked')==true){
+                business_district_id = business_district_id+','+$(v).val();
+
+            }
+        });
+        business_district_id = business_district_id.substr(1);
         //品牌
         brand_id = '';
         $(".brand").each(function(i,v){
@@ -248,7 +304,7 @@
         $.ajax({
            type: "GET",
            url: "hotel_search",
-           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name,price_type:price_type,brand_id:brand_id},
+           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name,price_type:price_type,brand_id:brand_id,business_district_id:business_district_id},
            success: function(msg){
              $("#boxs").html('');
              $("#boxs").append(msg);

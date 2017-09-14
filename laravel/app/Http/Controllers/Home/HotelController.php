@@ -37,7 +37,11 @@ class HotelController extends BaseController
         $hotel_arr = json_decode(json_encode($hotel_arr),true);
         if(empty($hotel_arr)){
 			return '暂未搜索到符合条件的酒店！';
+		}else{
+			$region_id = $hotel_arr[0]['region_id'];
+			$business_arr = DB::table('business_district')->select('business_district_id','business_district_name')->where('region_id','=',$region_id)->get();
 		}
+		// p($hotel_arr);die;
         //获取最低价格
         $hotel_arr = $this->get_price($hotel_arr);
 
@@ -48,6 +52,7 @@ class HotelController extends BaseController
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
         			'count' => count($hotel_arr),
+        			'business_arr' => $business_arr,
         		]);
 		
 	}
@@ -57,10 +62,12 @@ class HotelController extends BaseController
 	 */
 	public function hotel_search(Request $request)
 	{
+		//商圈搜索
+		$business_district_id = $request->business_district_id;
+		$business_district_id = explode(',',$business_district_id);
 		//价格搜索
 		$price_type = $request->price_type;
 		$price_type_arr = explode(',',$price_type);
-		//p($price_type_arr);
 
 		//设施id
 		$rooms_facilities_id = $request->rooms_facilities_id;
@@ -122,9 +129,44 @@ class HotelController extends BaseController
         	}
 		}
 
-		if(empty($hotel_arr)){
+		if (empty($hotel_arr)) {
+
 			return '暂未搜索到符合条件的酒店！';
+		} else {
+			if ($business_district_id[0]!='') {
+			foreach($business_district_id as $kkk=>$vvv){
+				$business_district_id[] = $vvv;
+			}
+			$business_district_id = implode(' or `business_district_id` = ',$business_district_id);
+			
+			// $region_id = $hotel_arr[0]['region_id'];
+			$business_arr = DB::select("select business_district_id,business_district_name from `sun_business_district` where `business_district_id` = $business_district_id");
+			
+			$business_arr = json_decode(json_encode($business_arr),true);
+		
+				if ($business_arr[0]!='') {
+					foreach($hotel_arr as $k=>&$v){
+						$num = 0;
+		        		foreach($business_arr as $key=>$val){
+		        			$coun = count($business_arr);
+			        		if ( $v['business_district_id'] == $val['business_district_id'] ){
+
+			        			break;
+			        		}else{
+			        			$num++;
+			        			if( $num == $coun ){
+			        				unset($hotel_arr[$k]);
+			        			}
+			        		}
+		        		}
+		        	}
+				}
+			}
+
 		}
+		
+
+
 		//获取最低价格
 		$hotel_arr = $this->get_price($hotel_arr);
 
