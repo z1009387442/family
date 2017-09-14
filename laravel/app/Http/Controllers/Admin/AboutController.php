@@ -19,13 +19,9 @@ class AboutController extends Controller
 		if ($request->isMethod('post')) {
 			//接收数据
 			$data = $request->all();
-			//将图片重命名
-			$newName = md5(date('ymdhis').$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
-			//移动文件到uploads
-			$path=$data['team_images']->move(public_path().'/uploads/',$newName);
-			//文件访问路径
-			$data['team_images']='/uploads/'.$newName;
-			//实例化model
+			$new_name = md5(rand(1,999).$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
+			$path=$data['team_images']->move(public_path().'/uploads/',$new_name);
+			$data['team_images']='/uploads/'.$new_name;
 			$team = new Team;
 			//添加数据入库
 			$team->team_name = $data['team_name'];
@@ -58,29 +54,21 @@ class AboutController extends Controller
 	{
 		if ($request->isMethod('post')) {
 			$data = $request->all();
-			if (empty($data['team_images'])) {
-				$team = new Team;
-				$team = Team::find($data['id']);
-				$team->team_name = $data['team_name'];
-				$team->team_desc  = $data['team_desc'];
-				$team->status  = $data['status'];
-				$bool = $team->save();			
-			} else {
-				$newName = md5(date('ymdhis').$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
+			$team = new Team;
+			$team = Team::find($data['id']);
+			$team->team_name = $data['team_name'];
+			$team->team_desc  = $data['team_desc'];
+			$team->status  = $data['status'];
+			if (!empty($data['team_images'])) {	
+				$new_name = md5(rand(1,999).$data['team_images']->getClientOriginalName()).".".$data['team_images']->getClientOriginalExtension();
 				//移动文件到uploads
-				$path=$data['team_images']->move(public_path().'/uploads/',$newName);
+				$path=$data['team_images']->move(public_path().'/uploads/',$new_name);
 				//文件访问路径
-				$data['team_images']='/uploads/'.$newName;
-				//实例化model
-				$team = new Team;
+				$data['team_images']='/uploads/'.$new_name;
 				//添加数据入库
-				$team = Team::find($data['id']);
-				$team->team_name = $data['team_name'];
-				$team->team_images = $data['team_images'];
-				$team->team_desc  = $data['team_desc'];
-				$team->status  = $data['status'];
-				$bool = $team->save();				
+				$team->team_images = $data['team_images'];		
 			}
+			$bool = $team->save();	
 			if ($bool) {
 
 				return Redirect::to('admin/about/team_list');
@@ -98,7 +86,6 @@ class AboutController extends Controller
 	{
 		//接收id
 		$id = $request->id;
-		//删除
 		$bool = Team::destroy($id);
 		if ($bool) {
 

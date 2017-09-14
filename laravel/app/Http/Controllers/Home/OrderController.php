@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Redirect;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use App\Models\Region;
 use App\Models\RoomsType;
 use App\Models\Order;
 use Carbon\Carbon;
@@ -20,11 +21,16 @@ class OrderController extends BaseController
 	public function create(Request $request)
 	{
 		$room_type_id=$request->room_type_id;//接收房间类型ID
-		$hotel_id=$request->hotel_id;//接收房间类型ID
-		//房间类型照片信息、数据 room_type
-		$room_data = RoomsType::find($room_type_id);
-		//查酒店表，酒店地址和名字hotel
-		$hotel_data=Hotel::find($hotel_id);//用name和address
+		$hotel_id=$request->hotel_id;//接收房间类型ID	
+		$room_data = RoomsType::find($room_type_id);//房间类型照片信息、数据 room_type		
+		$hotel_data=Hotel::find($hotel_id);//查酒店表，酒店地址和名字hotel
+		$region_data=Region::find($hotel_data->region_id);//获取当前酒店地区
+		$real_price=['price'=>substr($region_data->floating_value,2),'up_down'=>substr($region_data->floating_value,0,1)];
+		if ($real_price['up_down']==1) {
+			$room_data->vip_price=ceil(($room_data->vip_price)*(1+$real_price['price']/100));
+		} else {
+			$room_data->vip_price=ceil(($room_data->vip_price)*(1-$real_price['price']/100));
+		}
 		$my_date['today']=Carbon::now()->toDateString();
 		$my_date['tomorrow']=Carbon::tomorrow('Europe/London')->toDateString();
 
@@ -48,9 +54,9 @@ class OrderController extends BaseController
 		if ($end_time=='') {
 			$end_time=Carbon::tomorrow('Europe/London')->toDateString();
 		}
-		$startdate=strtotime($check_time);
-		$enddate=strtotime($end_time);
-		$total_days=round(($enddate-$startdate)/3600/24);
+		$start_date=strtotime($check_time);
+		$end_date=strtotime($end_time);
+		$total_days=round(($end_date-$start_date)/3600/24);
 		$room_sum=$request->input('room_sum');
 		$resident_people=$request->input('resident_people');//数组
 		$cell_phone=$request->input('cell_phone');
@@ -84,7 +90,8 @@ class OrderController extends BaseController
 
 	public function get_sn()
 	{
-		return 'sunshine-'.date('Ymd').rand(1000,9999);
+		$dt=Carbon::now();
+		return 'sunshine-'.$dt->timestamp.rand(1000,9999);
 	}
 
 	public function get_peo($resident_people)

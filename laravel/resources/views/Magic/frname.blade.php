@@ -237,6 +237,19 @@
                             </li>
                         </ul>
                     </li>
+                    <!--打折管理-->
+
+                     <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>打折管理</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/discounts/discounts_add')}}"><i class="icon-puzzle"></i> 折扣添加</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('admin/discounts/discounts_list')}}"><i class="icon-puzzle"></i> 折扣编辑</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="divider"></li>
                     <li class="nav-title">                   
                 </ul>

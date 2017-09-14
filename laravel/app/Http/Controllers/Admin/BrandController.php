@@ -40,10 +40,10 @@ class BrandController extends Controller
 			$brand->sort   = $data['sort'];
 			$brand->status   = $data['status'];
 			$bool = $brand->save();
-				if ($bool) {
+			if ($bool) {
 
-					return Redirect::to('admin/brand/brand_list');
-				}
+				return Redirect::to('admin/brand/brand_list');
+			}
 		} else {
 			
 			return view('brand_back.brand_add');
@@ -61,7 +61,9 @@ class BrandController extends Controller
 		$id = $request->id;
 		//删除
 		$bool = Brand::destroy($id);
+
 		if ($bool) {
+
 			return Redirect::to('admin/brand/brand_list');
 		}
 	}
@@ -77,6 +79,7 @@ class BrandController extends Controller
 	if ($request->isMethod('post')) {
 			//接收数据
 			$data = $request->all();
+
 			if (empty($data['brand_name'])) {
 				$brand = new Brand;
 				$brand = brand::find($data['id']);
@@ -98,14 +101,10 @@ class BrandController extends Controller
 					return Redirect::to('admin/brand/brand_list');
 				}
 	  } else {
+
 			$one = Brand::where('brand_id',$request->id)->first();
+
 			return view('brand_back.brand_save',['one'=>$one]);
 		}
-
-
-
-
-
-		
 	}
 }

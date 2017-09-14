@@ -1,0 +1,163 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+body {
+    line-height: 1;
+    font-size: 12px;
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+    /*font-family:\5fae\8f6f\96c5\9ed1;*/
+}
+
+input {
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+a{ text-decoration:none;-webkit-appearance:none;}
+a,img,button,input,textarea{-webkit-tap-highlight-color:rgba(255,255,255,0);}
+input,textarea{-webkit-appearance:none;}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+}
+
+blockquote, q {
+    quotes: "" "";
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+        outline: none;
+    }
+
+    a:active, a:focus {
+        outline: none;
+    }
+
+/*浮动相关*/
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.fix {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.main_w1200 {
+    width: 1200px;
+    margin: 0px auto;
+}
+
+.popup {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    background: #000;
+    -moz-opacity: 0.70;
+    opacity: 0.70;
+    z-index: 9990;
+    width: 100%;
+    display: none;
+    height: 100%;
+    filter: alpha(opacity=70);
+}
+
+i {
+    background-image: url(http://images.homeinns.com/image/web/public_img.png);
+    background-image: url()\9;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 400px;
+    height: 322px;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://images.homeinns.com/image/web/public_img.png', sizingMethod='scale') !important
+}
+
+.i_ie {
+    background-image: url();
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 400px;
+    height: 322px;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://images.homeinns.com/image/web/public_img.png', sizingMethod='scale') !important
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .i_ie {
+        background-image: url(http://images.homeinns.com/image/web/public_img.png);
+        background-image: url()\9;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 400px;
+        height: 322px;
+        background-size: 100% 100%;
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -o-background-size: 100% 100%;
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://images.homeinns.com/image/web/public_img.png', sizingMethod='scale')
+    }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    i {
+        position: static !important
+    }
+
+    .top_logo div.brands_logo {
+        position: static !important
+    }
+}

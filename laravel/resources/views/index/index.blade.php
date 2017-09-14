@@ -9,9 +9,9 @@
 @section('content')
 <!--时间插件引入文件-->
 <style type="text/css">
-	.gender_1,.age_box1{
-		vertical-align: middle;
-	}
+    .gender_1,.age_box1{
+        vertical-align: middle;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="/qiantai/time/datedropper.css">
 <link rel="stylesheet" type="text/css" href="/qiantai/time/timedropper.min.css">
@@ -23,53 +23,57 @@
     </div>
   </div>
   <div class="profile_search">
-  	<div class="container wrap_1" >
-	  <form action="{{url('home/hotel/show')}}" method="get">
-	  	<div class="search_top">
-		 <div class="inline-block">
-		  <label class="">目的地:</label>
-			<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<div class="city-select" id="single-select-1">
-					
-					<div class="city-info">
-						<div class="city-name" style="width: 10px;height: 10px;">
-							<!-- <span id='region'>北京市</span> -->
-						</div>
-						<div class="city-input">
-							<input type="text" class="input-search" value="" placeholder="请选择城市" />
-						</div>
-					</div>
-
-				</div>
-		   </div>
-	    </div>
-        <div class="inline-block">
-		  <label class="">入住时间:</label>
-			<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<input type="text" class="input" name="check_in" id="pickdate" style="color:#000" />
-          </div>
-        </div>
-        <div class="inline-block">
-		  <label class="">离开时间:</label>
-			<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<input type="text" class="input" name="check_out" id="pickdate1" style="color:#000"/>
-          </div>
+    <div class="container wrap_1" >
+    <form action="{{url('home/hotel/show')}}" method="get">
+    <div class="search_top">
+     <div class="inline-block">
+      <label class="">目的地:</label>
+        <div class="age_box1" style="max-width: 100%; display: inline-block;">
+            <div class="city-select" id="single-select-1">
+                <div class="city-info">
+                    <div class="city-name" style="width: 10px;height: 10px;"></div>
+                    <div class="city-input">
+                    <input type="text" class="input-search" value="" placeholder="请选择城市" />
+                    </div>
+                </div>
+            </div>
        </div>
-     </div>
-
+    </div>
+    <div class="inline-block">
+        <label class="">入住时间:</label>
+        <div class="age_box1" style="max-width: 100%; display: inline-block;">
+            <div class="city-select" id="single-select-1">
+                <div class="city-info">
+                    <input type="text"  name="check_in" id="pickdate" style="color:#000" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="inline-block">
+        <label class="">离开时间:</label>
+        <div class="age_box1" style="max-width: 100%; display: inline-block;">
+            <div class="city-select" id="single-select-1">
+                <div class="city-info">
+                    <input type="text"  name="check_out" id="pickdate1" style="color:#000" />
+                </div>
+            </div>
+        </div>    
+      </div>
+    </div>
+ </div>
 <script type="text/javascript" src="/qiantai/time/jquery-1.12.3.min.js"></script>
 <script src="/qiantai/time/datedropper.min.js"></script>
 <script src="/qiantai/time/timedropper.min.js"></script>
 <script>
 $("#pickdate").dateDropper({
-	animate: false,
-	format: 'Y-m-d',
-	maxYear: '2020'
+    animate: false,
+    format: 'Y-m-d',
+    maxYear: '2020'
 });
 $("#pickdate1").dateDropper({
-	animate: false,
-	format: 'Y-m-d',
-	maxYear: '2020'
+    animate: false,
+    format: 'Y-m-d',
+    maxYear: '2020'
 });
 
 </script>
@@ -82,10 +86,10 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-		<div class="submit inline-block">
-			<input type="hidden" value="" name="city_name" id="region">
-		   <input id="submit-btn" class="" type="submit" value="Find Matches">
-		</form>
+        <div class="submit inline-block">
+            <input type="hidden" value="" name="city_name" id="region">
+           <input id="submit-btn" class="" type="submit" value="Find Matches">
+        </form>
      </div>
     </div>
   </div>
@@ -100,30 +104,30 @@ var _hmt = _hmt || [];
 
 <div class="main_w1200">
     <div class="prefer_main">
-        <h1>会员尊享特惠</h1>
+        <h1>酒店特色</h1>
             <ul class="prefer_box" style="margin-right: 45px;">
-                <a href="http://www.bthhotels.com/Member/MemberRights" class="prefer_img1" target="_blank">
+                <a href="{{url('home/connect/album')}}" class="prefer_img1" target="_blank">
                     <img src="/qiantai/index/la.jpg" height="489">
                     <span></span>
-                    <b style="bottom: 9px;">无数精彩礼遇尽在家宾会</b>
+                    <b style="bottom: 9px;">舒适环境</b>
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/home_bus_new/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="#" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/789.jpg" height="222">
                     <span></span>
-                    <b style="bottom: 9px;">如家巴士</b>
+                    <b style="bottom: 9px;">优质服务</b>
                 </a>
             </ul>
                     <ul class="prefer_box" style="margin-right: 0px;">
-                <a href="http://images.homeinns.com/Activity/NewActivities/index.html?_gscu_=03306786c7z6l220&amp;_gscs_=05179366h2is4d10%7Cpv%3A1" class="prefer_img2" target="_blank">
+                <a href="#" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/110.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">199元住五星酒店</b>
                 </a>
             </ul>
                     <ul class="prefer_box">
-                <a href="http://images.homeinns.com/Activity/dear.html?_gscu_=91890283xy14vr12&amp;_gscs_=99044592pp67qz18%7Cpv%3A3" class="prefer_img2" target="_blank">
+                <a href="http://images.homeinns.com/Activity/dear.html?_gscu_=91890283xy14vr12&_gscs_=99044592pp67qz18%7Cpv%3A3" class="prefer_img2" target="_blank">
                     <img src="/qiantai/index/123.jpg" height="222">
                     <span></span>
                     <b style="bottom: 9px;">官方渠道低价保障 买贵赔3倍</b>
@@ -154,7 +158,6 @@ var _hmt = _hmt || [];
                    <span></span>
                    <b>漫趣乐园-如家上海浦东机场店</b>
                </a>
-
             </ul>
             
             <ul class="sub_imgR fl">
@@ -182,7 +185,7 @@ var _hmt = _hmt || [];
     <h3>热门推荐酒店</h3>
     <ul class="main_w1200">
         @foreach($hot_hotel as $v)
-            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 0px;">
+            <li class="fl" style="background: rgba(0, 0, 0, 0) url({{$v['hotel_img']}}) no-repeat scroll center center; margin-right: 45px;">
                 <span></span>
                 <b style="display: block;">{{$v['hotel_name']}}</b>
                 <div class="hot_tmbg" style="display: none;"></div>
@@ -205,60 +208,60 @@ var _hmt = _hmt || [];
 <script type="text/javascript">
 
 $("#submit-btn").click(function(){
-	var region_name = $(".city-info").text();
-	$("#region").val(region_name);
-	
+    var region_name = $(".city-info").text();
+    $("#region").val(region_name);
+    
 });
 // $("#region").
 
-	$(function() {
+    $(function() {
 
-		// 单选
-		var singleSelect1 = $('#single-select-1').citySelect({
-			dataJson: cityData,
-			multiSelect: false,
-			shorthand: true,
-			search: true,
-			onInit: function () {
-				console.log(this)
-			},
-			onTabsAfter: function (target) {
-				console.log(target)
-			},
-			onCallerAfter: function (target, values) {
-				console.log(JSON.stringify(values))
-			}
-		});
+        // 单选
+        var singleSelect1 = $('#single-select-1').citySelect({
+            dataJson: cityData,
+            multiSelect: false,
+            shorthand: true,
+            search: true,
+            onInit: function () {
+                console.log(this)
+            },
+            onTabsAfter: function (target) {
+                console.log(target)
+            },
+            onCallerAfter: function (target, values) {
+                console.log(JSON.stringify(values))
+            }
+        });
 
-		// 单选设置城市
-		singleSelect1.setCityVal('北京市');
+        // 单选设置城市
+        singleSelect1.setCityVal('北京市');
 
-		// 单选
-		var singleSelect2 = $('#single-select-2').citySelect({
-			dataJson: cityData
-		});
+        // 单选
+        var singleSelect2 = $('#single-select-2').citySelect({
+            dataJson: cityData
+        });
 
-		// 单选设置城市
-		singleSelect2.setCityVal('北京市');
+        // 单选设置城市
+        singleSelect2.setCityVal('北京市');
 
-		// 禁止点击显示的接口
-		singleSelect2.status('readonly');
+        // 禁止点击显示的接口
+        singleSelect2.status('readonly');
 
-		//单选
-		var singleSelect3 = $('#single-select-3').citySelect({
-			dataJson: cityData
-		});
+        //单选
+        var singleSelect3 = $('#single-select-3').citySelect({
+            dataJson: cityData
+        });
 
-		// 单选设置城市
-		singleSelect3.setCityVal('广州市');
+        // 单选设置城市
+        singleSelect3.setCityVal('广州市');
 
-		// 禁止点击显示的接口
-		singleSelect3.status('disabled');
+        // 禁止点击显示的接口
+        singleSelect3.status('disabled');
 
-	});
-	</script>
+    });
+    </script>
 @endsection
 
 @section('footer')
-	@parent
+    @parent
 @endsection

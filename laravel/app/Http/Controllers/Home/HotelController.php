@@ -35,6 +35,14 @@ class HotelController extends BaseController
         $complex_arr = ComplexFacilities::all();
 
         $hotel_arr = json_decode(json_encode($hotel_arr),true);
+        if (empty($hotel_arr)) {
+
+			return '暂未搜索到符合条件的酒店！';
+		}else{
+			$region_id = $hotel_arr[0]['region_id'];
+			$business_arr = DB::table('business_district')->select('business_district_id','business_district_name')->where('region_id','=',$region_id)->get();
+		}
+		// p($hotel_arr);die;
         //获取最低价格
         $hotel_arr = $this->get_price($hotel_arr);
 
@@ -44,6 +52,8 @@ class HotelController extends BaseController
         			'brand' => $brand_arr,
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
+        			'count' => count($hotel_arr),
+        			'business_arr' => $business_arr,
         		]);
 		
 	}
@@ -53,19 +63,47 @@ class HotelController extends BaseController
 	 */
 	public function hotel_search(Request $request)
 	{
+		//商圈搜索
+		$business_district_id = $request->business_district_id;
+		$business_district_id = explode(',',$business_district_id);
+		//价格搜索
+		$price_type = $request->price_type;
+		$price_type_arr = explode(',',$price_type);
+
 		//设施id
 		$rooms_facilities_id = $request->rooms_facilities_id;
 		$rooms_facilities_id = explode(',',$rooms_facilities_id);
 		//服务id
 		$complex_facilities_id = $request->complex_facilities_id;
 		$complex_facilities_id = explode(',',$complex_facilities_id);
-		
+		//品牌id
+		$brand_id = $request->brand_id;
+		$brand_id = explode(',',$brand_id);
 
 		$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
             ->get();
         $hotel_arr = json_decode(json_encode($hotel_arr),true);
+        
+        //品牌
+		if($brand_id[0]!=''){
+			foreach($hotel_arr as $k=>&$v){
+				$num = 0;
+        		foreach($brand_id as $key=>$val){
+        			$coun = count($brand_id);
+	        		if ( $v['brand_id'] == $val ){
+	        			
+	        			break;
+	        		}else{
+	        			$num++;
+	        			if( $num == $coun ){
+	        				unset($hotel_arr[$k]);
+	        			}
+	        		}
+        		}
+        	}
+		}
 
         //设施
 		if($rooms_facilities_id[0]!=''){
@@ -92,14 +130,76 @@ class HotelController extends BaseController
         	}
 		}
 
-		if(empty($hotel_arr)){
+		if (empty($hotel_arr)) {
+
 			return '暂未搜索到符合条件的酒店！';
+		} else {
+			if ($business_district_id[0]!='') {
+			foreach($business_district_id as $kkk=>$vvv){
+				$business_district_id[] = $vvv;
+			}
+			$business_district_id = implode(' or `business_district_id` = ',$business_district_id);
+			
+			// $region_id = $hotel_arr[0]['region_id'];
+			$business_arr = DB::select("select business_district_id,business_district_name from `sun_business_district` where `business_district_id` = $business_district_id");
+			
+			$business_arr = json_decode(json_encode($business_arr),true);
+		
+				if ($business_arr[0]!='') {
+					foreach($hotel_arr as $k=>&$v){
+						$num = 0;
+		        		foreach($business_arr as $key=>$val){
+		        			$coun = count($business_arr);
+			        		if ( $v['business_district_id'] == $val['business_district_id'] ){
+
+			        			break;
+			        		}else{
+			        			$num++;
+			        			if( $num == $coun ){
+			        				unset($hotel_arr[$k]);
+			        			}
+			        		}
+		        		}
+		        	}
+				}
+			}
+
 		}
+		
+
+
 		//获取最低价格
 		$hotel_arr = $this->get_price($hotel_arr);
 
+		if ($price_type_arr[0]!='') {
+			foreach($hotel_arr as $k=>&$v){
+        	$num = 0;
+        		foreach($price_type_arr as $key=>$val){
+        			$cou = count($price_type_arr);
+        			$value = explode('-',$val);
+	        		if ( $value[0] < $v['price'] && $v['price'] < $value[1] ){
+	        			
+	        			break;
+	        		}else{
+	        			
+	        			$num++;
+	        			if( $num == $cou ){
+	        				
+	        				unset($hotel_arr[$k]);
+	        			}
+	        		}
+        		}
+        	}
+		}
+		
+		if(empty($hotel_arr)){
+
+			return '暂未搜索到符合条件的酒店！';
+		}
+
 		return view('hotel.search',[
 				'hotel_arr' => $hotel_arr,
+				'count' => count($hotel_arr),
 			]);
 	}
 
@@ -134,19 +234,22 @@ class HotelController extends BaseController
 		//酒店图片查询
 		$hotel_img_arr=HotelAlbum::where('hotel_id',$request->id)->get();
 		//查看房间有没有
-		$room_status=DB::select('SELECT room_type_id, count(`status`)as a FROM `sun_rooms` where `status`=1 group by room_type_id');
+		$room_status=DB::select('SELECT room_type_id, count(`status`)as a FROM `sun_rooms` where `status`=1 and hotel_id='.$request->id.' group by room_type_id');
 		$room_status = json_decode(json_encode($room_status),true);
-		$arrRoomTypeId = array_column($room_status, 'room_type_id');
-		$arr_new_room_status = array_combine($arrRoomTypeId, $room_status);
+		$arr_room_type_id = array_column($room_status, 'room_type_id');
+		$arr_new_room_status = array_combine($arr_room_type_id, $room_status);
 		$room_arr = DB::table('rooms_type')
             ->join('hotel_room_type', 'rooms_type.room_type_id', '=', 'hotel_room_type.hotel_room_type_id')
             ->where('hotel_room_type.hotel_id',$request->id)
             ->get();
         $room_arr = json_decode(json_encode($room_arr),true);
 
-		$arrRoomTypeId2 = array_column($room_arr, 'room_type_id');
-		$newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
-		
+		$arr_room_type_id2 = array_column($room_arr, 'room_type_id');
+		$newroom_arr = array_combine($arr_room_type_id2, $room_arr);
+		if (empty($newroom_arr)) {
+
+			return "<center><h1>酒店正在维护中...</h1><a href='".url('home/index/index')."'>返回首页</a><center>";
+		}
 			foreach ($newroom_arr as $k => $v) {
 				if (!isset($arr_new_room_status[$k])) {
 					$new_arr_data[] = array_merge(['a' => 0], $newroom_arr[$k]);
@@ -163,13 +266,13 @@ class HotelController extends BaseController
 		$region_arr=Region::find($hotel_arr->region_id);
 		$price=['price'=>substr($region_arr->floating_value,2),'up_down'=>substr($region_arr->floating_value,0,1)];
 		//获取关于环境评价的条数
-		$h_num = Assess::where('assess_desc','like','%环境%')->count();
+		$h_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%环境%')->count();
 		//获取关于服务评价的条数
-		$s_num = Assess::where('assess_desc','like','%服务%')->count();
+		$s_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%服务%')->count();
 		//获取关于位置评价的条数
-		$r_num = Assess::where('assess_desc','like','%位置%')->count();
+		$r_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%位置%')->count();
 		//获取关于卫生评价的条数
-		$w_num = Assess::where('assess_desc','like','%干净%')->count();
+		$w_num = Assess::where('hotel_id',$request->id)->where('assess_desc','like','%干净%')->count();
 		//查询用户评价
 		$keyword=mb_substr($request->keyword,0,2);
 		$assess = DB::table('assess')
@@ -191,23 +294,6 @@ class HotelController extends BaseController
 				'r_num'=>$r_num,
 				'w_num'=>$w_num
 			]);
-
-			//查询服务项目
-			$rooms_facilities_arr=RoomsFacilities::whereIn('rooms_facilities_id',explode(',',$hotel['rooms_facilities_id']))->get();
-	        //查询地区房间的买的价格
-			$region_arr=Region::find($hotel_arr->region_id);
-			$price=['price'=>substr($region_arr->floating_value,2),'up_down'=>substr($region_arr->floating_value,0,1)];
-	        //渲染页面传值
-			return view('hotel.room',[
-					'hotel'=>$hotel,
-					'hotel_img'=>$hotel_img_arr,
-					'rooms'=>$new_arr_data,
-					'price'=>$price,
-					'new_2'=>$complex_facilities_arr,
-					'new_1'=>$rooms_facilities_arr
-				]);
-				
-
 	}
 	/**
 	 * 评价关键字查询
@@ -262,7 +348,7 @@ class HotelController extends BaseController
                 
                 <div class="cbottom Ltar Lcfx">
                     <span class="score Lfll">
-                        <span class="Ldib Lpl5">'.$new_str.'
+                        <span class="Ldib Lpl5">'.$new_str.$v->assess_num.'<i>分</i></span>
                       
                         <i class="Cicon small_phone">
                         </i>

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/qiantai/date_use/daterangepicker.min.css">
 <style type="text/css">
 	.sub_btn{border: 1px solid #993366;border-radius: 0.5em;padding: 0.5em 2em 0.55em;color: #fef4e9;font: 16px/100%;background-color:#993366; margin-top: 15px;}
+	.container{font-size:14px;};	
 	.tab_box h2{color: #c32143;font-size: 1.5em};
 	.basic_1 h4{color: #c32143;font-size: 1.5em};
 	.hotel_name{font-size: 2em};
@@ -83,7 +84,7 @@
 			   <div id="myTabContent" class="tab-content">
 				  <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
 				    <div class="tab_box">
-				    	<h2>请完成您的预订信息</h2>
+				    	<h2>请完成您的入住信息</h2>
 				    	<p>Please complete your booking information</p>
 				    </div>
 				    <div class="basic_1">
@@ -181,14 +182,14 @@
         	<ul class="profile_item">
         	   <li class="profile_item-desc">
         	   	  <h4 class="hotel_name">{{$hotel_data->hotel_name}}</h4>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_address}}<p>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_tel}}</p>
         	   </li>
-        	   <li class="profile_item-desc">
+        	   <li class="profile_item-desc" style="margin-top:20px;">
         	   	  <p>{{$hotel_data->hotel_desc}}</p>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_hint}}</p>
         	   </li>
         	   <div class="clearfix"> </div>
@@ -343,24 +344,34 @@ $(document).on("click",".click_login",function(){
 <link rel="stylesheet" href="/qiantai/css/flexslider.css" type="text/css" media="screen" />
 <script>
 	flag_tel=0;
+	flag_money=1;
 	$(document).on("click",".check_data",function(){
+		var start_time=$("#date-range13").val();
+		var end_time=$("#date-range14").val();
+		var Start = new Date(start_time).getTime();
+		var End = new Date(end_time).getTime();
+		if(End < Start||End == Start){
+			alert('结束日期必须大于开始日期！');
+			return false;
+		}
 		if(flag_tel==0){
-			alert('请填写完整标红选项');
+			alert('请完成您的预订信息');
 			return false;
 		}else{
 			return true;
 		}
 	})
 
-	$("#date-range13").blur(function(){
+	$("#date-range13").change(function(){
 		change_price();
 	})
 
-	$("#date-range14").blur(function(){
+	$("#date-range14").change(function(){
 		change_price();
 	})
 
 	function change_price(){
+		var total_price=0;
 		var room_one=$("#room_one_price").text();
 		var count=$(".room_sum").val();
 		var start_time=$("#date-range13").val();
@@ -392,7 +403,7 @@ $(document).on("click",".click_login",function(){
 		$(".resident_people").html('');
 		var count=$(this).val();
 		for(var i=0;i<count;i++){
-			$(".resident_people").append('<input type="text" name="resident_people[]" size="6" placeholder="姓名">');
+			$(".resident_people").append('  <input type="text" name="resident_people[]" size="6" placeholder="姓名"> ');
 		}
 	})
 

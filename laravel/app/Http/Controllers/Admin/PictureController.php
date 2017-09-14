@@ -12,7 +12,6 @@ use App\Models\Type;
 use App\Models\RoomsTypeAlbum;
 use Illuminate\Support\Facades\Input;
 
-
 class PictureController extends Controller
 {
 	/**
@@ -29,12 +28,12 @@ class PictureController extends Controller
 			$hotel_id=$request->hotel_id;
 			$file=$request->hotel_img;
 			foreach ($file as $k=>$v) {	
-			//图片重命名			
-			$newName = md5(date('ymdhis').$v->getClientOriginalName()).".".$v->getClientOriginalExtension();   
-			$path=$v->move(public_path().'\uploads/',$newName);
-			$new_path[]='/uploads/'.$newName;
+				//图片重命名			
+				$new_name = md5(rand(1,999).$v->getClientOriginalName()).".".$v->getClientOriginalExtension();   
+				$path=$v->move(public_path().'\uploads/',$new_name);
+				$new_path[]='/uploads/'.$new_name;
 			}
-			$HotelAlbum = new HotelAlbum;
+			$hotel_album = new HotelAlbum;
 			$data['hotel_id'] =$hotel_id;
 			$data['hotel_img']=$new_path;
 			$new_data=array();
@@ -42,7 +41,7 @@ class PictureController extends Controller
 				$new_data[$key]['hotel_id']=$data['hotel_id'];
 				$new_data[$key]['hotel_img']=$value;
 			}
-			$bool=$HotelAlbum->insert($new_data);
+			$bool=$hotel_album->insert($new_data);
 			if ($bool) {
 
 				return redirect('admin/picture/hotel_album_add');
