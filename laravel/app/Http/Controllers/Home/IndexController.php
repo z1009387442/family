@@ -46,6 +46,7 @@ class IndexController extends BaseController
 				$user_name = $user_name;
 				$request->session()->put('user_id',$user_id);
 				$request->session()->put('user_name',$user_name);
+
 				return redirect()->action('Home\IndexController@index');
 			}
 		} else {
@@ -99,6 +100,7 @@ class IndexController extends BaseController
 				$room_num = $v->room_num;
 				}
 			if(empty($order)){
+
 				return view("index.personal_data",[
 					'user_info' => $user_info,
 					'detailed' => $detailed,
@@ -251,6 +253,7 @@ class IndexController extends BaseController
 		$verify_code = $request->session()->get('verify_code');
 		$now = time();
 		if(	!$user_tel == $tel && $user_verify_code==$verify_code ){
+			
 			return 2;
 		}
 

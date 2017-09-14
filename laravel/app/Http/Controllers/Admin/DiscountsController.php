@@ -10,7 +10,6 @@ use App\Models\Discounts;
 use Redirect;
 use Illuminate\Support\Facades\Input;
 
-
 class DiscountsController extends Controller
 {
 
@@ -57,9 +56,9 @@ class DiscountsController extends Controller
 					return Redirect::to('admin/discounts/discounts_list');
 			       }
 		    } else {
-			  $hotel = Hotel::all();
+				$hotel = Hotel::all();
 
-			return view('discounts_back.discounts_add',['hotel'=>$hotel]);
+				return view('discounts_back.discounts_add',['hotel'=>$hotel]);
 			}
 	}
 

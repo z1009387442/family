@@ -40,10 +40,10 @@ class BrandController extends Controller
 			$brand->sort   = $data['sort'];
 			$brand->status   = $data['status'];
 			$bool = $brand->save();
-				if ($bool) {
+			if ($bool) {
 
-					return Redirect::to('admin/brand/brand_list');
-				}
+				return Redirect::to('admin/brand/brand_list');
+			}
 		} else {
 			
 			return view('brand_back.brand_add');

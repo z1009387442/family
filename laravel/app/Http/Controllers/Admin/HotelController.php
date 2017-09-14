@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Session;
@@ -57,11 +58,11 @@ class HotelController extends Controller
 				$data['business_district_id'] = $businessdistrict->business_district_id;
 			}
 
-			$newName = md5(date('ymdhis').$data['hotel_img']->getClientOriginalName()).".".$data['hotel_img']->getClientOriginalExtension();
+			$new_name = md5(rand(1,999).$data['hotel_img']->getClientOriginalName()).".".$data['hotel_img']->getClientOriginalExtension();
 
-			$path=$data['hotel_img']->move(public_path().'/uploads/',$newName);
+			$path=$data['hotel_img']->move(public_path().'/uploads/',$new_name);
 
-			$data['hotel_img']='/uploads/'.$newName;
+			$data['hotel_img']='/uploads/'.$new_name;
 
 			$hotel = new Hotel;
 
@@ -100,15 +101,15 @@ class HotelController extends Controller
 			}
 		} else {
 
-			$roomsFacilities = RoomsFacilities::where('status',1)->get();
+			$rooms_facilities = RoomsFacilities::where('status',1)->get();
 
-			$complexFacilities = ComplexFacilities::where('status',1)->get();
+			$complex_facilities = ComplexFacilities::where('status',1)->get();
 
 			$brand = Brand::where('status',1)->get();
 
 			return view('hotel_back.hotel_add',[
-				'roomsFacilities'=>$roomsFacilities,
-				'complexFacilities'=>$complexFacilities,
+				'roomsFacilities'=>$rooms_facilities,
+				'complexFacilities'=>$complex_facilities,
 				'brand'=>$brand
 			]);
 		}
@@ -132,6 +133,7 @@ class HotelController extends Controller
 
 				$room_bool = Room::where('hotel_id', $request->hotel_id)->delete();
 				if ($room_bool) {
+
 					return 1;
 				}
 			}
@@ -252,16 +254,16 @@ class HotelController extends Controller
 			$hotel['complex_facilities_id'] = explode(',',$hotel->complex_facilities_id);
 			$hotel['rooms_facilities_id'] = explode(',',$hotel->rooms_facilities_id);
 
-			$roomsFacilities = RoomsFacilities::where('status',1)->get();
+			$rooms_facilities = RoomsFacilities::where('status',1)->get();
 
-			$complexFacilities = ComplexFacilities::where('status',1)->get();
+			$complex_facilities = ComplexFacilities::where('status',1)->get();
 
 			$brand = Brand::where('status',1)->get();
 
 			return view('hotel_back.hotel_save',[
 						'hotel'=>$hotel,
-						'roomsFacilities'=>$roomsFacilities,
-						'complexFacilities'=>$complexFacilities,
+						'roomsFacilities'=>$rooms_facilities,
+						'complexFacilities'=>$complex_facilities,
 						'brand'=>$brand,
 						'complex_facilities_id'=>$hotel['complex_facilities_id'],
 						'rooms_facilities_id' =>$hotel['rooms_facilities_id'],

@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Gallery;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Redirect;
 use App\Models\Region;
+
 class RegionController extends Controller
 {
 	/**
@@ -20,22 +23,23 @@ class RegionController extends Controller
 		if($request->isMethod('post')){
 			$data = $request->all();
 			//实例化model
-			$Region = new Region;
+			$region = new Region;
 			//添加数据入库
-			$Region->region_name = $data['region_name'];
-			$Region->short = $data['short'];
-			$Region->sort   = $data['sort'];
-			$Region->floating_value = $data['floating_value'];
-			$Region->lng = $data['lng'];
-			$Region->lat = $data['lat'];
-			$Region->add_time = time();
-			$bool = $Region->save();
+			$region->region_name = $data['region_name'];
+			$region->short = $data['short'];
+			$region->sort   = $data['sort'];
+			$region->floating_value = $data['floating_value'];
+			$region->lng = $data['lng'];
+			$region->lat = $data['lat'];
+			$region->add_time = time();
+			$bool = $region->save();
 			if($bool)
 			{
 				return Redirect::to('admin/region/region_add');
 			}
 			
 		}else{
+
 			return view('region_back.region_add');
 		}
 		
@@ -51,6 +55,7 @@ class RegionController extends Controller
 	public function region_list()
 	{
 		$data = DB::table('region')->paginate(15);
+
 		return view('region_back.region_list',['data' => $data]);
 	}
 
@@ -67,19 +72,21 @@ class RegionController extends Controller
 			$floating_value = $request->floating_value;
 			$region_id = $request->region_id;
 			//实例化model
-			$Region = new Region;
-			$Region = Region::find($region_id);
+			$region = new Region;
+			$region = Region::find($region_id);
 			//添加数据入库
-			$Region->floating_value = $floating_value;
-			$Region->update_time = time();
+			$region->floating_value = $floating_value;
+			$region->update_time = time();
 			$bool = $Region->save();
 			if($bool){
+
 				return Redirect::to('admin/region/region_list');
 			}
 		}
 		else{
 				$region_id = $request->id;
 				$data = Region::find($region_id);
+				
 				return view('region_back.region_list_save',['data' => $data]);
 		}
 	}
