@@ -53,19 +53,10 @@ a:active, a:focus {outline:none;}
 .popup{position:absolute;left:0;top:0px; background:#000;-moz-opacity:0.70;opacity:0.70;z-index:9990;width:100%; display:none; height:100%;filter:alpha(opacity=70);}
 
 i{ 
-    background-image:url(http://images.homeinns.com/image/web/public_img.png);
     background-image:url()\9;
     background-repeat:no-repeat;
-    display:inline-block;
     width:400px;
     height:322px;
-    background-size:100% 100%;
-    -webkit-background-size:100% 100%;
-    -moz-background-size:100% 100%;
-    -o-background-size:100% 100%;	
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='http://images.homeinns.com/image/web/public_img.png',
-    sizingMethod='scale')!important
 }
 .i_ie{ 
     background-image:url();
