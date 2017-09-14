@@ -84,7 +84,7 @@
 			   <div id="myTabContent" class="tab-content">
 				  <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
 				    <div class="tab_box">
-				    	<h2>请完成您的预订信息</h2>
+				    	<h2>请完成您的入住信息</h2>
 				    	<p>Please complete your booking information</p>
 				    </div>
 				    <div class="basic_1">
@@ -182,14 +182,14 @@
         	<ul class="profile_item">
         	   <li class="profile_item-desc">
         	   	  <h4 class="hotel_name">{{$hotel_data->hotel_name}}</h4>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_address}}<p>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_tel}}</p>
         	   </li>
-        	   <li class="profile_item-desc">
+        	   <li class="profile_item-desc" style="margin-top:20px;">
         	   	  <p>{{$hotel_data->hotel_desc}}</p>
-        	   	  <p></p>
+        	   	  <p>   </p>
         	   	  <p>{{$hotel_data->hotel_hint}}</p>
         	   </li>
         	   <div class="clearfix"> </div>
@@ -350,8 +350,8 @@ $(document).on("click",".click_login",function(){
 		var end_time=$("#date-range14").val();
 		var Start = new Date(start_time).getTime();
 		var End = new Date(end_time).getTime();
-		if(End < Start){
-			alert('结束日期不能小于开始日期！');
+		if(End < Start||End == Start){
+			alert('结束日期必须大于开始日期！');
 			return false;
 		}
 		if(flag_tel==0){
@@ -403,7 +403,7 @@ $(document).on("click",".click_login",function(){
 		$(".resident_people").html('');
 		var count=$(this).val();
 		for(var i=0;i<count;i++){
-			$(".resident_people").append('<input type="text" name="resident_people[]" size="6" placeholder="姓名">');
+			$(".resident_people").append('  <input type="text" name="resident_people[]" size="6" placeholder="姓名"> ');
 		}
 	})
 

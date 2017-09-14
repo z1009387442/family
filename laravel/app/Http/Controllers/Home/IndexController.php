@@ -327,13 +327,6 @@ class IndexController extends BaseController
 		return $res ? 1 : 2;
 	}
 
-
-
-
-
-
-
-
 	/**
 	 * 弹窗登录
 	 */

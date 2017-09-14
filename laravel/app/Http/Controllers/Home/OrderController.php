@@ -90,7 +90,8 @@ class OrderController extends BaseController
 
 	public function get_sn()
 	{
-		return 'sunshine-'.date('Ymd').rand(1000,9999);
+		$dt=Carbon::now();
+		return 'sunshine-'.$dt->timestamp.rand(1000,9999);
 	}
 
 	public function get_peo($resident_people)
