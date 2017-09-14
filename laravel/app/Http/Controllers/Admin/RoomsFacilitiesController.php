@@ -75,28 +75,20 @@ class RoomsFacilitiesController extends Controller
 		if ($request->isMethod('post')) {
 				//接收数据
 				$data = $request->all();
-				if (empty($data['rooms_facilities_name'])) {
-					$rooms_facilities = new RoomsFacilities;
-					$rooms_facilities = RoomsFacilities::find($data['id']);
-					$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
-					$rooms_facilities->sort   = $data['sort'];
-					$rooms_facilities->status   = $data['status'];
-					$bool = $rooms_facilities->save();	
-				} else {
-					//实例化model
-					$rooms_facilities = new RoomsFacilities;
-					//添加数据入库
-					$rooms_facilities = RoomsFacilities::find($data['id']);
-					$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
-					$rooms_facilities->status   = $data['status'];
-					$rooms_facilities->sort   = $data['sort'];
-					$bool = $rooms_facilities->save();	
-				}
-					if($bool) {
+				//实例化model
+				$rooms_facilities = new RoomsFacilities;
+				//添加数据入库
+				$rooms_facilities = RoomsFacilities::find($data['id']);
+				$rooms_facilities->rooms_facilities_name = $data['rooms_facilities_name'];
+				$rooms_facilities->status   = $data['status'];
+				$rooms_facilities->sort   = $data['sort'];
+				$bool = $rooms_facilities->save();	
+		
+				if($bool) {
 
-						return Redirect::to('admin/rooms/facilities_list');
-						
-					}
+					return Redirect::to('admin/rooms/facilities_list');
+					
+				}
 		} else {
 
 				$one = RoomsFacilities::where('rooms_facilities_id',$request->id)->first();
