@@ -401,7 +401,7 @@ $("#key").html("关闭").parent().animate({height:"280px"},1);
             </div>
         </div>
         <div class="rarea">
-            <div class="pricearea Ltar" data-hotel-lowest-price="-143"><span class="price"><i>￥</i><i><font size="6"><?php echo $hotel['price']; ?></font>起</i></span></div>
+            <div class="pricearea Ltar" data-hotel-lowest-price="-143"><span class="price"><i>￥</i><i><font size="6"><?php if(empty($hotel['price'])){ echo 0; }else{ echo $hotel['price']; }?></font>起</i></span></div>
             <div class="score Ltar">
                 <i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i><i class="Cicon star full"></i>
                 <span class="Ldib Lpl5">5<i>/5分</i></span>

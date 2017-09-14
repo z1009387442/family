@@ -244,7 +244,9 @@ class HotelController extends BaseController
 
 		$arrRoomTypeId2 = array_column($room_arr, 'room_type_id');
 		$newroom_arr = array_combine($arrRoomTypeId2, $room_arr);
-		
+		if(empty($newroom_arr)){
+			return "<center><h1>酒店正在维护中...</h1><a href='".url('home/index/index')."'>返回首页</a><center>";
+		}
 			foreach ($newroom_arr as $k => $v) {
 				if (!isset($arr_new_room_status[$k])) {
 					$new_arr_data[] = array_merge(['a' => 0], $newroom_arr[$k]);
