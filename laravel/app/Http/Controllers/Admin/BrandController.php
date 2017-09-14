@@ -79,27 +79,17 @@ class BrandController extends Controller
 	if ($request->isMethod('post')) {
 			//接收数据
 			$data = $request->all();
-
-			if (empty($data['brand_name'])) {
-				$brand = new Brand;
-				$brand = brand::find($data['id']);
-				$brand->brand_name = $data['brand_name'];
-				$brand->sort   = $data['sort'];
-				$brand->status   = $data['status'];
-				$bool = $brand->save();	
-			} else {
-				//实例化model
-				$brand = new Brand;
-				//添加数据入库
-				$brand = brand::find($data['id']);
-				$brand->brand_name = $data['brand_name'];
-				$brand->status   = $data['status'];
-				$brand->sort   = $data['sort'];
-				$bool = $brand->save();
+			//实例化model
+			$brand = new Brand;
+			//添加数据入库
+			$brand = brand::find($data['id']);
+			$brand->brand_name = $data['brand_name'];
+			$brand->status   = $data['status'];
+			$brand->sort   = $data['sort'];
+			$bool = $brand->save();
+			if ($bool) {
+				return Redirect::to('admin/brand/brand_list');
 			}
-				if ($bool) {
-					return Redirect::to('admin/brand/brand_list');
-				}
 	  } else {
 
 			$one = Brand::where('brand_id',$request->id)->first();
