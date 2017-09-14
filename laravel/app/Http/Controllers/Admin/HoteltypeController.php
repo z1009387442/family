@@ -17,69 +17,84 @@ class HoteltypeController extends Controller
 	 * 酒店管理首页
 	 * @author [meng] <[920417690@qq.com]>
 	 * @access public
-	 * @param  $[name] [description]
-	 * @return [type] [description]
+	 * @param  $list 所有的类型
+	 * @return object
 	 */
 	public function hotel_type_list(Request $request)
 	{
-		//获取酒店id
 		$hotel_id = $request->get('id');
-		//查询酒店拥有分类的id
+
 		$hotel_types = Hoteltype::where('hotel_id', $hotel_id)->get();
-		//获取酒店拥有类型单列
-		foreach($hotel_types as $hotel_type)
+
+		foreach ($hotel_types as $hotel_type)
 		{
 			$hotel_type_id[] = $hotel_type->hotel_room_type_id;
 		}
-		//查询所有分类
+
 		$types = Type::where('status',1)->get();
-		//获取所有分类id
-		foreach($types as $type)
+
+		foreach ($types as $type)
 		{
 			$type_id[] = $type ->room_type_id;
 		}
-		if(empty($hotel_type_id)){
+
+		if (empty($hotel_type_id)) {
+
 			$type_list = Type::where('status',1)->get();
-		}else{
-			//对比酒店已有类型id和所有类型id
+
+		} else {
+
 			$other_id = array_diff($type_id,$hotel_type_id);
-			//如果other_id为空说明
-			if(empty($other_id)){
+
+			if (empty($other_id)) {
+
 				$type_list = '';
-			}else{
-				//查询酒店还没有的房间类型
+
+			} else {
+
 				$type_list = Type::where('status',1)->whereIn('room_type_id' ,$other_id)->get();
 			}
 		}
-		if(empty($hotel_type_id)){
+		if (empty($hotel_type_id)) {
+
 			$list = "";
-		}else{
-			//根据关联id查询酒店拥有的类型
+
+		} else {
+
 			$list = Type::whereIn('room_type_id' ,$hotel_type_id)->get();
 		}
-		return view('hotel_type_back.hotel_type_list',['type_list'=>$type_list,'list'=>$list,'hotel_id'=>$hotel_id]);
+		return view('hotel_type_back.hotel_type_list',[
+					'type_list'=>$type_list,
+					'list'=>$list,
+					'hotel_id'=>$hotel_id
+				]);
 	}
 
 	/**
 	 * 酒店管理添加
 	 * @author [meng] <[920417690@qq.com]>
 	 * @access public
-	 * @param  $[name] [description]
-	 * @return [type] [description]
+	 * @param  $bool 
+	 * @return bool
 	 */
 	public function hotel_type_add(Request $request)
 	{
-		$hotel_room_type_id = $request->hotel_room_type_id;;
+		$hotel_room_type_id = $request->hotel_room_type_id;
+
 		$hotel_id = $request->hotel_id;
+		
 		$data = '';
-		foreach($hotel_room_type_id as $k=>$v)
+		
+		foreach ($hotel_room_type_id as $k=>$v)
 		{
 			$data[$k]['hotel_id'] = $hotel_id;
 			$data[$k]['hotel_room_type_id'] = $v;
 		}
+		
 		$bool = Hoteltype::insert($data);
-		if($bool)
-		{
+		
+		if ($bool) {
+
 			return Redirect::to('admin/hotel_type/hotel_type_list?id='."$hotel_id");
 		}
 	}
@@ -93,14 +108,15 @@ class HoteltypeController extends Controller
 	 */
 	public function hotel_type_del(Request $request)
 	{
-		//删除对应酒店下的此分类
+
 		$type_bool = Hoteltype::where('hotel_id',$request->hotel_id)->where('hotel_room_type_id', $request->room_type_id)->delete();
-		if($type_bool)
-		{
-			//删除酒店下的所有房间
+		
+		if ($type_bool) {
+
 			$room_bool = Room::where('hotel_id',$request->hotel_id)->where('room_type_id', $request->room_type_id)->delete();
-			if($room_bool)
-			{
+
+			if ($room_bool) {
+				
 				return 1;
 			}
 		}

@@ -258,6 +258,52 @@ class DatabaseSeeder extends Seeder
             'status' =>'1',
             'sort'   =>'1',
             ],
-        ]);          
+        ]);    
+        DB::table('brand')->insert([
+            ['brand_name' =>'漫心',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+           ['brand_name'=>'汉庭',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['brand_name' =>'海友',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['brand_name' =>'美爵',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['brand_name' =>'索菲特',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['brand_name' =>'宜必思',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+        ]);    
+
+         DB::table('business_district')->insert([
+            ['business_district_name' =>'海淀区',
+            'region_id'=>'12',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['business_district_name' =>'朝阳区',
+            'region_id'=>'12',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+            ['business_district_name' =>'顺义区',
+            'region_id'=>'12',
+            'status' =>'1',
+            'sort'   =>'1',
+            ],
+           
+        ]);    
+
     }
 }

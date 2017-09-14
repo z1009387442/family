@@ -33,7 +33,7 @@ body {
 <div>
 <div class="box1"></div>
 <div align="center" class="box2"><img src="/qiantai/images/made.jpg" alt=""></div>
-<div class="box3"></div>
+
 </div>
 
 </body></html>
