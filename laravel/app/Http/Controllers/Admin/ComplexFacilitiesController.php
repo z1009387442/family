@@ -79,34 +79,22 @@ class ComplexFacilitiesController extends Controller
 		if ($request->isMethod('post')) {
 				//接收数据
 				$data = $request->all();
+				$complex_facilities = new complexFacilities;
+				//添加数据入库
+				$complex_facilities = complexFacilities::find($data['id']);
+				$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
+				$complex_facilities->status   = $data['status'];
+				$complex_facilities->sort   = $data['sort'];
+		        $bool = $complex_facilities->save();
+				if ($bool) {
 
-				if (empty($data['complex_facilities_name'])) {
-
-					$complex_facilities = new complexFacilities;
-					$complex_facilities = complexFacilities::find($data['id']);
-					$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
-					$complex_facilities->sort   = $data['sort'];
-					$complex_facilities->status   = $data['status'];
-					$bool = $complex_facilities->save();	
-					
-				} else {
-					//实例化model
-					$complex_facilities = new complexFacilities;
-					//添加数据入库
-					$complex_facilities = complexFacilities::find($data['id']);
-					$complex_facilities->complex_facilities_name = $data['complex_facilities_name'];
-					$complex_facilities->status   = $data['status'];
-					$complex_facilities->sort   = $data['sort'];
-					$bool = $complex_facilities->save();
+					return Redirect::to('admin/complex/facilities_list');
 				}
-					if ($bool) {
-
-						return Redirect::to('admin/complex/facilities_list');
-					}
 		  } else {
 				$one = complexfacilities::where('complex_facilities_id',$request->id)->first();
 
 				return view('complex_facilities_back.complex_facilities_save',['one'=>$one]);
 		 }
 	}
+
 }

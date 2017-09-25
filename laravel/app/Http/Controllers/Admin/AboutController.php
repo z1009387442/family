@@ -46,7 +46,7 @@ class AboutController extends Controller
 	public function team_list()
 	{
 		$list = Team::all();
-
+ 
 		return view('about_back.team_list',['list'=>$list]);
 	}
 
