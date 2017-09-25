@@ -60,6 +60,7 @@
         </div>    
       </div>
     </div>
+    </form>
  </div>
 <script type="text/javascript" src="/qiantai/time/jquery-1.12.3.min.js"></script>
 <script src="/qiantai/time/datedropper.min.js"></script>
