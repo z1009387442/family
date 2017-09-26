@@ -182,7 +182,7 @@
         <div class="keybox Lmt5">
             <span class="label"><font color="black">大家都在说</font></span>
             <div class="keys">
-                <span class="key active" data-map-new-prop-id="0">不限</span><span class="key" data-map-new-prop-id="46">服务态度({{$s_num}})</span><span class="key" data-map-new-prop-id="51">环境情况{{$h_num}}</span><span class="key" data-map-new-prop-id="558">干净卫生({{$w_num}})</span><span class="key" data-map-new-prop-id="558">地理位置({{$r_num}})</span>
+                <span class="key active" data-map-new-prop-id="0">不限</span><span class="key" data-map-new-prop-id="46">服务态度({{$s_num}})</span><span class="key" data-map-new-prop-id="51">环境情况({{$h_num}})</span><span class="key" data-map-new-prop-id="558">干净卫生({{$w_num}})</span><span class="key" data-map-new-prop-id="558">地理位置({{$r_num}})</span>
             </div>
         </div>
     </div>

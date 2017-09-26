@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-class DatabaseSeeder extends Seeder
+use App\Models\Room as Room;
+class RoomTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(Hotel_room_typeTableSeeder::class);
-        $this->call(RoomTableSeeder::class);
+    	factory(Room::class,52000)->create();
     }
 }

@@ -11,11 +11,12 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Room::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'hotel_id' => rand(1,99),
+        'room_type_id'=>2,
+        'room_floor' => 2,
+        'room_dicection' => '南',
+        'room_number'=>2299
     ];
 });
