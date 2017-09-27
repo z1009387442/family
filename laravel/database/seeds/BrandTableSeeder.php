@@ -20,6 +20,18 @@ class BrandTableSeeder extends Seeder
         	'sort'=>50
         	]);
         Brand::create([
+            'brand_name'=>'如家',
+            'sort'=>50
+            ]);
+        Brand::create([
+            'brand_name'=>'格林豪泰',
+            'sort'=>50
+            ]);
+        Brand::create([
+            'brand_name'=>'凯宾',
+            'sort'=>50
+            ]);
+        Brand::create([
         	'brand_name'=>'洲际酒店',
         	'sort'=>50
         	]);

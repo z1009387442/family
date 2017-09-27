@@ -12,8 +12,28 @@ class Hotel_room_typeTableSeeder extends Seeder
     public function run()
     {
         Hoteltype::create([
+            'hotel_room_type_id'=>1,
+            'hotel_id'=>1
+            ]);
+        Hoteltype::create([
         	'hotel_room_type_id'=>2,
         	'hotel_id'=>1
         	]);
+        Hoteltype::create([
+            'hotel_room_type_id'=>3,
+            'hotel_id'=>1
+            ]);
+        Hoteltype::create([
+            'hotel_room_type_id'=>4,
+            'hotel_id'=>1
+            ]);
+        Hoteltype::create([
+            'hotel_room_type_id'=>5,
+            'hotel_id'=>1
+            ]);
+        Hoteltype::create([
+            'hotel_room_type_id'=>6,
+            'hotel_id'=>1
+            ]);
     }
 }
