@@ -5,7 +5,7 @@ use App\Models\ComplexFacilities;
 class Complex_facilitiesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充服务设施数据
      *
      * @return void
      */

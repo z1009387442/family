@@ -1,39 +1,16 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Hoteltype;
+use App\Models\HotelRoomType;
 class Hotel_room_typeTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充酒店与客房类型关联数据
      *
      * @return void
      */
     public function run()
     {
-        Hoteltype::create([
-            'hotel_room_type_id'=>1,
-            'hotel_id'=>1
-            ]);
-        Hoteltype::create([
-        	'hotel_room_type_id'=>2,
-        	'hotel_id'=>1
-        	]);
-        Hoteltype::create([
-            'hotel_room_type_id'=>3,
-            'hotel_id'=>1
-            ]);
-        Hoteltype::create([
-            'hotel_room_type_id'=>4,
-            'hotel_id'=>1
-            ]);
-        Hoteltype::create([
-            'hotel_room_type_id'=>5,
-            'hotel_id'=>1
-            ]);
-        Hoteltype::create([
-            'hotel_room_type_id'=>6,
-            'hotel_id'=>1
-            ]);
+        factory(HotelRoomType::class,1000)->create();
     }
 }

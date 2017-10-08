@@ -5,7 +5,7 @@ use App\Models\Businessdistrict;
 class Business_districtTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充商圈数据
      *
      * @return void
      */
