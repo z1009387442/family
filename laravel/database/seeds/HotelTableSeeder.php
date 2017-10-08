@@ -5,7 +5,7 @@ use App\Models\Hotel;
 class HotelTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充酒店数据
      *
      * @return void
      */

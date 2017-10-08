@@ -5,7 +5,7 @@ use App\Models\Brand;
 class BrandTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充品牌数据
      *
      * @return void
      */
