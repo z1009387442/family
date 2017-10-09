@@ -23,10 +23,17 @@ class HotelController extends BaseController
 
 	public function show(Request $request){
 
+		$hotel_count = DB::table('region')
+            ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
+            ->where('region.region_name',$request->city_name)
+            ->count();
+           
 		$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
-            ->get();
+            ->offset(0)->limit(10)->get();
+            // echo "<pre>";
+            // print_r($hotel_arr);die;
         //所有品牌
         $brand_arr = Brand::all();
         //所有设施
@@ -46,14 +53,17 @@ class HotelController extends BaseController
         //获取最低价格
         $hotel_arr = $this->get_price($hotel_arr);
 
+        $hotel_page = ceil($hotel_count/10);
 
         	return view('hotel.show',[
         			'hotel_arr' => $hotel_arr,
         			'brand' => $brand_arr,
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
-        			'count' => count($hotel_arr),
+        			'count' => $hotel_count,
         			'business_arr' => $business_arr,
+        			'hotel_count' => $hotel_count,
+        			'hotel_page' => $hotel_page,
         		]);
 		
 	}
@@ -63,6 +73,10 @@ class HotelController extends BaseController
 	 */
 	public function hotel_search(Request $request)
 	{
+		//当前页
+		$page = $request->page;
+		//echo $page;die;
+
 		//商圈搜索
 		$business_district_id = $request->business_district_id;
 		$business_district_id = explode(',',$business_district_id);
@@ -197,9 +211,19 @@ class HotelController extends BaseController
 			return '暂未搜索到符合条件的酒店！';
 		}
 
+		$hotel_count = count($hotel_arr);
+		$hotel_page = ceil($hotel_count/10);
+		$limit = ($page-1)*10;
+
+		$hotel_arr = array_slice($hotel_arr,$limit,10);
+		// echo "<pre>";
+		// print_r($hotel_arr);die;
+
 		return view('hotel.search',[
 				'hotel_arr' => $hotel_arr,
-				'count' => count($hotel_arr),
+				'count' => $hotel_count,
+				'hotel_page' => $hotel_page,
+				'page' => $page,
 			]);
 	}
 

@@ -1,4 +1,5 @@
                 <div class="lbox">
+<input type="hidden" value="{{ $page }}" id="page">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
                             当前城市，为您找到<b><?php echo $count; ?></b>家酒店
@@ -80,4 +81,13 @@
     </div>
 </div>
 <?php } ?>
+</div>
+
+<div class="pages">
+<div class="Cpage Ltar">
+<a href="javascript:void(0);" class="check1 needspace" data-p="1">首页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="{{ $page-1 }}">上一页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="{{ $page+1 }}">下一页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="{{ $hotel_page }}">尾页</a>
+</div>
 </div>
