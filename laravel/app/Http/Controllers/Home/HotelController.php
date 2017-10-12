@@ -13,6 +13,7 @@ use App\Models\Assess;
 use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Redis;
 
 class HotelController extends BaseController
 {
@@ -94,12 +95,22 @@ class HotelController extends BaseController
 		$brand_id = $request->brand_id;
 		$brand_id = explode(',',$brand_id);
 
-		$hotel_arr = DB::table('region')
+
+		$redis = new \Redis();
+		$redis->connect('127.0.0.1',6379);
+		if($redis->get("$request->city_name")){
+			$hotel_arr = $redis->get("$request->city_name");//获取变量值
+			$hotel_arr = json_decode($hotel_arr,true);
+		}else{
+			$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
             ->get();
-        $hotel_arr = json_decode(json_encode($hotel_arr),true);
-        
+	        $hotel_arr = json_decode(json_encode($hotel_arr),true);
+	        $hotel_arrs = json_encode($hotel_arr);//避免第一次缓存没有结果
+	        $redis->set($request->city_name,$hotel_arrs);
+		}
+
         //品牌
 		if($brand_id[0]!=''){
 			foreach($hotel_arr as $k=>&$v){
