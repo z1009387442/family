@@ -249,70 +249,7 @@ $("#key").html("关闭").parent().animate({height:"280px"},1);
     <span class="next">&gt;</span>
 </div>
 
-<script type="text/javascript">
-    $(".check1").click(function(){
-        //商圈
-        
-        business_district_id = '';
-        $(".business").each(function(i,v){
-            if($(v).prop('checked')==true){
-                business_district_id = business_district_id+','+$(v).val();
 
-            }
-        });
-        business_district_id = business_district_id.substr(1);
-        //品牌
-        brand_id = '';
-        $(".brand").each(function(i,v){
-            if($(v).prop('checked')==true){
-                brand_id = brand_id+','+$(v).val();
-
-            }
-        });
-        brand_id = brand_id.substr(1);
-
-        //价格
-        price_type = '';
-        $(".price").each(function(i,v){
-            if($(v).prop('checked')==true){
-                price_type = price_type+','+$(v).data('search-code');
-            }
-        });
-        price_type = price_type.substr(1);
-
-        //设施
-        rooms_facilities_id = '';
-        $(".sheshi").each(function(i,v){
-            if($(v).prop('checked')==true){
-                rooms_facilities_id = rooms_facilities_id+','+$(v).val();
-
-            }
-        });
-        rooms_facilities_id = rooms_facilities_id.substr(1);
-        //服务
-        complex_facilities_id = '';
-        $(".fuwu").each(function(i,v){
-            if($(v).prop('checked')==true){
-                complex_facilities_id = complex_facilities_id+','+$(v).val();
-
-            }
-        });
-        complex_facilities_id = complex_facilities_id.substr(1);
-
-        //搜索
-         var city_name = "<?php echo $_GET['city_name']; ?>";
-        $.ajax({
-           type: "GET",
-           url: "hotel_search",
-           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name,price_type:price_type,brand_id:brand_id,business_district_id:business_district_id},
-           success: function(msg){
-             $("#boxs").html('');
-             $("#boxs").append(msg);
-           }
-        });
-    });
-
-</script>
 
 <!-- 区域展示 -->
 
@@ -334,8 +271,10 @@ $("#key").html("关闭").parent().animate({height:"280px"},1);
 
 
 </div>
+
 <div id="boxs">
                 <div class="lbox">
+<input type="hidden" value="1" id="page">
                     <div id="Plist_hotel" class="Plist_hotel" data-nblock-id="block/hotelListHotels?initHotelList=hotelListData">
                         <div class="citycount">
                            当前城市，为您找到<b><?php echo $count; ?></b>家酒店
@@ -425,7 +364,10 @@ $("#key").html("关闭").parent().animate({height:"280px"},1);
 
 <div class="pages">
 <div class="Cpage Ltar">
-<a href="#" class="active" data-page-index="1">1</a><a href="#" data-page-index="2">2</a><a href="#" data-page-index="3">3</a><a href="#" class="needspace" data-page-index="2">下一页</a><a href="#" class="needspace" data-page-index="51">尾页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="1">首页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="undefined">上一页</a>
+<a href="javascript:void(0);" class="check1 needspace" data-p="2">下一页</a>
+<a href="javascript:void(0);" class="check1" data-p="{{ $hotel_page }}">尾页</a>
 </div>
 </div>
 
@@ -619,6 +561,81 @@ var _hmt = _hmt || [];
 	  });
 	});
   </script>
+
+
+  <script type="text/javascript">
+    // $(".check1").click(function(){
+    $(document).on('click',".check1",function(){
+        //当前页
+        page = $("#page").val();
+        page = $(this).data('p');
+        if(page == 'undefined'){
+            page = 1;
+        }
+
+
+        //商圈
+        
+        business_district_id = '';
+        $(".business").each(function(i,v){
+            if($(v).prop('checked')==true){
+                business_district_id = business_district_id+','+$(v).val();
+
+            }
+        });
+        business_district_id = business_district_id.substr(1);
+        //品牌
+        brand_id = '';
+        $(".brand").each(function(i,v){
+            if($(v).prop('checked')==true){
+                brand_id = brand_id+','+$(v).val();
+
+            }
+        });
+        brand_id = brand_id.substr(1);
+
+        //价格
+        price_type = '';
+        $(".price").each(function(i,v){
+            if($(v).prop('checked')==true){
+                price_type = price_type+','+$(v).data('search-code');
+            }
+        });
+        price_type = price_type.substr(1);
+
+        //设施
+        rooms_facilities_id = '';
+        $(".sheshi").each(function(i,v){
+            if($(v).prop('checked')==true){
+                rooms_facilities_id = rooms_facilities_id+','+$(v).val();
+
+            }
+        });
+        rooms_facilities_id = rooms_facilities_id.substr(1);
+        //服务
+        complex_facilities_id = '';
+        $(".fuwu").each(function(i,v){
+            if($(v).prop('checked')==true){
+                complex_facilities_id = complex_facilities_id+','+$(v).val();
+
+            }
+        });
+        complex_facilities_id = complex_facilities_id.substr(1);
+
+        //搜索
+         var city_name = "<?php echo $_GET['city_name']; ?>";
+        $.ajax({
+           type: "GET",
+           url: "hotel_search",
+           data: {rooms_facilities_id:rooms_facilities_id,complex_facilities_id:complex_facilities_id,city_name:city_name,price_type:price_type,brand_id:brand_id,business_district_id:business_district_id,page:page},
+           success: function(msg){
+             $("#boxs").html('');
+             $("#boxs").append(msg);
+           }
+        });
+    });
+
+</script>
 
 @endsection
 

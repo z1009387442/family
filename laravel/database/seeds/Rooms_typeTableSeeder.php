@@ -5,7 +5,7 @@ use App\Models\Type;
 class Rooms_typeTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充客房类型数据
      *
      * @return void
      */

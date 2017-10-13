@@ -5,7 +5,7 @@ use App\Models\RoomsFacilities;
 class Rooms_facilitiesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * 填充房间设施数据
      *
      * @return void
      */

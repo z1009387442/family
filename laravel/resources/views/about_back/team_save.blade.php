@@ -19,23 +19,21 @@
             <input type="hidden" name="id" value="{{$one->id}}">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="text-input">team name</label>
+                <label class="col-md-3 form-control-label" for="text-input">队员名称</label>
                 <div class="col-md-9">
                     <input type="text" id="text-input" name="team_name" class="form-control" placeholder="name" value="{{$one->team_name}}">
-                    <span class="help-block">This is a team name</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="text-input">team desc</label>
+                <label class="col-md-3 form-control-label" for="text-input">队员个签</label>
                 <div class="col-md-9">
                     <input type="text" id="text-input" name="team_desc" class="form-control" placeholder="desc" value="{{$one->team_desc}}">
-                    <span class="help-block">This is a team desc</span>
                 </div>
             </div>
             	
             
             <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="file-input">team images</label>
+                <label class="col-md-3 form-control-label" for="file-input">队员图像</label>
                 <div class="col-md-9">
                 <img width="230" height="180" src="{{$one->team_images}}"/><br/>
                     <input type="file" id="file-input" name="team_images" value="{{$one->team_images}}">
@@ -44,7 +42,7 @@
             </div>
 
              <div class="form-group row">
-                <label class="col-md-3 form-control-label" for="file-input">status</label>
+                <label class="col-md-3 form-control-label" for="file-input">队员状态</label>
                 <div class="col-md-9">
                     <input type="radio" id="file-input" name="status" value="1" checked="checked">开启
                     <input type="radio" id="file-input" name="status" value="0">关闭
