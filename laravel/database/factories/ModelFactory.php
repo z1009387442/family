@@ -12,11 +12,9 @@
 */
 
 $factory->define(App\Models\Room::class, function (Faker\Generator $faker) {
-    return [
-        'hotel_id' => rand(1,99),
-        'room_type_id'=>2,
-        'room_floor' => 2,
-        'room_dicection' => '南',
-        'room_number'=>2299
-    ];
+    // return [
+    //     'user_name'=>'123',
+    //     'user_pwd' => 'e10adc3949ba59abbe56e057f20f883e',
+    //     'email' => '123@qq.com'
+    // ];
 });
