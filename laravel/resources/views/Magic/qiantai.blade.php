@@ -77,9 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="navbar navbar-inverse-blue navbar">
 @section('header')
 
-<?php require('/qiantai/index.html'); ?>
-<script src='http://home.wolive.cc/assets/libs/jquery/jquery.min.js'></script>
-<script src='http://home.wolive.cc/assets/js/index/kefu_online.js'></script>
+
 <a  href='http://home.wolive.cc'   user_id='' username='' avatar=''  web_id='zhangzhen'   id='workerman-kefu'></a>
       <div class="navbar-inner"  style="background-image: url(/qiantai/images/123.png); background-size:100% 100%;">
         <div class="container">

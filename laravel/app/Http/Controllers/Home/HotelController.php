@@ -13,6 +13,7 @@ use App\Models\Assess;
 use App\Models\ComplexFacilities;
 use App\Models\RoomsFacilities;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Redis;
 
 class HotelController extends BaseController
 {
@@ -23,10 +24,17 @@ class HotelController extends BaseController
 
 	public function show(Request $request){
 
+		$hotel_count = DB::table('region')
+            ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
+            ->where('region.region_name',$request->city_name)
+            ->count();
+           
 		$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
-            ->get();
+            ->offset(0)->limit(10)->get();
+            // echo "<pre>";
+            // print_r($hotel_arr);die;
         //所有品牌
         $brand_arr = Brand::all();
         //所有设施
@@ -46,14 +54,17 @@ class HotelController extends BaseController
         //获取最低价格
         $hotel_arr = $this->get_price($hotel_arr);
 
+        $hotel_page = ceil($hotel_count/10);
 
         	return view('hotel.show',[
         			'hotel_arr' => $hotel_arr,
         			'brand' => $brand_arr,
         			'facilities' => $facilities_arr,
         			'complex' => $complex_arr,
-        			'count' => count($hotel_arr),
+        			'count' => $hotel_count,
         			'business_arr' => $business_arr,
+        			'hotel_count' => $hotel_count,
+        			'hotel_page' => $hotel_page,
         		]);
 		
 	}
@@ -63,6 +74,10 @@ class HotelController extends BaseController
 	 */
 	public function hotel_search(Request $request)
 	{
+		//当前页
+		$page = $request->page;
+		//echo $page;die;
+
 		//商圈搜索
 		$business_district_id = $request->business_district_id;
 		$business_district_id = explode(',',$business_district_id);
@@ -80,12 +95,22 @@ class HotelController extends BaseController
 		$brand_id = $request->brand_id;
 		$brand_id = explode(',',$brand_id);
 
-		$hotel_arr = DB::table('region')
+
+		$redis = new \Redis();
+		$redis->connect('127.0.0.1',6379);
+		if($redis->get("$request->city_name")){
+			$hotel_arr = $redis->get("$request->city_name");//获取变量值
+			$hotel_arr = json_decode($hotel_arr,true);
+		}else{
+			$hotel_arr = DB::table('region')
             ->join('hotel', 'region.region_id', '=', 'hotel.region_id')
             ->where('region.region_name',$request->city_name)
             ->get();
-        $hotel_arr = json_decode(json_encode($hotel_arr),true);
-        
+	        $hotel_arr = json_decode(json_encode($hotel_arr),true);
+	        $hotel_arrs = json_encode($hotel_arr);//避免第一次缓存没有结果
+	        $redis->set($request->city_name,$hotel_arrs);
+		}
+
         //品牌
 		if($brand_id[0]!=''){
 			foreach($hotel_arr as $k=>&$v){
@@ -197,9 +222,19 @@ class HotelController extends BaseController
 			return '暂未搜索到符合条件的酒店！';
 		}
 
+		$hotel_count = count($hotel_arr);
+		$hotel_page = ceil($hotel_count/10);
+		$limit = ($page-1)*10;
+
+		$hotel_arr = array_slice($hotel_arr,$limit,10);
+		// echo "<pre>";
+		// print_r($hotel_arr);die;
+
 		return view('hotel.search',[
 				'hotel_arr' => $hotel_arr,
-				'count' => count($hotel_arr),
+				'count' => $hotel_count,
+				'hotel_page' => $hotel_page,
+				'page' => $page,
 			]);
 	}
 

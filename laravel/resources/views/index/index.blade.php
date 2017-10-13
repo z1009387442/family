@@ -16,15 +16,16 @@
 <link rel="stylesheet" type="text/css" href="/qiantai/time/datedropper.css">
 <link rel="stylesheet" type="text/css" href="/qiantai/time/timedropper.min.css">
 <!--时间插件引入文件（结束）-->
+<form action="{{url('home/hotel/show')}}" method="get">
 <div class="banner">
   <div class="container">
     <div class="banner_info">
       <h3>New experience</h3>
     </div>
   </div>
+  
   <div class="profile_search">
     <div class="container wrap_1" >
-    <form action="{{url('home/hotel/show')}}" method="get">
     <div class="search_top">
      <div class="inline-block">
       <label class="">目的地:</label>
@@ -60,6 +61,7 @@
         </div>    
       </div>
     </div>
+    
  </div>
 <script type="text/javascript" src="/qiantai/time/jquery-1.12.3.min.js"></script>
 <script src="/qiantai/time/datedropper.min.js"></script>
@@ -89,11 +91,10 @@ var _hmt = _hmt || [];
         <div class="submit inline-block">
             <input type="hidden" value="" name="city_name" id="region">
            <input id="submit-btn" class="" type="submit" value="Find Matches">
-        </form>
      </div>
     </div>
   </div>
-</div> 
+</form> 
 <!--搜索下面内容-->
 <link href="/qiantai/index/reset.css" rel="stylesheet">
 <link href="/qiantai/index/brand.css" rel="stylesheet">
@@ -208,12 +209,12 @@ var _hmt = _hmt || [];
 <script type="text/javascript">
 
 $("#submit-btn").click(function(){
+    
     var region_name = $(".city-info").text();
+    var region_name=region_name.replace(/(^\s*)|(\s*$)/g, "");
     $("#region").val(region_name);
     
 });
-// $("#region").
-
     $(function() {
 
         // 单选
